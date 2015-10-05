@@ -1,0 +1,237 @@
+/*
+Home page styles
+Version: 1.0
+*/
+#homepostbar
+{
+    margin-top: -48px;
+    background-color: rgba(0, 0, 0, 0.5);
+    height: 40px;
+    padding: 5px 10px;
+    font-size: 150%;
+    overflow: hidden;
+}
+
+.slider-wrapper
+{
+    overflow: hidden;
+    margin: auto;
+}
+#homepostbar a, #homepostbar a:visited
+{
+ color: rgb(205, 207, 209);
+}
+
+#homepostbar a:hover
+{
+    color:  #f00;
+    font-weight: bold;
+}
+.homepostitem
+{
+    font-size: 100%;
+    float: left;
+    display: inline-block;
+    padding: 2px 15px 2px 15px;
+    margin: 0 15px 0 0;
+}
+    .home #content
+{
+    padding:  0 0;
+
+}
+
+
+.home-thumb
+{
+        padding-top: 25px;
+    padding-left: 15px;
+}
+
+.shoofly-home-branding
+{
+      position: absolute;
+      z-index: 99;
+      margin: 25px;
+}
+
+
+
+.home #page #primary .fullwidth
+{
+    float: none;
+    width: 100%;
+}
+
+hr.home1
+{
+    margin-top: 15px;
+}
+.home #main #secondary.widget-area
+{
+    margin-top: 15px;
+}
+@media only screen and (min-width:0px) and (max-width:870px) {
+    .home .shoofly-cell {
+        display: block;
+        vertical-align: top;
+        clear: both;
+        width: 100%;
+    }
+    .home .shoofly-row {
+      display: block;
+    }
+}
+
+.highlight-img
+{
+    width: 50px;
+    height: 50px;
+}
+
+.home-highlight-section {
+    width: 100%;
+    clear: both;
+    margin: 0 0 25px;
+    float: left;
+    background: url("library/media/images/shadow.png") no-repeat scroll center bottom rgba(0, 0, 0, 0);
+}
+
+.highlight-left-img,
+.highlight-right-img {
+        float: left;
+        width: 50%;
+        height: auto;
+        margin: auto;
+}
+
+ span.highlight-span
+h2 {
+    overflow-wrap: break-word;
+}
+
+.highlight-left-img .highlight-img,
+.highlight-right-img .highlight-img,
+.highlight-top-img .highlight-img {
+ 
+  width: auto;
+  height: 150px;
+
+}
+
+.highlight-left-text,
+.highlight-right-text
+{
+    float: left;
+    width: 50%;
+    padding: 25px;
+    text-align: center;
+    /* height: 150px; */
+    /* overflow: hidden; */
+    display: inline-block;
+    /* align-items: center; */
+ 
+}
+.highlight-box
+{
+    max-width: 600px;
+    min-width: 300px;
+    text-align:center;
+      
+    
+    position: relative;
+    min-height: 1px;
+        
+    float: left;
+    padding: 15px;
+    vertical-align: top;
+}
+.highlight-box i {
+    font-size:50px;
+    text-shadow:rgba(0,0,0,.05) 3px 3px 0;
+    
+}
+.highlight-box p {
+    color:#888;
+    font-size:18px;
+    
+}
+.highlight-box .read-more {
+    background:rgba(0,0,0,.05);
+    color:#aaa;
+        margin: auto;
+    font-size: 18px;
+    padding: 2px 14px;
+    border-radius: 4px;
+    float: none;
+}
+.home-highlight-boxes
+{
+      padding: 25px 25px 25px 25px;
+     
+   
+}
+
+.highlight-link {
+  margin-bottom: 15px;  
+}
+
+.highlight-3-col
+{
+    min-width: 200px;
+    width: 33%;
+}
+.highlight-1-col
+{
+   
+    margin: auto;
+    float: none;
+    display: block;
+}
+.highlight-2-col
+{
+    width: 48%;
+  
+}
+
+
+
+
+
+@media only screen and  (max-width: 700px)
+{
+    .highlight-2-col
+     {
+      width: 100%;
+      max-width: 500px;
+      float: none;
+      margin: auto;
+    }
+}
+@media only screen and  (max-width: 768px)
+{
+    .highlight-3-col
+     {
+      width: 100%;
+      max-width: 500px;
+      float: none;
+      margin: auto;
+    }
+}
+
+
+
+@media only screen and (max-width:600px) {
+    .thumbnailgridcontainer .griditemleft {
+      width: auto;
+      clear: both;
+    }
+
+    .thumbnailgridcontainer {
+      width: auto !important;
+    }
+
+    .highlight-link {
+      margin-bottom: 30px;
+    }
+}
