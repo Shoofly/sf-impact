@@ -5,15 +5,15 @@
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/#single-post
  *
  * @package shoofly
- * @subpackage sf-impact-lite
- * @since sf-impact-lite 1.0
+ * @subpackage sf-impact
+ * @since sf-impact 1.0
  */
 
 get_header(); 
 //default sidebar option
-$sf_impact_lite_post_sidebar = !get_theme_mod('sf_impact_lite_post_sidebar', FALSE);
+$sf_impact_post_sidebar = !get_theme_mod('sf_impact_post_sidebar', FALSE);
 //post sidebar option
-$hidesidebar = esc_attr( get_post_meta( $post->ID, 'post_hide_sidebar', true ) ) ? esc_attr( get_post_meta( $post->ID, 'post_hide_sidebar', true ) ) : $sf_impact_lite_post_sidebar ;
+$hidesidebar = esc_attr( get_post_meta( $post->ID, 'post_hide_sidebar', true ) ) ? esc_attr( get_post_meta( $post->ID, 'post_hide_sidebar', true ) ) : $sf_impact_post_sidebar ;
 
 if (!$hidesidebar)
     $class="content-area";

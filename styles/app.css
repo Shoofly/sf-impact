@@ -1238,7 +1238,11 @@ embed, iframe, object {
 }
 
 /***13.0 Page Elements*/
+<<<<<<< HEAD
 #accordion-section-sfimpact_social_media .customize-control-title {
+=======
+#accordion-section-sf_impact_social_media .customize-control-title {
+>>>>>>> origin/master
   text-transform: capitalize;
 }
 

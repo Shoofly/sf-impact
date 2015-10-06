@@ -8,7 +8,7 @@ Stable tag: 1.0.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-A theme called Impact by Shoofly Solutions (sf-impact-lite)
+A theme called Impact by Shoofly Solutions (sf-impact)
 
 == Description ==
 

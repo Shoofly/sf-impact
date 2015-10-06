@@ -2,8 +2,8 @@
 /**
  * Template Name: Full Width Page (No sidebar)
  * @package _shoofly
- * @subpackage sf-impact-lite
- * @since sf-impact-lite 1.0
+ * @subpackage sf-impact
+ * @since sf-impact 1.0
  */
 
 get_header(); 

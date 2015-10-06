@@ -10,8 +10,8 @@
  * @link https://codex.wordpress.org/Template_Hierarchy
  *
  * @package shoofly
- * @subpackage sf-impact-lite
- * @since sf-impact-lite 1.0
+ * @subpackage sf-impact
+ * @since sf-impact 1.0
  */
 
 get_header(); 
@@ -57,8 +57,8 @@ get_header();
 
 		</main><!-- #main -->
 	</div><!-- #primary -->
-      <?php   $sf_impact_lite_home_sidebar = get_theme_mod('sf_impact_lite_home_sidebar', TRUE);?>
-      <?php if (!($sf_impact_lite_home_sidebar == FALSE && is_front_page()))
+      <?php   $sf_impact_home_sidebar = get_theme_mod('sf_impact_home_sidebar', TRUE);?>
+      <?php if (!($sf_impact_home_sidebar == FALSE && is_front_page()))
     get_sidebar(); ?>
   </div><!--wrap-->
 </div><!--container-->

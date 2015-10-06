@@ -3,8 +3,8 @@
  * The sidebar containing the footer widget area.
  *
  * @package shoofly
-  * @subpackage sf-impact-lite
- * @since sf-impact-lite 1.0
+  * @subpackage sf-impact
+ * @since sf-impact 1.0
  */
  ?>
 
