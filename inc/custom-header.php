@@ -6,39 +6,39 @@
  * @link http://codex.wordpress.org/Custom_Headers
  *
  * @package shoofly
- * @subpackage sf-impact-lite
- * @since sf-impact-lite 1.0
+ * @subpackage sf-impact
+ * @since sf-impact 1.0
  */
 
 /**
  * Set up the WordPress core custom header feature.
  *
- * @uses sf_impact_lite_header_style()
+ * @uses sf_impact_header_style()
  * @uses s_admin_header_style()
  * @uses s_admin_header_image()
  */
 
-function sf_impact_lite_custom_header_setup() {
-	add_theme_support( 'custom-header', apply_filters( 'sf_impact_lite_custom_header_args', array(
+function sf_impact_custom_header_setup() {
+	add_theme_support( 'custom-header', apply_filters( 'sf_impact_custom_header_args', array(
 		'default-image'          => '',
 		'default-text-color'     => 'FFFFFF',
 		'width'                  => 1000,
 		'height'                 => 250,
 		'flex-height'            => true,
-		'wp-head-callback'       => 'sf_impact_lite_header_style',
-		'admin-head-callback'    => 'sf_impact_lite_admin_header_style',
-		'admin-preview-callback' => 'sf_impact_lite_admin_header_image',
+		'wp-head-callback'       => 'sf_impact_header_style',
+		'admin-head-callback'    => 'sf_impact_admin_header_style',
+		'admin-preview-callback' => 'sf_impact_admin_header_image',
 	) ) );
 }
-add_action( 'after_setup_theme', 'sf_impact_lite_custom_header_setup' );
+add_action( 'after_setup_theme', 'sf_impact_custom_header_setup' );
 
-if ( ! function_exists( 'sf_impact_lite_header_style' ) ) :
+if ( ! function_exists( 'sf_impact_header_style' ) ) :
 /**
  * Styles the header image and text displayed on the blog
  *
- * @see sf_impact_lite_custom_header_setup().
+ * @see sf_impact_custom_header_setup().
  */
-function sf_impact_lite_header_style() {
+function sf_impact_header_style() {
 	$header_text_color = get_header_textcolor();
 
 	// If no custom options for text are set, let's bail
@@ -71,15 +71,15 @@ function sf_impact_lite_header_style() {
 	</style>
 	<?php
 }
-endif; // sf_impact_lite_header_style
+endif; // sf_impact_header_style
 
-if ( ! function_exists( 'sf_impact_lite_admin_header_style' ) ) :
+if ( ! function_exists( 'sf_impact_admin_header_style' ) ) :
 /**
  * Styles the header image displayed on the Appearance > Header admin panel.
  *
- * @see sf_impact_lite_custom_header_setup().
+ * @see sf_impact_custom_header_setup().
  */
-function sf_impact_lite_admin_header_style() {
+function sf_impact_admin_header_style() {
 ?>
 	<style type="text/css">
 		.appearance_page_custom-header #headimg {
@@ -99,15 +99,15 @@ function sf_impact_lite_admin_header_style() {
 	</style>
 <?php
 }
-endif; // sf_impact_lite_admin_header_style
+endif; // sf_impact_admin_header_style
 
-if ( ! function_exists( 'sf_impact_lite_admin_header_image' ) ) :
+if ( ! function_exists( 'sf_impact_admin_header_image' ) ) :
 /**
  * Custom header image markup displayed on the Appearance > Header admin panel.
  *
- * @see sf_impact_lite_custom_header_setup().
+ * @see sf_impact_custom_header_setup().
  */
-function sf_impact_lite_admin_header_image() {
+function sf_impact_admin_header_image() {
 ?>
 	<div id="headimg">
 		<h1 class="displaying-header-text">
@@ -120,4 +120,4 @@ function sf_impact_lite_admin_header_image() {
 	</div>
 <?php
 }
-endif; // sf_impact_lite_admin_header_image
+endif; // sf_impact_admin_header_image

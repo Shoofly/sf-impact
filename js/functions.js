@@ -61,7 +61,7 @@
 			return;
 		}
 
-		button.on( 'click.sf-impact-lite', function() {
+		button.on( 'click.sf-impact', function() {
 			nav.toggleClass( 'toggled-on' );
 			if ( nav.hasClass( 'toggled-on' ) ) {
 				$( this ).attr( 'aria-expanded', 'true' );
@@ -79,7 +79,7 @@
 	 *
 	 * @link http://www.nczonline.net/blog/2013/01/15/fixing-skip-to-content-links/
 	 */
-	_window.on( 'hashchange.sf-impact-lite', function() {
+	_window.on( 'hashchange.sf-impact', function() {
 		var hash = location.hash.substring( 1 ), element;
 
 		if ( ! hash ) {
@@ -102,7 +102,7 @@
 
 	$( function() {
 		// Search toggle.
-		$( '.search-toggle' ).on( 'click.sf-impact-lite', function( event ) {
+		$( '.search-toggle' ).on( 'click.sf-impact', function( event ) {
 			var that    = $( this ),
 				wrapper = $( '#search-container' ),
 				container = that.find( 'a' );
@@ -140,7 +140,7 @@
 				toolbarOffset  = body.is( '.admin-bar' ) ? $( '#wpadminbar' ).height() : 0;
 				mastheadOffset = $( '#masthead' ).offset().top - toolbarOffset;
 
-				_window.on( 'scroll.sf-impact-lite', function() {
+				_window.on( 'scroll.sf-impact', function() {
 					if ( _window.scrollTop() > mastheadOffset && mastheadHeight < 49 ) {
 						body.addClass( 'masthead-fixed' );
 					} else {
@@ -151,7 +151,7 @@
 		}
 
 		// Focus styles for menus.
-		$( '.primary-navigation, .secondary-navigation' ).find( 'a' ).on( 'focus.sf-impact-lite blur.sf-impact-lite', function() {
+		$( '.primary-navigation, .secondary-navigation' ).find( 'a' ).on( 'focus.sf-impact blur.sf-impact', function() {
 			$( this ).parents().toggleClass( 'focus' );
 		} );
 	} );
@@ -175,8 +175,8 @@
 	}
 
 	_window
-		.on( 'load.sf-impact-lite', onResizeARIA )
-		.on( 'resize.sf-impact-lite', function() {
+		.on( 'load.sf-impact', onResizeARIA )
+		.on( 'resize.sf-impact', function() {
 			onResizeARIA();
 	} );
 

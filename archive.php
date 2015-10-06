@@ -5,8 +5,8 @@
  * @link https://codex.wordpress.org/Template_Hierarchy
  *
  * @package shoofly
- * @subpackage sf-impact-lite
- * @since sf-impact-lite 1.0
+ * @subpackage sf-impact
+ * @since sf-impact 1.0
  */
 
 get_header(); ?>
@@ -27,7 +27,7 @@ get_header(); ?>
 
 			<?php /* Start the Loop */ ?>
 			<?php while ( have_posts() ) : the_post(); 
-                $full  = sf_impact_lite_postContentFull();
+                $full  = sf_impact_postContentFull();
                 if ($full)
 				    get_template_part( 'template-parts/content', get_post_format() );
                 else
@@ -35,7 +35,7 @@ get_header(); ?>
 				?>
 
 			<?php endwhile; ?>
-
+             
 			<?php the_posts_navigation(); ?>
 			<?php
 				// If comments are open or we have at least one comment, load up the comment template.
@@ -48,7 +48,7 @@ get_header(); ?>
 			<?php get_template_part( 'template-parts/content', 'none' ); ?>
 
 		<?php endif; ?>
-
+       
 		</main><!-- #main -->
 	</div><!-- #primary -->
      <?php get_sidebar(); ?>

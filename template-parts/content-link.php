@@ -6,15 +6,15 @@
  * @subpackage sfimpact
  * @since sfImpact 1.0
  */
- $myLink = sf_impact_lite_get_url(); 
+ $myLink = sf_impact_get_url(); 
 ?>
 
     <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
        <header class="entry-header">
  	        <div class="entry-meta">
-                <?php <?php sf_impact_lite_thumbnail();?>      
-		        <?php sf_impact_lite_posted_on(); ?>
-                <?php sf_impact_lite_title(); ?>
+                <?php <?php sf_impact_thumbnail();?>      
+		        <?php sf_impact_posted_on(); ?>
+                <?php sf_impact_title(); ?>
             </div><!-- .entry-meta -->
 	
 	    </header><!-- .entry-header -->
@@ -45,7 +45,7 @@
         <?php if (is_single())
         {?>
 	    <footer class="entry-footer">
-		    <?php sf_impact_lite_entry_footer(); ?>
+		    <?php sf_impact_entry_footer(); ?>
    
 	    </footer><!-- .entry-footer -->
         <?php        }?>

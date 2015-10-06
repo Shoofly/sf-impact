@@ -5,8 +5,8 @@
  * Contains the closing of the #content div and all content after
  *
  * @package shoofly
- * @subpackage sf-impact-lite
- * @since sf-impact-lite 1.0
+ * @subpackage sf-impact
+ * @since sf-impact 1.0
  */
 ?>
 
@@ -15,7 +15,7 @@
 	<footer id="colophon" class="site-footer fixed" role="contentinfo">
       
         <?php get_sidebar('footer');
-        $footer =   $sf_impact_lite_footer_text = get_theme_mod("sf_impact_lite_footer_text", "&copy; 2015 Shoofly Solutions ");
+        $footer =   $sf_impact_footer_text = get_theme_mod("sf_impact_footer_text", "&copy; 2015 Shoofly Solutions ");
         ?>
         
 	

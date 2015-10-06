@@ -3,20 +3,20 @@
  * The template used for displaying branding
  *
  * @package shoofly
-  * @subpackage sf-impact-lite
- * @since sf-impact-lite 1.0
+  * @subpackage sf-impact
+ * @since sf-impact 1.0
  */
 ?>
 <?php   
 
- $sf_impact_lite_logo_image = get_theme_mod("sf_impact_lite_logo_image", '');
+ $sf_impact_logo_image = get_theme_mod("sf_impact_logo_image", '');
 ?>
     <div id="site-logo-title">
 
 	<a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home">
-            <?php if($sf_impact_lite_logo_image != '')
+            <?php if($sf_impact_logo_image != '')
             {?>
-                <img src="<?php echo $sf_impact_lite_logo_image; ?>"/>
+                <img src="<?php echo $sf_impact_logo_image; ?>"/>
             <?php 
             }
             else

@@ -11,14 +11,14 @@
  <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
      <header class="entry-header">
           	<div class="entry-meta">
-    			<?php sf_impact_lite_posted_on(); ?>
+    			<?php sf_impact_posted_on(); ?>
 		    </div><!-- .entry-meta -->
-            <?php sf_impact_lite_title(); ?>
+            <?php sf_impact_title(); ?>
      </header><!-- .entry-header -->
     <div class="entry-content entry-excerpt">
  		<?php
-           $sf_impact_lite_show_thumbnail_excerpt = get_theme_mod('sf_impact_lite_show_thumbnail_excerpt', FALSE);
-            if (has_post_thumbnail() && $sf_impact_lite_show_thumbnail_excerpt != FALSE)
+           $sf_impact_show_thumbnail_excerpt = get_theme_mod('sf_impact_show_thumbnail_excerpt', FALSE);
+            if (has_post_thumbnail() && $sf_impact_show_thumbnail_excerpt != FALSE)
             {
                 the_post_thumbnail( 'thumbnail' ); 
             }

@@ -4,15 +4,15 @@
  *
  *
  * @package shoofly
- * @subpackage sf-impact-lite
- * @since sf-impact-lite 1.0
+ * @subpackage sf-impact
+ * @since sf-impact 1.0
  */
 
 get_header(); 
-  $sf_impact_lite_home_sidebar = get_theme_mod('sf_impact_lite_home_sidebar', TRUE);
+  $sf_impact_home_sidebar = get_theme_mod('sf_impact_home_sidebar', TRUE);
  
   $sidebar = TRUE;
- if (!$sf_impact_lite_home_sidebar && is_front_page())
+ if (!$sf_impact_home_sidebar && is_front_page())
  {
     
         $class="full-width";
