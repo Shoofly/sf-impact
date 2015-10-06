@@ -268,20 +268,15 @@ if (!function_exists('sf_impact_scripts')):
  
 
         $themedir = get_template_directory_uri();
-       
-<<<<<<< HEAD
+        
        
         $custom_style =  get_theme_mod('sf_impact_lite_color_theme', "light") ;
         $linkTheme = new sf_impact_lite_CustomLinkThemes( 'sf-impact-lite' );
         
         wp_register_style('sf_impact_lite_theme_styles', $themedir . '/styles/app.css', '1.0');
-=======
-        wp_register_style("sf_impact_theme_styles", "$themedir/styles/app.css", "1.0");
->>>>>>> origin/master
       
         wp_enqueue_style("sf_impact_theme_styles");
         
-<<<<<<< HEAD
         ob_start();
         include( $linkTheme->getCustomThemePath($custom_style) );
         $custom_css = ob_get_clean();
@@ -297,19 +292,13 @@ if (!function_exists('sf_impact_scripts')):
          
         wp_add_inline_style( 'sf_impact_lite_theme_styles', $custom_css );
         
+        wp_register_style("sf_impact_theme_styles", "$themedir/styles/app.css", "1.0");
+      
+        wp_enqueue_style("sf_impact_theme_styles");
         
-       
-        //wp_register_style('sf_impact_lite_custom_styles', $linkTheme->getCustomThemePath( $custom_style ), "1.0");
-        //wp_enqueue_style('sf_impact_lite_custom_styles');
-        //add_editor_style( "$themedir/styles/app.css", "$themedir/style-parts/$custom_style-scheme.css"); 
-=======
-        $custom_style =  get_theme_mod('sf_impact_color_theme', "light") ;
-        $linkTheme = new sf_impact_CustomLinkThemes( 'sf-impact' );
-       
-        wp_register_style('sf_impact_custom_styles', $linkTheme->getCustomThemePath( $custom_style ), "1.0");
-        wp_enqueue_style('sf_impact_custom_styles');
+
         add_editor_style( "$themedir/styles/app.css", "$themedir/style-parts/$custom_style-scheme.css"); 
->>>>>>> origin/master
+
         wp_enqueue_script('jquery');
         wp_enqueue_script('	jquery-ui-tooltip');
         if ( class_exists( 'bbPress' ) ) 
@@ -426,6 +415,7 @@ function woocommerce_support() {
 remove_action( 'woocommerce_before_main_content', 'woocommerce_output_content_wrapper', 10);
 remove_action( 'woocommerce_after_main_content', 'woocommerce_output_content_wrapper_end', 10);
 
+
 add_action('woocommerce_before_main_content', 'sf_impact_wrapper_start', 10);
 add_action('woocommerce_after_main_content', 'sf_impact_wrapper_end', 10);
 if (!function_exists('sf_impact_wrapper_start')):
@@ -442,7 +432,6 @@ if (!function_exists('sf_impact_wrapper_end')):
 function sf_impact_wrapper_end() {
   echo '		</main><!-- #main -->
 	</div><!-- #primary -->';
-
 }
 endif;
 /* 
