@@ -269,16 +269,34 @@ if (!function_exists('sf_impact_lite_scripts')):
 
         $themedir = get_template_directory_uri();
        
-        wp_register_style("sf_impact_lite_theme_styles", "$themedir/styles/app.css", "1.0");
+       
+        $custom_style =  get_theme_mod('sf_impact_lite_color_theme', "light") ;
+        $linkTheme = new sf_impact_lite_CustomLinkThemes( 'sf-impact-lite' );
+        
+        wp_register_style('sf_impact_lite_theme_styles', $themedir . '/styles/app.css', '1.0');
       
         wp_enqueue_style("sf_impact_lite_theme_styles");
         
-        $custom_style =  get_theme_mod('sf_impact_lite_color_theme', "light") ;
-        $linkTheme = new sf_impact_lite_CustomLinkThemes( 'sf-impact-lite' );
+        ob_start();
+        include( $linkTheme->getCustomThemePath($custom_style) );
+        $custom_css = ob_get_clean();
+        
+        $custom_css .= '
+            .foreground-color {
+                background-color: '. get_theme_mod( 'sf_impact_lite_content_background' ) .';   
+            }
+            
+            .background-color {
+                background-color: '. get_theme_mod( 'background_color' ) .';
+            }';
+         
+        wp_add_inline_style( 'sf_impact_lite_theme_styles', $custom_css );
+        
+        
        
-        wp_register_style('sf_impact_lite_custom_styles', $linkTheme->getCustomThemePath( $custom_style ), "1.0");
-        wp_enqueue_style('sf_impact_lite_custom_styles');
-        add_editor_style( "$themedir/styles/app.css", "$themedir/style-parts/$custom_style-scheme.css"); 
+        //wp_register_style('sf_impact_lite_custom_styles', $linkTheme->getCustomThemePath( $custom_style ), "1.0");
+        //wp_enqueue_style('sf_impact_lite_custom_styles');
+        //add_editor_style( "$themedir/styles/app.css", "$themedir/style-parts/$custom_style-scheme.css"); 
         wp_enqueue_script('jquery');
         wp_enqueue_script('	jquery-ui-tooltip');
         if ( class_exists( 'bbPress' ) ) 
@@ -1238,8 +1256,8 @@ if (!class_exists('sf_impact_lite_CustomLinkThemes')):
         }  
     
         public function getCustomThemePath( $choice ) 
-        {        
-            return $this->choices[$choice]['uri'] . "/" . $choice . "-scheme.css";
+        {
+            return $this->choices[$choice]['dir'] . "/" . $choice . ".css.php";
         }
     
         public function getLinkThemesForCustomizer()
@@ -1273,12 +1291,13 @@ if (!class_exists('sf_impact_lite_CustomLinkThemes')):
                 $files = array_diff( $files, array( ".",".." ) );
 
                 foreach($files as $file) {
-                    if(preg_match("/([a-zA-Z0-9]+)-scheme\.css/",$file,$string)) {
+                    if(preg_match("/([a-zA-Z0-9\-]+)\.css\.php/",$file,$string)) {
                     
-                        $ucstring = ucfirst($string[1]);
+                        $ucstring = str_replace( "-", " ", ucfirst( $string[1] ) );
                     
                         $themes[$string[1]] = array( 
                             'uri' => $uri . $folder,
+                            'dir' => $dir . $folder,
                             'customizer' => $string[1],
                         );
                     }
