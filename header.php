@@ -109,7 +109,7 @@
             }
             else
             {
-                sf_impact_homeheader(); /*code to display header on home page*/
+                sf_impact_header(); /*code to display header on home page*/
               
             }
     

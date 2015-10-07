@@ -1239,7 +1239,7 @@
                     array(   'transport' => 'refresh', 
                     'sanitize_callback' => 'sanitize_text_field') );
             $wp_customize->add_control(
-                new Arbitrary_Custom_Line(
+                new Arbitrary_Custom_Control(
                     $wp_customize,
                     'line1',
                     array(
@@ -1352,11 +1352,11 @@
                 );        
                 
             $wp_customize->add_control(
-            new Arbitrary_Custom_Line(
+            new Arbitrary_Custom_Control(
                     $wp_customize,
                     "$line",
                     array(
-                 
+                        'type' => 'line',
                         'section' => 'sf_impact_highlight_options', 
                         'settings' => "$line", 
                         'priority' => 10, 
