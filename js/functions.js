@@ -34,6 +34,7 @@
             
             if(!checker[thisId]) {
                 subMenuRightEdge = subMenu.offset().left + menuSize*2;
+                console.log(subMenuRightEdge);
                 if(subMenuRightEdge > _window.width()) {
                     subMenu.find('ul').each(function() { 
                         $(this).toggleClass('left-side',true);

@@ -6,7 +6,7 @@ a:visited {
 	color: #008BC3;
 }
 
-a:hover {
+a:hover, a:focus {
 	color: #1ABEF6;
 }
 
@@ -19,7 +19,7 @@ article:last-child {
 }
 
 #masthead .primary-navigation a {
-    color: #00487F;
+    color: #26BBF2;
 }
 
 #masthead .primary-navigation a:hover, #masthead .primary-navigation a:focus, #masthead .primary-navigation a:active {
@@ -64,7 +64,7 @@ hr {
 	color: #B3B3DA;
 }
 
-.primary-menu > li > a:hover {
+.primary-menu > li > a:hover, .primary-menu > li > a:focus {
 	color: #9A9AC1; 
 	border-bottom-color: #9A9AC1;
 }
@@ -85,17 +85,9 @@ hr {
     color: white; 
 }
 
-.primary-menu .menu-item .menu-item a:hover {
+.primary-menu .menu-item .menu-item a:hover, .primary-menu .menu-item .menu-item a:focus {
 	background-color: #5a666d;
 	color: #b2b2b2; 
-}
-
-.primary-menu .children a .menu-item-bg, .primary-menu .children a:visited .menu-item-bg {
-	color: inherit;
-}
-
-.primary-menu .children a:hover .menu-item-bg, .primary-menu .children a:hover .menu-item-bg {
-	color: inherit; 
 }
 
 .primary-navigation .nav-menu {
@@ -110,7 +102,7 @@ hr {
     color: #9999C0; 
 }
 
-.primary-menu .menu-item .menu-item a:hover {
+.primary-menu .menu-item .menu-item a:hover, .primary-menu .menu-item .menu-item a:focus {
 	background-color: #5a666d;
 	color: #E5E5FF; 
 }
@@ -125,9 +117,21 @@ hr {
 	color: #9A9AC1;
 }
 
-.primary-navigation > ul ul a:hover {
+.primary-navigation > ul ul a:hover, .primary-navigation > ul ul a:focus {
     background-color: rgb(100,100,100);
     color: #10aee5;    
+}
+
+.primary-navigation .primary-menu .sub-menu {
+    box-shadow: 6px 0px 10px 2px #666;
+}
+
+#masthead .primary-navigation .sub-menu li a {
+    color: #73FFFF;
+}
+
+#masthead .primary-navigation .sub-menu li a:hover {
+    color: #4DE2FF;    
 }
 
 .site-description {
@@ -150,7 +154,7 @@ h1, h3, h4, h5, h6 {
 	color: #0069BA;	
 }
 
-.widget-area a:hover {
+.widget-area a:hover, .widget-area a:focus {
 	color: #001369;
 }
 
@@ -158,7 +162,7 @@ h1, h3, h4, h5, h6 {
 	color: #7F7F7F;
 }
 
-.widget-footer a:hover {
+.widget-footer a:hover, .widget-footer a:focus {
 	color: #F1F1F1;	
 }
 
@@ -166,12 +170,16 @@ h1, h3, h4, h5, h6 {
 	color: #002900;
 }
 
-.entry-title a:hover, .page-title a:hover {
+.entry-title a:hover, .page-title a:hover, .entry-title a:focus, .page-title a:focus {
     color: #1A431A;
 }
 
-@media only screen and (max-width: 781px) {
-  .primary-navigation .menu-item .menu-item a, .primary-menu .menu-item .menu-item a:hover {
-    background-color: transparent;
-  }
+.site-info {
+    color: #F64D19;
+}
+
+@media only screen and (max-width: 782px) {
+    #primary-menu a:hover, #primary-menu a:focus {
+        border-bottom-color: #9a9ac1;
+    }
 }

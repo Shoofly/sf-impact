@@ -665,7 +665,7 @@ textarea:focus {
 }
 
 .site-navigation ul ul {
-  margin-left: 20px;
+  margin-left: 18px;
 }
 
 /* Primary Navigation */
@@ -688,6 +688,10 @@ textarea:focus {
   display: block;
 }
 
+.primary-navigation .menu-toggle:focus, .primary-navigation .menu-toggle:active {
+  outline: 0;
+}
+
 .primary-navigation a {
   padding: 7px 0;
   float: right;
@@ -695,16 +699,20 @@ textarea:focus {
   /* margin: 0 1px 0 -12px; */
 }
 
+.primary-navigation a:focus {
+  outline: 0;
+}
+
 .primary-navigation ul.primary-menu > li > a {
   border-bottom: 3px solid;
 }
 
-.primary-navigation ul.primary-menu > li > a, .primary-navigation ul.primary-menu > li.menu-item-has-children > a, .primary-navigation ul.primary-menu > li.current-menu-parent:hover > a, .primary-navigation ul.primary-menu > li.menu-item-has-children > a:hover {
-  border-bottom-color: transparent;
+.primary-navigation ul.primary-menu > li.current-menu-parent > a:hover, .primary-navigation ul.primary-menu > li.current-menu-parent > a:focus {
+  border-bottom-color: black;
 }
 
-.primary-navigation ul.primary-menu > li.current-menu-parent > a:hover {
-  border-bottom-color: black;
+.primary-navigation ul.primary-menu > li > a, .primary-navigation ul.primary-menu > li.menu-item-has-children > a, .primary-navigation ul.primary-menu > li.current-menu-parent:hover > a, .primary-navigation ul.primary-menu > li.menu-item-has-children > a:hover, .primary-navigation ul.primary-menu > li.menu-item-has-children > a:focus {
+  border-bottom-color: transparent;
 }
 
 .menu-item-bg {
@@ -1564,7 +1572,7 @@ footer {
     padding: 0 5px;
     vertical-align: bottom;
   }
-  .primary-navigation li.current-menu-item > a, .primary-navigation li.current_page_item > a, .primary-navigation li.current_post_item > a {
+  .primary-navigation li.current-menu-item > a {
     border-bottom: 3px outset;
     box-sizing: border-box;
   }
@@ -1572,7 +1580,7 @@ footer {
     box-sizing: border-box;
     border-bottom: 3px solid transparent;
   }
-  .primary-navigation .primary-menu > li > a:hover {
+  .primary-navigation .primary-menu > li > a:hover, .primary-navigation .primary-menu > li > a:focus {
     border-bottom: 3px solid;
   }
   .primary-navigation a {
@@ -1595,22 +1603,22 @@ footer {
     left: -999em;
     z-index: 99999;
     margin-top: -2px 0px 0px 0px;
-    box-shadow: 0px 0px 5px 2px #888888;
+    box-shadow: 6px 0px 5px 2px #888888;
   }
   .primary-navigation .primary-menu .sub-menu > li {
     padding: 0px;
   }
-  .primary-navigation .primary-menu .sub-menu > li.current-menu-item a, .primary-navigation .primary-menu .sub-menu > li a, .primary-navigation .primary-menu .sub-menu > li.current_page_item a, .primary-navigation .primary-menu .sub-menu > li a, .primary-navigation .primary-menu .sub-menu > li.current_post_item a, .primary-navigation .primary-menu .sub-menu > li a {
+  .primary-navigation .primary-menu .sub-menu > li.current-menu-item a, .primary-navigation .primary-menu .sub-menu > li a {
     border-width: 0px 1px 1px 1px;
     border-style: outset;
   }
   .primary-navigation .primary-menu .sub-menu > li:last-child > a {
-    border-width: 0px 1px 3px 1px;
-    border-style: outset outset double outset;
+    border-width: 0px 1px 2px 1px;
+    border-style: outset;
   }
   .primary-navigation .primary-menu .sub-menu > li:first-child > a {
     border-width: 2px 1px 1px;
-    border-style: outset outset outset;
+    border-style: outset;
   }
   .primary-navigation .primary-menu .sub-menu ul {
     display: none;
@@ -1625,24 +1633,25 @@ footer {
     padding: 5px 20px;
     width: 168px;
     font-size: 11px;
+    border-color: black;
   }
   .primary-navigation .primary-menu ul a span {
     font-size: 12px;
   }
-  .primary-navigation .primary-menu li:hover > ul, .primary-navigation .primary-menu li.focus > ul {
+  .primary-navigation .primary-menu li:hover > ul, .primary-navigation .primary-menu li.focus > ul, .primary-navigation .primary-menu li:focus > ul {
     left: auto;
     display: block;
   }
-  .primary-navigation .primary-menu ul li:hover > ul, .primary-navigation .primary-menu ul li.focus > ul {
+  .primary-navigation .primary-menu ul li:hover > ul, .primary-navigation .primary-menu ul li.focus > ul, .primary-navigation .primary-menu ul li:focus > ul {
     left: 100%;
     margin-left: -12px;
   }
-  .primary-navigation .primary-menu ul li:hover > ul.left-side, .primary-navigation .primary-menu ul li.focus > ul.left-side {
+  .primary-navigation .primary-menu ul li:hover > ul.left-side, .primary-navigation .primary-menu ul li.focus > ul.left-side, .primary-navigation .primary-menu ul li:focus > ul.left-side {
     left: -100%;
     width: 100%;
     margin-left: 13px;
   }
-  .primary-navigation .menu-item-has-children, .primary-navigation .page_item_has_children, .primary-navigation .post_item_has_children {
+  .primary-navigation .menu-item-has-children {
     clear: both;
     position: relative;
   }
@@ -1655,10 +1664,10 @@ footer {
     right: -10px;
     position: absolute;
   }
-  .primary-navigation .menu-item-has-children > a, .primary-navigation .page_item_has_children > a, .primary-navigation .post_item_has_children > a {
+  .primary-navigation .menu-item-has-children > a, .primary-navigation .menu-item-has-children > a {
     padding-right: 26px;
   }
-  .primary-navigation li .menu-item-has-children > a, .primary-navigation li .page_item_has_children > a, .primary-navigation li .post_item_has_children > a {
+  .primary-navigation li .menu-item-has-children > a, .primary-navigation li .menu-item-has-children > a {
     padding-right: 20px;
     width: 168px;
   }
@@ -1667,7 +1676,7 @@ footer {
     left: auto;
     display: none;
   }
-  .primary-navigation li .sub-menu .menu-item-has-children, .primary-navigation li .sub-menu .page_item_has_children, .primary-navigation li .sub-menu .post_item_has_children {
+  .primary-navigation li .sub-menu .menu-item-has-children, .primary-navigation li .sub-menu .menu-item-has-children {
     margin-left: -1px;
   }
   .site-main .comment-navigation, .site-main .paging-navigation, .site-main .post-navigation {
@@ -1692,7 +1701,7 @@ footer {
 }
 
 @media only screen and (min-width: 1200px) {
-  #content, #masthead, #innermasthead, .site-footer {
+  #content, #masthead, #innermasthead, .site-footer, #bottomwrapper {
     width: 1200px;
     margin: auto;
   }
@@ -1723,8 +1732,14 @@ footer {
     padding: 0 25px;
     margin: 15px;
   }
-  #primary-menu a:hover {
+  #primary-menu a {
+    border-bottom: 1px transparent solid;
+  }
+  #primary-menu a:hover, #primary-menu a:focus {
     border-bottom: 1px white solid;
+  }
+  #primary-menu .menu-item .menu-item a, #primary-menu .menu-item .menu-item a:hover, #primary-menu .menu-item .menu-item a:focus {
+    background-color: transparent;
   }
   .primary-navigation ul li {
     float: left;
