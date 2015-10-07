@@ -100,6 +100,12 @@ function sf_impact_setup() {
 		'default-color' => '#3A3A3A',
 		'default-image' => '',
 	) ) );
+    $args = array(
+	    'width'         => 980,
+	    'height'        => 60,
+	    'default-image' => get_template_directory_uri() . '/images/impact.png',
+    );
+    add_theme_support( 'custom-header', $args );
     //add excerpt support for posts
      add_post_type_support( 'page', 'excerpt' );
 
@@ -110,8 +116,8 @@ function sf_impact_setup() {
     {
         $defaultpath =        get_template_directory_uri() . '/images/';
         $defaultlogo = $defaultpath . "logo.png"; 
-        $defaultheader = $defaultpath . "impact.png";
-        $defaultheadertype = "0";
+ //       $defaultheader = $defaultpath . "impact.png";
+        $defaultheadertype = "3";
   
         set_theme_mod('sf_impact_header_image', $defaultheader);
         set_theme_mod('sf_impact_logo_image', $defaultlogo);
@@ -1394,7 +1400,7 @@ function sf_impact_count_sticky($category = NULL)
  {
         
     $menu_settings = array( 'theme_location' => 'primary',  
-                                'link_before' => '<span class="menu-item-bg">', 
+                                'link_before' => '<span class="menu-link">', 
                                 'container_id' => 'cssmenu',
                                 'fallback_cb' => 'sf_impact_page_menu',
                                 'link_after' => '</span>', 

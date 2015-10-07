@@ -25,7 +25,9 @@
   
 <?php wp_footer(); ?>
 <?php $dev = '<span>Theme developed by &nbsp; </span> <a href="http://shooflysolutions.com/"> Shoofly Solutions</a>'; ?>
-<div id="shoofly-footer"><?php echo $footer  ?></div>
-<div class="site-info fixed"><?php echo $dev?></div>
+<div id="bottomwrapper">
+    <div id="shoofly-footer"><?php echo $footer  ?></div>
+    <div class="site-info fixed"><?php echo $dev?></div>
+</div>
 </body>
 </html>
