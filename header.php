@@ -71,7 +71,7 @@
                 }?>
   
                 <?php if ($menu == "above")
-                    sf_impact_light_menu();
+                    sf_impact_menu();
                 ?>
  	    
                    
@@ -117,7 +117,7 @@
         </div><!--sfly-headerimg-->
         <?php if ($menu == "below")
         {
-                sf_impact_light_menu();
+                sf_impact_menu();
             ?><hr class="navdivider"><?php
          }
         ?>

@@ -43,9 +43,9 @@
               );      
        
          $wp_customize->add_panel( 'sf_impact_panel', array(
-            'title' =>  __('Home Page', 'sf-impact'),
+            'title' =>  __('Theme Options', 'sf-impact'),
              'capability' => 'edit_theme_options', //Capability needed to tweak
-            'description' =>  __('Customize Home Page.', 'sf-impact'),
+            'description' =>  __('Customize Theme Options.', 'sf-impact'),
             'priority' => 2,
       
           ));
@@ -89,7 +89,7 @@
   
         $wp_customize->add_setting( 'sf_impact_header_opacity', 
             array(
-                'default' => "0", 
+                'default' => "1", 
                 'type' => 'theme_mod', 
                 'capability' => 'edit_theme_options', 
                 'transport' => 'refresh', 
@@ -185,11 +185,11 @@
     {
             $wp_customize->add_section( 'sf_impact_general_options', 
                 array(
-                'title' => __( 'Theme Options', 'sf-impact' ), //Visible title of section
+                'title' => __( 'General Options', 'sf-impact' ), //Visible title of section
                 'priority' => 1, //Determines what order this appears in
                 'capability' => 'edit_theme_options', //Capability needed to tweak
                 'description' => __('Genearal Theme Settings.', 'sf-impact'), //Descriptive tooltip
-                //'panel' => 'sf_impact_panel',
+                'panel' => 'sf_impact_panel',
                 ) 
             );
            
@@ -447,239 +447,257 @@
                 'priority' => 1, //Determines what order this appears in
                 'capability' => 'edit_theme_options', //Capability needed to tweak
                 'description' => __('Customize a thumbnail grid that displays below the header (This feature requires the Featured Image Thumbnail Grid Plugin)', 'sf-impact'), //Descriptive tooltip
-                // 'panel' => 'sf_impact_panel',
+                 'panel' => 'sf_impact_panel',
                 ) 
             ); 
-            //Display Grid on HOme Page
-            $wp_customize->add_setting( 'sf_impact_grid_display', 
-                array(
-                'default' => FALSE, 
-                'type' => 'theme_mod', 
-                'capability' => 'edit_theme_options', 
-                'transport' => 'refresh', 
-                'sanitize_callback' => 'sf_impact_sanitize_checkbox'
-                ) 
-            );      
- 
-            $wp_customize->add_control( 'sf_impact_grid_display', array(
-                'settings' => 'sf_impact_grid_display',
-                'label'    => __( 'Display the thumbnail grid on the home page / front page.' , 'sf-impact'),
-                'section'  => 'sf_impact_grid_options',
-                            'priority' => 10,
-                'type'     => 'checkbox',
-            ) );
-            //Display Grid on all pages
-            $wp_customize->add_setting( 'sf_impact_grid_display_all', 
-                array(
-                'default' => FALSE, 
-                'type' => 'theme_mod', 
-                'capability' => 'edit_theme_options', 
-                'transport' => 'refresh', 
-                'sanitize_callback' => 'sf_impact_sanitize_checkbox'
-                ) 
-            );      
- 
-            $wp_customize->add_control( 'sf_impact_grid_display_all', array(
-                'settings' => 'sf_impact_grid_display_all',
-                'label'    => __( 'Display the grid on all pages' , 'sf-impact'),
-                'section'  => 'sf_impact_grid_options',
-                            'priority' => 10,
-                'type'     => 'checkbox',
-            ) );
-            //Title for the Grid 
-                $wp_customize->add_setting( 'sf_impact_grid_title', 
-                array(
-                'default' => "Recent Posts", 
-                'type' => 'theme_mod', 
-                'capability' => 'edit_theme_options', 
-                'transport' => 'refresh', 
-                'sanitize_callback' => 'esc_textarea'
-                ) 
-            );      
-            
-     
-            $wp_customize->add_control( new WP_Customize_Control (
-   
-                $wp_customize, 
-                'sf_impact_grid_title', 
-                array(
-                'label' => __( 'The title of the grid area', 'sf-impact'), 
-                'description' => __("You can leave this blank if you don't want to display a title.", 'sf-impact' ), 
-                'section' => 'sf_impact_grid_options', 
-                'settings' => 'sf_impact_grid_title', 
-                'priority' => 10, 
-           
-                ) 
-            ) );
-            //Text to click to full category page
-                $wp_customize->add_setting( 'sf_impact_grid_more', 
-                array(
-                'default' => "More Recent Posts", 
-                'type' => 'theme_mod', 
-                'capability' => 'edit_theme_options', 
-                'transport' => 'refresh', 
-                'sanitize_callback' => 'esc_textarea'
-                ) 
-            );      
-            
-     
-            $wp_customize->add_control( new WP_Customize_Control (
-   
-                $wp_customize, 
-                'sf_impact_grid_more', 
-                array(
-                'label' => __( "The text for the link at the bottom of the grid.", 'sf-impact'),
-                'description' => __("This link will display 'more' posts depending on the grid. You can leave this blank if you don't want to display a link.", 'sf-impact' ), 
-                'section' => 'sf_impact_grid_options', 
-                'settings' => 'sf_impact_grid_more', 
-                'priority' => 10, 
-           
-                ) 
-            ) );
-             
-            //Text to display thumbnails for posts or pages
-            $wp_customize->add_setting( 'sf_impact_grid_type', 
-                array(
-                'default' => "post", 
-                'type' => 'theme_mod', 
-                'capability' => 'edit_theme_options', 
-                'transport' => 'refresh', 
-                'sanitize_callback' => 'sf_impact_sanitize_select'
-                ) 
-            );      
-            
-     
-        $wp_customize->add_control( new WP_Customize_Control (
-   
-                $wp_customize, 
-                'sf_impact_grid_type', 
-                array(
-                'label' => __( 'Display featured images for posts or pages in the grid', 'sf-impact' ), 
-                'description' => __( 'The page option could be used to create an image menu for your site. Categories can be enabled on pages using a plugin. ', 'sf-impact'),
-                'section' => 'sf_impact_grid_options', 
-                'settings' => 'sf_impact_grid_type', 
-                'priority' => 10, 
-                'type'     => 'radio',
-		    'choices'  => array(
-			    'post'  => __('post', 'sf-impact'),
-			    'page' => __('page', 'sf-impact'),
-                )
-                ) 
-            ) );
-            //Category for the grid
-            $wp_customize->add_setting( 'sf_impact_post_category', array(
-                'default'        => '',
-                    'type' => 'theme_mod', 
-                'capability' => 'edit_theme_options', 
-                'transport' => 'refresh', 
-                'sanitize_callback' => 'sf_impact_sanitize_category'
-            ) );
-            $wp_customize->add_control( new Category_Dropdown_Custom_Control( $wp_customize, 'sf_impact_post_category', array(
-                'label'=> __('Thumbnail category', 'sf-impact'),
-                'description'   => __( 'Display thumbnails for a selected category in the grid section or choose all', 'sf-impact' ),                'section' => 'sf_impact_grid_options',
-                'settings'   => 'sf_impact_post_category',
-                'priority' => 10
-            ) ) );
- 
-            //Page to link to if All is selected - Will display standard 'blog' page
-            $wp_customize->add_setting( 'sf_impact_thumbnail_more_page', array(
-                'default'        => '',
-                    'type' => 'theme_mod', 
-                'capability' => 'edit_theme_options', 
-                'transport' => 'refresh', 
-                'sanitize_callback' => 'sf_impact_sanitize_dropdown_pages'
-            ) );
-            $wp_customize->add_control( new Page_Dropdown_Custom_Control( $wp_customize, 'sf_impact_thumbnail_more_page', array(
-                'label'   => __( 'Select a page for the link if "All" was selected', 'sf-impact' ), 
-                'description' => __('You should create a blank page where posts will be displayed. This page is similar to a Blog page', 'sf-impact'),
-                'section' => 'sf_impact_grid_options',
-                'settings'   => 'sf_impact_thumbnail_more_page',
-                'priority' => 10
-            ) ) );
-            //Number of thumbnails to display
-            $wp_customize->add_setting( 'sf_impact_grid_posts', 
+           if (class_exists('sfly_thumbnailgrid'))
+           {
+                //Display Grid on HOme Page
+                $wp_customize->add_setting( 'sf_impact_grid_display', 
                     array(
-                    'default' => "4", 
+                    'default' => FALSE, 
                     'type' => 'theme_mod', 
                     'capability' => 'edit_theme_options', 
                     'transport' => 'refresh', 
-                    'sanitize_callback' => 'sf_impact_sanitize_number_absint'
+                    'sanitize_callback' => 'sf_impact_sanitize_checkbox'
                     ) 
                 );      
-                $wp_customize->add_control( new Number_Custom_Control (
-                $wp_customize, 
-     
-                    'sf_impact_grid_posts', 
-                    array(
-                    'label' => __( 'Number of thumbnails to display', 'sf-impact' ), 
-                    'description' => __( 'Enter the maximum number of items to display in the grid section', 'sf-impact'),
-                    'section' => 'sf_impact_grid_options', 
-                    'settings' => 'sf_impact_grid_posts', 
-                    'priority' => 10, 
-                    )
+ 
+                $wp_customize->add_control( 'sf_impact_grid_display', array(
+                    'settings' => 'sf_impact_grid_display',
+                    'label'    => __( 'Display the thumbnail grid on the home page / front page.' , 'sf-impact'),
+                    'section'  => 'sf_impact_grid_options',
+                                'priority' => 10,
+                    'type'     => 'checkbox',
                 ) );
-            //Wordpress Image Size
-            $wp_customize->add_setting( 'sf_impact_image_size_name', array(
-                'default'        => 'thumbnail',
+                //Display Grid on all pages
+                $wp_customize->add_setting( 'sf_impact_grid_display_all', 
+                    array(
+                    'default' => FALSE, 
                     'type' => 'theme_mod', 
-                'capability' => 'edit_theme_options', 
-                'transport' => 'refresh', 
-                'sanitize_callback' => 'sf_impact_sanitize_select'
-            ) );
-            $wp_customize->add_control( new ImageSize_Dropdown_Custom_Control( $wp_customize, 'sf_impact_image_size_name', array              (
-                'label'   => __( 'Grid image size', 'sf-impact' ), 
-                'description' => __('selects the wordpress image used in the grid. It does not effect the width & height which is set below', 'sf-impact'),
-                'section' => 'sf_impact_grid_options',
-                'settings'   => 'sf_impact_image_size_name',
-                'priority' => 10
-            ) ) );
-            //Image Height
-            $wp_customize->add_setting( 'sf_impact_grid_image_height', 
-                array(
-                'default' => "", 
-                'type' => 'theme_mod', 
-                'capability' => 'edit_theme_options', 
-                'transport' => 'refresh', 
-                'sanitize_callback' => 'sanitize_text_field'
-                ) 
-            );      
+                    'capability' => 'edit_theme_options', 
+                    'transport' => 'refresh', 
+                    'sanitize_callback' => 'sf_impact_sanitize_checkbox'
+                    ) 
+                );      
+ 
+                $wp_customize->add_control( 'sf_impact_grid_display_all', array(
+                    'settings' => 'sf_impact_grid_display_all',
+                    'label'    => __( 'Display the grid on all pages' , 'sf-impact'),
+                    'section'  => 'sf_impact_grid_options',
+                                'priority' => 10,
+                    'type'     => 'checkbox',
+                ) );
+                //Title for the Grid 
+                    $wp_customize->add_setting( 'sf_impact_grid_title', 
+                    array(
+                    'default' => "Recent Posts", 
+                    'type' => 'theme_mod', 
+                    'capability' => 'edit_theme_options', 
+                    'transport' => 'refresh', 
+                    'sanitize_callback' => 'esc_textarea'
+                    ) 
+                );      
+            
+     
+                $wp_customize->add_control( new WP_Customize_Control (
+   
+                    $wp_customize, 
+                    'sf_impact_grid_title', 
+                    array(
+                    'label' => __( 'The title of the grid area', 'sf-impact'), 
+                    'description' => __("You can leave this blank if you don't want to display a title.", 'sf-impact' ), 
+                    'section' => 'sf_impact_grid_options', 
+                    'settings' => 'sf_impact_grid_title', 
+                    'priority' => 10, 
+           
+                    ) 
+                ) );
+                //Text to click to full category page
+                    $wp_customize->add_setting( 'sf_impact_grid_more', 
+                    array(
+                    'default' => "More Recent Posts", 
+                    'type' => 'theme_mod', 
+                    'capability' => 'edit_theme_options', 
+                    'transport' => 'refresh', 
+                    'sanitize_callback' => 'esc_textarea'
+                    ) 
+                );      
+            
+     
+                $wp_customize->add_control( new WP_Customize_Control (
+   
+                    $wp_customize, 
+                    'sf_impact_grid_more', 
+                    array(
+                    'label' => __( "The text for the link at the bottom of the grid.", 'sf-impact'),
+                    'description' => __("This link will display 'more' posts depending on the grid. You can leave this blank if you don't want to display a link.", 'sf-impact' ), 
+                    'section' => 'sf_impact_grid_options', 
+                    'settings' => 'sf_impact_grid_more', 
+                    'priority' => 10, 
+           
+                    ) 
+                ) );
+             
+                //Text to display thumbnails for posts or pages
+                $wp_customize->add_setting( 'sf_impact_grid_type', 
+                    array(
+                    'default' => "post", 
+                    'type' => 'theme_mod', 
+                    'capability' => 'edit_theme_options', 
+                    'transport' => 'refresh', 
+                    'sanitize_callback' => 'sf_impact_sanitize_select'
+                    ) 
+                );      
+            
      
             $wp_customize->add_control( new WP_Customize_Control (
    
-                $wp_customize, 
-                'sf_impact_grid_image_height', 
-                array(
-                'label' => __( 'Thumbnail height', 'sf-impact'),
-                'description' => __('If not default (usually 150px) enter a measurement (px, %, em) or auto', 'sf-impact' ), 
-                'section' => 'sf_impact_grid_options', 
-                'settings' => 'sf_impact_grid_image_height', 
-                'priority' => 10, 
-           
-                ) 
-            ) );
-            //Image Width
-            $wp_customize->add_setting( 'sf_impact_grid_image_width', 
-                array(
-                'default' => "", 
-                'type' => 'theme_mod', 
-                'capability' => 'edit_theme_options', 
-                'transport' => 'refresh', 
-                'sanitize_callback' => 'sanitize_text_field'
-                ) 
-            );      
-            $wp_customize->add_control( new WP_Customize_Control (
+                    $wp_customize, 
+                    'sf_impact_grid_type', 
+                    array(
+                    'label' => __( 'Display featured images for posts or pages in the grid', 'sf-impact' ), 
+                    'description' => __( 'The page option could be used to create an image menu for your site. Categories can be enabled on pages using a plugin. ', 'sf-impact'),
+                    'section' => 'sf_impact_grid_options', 
+                    'settings' => 'sf_impact_grid_type', 
+                    'priority' => 10, 
+                    'type'     => 'radio',
+		        'choices'  => array(
+			        'post'  => __('post', 'sf-impact'),
+			        'page' => __('page', 'sf-impact'),
+                    )
+                    ) 
+                ) );
+                //Category for the grid
+                $wp_customize->add_setting( 'sf_impact_post_category', array(
+                    'default'        => '',
+                        'type' => 'theme_mod', 
+                    'capability' => 'edit_theme_options', 
+                    'transport' => 'refresh', 
+                    'sanitize_callback' => 'sf_impact_sanitize_category'
+                ) );
+                $wp_customize->add_control( new Category_Dropdown_Custom_Control( $wp_customize, 'sf_impact_post_category', array(
+                    'label'=> __('Thumbnail category', 'sf-impact'),
+                    'description'   => __( 'Display thumbnails for a selected category in the grid section or choose all', 'sf-impact' ),                'section' => 'sf_impact_grid_options',
+                    'settings'   => 'sf_impact_post_category',
+                    'priority' => 10
+                ) ) );
+ 
+                //Page to link to if All is selected - Will display standard 'blog' page
+                $wp_customize->add_setting( 'sf_impact_thumbnail_more_page', array(
+                    'default'        => '',
+                        'type' => 'theme_mod', 
+                    'capability' => 'edit_theme_options', 
+                    'transport' => 'refresh', 
+                    'sanitize_callback' => 'sf_impact_sanitize_dropdown_pages'
+                ) );
+                $wp_customize->add_control( new Page_Dropdown_Custom_Control( $wp_customize, 'sf_impact_thumbnail_more_page', array(
+                    'label'   => __( 'Select a page for the link if "All" was selected', 'sf-impact' ), 
+                    'description' => __('You should create a blank page where posts will be displayed. This page is similar to a Blog page', 'sf-impact'),
+                    'section' => 'sf_impact_grid_options',
+                    'settings'   => 'sf_impact_thumbnail_more_page',
+                    'priority' => 10
+                ) ) );
+                //Number of thumbnails to display
+                $wp_customize->add_setting( 'sf_impact_grid_posts', 
+                        array(
+                        'default' => "4", 
+                        'type' => 'theme_mod', 
+                        'capability' => 'edit_theme_options', 
+                        'transport' => 'refresh', 
+                        'sanitize_callback' => 'sf_impact_sanitize_number_absint'
+                        ) 
+                    );      
+                    $wp_customize->add_control( new Number_Custom_Control (
+                    $wp_customize, 
+     
+                        'sf_impact_grid_posts', 
+                        array(
+                        'label' => __( 'Number of thumbnails to display', 'sf-impact' ), 
+                        'description' => __( 'Enter the maximum number of items to display in the grid section', 'sf-impact'),
+                        'section' => 'sf_impact_grid_options', 
+                        'settings' => 'sf_impact_grid_posts', 
+                        'priority' => 10, 
+                        )
+                    ) );
+                //Wordpress Image Size
+                $wp_customize->add_setting( 'sf_impact_image_size_name', array(
+                    'default'        => 'thumbnail',
+                        'type' => 'theme_mod', 
+                    'capability' => 'edit_theme_options', 
+                    'transport' => 'refresh', 
+                    'sanitize_callback' => 'sf_impact_sanitize_select'
+                ) );
+                $wp_customize->add_control( new ImageSize_Dropdown_Custom_Control( $wp_customize, 'sf_impact_image_size_name', array              (
+                    'label'   => __( 'Grid image size', 'sf-impact' ), 
+                    'description' => __('selects the wordpress image used in the grid. It does not effect the width & height which is set below', 'sf-impact'),
+                    'section' => 'sf_impact_grid_options',
+                    'settings'   => 'sf_impact_image_size_name',
+                    'priority' => 10
+                ) ) );
+                //Image Height
+                $wp_customize->add_setting( 'sf_impact_grid_image_height', 
+                    array(
+                    'default' => "", 
+                    'type' => 'theme_mod', 
+                    'capability' => 'edit_theme_options', 
+                    'transport' => 'refresh', 
+                    'sanitize_callback' => 'sanitize_text_field'
+                    ) 
+                );      
+     
+                $wp_customize->add_control( new WP_Customize_Control (
    
-                $wp_customize, 
-                'sf_impact_grid_image_width', 
-                array(
-                'label' => __( 'Thumbnail width', 'sf-impact'), 
-                'description' => __('If not default (usually 150px) enter a measurement (px, %, em) or auto', 'sf-impact' ), 
-                'section' => 'sf_impact_grid_options', 
-                'settings' => 'sf_impact_grid_image_width', 
-                'priority' => 10, 
+                    $wp_customize, 
+                    'sf_impact_grid_image_height', 
+                    array(
+                    'label' => __( 'Thumbnail height', 'sf-impact'),
+                    'description' => __('If not default (usually 150px) enter a measurement (px, %, em) or auto', 'sf-impact' ), 
+                    'section' => 'sf_impact_grid_options', 
+                    'settings' => 'sf_impact_grid_image_height', 
+                    'priority' => 10, 
            
-                ) 
-            ) );       
+                    ) 
+                ) );
+                //Image Width
+                $wp_customize->add_setting( 'sf_impact_grid_image_width', 
+                    array(
+                    'default' => "", 
+                    'type' => 'theme_mod', 
+                    'capability' => 'edit_theme_options', 
+                    'transport' => 'refresh', 
+                    'sanitize_callback' => 'sanitize_text_field'
+                    ) 
+                );      
+                $wp_customize->add_control( new WP_Customize_Control (
+   
+                    $wp_customize, 
+                    'sf_impact_grid_image_width', 
+                    array(
+                    'label' => __( 'Thumbnail width', 'sf-impact'), 
+                    'description' => __('If not default (usually 150px) enter a measurement (px, %, em) or auto', 'sf-impact' ), 
+                    'section' => 'sf_impact_grid_options', 
+                    'settings' => 'sf_impact_grid_image_width', 
+                    'priority' => 10, 
+           
+                    ) 
+                ) );       
+           }
+           else
+           {
+                $wp_customize->add_setting( "gridlabel", array(   'transport' => 'refresh', 'sanitize_callback' => 'sanitize_text_field') );
+
+                $wp_customize->add_control(
+                new Arbitrary_Custom_Control(
+                    $wp_customize,  "gridlabel",
+                    array(
+                        'type' => "h2",  'label' => 'The Featured Image Thumbnail Plugin is required to use this feature.', 'section' => 'sf_impact_grid_options', 
+                        'settings' => "gridlabel", 'priority' => 10, 
+                    )
+                )
+            );
+
+           }
     }
     function sf_impact_homePageOptions($wp_customize)
     {
@@ -1093,9 +1111,9 @@
         $wp_customize->add_section( 'sf_impact_social_media', array(
 			    'title'          => __('Icon Menu', 'sf-impact'),
 			    'priority'       => 10,
-          
                 'capability' => 'edit_theme_options', //Capability needed to tweak
                 'description' => __('Social Media Icons', 'sf-impact'), //Descriptive tooltip
+                'panel' => 'sf_impact_panel',
 	    ) );
             $wp_customize->add_setting( 'sf_impact_social_above_menu', 
                 array(
@@ -1225,7 +1243,6 @@
                     $wp_customize,
                     'line1',
                     array(
-                  
                         'section' => 'sf_impact_highlight_options', 
                         'type' => 'line',
                         'settings' => 'line1', 
@@ -1354,7 +1371,7 @@
                     "$label",
                     array(
                         'type' => "h2",
-                            'label' => $title, 
+                        'label' => $title, 
                         'section' => 'sf_impact_highlight_options', 
                         'settings' => "$label", 
                         'priority' => 10, 
