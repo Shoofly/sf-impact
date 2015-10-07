@@ -1564,7 +1564,7 @@ footer {
     padding: 0 5px;
     vertical-align: bottom;
   }
-  .primary-navigation li.current-menu-item > a {
+  .primary-navigation li.current-menu-item > a, .primary-navigation li.current_page_item > a, .primary-navigation li.current_post_item > a {
     border-bottom: 3px outset;
     box-sizing: border-box;
   }
@@ -1600,7 +1600,7 @@ footer {
   .primary-navigation .primary-menu .sub-menu > li {
     padding: 0px;
   }
-  .primary-navigation .primary-menu .sub-menu > li.current-menu-item a, .primary-navigation .primary-menu .sub-menu > li a {
+  .primary-navigation .primary-menu .sub-menu > li.current-menu-item a, .primary-navigation .primary-menu .sub-menu > li a, .primary-navigation .primary-menu .sub-menu > li.current_page_item a, .primary-navigation .primary-menu .sub-menu > li a, .primary-navigation .primary-menu .sub-menu > li.current_post_item a, .primary-navigation .primary-menu .sub-menu > li a {
     border-width: 0px 1px 1px 1px;
     border-style: outset;
   }
@@ -1642,7 +1642,7 @@ footer {
     width: 100%;
     margin-left: 13px;
   }
-  .primary-navigation .menu-item-has-children {
+  .primary-navigation .menu-item-has-children, .primary-navigation .page_item_has_children, .primary-navigation .post_item_has_children {
     clear: both;
     position: relative;
   }
@@ -1655,10 +1655,10 @@ footer {
     right: -10px;
     position: absolute;
   }
-  .primary-navigation .menu-item-has-children > a, .primary-navigation .menu-item-has-children > a {
+  .primary-navigation .menu-item-has-children > a, .primary-navigation .page_item_has_children > a, .primary-navigation .post_item_has_children > a {
     padding-right: 26px;
   }
-  .primary-navigation li .menu-item-has-children > a, .primary-navigation li .menu-item-has-children > a {
+  .primary-navigation li .menu-item-has-children > a, .primary-navigation li .page_item_has_children > a, .primary-navigation li .post_item_has_children > a {
     padding-right: 20px;
     width: 168px;
   }
@@ -1667,7 +1667,7 @@ footer {
     left: auto;
     display: none;
   }
-  .primary-navigation li .sub-menu .menu-item-has-children, .primary-navigation li .sub-menu .menu-item-has-children {
+  .primary-navigation li .sub-menu .menu-item-has-children, .primary-navigation li .sub-menu .page_item_has_children, .primary-navigation li .sub-menu .post_item_has_children {
     margin-left: -1px;
   }
   .site-main .comment-navigation, .site-main .paging-navigation, .site-main .post-navigation {

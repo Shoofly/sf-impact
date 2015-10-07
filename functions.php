@@ -368,6 +368,10 @@ add_action( 'wp_enqueue_scripts', 'sf_impact_scripts' );
  */
 require get_template_directory() . '/inc/custom-header.php';
 
+/**
+ * Default menu more in-line with regular menu
+ */
+require get_template_directory() . '/inc/default-menu.php';
 
 /**
  * Custom template tags for this theme.
@@ -1386,12 +1390,13 @@ function sf_impact_count_sticky($category = NULL)
      }
  endif;
 
- function sf_impact_light_menu()
+ function sf_impact_menu()
  {
         
     $menu_settings = array( 'theme_location' => 'primary',  
                                 'link_before' => '<span class="menu-item-bg">', 
                                 'container_id' => 'cssmenu',
+                                'fallback_cb' => 'sf_impact_page_menu',
                                 'link_after' => '</span>', 
                                 'menu_class' => 'nav-menu primary-menu fixed', 
                                 'menu_id' => 'primary-menu' )?>                   
