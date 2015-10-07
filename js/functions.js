@@ -23,8 +23,8 @@
         * @content Navigation sub-menu fix so content doesn't go off canvas.
         */
         
-        
-        menuSize = $('.primary-navigation ul.primary-menu > li:last-child').width();
+        //Hard coded menu width.
+        menuSize = 168;
        
         $('.menu-item-has-children').hover(function() {
             var subMenu,subMenuRightEdge,menuItem;
