@@ -130,6 +130,10 @@ h3, h4, h5, h6 {
     color: #A96E11;
 }
 
+#shoofly-footer {
+    color: #000276;
+}
+
 @media only screen and (max-width: 782px) {
     #primary-menu a:hover, #primary-menu a:focus {
         border-bottom-color: #6e6e6e;
