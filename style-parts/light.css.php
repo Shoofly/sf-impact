@@ -1,8 +1,4 @@
-a {
-	color: #00a4dc;
-}
-
-a:visited {
+a, a:visited {
 	color: #008BC3;
 }
 
@@ -11,7 +7,7 @@ a:hover, a:focus {
 }
 
 article:last-child {
-    border-color: #00a4dc;
+    border-color: #008BC3;
 }
 
 .primary-navigation a:hover, .primary-navigation a:focus, .primary-navigation a:active {
@@ -178,6 +174,9 @@ h1, h3, h4, h5, h6 {
     color: #F64D19;
 }
 
+#shoofly-footer {
+    color: #008BC3;
+}
 @media only screen and (max-width: 782px) {
     #primary-menu a:hover, #primary-menu a:focus {
         border-bottom-color: #9a9ac1;
