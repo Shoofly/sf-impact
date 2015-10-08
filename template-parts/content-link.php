@@ -50,4 +50,3 @@
 	    </footer><!-- .entry-footer -->
         <?php        }?>
     </article><!-- #post-## -->
-<?php
