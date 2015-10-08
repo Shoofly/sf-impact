@@ -22,7 +22,7 @@
     $url = (get_header_image());        //get the default header image
     //Get the settings for the header
     $sf_impact_logo_location = get_theme_mod('sf_impact_logo_location', 'image');
-    $sf_impact_menu_location = get_theme_mod('sf_impact_menu_location', 'below');
+    $sf_impact_menu_location = get_theme_mod('sf_impact_menu_location', 'above');
     $sf_impact_home_header_type = get_theme_mod('sf_impact_home_header_type', '3');
     $sf_impact_header_image = get_theme_mod('sf_impact_header_image', '');
     $sf_impact_social_above_content = get_theme_mod('sf_impact_social_above_content', true);
@@ -35,12 +35,32 @@
         $homeimage = FALSE;     //Do not display the custom home page header
     $logo = $sf_impact_logo_location; 
     $menu = $sf_impact_menu_location;
-    if ($homeimage && $sf_impact_home_header_type != 2 && !$sf_impact_header_image ) //Make sure there is an image to post it on
-    {
-        $logo = "top"; //No Header Image
-        $menu = "above";                     
-    }
-    if (!$homeimage && !$url)     
+    $the_slide_query  = NULL;
+    $isnoimage = FALSE;
+ 
+    if ($sf_impact_home_header_type == "2" ||
+        ($sf_impact_home_header_type == "3" && $url == "") ||
+         ($sf_impact_home_header_type == "0"  && $sf_impact_header_image=="") )
+            $isnoimage = TRUE;
+    if ($homeimage)
+    { 
+        if ($sf_impact_home_header_type = 1)
+        {
+            $the_slide_query = sf_impact_slideshow_query();
+            if ($the_slide_query->post_count <= 0)
+            { 
+                $sf_impact_home_header_type = 2;
+                $isnoimage = TRUE;
+            }
+        }
+
+
+        if ($isnoimage)
+            {       
+               $logo = "top"; //No Header Image
+                $menu = "above";                     
+            }
+    } elseif (!$url)     
     {
         $logo="top";
         $menu = "above";
@@ -109,7 +129,7 @@
             }
             else
             {
-                sf_impact_header(); /*code to display header on home page*/
+                sf_impact_header($the_slide_query); /*code to display header on home page*/
               
             }
     

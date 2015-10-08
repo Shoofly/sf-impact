@@ -752,9 +752,9 @@
                 'priority' => 10, 
                 'type'     => 'radio',
 		        'choices'  => array(
-                "2" => __('None', 'sf-impact'),
+                    "2" => __('None', 'sf-impact'),
                     "3" => __('Default', 'sf-impact'),
-			        "0"  => __('Header Image', 'sf-impact'),
+			        "0"  => __('Custom Header Image', 'sf-impact'),
 			        "1" => __('Slideshow', 'sf-impact'),
                  
                 

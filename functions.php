@@ -116,10 +116,9 @@ function sf_impact_setup() {
     {
         $defaultpath =        get_template_directory_uri() . '/images/';
         $defaultlogo = $defaultpath . "logo.png"; 
- //       $defaultheader = $defaultpath . "impact.png";
         $defaultheadertype = "3";
   
-        set_theme_mod('sf_impact_header_image', $defaultheader);
+      
         set_theme_mod('sf_impact_logo_image', $defaultlogo);
         set_theme_mod('sf_impact_logo_location', 'image');
         set_theme_mod('sf_impact_home_header_type', $defaultheadertype);
@@ -403,13 +402,13 @@ require get_template_directory() . '/inc/jetpack.php';
 /**
 * Load Custom Controls for Customizr
 */
-/*require get_template_directory() . '/inc/imagesize-dropdown-custom-control.php';  //Image Size
+require get_template_directory() . '/inc/imagesize-dropdown-custom-control.php';    //Image Size
 require get_template_directory() . '/inc/category-dropdown-custom-control.php';     //Category
 require get_template_directory() . '/inc/page-dropdown-custom-control.php';         //Page
 require get_template_directory() . '/inc/arbitrary-custom-control.php';             //Label & Header Text, LInes
 require get_template_directory() . '/inc/color-custom-control.php';                 //Color
 require get_template_directory() . '/inc/number-custom-control.php';                //Number & Range
-*/
+
 //Use the addin Advanced Excerpts for Excerpt display
 //Filters
 /**
@@ -444,23 +443,872 @@ function sf_impact_wrapper_end() {
 	</div><!-- #primary -->';
 }
 endif;
-require get_template_directory() . '/inc/functions-home.php';     //Home page functions
-require get_template_directory() . '/inc/functions-header.php';   //Header functions
-require get_template_directory() . '/inc/functions-utility.php';
-require get_template_directory() . '/inc/functions-formats.php';
-require get_template_directory() . '/inc/functions-custom-controls.php';
+/* 
+* Restrict WP_Query to category on the home page
+* Query - the query
+*/
+if (!function_exists('sf_impact_home_category')):                           
+  function sf_impact_home_category( $query ) {
+           
+    $sf_impact_home_rp_categoryid = get_theme_mod('sf_impact_home_rp_categoryid', "");
+    if ( $query->is_home() && $query->is_main_query() ) {
+        $query->set( 'cat', $sf_impact_home_rp_categoryid );
+    }
+  }
+       
+ endif;  
+
+
+/*
+* Array of possible Social Media Icons
+*/
+if (!function_exists('sf_impact_social_icons_array')):
+     function sf_impact_social_icons_array() {
+ 
+		return array( 'twitter', 'facebook', 'google-plus', 'flickr', 'pinterest', 'youtube', 'vimeo', 'tumblr', 'dribbble', 'rss', 'linkedin', 'instagram', 'user',  'shopping-cart');
+  }
+  endif;
+/*
+* Array of possible Social Media Links
+*/
+if (!function_exists('sf_impact_social_media_array')):
+     function sf_impact_social_media_array() {
+ 
+	// store social site names in array
+	$social_sites = array( 
+        __('twitter', 'sf-impact'), 
+        __('facebook', 'sf-impact'), 
+        __('google-plus', 'sf-impact'), 
+        __('flickr',  'sf-impact'), 
+        __('pinterest', 'sf-impact'), 
+        __('youtube', 'sf-impact'), 
+        __('vimeo', 'sf-impact'), 
+        __('tumblr', 'sf-impact'), 
+        __('dribbble', 'sf-impact'), 
+        __('rss', 'sf-impact'),
+        __('linkedin', 'sf-impact'), 
+        __('instagram', 'sf-impact'), 
+        __('account', 'sf-impact'),  
+        __('shopping-cart', 'sf-impact'));
+ 
+	return $social_sites;
+  }
+  endif;
+/*
+* Display Social Media Icons
+*/
+if (!function_exists('sf_impact_social_media_icons')):
+
+    function sf_impact_social_media_icons() {
+     
+        $social_sites = sf_impact_social_media_array();
+        $social_icons = sf_impact_social_icons_array();
+ 
+        // any inputs that aren't empty are stored in $active_sites array
+         $sf_impact_icon_size = get_theme_mod('sf_impact_icon_size', 'lg');
+        for ($i=0; $i < count($social_sites); ++$i) 
+       {
+
+            $social_site = $social_sites[$i];
+            if( strlen( get_theme_mod( $social_site ) ) > 0 ) {
+                
+                $active_sites[] = $social_site;
+                $links[] = get_theme_mod( $social_site );
+                $icons[] = $social_icons[$i];
+            }
+        }
+ 
+        // for each active social site, add it as a list item 
+        if(!empty($active_sites)) {
+          ?><div id="shoofly-social-media-container" class="fixed">
+                <div id="shoofly-social-media"><?php
+                for ($i=0; $i < count($active_sites); ++$i)
+                {
+                    $site = $active_sites[$i];
+                    $link = $links[$i];
+                    $icon = $icons[$i];
+                ?>
+   
+                    <a href="<?php echo $link?>" target="_blank" title="<?php echo ucfirst($site); ?>"><i class="fa fa-<?php echo $icon?> fa-<?php echo $sf_impact_icon_size ?>"></i></a>
+                <?php }?>
+           </div><!--shoofly-social-media-->
+        </div><!--shoofly-social-media-container--><?php
+        
+    }
+   }
+ endif;
+//=========================================================Functions
+/*
+* Generate Style for the home page header 
+*/
+if (!function_exists('sf_impact_get_home_header_style')):
+    function sf_impact_get_home_header_style()
+    {
+            $sf_impact_header_height = get_theme_mod('sf_impact_header_height', "");
+            $sf_impact_header_width = get_theme_mod( 'sf_impact_header_width', "100%");
+            $style = sf_impact_get_home_header_width() . sf_impact_get_home_header_height();
+            return $style;
+    }
+endif;
+if (!function_exists('sf_impact_get_home_header_width')):
+    function sf_impact_get_home_header_width()
+    {
+           
+            $sf_impact_header_width = get_theme_mod( 'sf_impact_header_width', "100%");
+            $style = "";
+            if ($sf_impact_header_width != '')
+                        $style .= "width:" . $sf_impact_header_width . "!important;";
+        
+  
+            return $style;
+    }
+endif;
+if (!function_exists('sf_impact_get_home_header_height')):
+    function sf_impact_get_home_header_height()
+    {
+            $sf_impact_header_height = get_theme_mod('sf_impact_header_height', "");
+            $style = "";
+        
+            if ($sf_impact_header_height)
+                    $style .= "height:" . $sf_impact_header_height . "!important;";
+            return $style;
+    }
+endif;
+/* 
+* Custom Styles
+*/
+
+/*
+* Footer style for the home page if the header is a slideshow
+*/
+
+if (!function_exists('sf_impact_slideshow_scripts')):
+
+    function sf_impact_slideshow_scripts()
+    {
+       
+        $sf_impact_slider_transition = get_theme_mod('sf_impact_slider_transition', 'fade');
+        $sf_impact_slider_animspeed = get_theme_mod('sf_impact_slider_animspeed', '500');
+        $sf_impact_slider_speed = get_theme_mod('sf_impact_slider_speed', '7000');
+        $sf_impact_slider_automate = get_theme_mod('sf_impact_slider_automate', true)  == TRUE ? 'true' : 'false';
+        $sf_impact_slider_direction = get_theme_mod('sf_impact_slider_direction', 'horizontal');
+        $sf_impact_slider_navigation = get_theme_mod('sf_impact_slider_navigation', FALSE) == TRUE ? "true" : "false";
+        $sf_impact_slider_navdirection = get_theme_mod('sf_impact_slider_navdirection', FALSE) == TRUE ? "true" : "false";
+        $sf_impact_slider_keyboard = get_theme_mod('sf_impact_slider_keyboard', true) == TRUE ? "true" : "false";
+        $sf_impact_slider_mousewheel = get_theme_mod('sf_impact_slider_mousewheel', true) == TRUE ? "true" : "false";
+        $sf_impact_slider_pauseonhover = get_theme_mod('sf_impact_slider_pauseonhover', false) == TRUE ? "true" : "false";
+
+         ?>
+       	<script type="text/javascript">
+		jQuery(window).load(function() {
+			jQuery('.flexslider').flexslider(
+            {
+                animation: "<?php echo $sf_impact_slider_transition;?>",              //String: Select your animation type, "fade" or "slide"
+                slideDirection: "<?php echo $sf_impact_slider_direction; ?>",   //String: Select the sliding direction, "horizontal" or "vertical"
+                slideshow: <?php echo $sf_impact_slider_automate; ?>,                //Boolean: Animate slider automatically
+               useCSS: false,
+                slideshowSpeed: <?php echo $sf_impact_slider_speed?>,           //Integer: Set the speed of the slideshow cycling, in milliseconds
+                animationDuration: <?php echo $sf_impact_slider_animspeed ?>,         //Integer: Set the speed of animations, in milliseconds
+                directionNav: <?php echo $sf_impact_slider_navdirection ?>,             //Boolean: Create navigation for previous/next navigation? (true/false)
+                controlNav: <?php echo $sf_impact_slider_navigation ?>,               //Boolean: Create navigation for paging control of each clide? Note: Leave true for manualControls usage
+                keyboardNav: <?php echo $sf_impact_slider_keyboard?>,              //Boolean: Allow slider navigating via keyboard left/right keys
+                mousewheel: <?php echo $sf_impact_slider_mousewheel?>,               //Boolean: Allow slider navigating via mousewheel
+                prevText: "Previous",           //String: Set the text for the "previous" directionNav item
+                nextText: "Next",               //String: Set the text for the "next" directionNav item
+                pausePlay: false,               //Boolean: Create pause/play dynamic element
+                pauseText: 'Pause',             //String: Set the text for the "pause" pausePlay item
+                playText: 'Play',               //String: Set the text for the "play" pausePlay item
+                randomize: false,               //Boolean: Randomize slide order
+                slideToStart: 0,                //Integer: The slide that the slider should start on. Array notation (0 = first slide)
+                animationLoop: true,            //Boolean: Should the animation loop? If false, directionNav will received "disable" classes at either end
+                pauseOnAction: true,            //Boolean: Pause the slideshow when interacting with control elements, highly recommended.
+                pauseOnHover: <?php echo $sf_impact_slider_pauseonhover?>,            //Boolean: Pause the slideshow when hovering over slider, then resume when no longer hovering
+                controlsContainer: "flexslider",          //Selector: Declare which container the navigation elements should be appended too. Default container is the flexSlider element. Example use would be ".flexslider-container", "#container", etc. If the given element is not found, the default action will be taken.
+                manualControls: "",             //Selector: Declare custom control navigation. Example would be ".flex-control-nav li" or "#tabs-nav li img", etc. The number of elements in your controlNav should match the number of slides/tabs.
+ 
+            });
+            
+		});
+        </script>
+        <?php        
+     }
+ endif;
+
+/*
+* Main code for the Home Page Header
+*/
+if (!function_exists('sf_impact_homeheader')):
+    function sf_impact_homeheader()
+    {
+        $top = TRUE;
+      
+  
+        $sf_impact_header_image = get_theme_mod('sf_impact_header_image', '');
+        $sf_impact_logo_location = get_theme_mod('sf_impact_logo_location', 'image');
+        $sf_impact_home_header_type = get_theme_mod('sf_impact_home_header_type', '3');
+     
+      
+        if ($sf_impact_header_image && $sf_impact_logo_location == 'image')
+            $top = FALSE;
+            
+        $style = sf_impact_get_home_header_style();
+ 
+    
+   
+         if ($sf_impact_home_header_type == "1")
+         {     
+            $wstyle = sf_impact_get_home_header_width();
+            $hstyle = sf_impact_get_home_header_height();
+            sf_impact_get_slideshow($wstyle, $hstyle);
+         }
+         else 
+         {
+             if ($sf_impact_header_image && $sf_impact_home_header_type == "0")
+             {
+                ?>
+
+                <img class="headerimg headerimg-home" alt="header" style="<?php echo  $style?>;" src="<?php echo $sf_impact_header_image?>"/>
+           
+                <?php 
+                $output = "";
+                $output = apply_filters('sf_impact_home_post_bar', $output);
+                if ( $output != '' )
+                {
+                    ?><div id="homepostbar">
+                    <?php
+                            echo $output;?>
+                    </div>
+                    <?php
+                }
+             }
+         }
+    
+    }
+endif;
+
+/*
+* Create the settings for the thumbnail grid array. 
+* $type = page or post
+* $category = the category to display
+* $posts = Number of posts to display
+* $height = Height of thumbnail if not default
+* $width = Width of thumbnail if not default
+* $imagesize = wordpress image size (ie, thumbnail, medium, etc)
+* $cellwidth - not currently used - use cell width & height to display even grid when image sizes are not uniform.
+* $cellheight - not currently used
+*/
+if (!function_exists('sf_impact_get_thumbnailarray')):
+    function sf_impact_get_thumbnailarray($type, $category, $posts, $height, $width,  $imagesize, $cellwidth, $cellheight, $captionwidth, $gridwidth )
+    {
+    
+         $arra = array('post_type' => $type, 'posts_per_page' => $posts,  'aligngrid' => 'autocenter',   'imagesize' => $imagesize, 'cellwidth' => $cellwidth, 'cellheight'=>$cellheight, 'captionwidth' => $captionwidth, 'ignore_sticky_posts' => 1);
+
+           if ($height)
+                $arra['height'] = $height;
+            if ($width)
+                $arra['width'] = $width;
+        if ($category)
+                $arra['cat']  = $category;
+        if ($gridwidth)
+            $arra['gridwidth'] = $gridwidth;
+        return ($arra);
+    }
+endif;
+/*
+* Get the URL of the post thumbnail 
+*/
+//Get thumbnail url
+if (!function_exists('sf_impact_get_thumbnailurl')):
+    function sf_impact_get_thumbnailurl($category, $page)
+    {
+        if ($category)
+            $url = get_category_link($category);
+        else
+            $url = get_permalink( $page );
+        return $url;
+    }
+endif;
+/*
+* Display Featured Highlight Boxes
+*/
+if (!function_exists('sf_impact_get_highlightboxes')):
+    function sf_impact_get_highlightboxes()
+    {
+      
+        $sf_impact_highlight_boxes = get_theme_mod('sf_impact_highlight_boxes', 0);
+        $boxcount = intval( $sf_impact_highlight_boxes );
+        if ($boxcount > 0) 
+        { 
+            $sf_impact_highlight_style = get_theme_mod('sf_impact_highlight_style', "L");
+         
+            for ($x = 0; $x <= 3; ++$x) 
+            {
+                ${'sf_impact_highlight_image' . $x} = get_theme_mod('sf_impact_highlight_image' . $x, '');
+                ${'sf_impact_highlight_header' . $x} = get_theme_mod('sf_impact_highlight_header' . $x, '');
+                ${'sf_impact_highlight_text' . $x} = get_theme_mod('sf_impact_highlight_text' . $x, '');
+                ${'sf_impact_highlight_link' . $x} = get_theme_mod('sf_impact_highlight_link' . $x, '#');
+            }
+
+ 
+    
+    
+         ?>
+    
+            <div class="home-highlight-boxes fixed sfcenter">
+                <?php
+ 
+                $grid = 12/$boxcount;
+                for ($x = 1; $x <= $boxcount; $x++)  :?>
+
+                    <div class="highlight-<?php echo $boxcount ?>-col highlight-box highlight-box-<?php echo $boxcount?> grid_<?php echo $grid;?> sfchild">
+                       <div class="highlight-box-container fixed " >
+                        <?php 
+                        switch ($sf_impact_highlight_style)
+                        {
+                        default:
+                        case ('L'):
+                        {
+                           if (${'sf_impact_highlight_image' . $x} != "")
+                           {    sf_impact_getHightlightImg(${'sf_impact_highlight_image' . $x}, "highlight-left-img highlight-img-$x", ${"sf_impact_highlight_text$x"});     
+                                $class="highlight-right-text highlight-text-$x";
+                            }
+                            else
+                            {
+                                    $class="highlight-full highlight-text-$x";
+                            }
+                            sf_impact_getHightlightText  (${"sf_impact_highlight_header$x"} ,  ${"sf_impact_highlight_text$x"}, $class); 
+                        break;
+                        }
+                        case ("T"):
+                        {
+                            if (${'sf_impact_highlight_image' . $x} != "")
+                            {
+                                 sf_impact_getHightlightImg(${'sf_impact_highlight_image' . $x}, "highlight-top-img highlight-img-$x", ${"sf_impact_highlight_text$x"});
+                            }
+                             sf_impact_getHightlightText  (${"sf_impact_highlight_header$x"} ,  ${"sf_impact_highlight_text$x"}); 
+                            break;
+                         }        
+                        case ("R"):
+                        {
+                                            
+                           if (${'sf_impact_highlight_image' . $x} != "")
+                           {        
+                                $class="highlight-left-text highlight-text-$x";
+                            }
+                            else
+                            {
+                                    $class="highlight-full highlight-text-$x";
+                            }
+                             sf_impact_getHightlightText  (${"sf_impact_highlight_header$x"} ,  ${"sf_impact_highlight_text$x"}, $class); 
+                            if (${'sf_impact_highlight_image' . $x} != "")
+                            {        
+                                 sf_impact_getHightlightImg(${'sf_impact_highlight_image' . $x}, "highlight-right-img highlight-img-$x", ${"sf_impact_highlight_text$x"});    
+                            }
+                           break;
+                    
+                        }
+                        }
+                        if (${'sf_impact_highlight_link' . $x} != "")
+                            {?>
+                              <div class="highlight-link"><a class="read-more btn" href="<?php echo ${'sf_impact_highlight_link' . $x};?>">more</a></div>   
+                
+ 
+                        <?php 
+                            }?>
+                        </div><!--highlight box container-->
+                    </div><!--highlight box-->
+    
+            <?php
+            endfor;
+            ?>
+            </div> 
+            <!--highlight boxes-->
+
+            <hr class="home1">
+            <?php
+        }
+    }    
+endif;
+/*
+* Get the html for the image for the featured highlight
+* $imagename - path to the image
+* $class - class for the img div (Image can be on top, left or right of box)
+*/
+if (!function_exists('sf_impact_getHightlightImg')):
+    function sf_impact_getHightlightImg($imagename, $class, $alt)
+    {
+ 
+        ?>
+            <div class="<?php echo $class?>">
+                <img class="highlight-img" alt="<?php echo $alt?>" src="<?php echo $imagename ;?>"/>
+            </div>  <!--highlight-left-img-->
+        <?php   
+    }
+endif;
+/*
+* Get the html for the featured image highlight text
+* $header - highlight header text
+* $text - highlight description text
+* $class - div class (text can be below image, to the right or to the left)
+*/ 
+if (!function_exists('sf_impact_getHightlightText')):
+    function sf_impact_getHightlightText($header, $text, $class="highlight-full")
+    {?>
+        <div class="<?php echo $class?>"> 
+            <span class="highlight-span">
+                <h2><?php echo $header?></h2>
+                <p><?php echo $text;?></p>
+            </span>
+        </div><!--<?php echo $class?>-->
+    <?php
+     }
+endif;
+/*
+* Checks to display the thumbnail grid on a page
+*/
+ if (!function_exists('sf_impact_is_grid')):
+    function sf_impact_is_grid()
+    {
+        $grid = FALSE;
+        $sf_impact_grid_display = get_theme_mod('sf_impact_grid_display', FALSE);
+        $sf_impact_grid_display_all = get_theme_mod('sf_impact_grid_display_all', FALSE);
+      
+           //Load script for thumbnail grid
+         if (class_exists('sfly_thumbnailgrid'))
+        {
+            if (is_home() || is_front_page())
+            {
+                if ($sf_impact_grid_display)
+                    $grid = true;
+            }
+            else
+                if ($sf_impact_grid_display_all)
+                    $grid = TRUE;
+        }
+       
+        return $grid;
+    }
+endif;
+
+/*
+* Check to see if this is the home page or the front page (not the blog page)
+* Returns Boolean
+*/
+if (!function_exists('sf_impact_is_home_page')):
+
+    function sf_impact_is_home_page()
+    {
+       if ((is_home() || is_front_page()))
+       {
+           if ((isset($wp_query) && $wp_query -> is_posts_page))
+                return FALSE;
+          else
+            return TRUE;
+       }
+        else
+            return FALSE;
+       
+    }
+endif;
+
+if (!function_exists('sf_impact_slideshow_query')):
+    function sf_impact_slideshow_query()
+    {
+        wp_reset_query();
+            $args = array(
+                'post_type' => 'post',
+                'posts_per_page' => 5,
+                'meta_query' => array(
+                array(
+                    'key' => 'post_show_in_slideshow',
+                    'value' => 1,
+                ),
+                array(
+                    'key' => '_thumbnail_id',
+                    'compare' => 'EXISTS'
+                )
+                ));
+        $the_query =   new WP_Query($args);
+        return $the_query;        
+    }
+endif;
+/*
+* HTML for the Home Page Slide Show
+* $style - style for the slide show, height and width if not default
+*/
+if (!function_exists('sf_impact_get_slideshow')):
+    function sf_impact_get_slideshow($the_query, $wstyle, $hstyle)
+    {
+        
+          $format =  get_theme_mod('sf_impact_slider_style', 'default');
+          $sf_impact_slider_captions = get_theme_mod('sf_impact_slider_captions', TRUE) ;
+          if ($wstyle) 
+                $fstyle = "style=$wstyle;"; 
+           else 
+                $fstyle="";
+           if ($hstyle)
+                $fhstyle = "style=$hstyle";
+            else
+                $fhstyle = "";
+            ?>
+         
+    		<div class="flexslider"  <?php echo $fstyle;?>> 
+		    <ul class="slides">
+		   
+  
+                    <?php 
+                    
+                     
+                     $sf_impact_slider_thumbnails = get_theme_mod('sf_impact_slider_thumbnails', false) == TRUE ? "true" : "false";
+                     while ( $the_query->have_posts() )  :$the_query->the_post();
+                            $permalink = get_permalink();
+                            $title = get_the_title();
+                            $id = get_the_ID();
+                            $image_id = get_post_thumbnail_id();
+                            $image_atts = wp_get_attachment_image_src($image_id, "full", true);
+                            $image_url = $image_atts[0] ;
+
+                            $tnimage_atts = wp_get_attachment_image_src($image_id, "thumbnail", true);
+                            $tnimage_url = $tnimage_atts[0];
+                            if ($sf_impact_slider_thumbnails)
+                                $datathumb = "data-thumb='$tnimage_url'";
+                            else
+                                $datathumb = "";
+                            if ($image_url && strpos($image_url, 'default.png') == FALSE)
+                            {
+                                $hid = "title" . $id;
+                                ?>
+                 	            <li <?php echo $datathumb?>>
+		    		            <a href="<?php echo $permalink ?>"><img src="<?php echo $image_url?>" alt="<?php echo $hid?>" <?php echo $fhstyle; ?>/>
+                                <?php if ($sf_impact_slider_captions==true) { ?>
+		    		                <p class="flex-caption"><?php echo $hid?></p>
+		    	                <?php } ?></a>
+                                 </li>
+                           <?php }
+                     
+                     endwhile;
+                     wp_reset_query();
+   
+                    ?> 
+                </ul><!--slides-->
+                </div><!--flexslider-->
+        
+         <?php
+    }
+ endif;
+ if (!function_exists('sf_impact_home_query')):
+ function sf_impact_home_query()
+ {
+     	wp_reset_postdata();
+       
+        if ( get_query_var('paged') ) {
+            $paged = get_query_var('paged');
+        } else if ( get_query_var('page') ) {
+            $paged = get_query_var('page');
+        } else {
+            $paged = 1;
+        }
+        $args = array( 'post_type' => 'post', 'paged' => $paged );  
+        $the_query = new WP_Query($args);
+    
+        sf_impact_posts($the_query);
+
+        wp_reset_postdata();
+        
+ }
+ endif;
+ /*
+ * Display the blog posts on the home page or the blog page when the home page is a static page
+ */
+if (!function_exists('sf_impact_posts')):
+    function sf_impact_posts($the_query, $stickycount = 0)
+    {
+        $full  = sf_impact_postContentFull();
+    
+
+        if ( $the_query->have_posts() ) :  ?>
+        <div>
+  		<?php /* Start the Loop */ ?>
+		<?php while ( $the_query->have_posts() ) : $the_query->the_post(); ?>
+               <?php
+                $current_post_index = $the_query->current_post ;   //Get the current index
+                $full  = sf_impact_postContentFull();  //Check to see if the option to display excerpts is on or off
+                $sf_impact_show_full_sticky_post = FALSE;  //Check to see if the sticky as full post option is on 
+                if (is_sticky() && !$full)  //The sticky as full post is only valid when excerpts are enabled.
+                   $sf_impact_show_full_sticky_post = (get_theme_mod('sf_impact_show_full_sticky_post', true) && $current_post_index  == 0);      //Make sure that all sticky posts at the top display as full if this is set
+                ?>      
+			<?php
+                if ($full || get_post_format() == "link")
+				    get_template_part( 'template-parts/content', get_post_format() );
+                else
+                    if ($sf_impact_show_full_sticky_post)
+                        get_template_part('template-parts/content', 'sticky_full');
+                    else
+                        get_template_part('template-parts/excerpt', 'get_post_format');
+			?>
+
+		<?php endwhile; ?>
+        </div>
+		<?php the_posts_navigation(); ?>
+
+	<?php else : ?>
+
+		<?php get_template_part( 'template-parts/content', 'none' ); ?>
+
+	<?php endif; 
+   }
+endif;
+//Utility Functions
+/*
+* Check to see if the full post should be displayed or the excerpt
+*/
+if ( ! function_exists( 'sf_impact_postContentFull' ) ) :
+    function sf_impact_postContentFull()
+    {
+     $full = TRUE;
+
+    if (!is_search())
+    {
+     if (is_archive())
+     {
+    
+        $full = ! get_theme_mod('sf_impact_show_excerpt_archive_post', true);
+     } 
+      else if ((!is_single()  && !is_page()) )
+     {
+    
+        $full = !get_theme_mod('sf_impact_show_excerpt_blog_post', TRUE);
+    
+    
+     }
+    }
+    else 
+        $full = FALSE; // Not an option for search
+     return $full;
+    }
+endif;
+
+/*
+* Get the base current URL
+*/
+if (!function_exists('sf_impact_geturi')):
+
+     function sf_impact_geturi()
+     {
+        global $wp;
+        return home_url(add_query_arg(array(),$wp->request)); 
+     }
+ endif;
+ /*
+ * Convert hex color to rgb
+ * $hex = hex color
+ */
+if (!function_exists('sf_impact_hex2rgb')):
+    function sf_impact_hex2rgb($hex)
+    {
+        $hex = str_replace("#", "", $hex);
+
+       if(strlen($hex) == 3) {
+          $r = hexdec(substr($hex,0,1).substr($hex,0,1));
+          $g = hexdec(substr($hex,1,1).substr($hex,1,1));
+          $b = hexdec(substr($hex,2,1).substr($hex,2,1));
+       } else {
+          $r = hexdec(substr($hex,0,2));
+          $g = hexdec(substr($hex,2,2));
+          $b = hexdec(substr($hex,4,2));
+       }
+       $rgb = array($r, $g, $b);
+       return $rgb;
+    }
+endif;
+/*
+* Get RGBA style string
+* $hex = hex color
+* $opacity = opacity
+*/
+if (!function_exists('sf_impact_rgbastyle')):
+    function sf_impact_rbgastyle($hex, $opacity)
+    {
+    
+        $rgb = join(",", sf_impact_hex2rgb($hex));
+        $rgba = $rgb . "," . strval($opacity/100);
+  
+        return
+        " background-color: $hex;
+        background-color: rgba($rgba); ";
+    }
+endif;
+/*
+* For debugging only
+*/
+if ( ! function_exists('write_log')) {
+   function write_log ( $log )  {
+      if ( is_array( $log ) || is_object( $log ) ) {
+         error_log( print_r( $log, true ) );
+      } else {
+         error_log( $log );
+      }
+   }
+}
 
 /*
 * Post Meta
 */
 
+
+
 /**
  * Calls the class on the post edit screen to create custom meta values
  */
-/*function call_sfly_post_meta() {
+function call_sfly_post_meta() {
     new sfly_post_meta();
-}*/
+}
 
+if ( is_admin() ) {
+    add_action( 'load-post.php', 'call_sfly_post_meta' );
+    add_action( 'load-post-new.php', 'call_sfly_post_meta' );
+}
+
+/** 
+ * The Class.
+ */
+ if (!class_exists('sfly_post_meta')):
+    class sfly_post_meta {
+
+	    /**
+	     * Hook into the appropriate actions when the class is constructed.
+	     */
+	    public function __construct() {
+		    add_action( 'add_meta_boxes', array( $this, 'add_meta_box' ) );
+		    add_action( 'save_post', array( $this, 'save' ) );
+            add_filter( 'admin_post_thumbnail_html', array($this, 'add_image_meta' ));
+	    }
+
+	    /**
+	     * Adds the meta box container.
+	     */
+	    public function add_meta_box( $post_type ) {
+                $post_types = array('post');     //limit meta box to certain post types
+                if ( in_array( $post_type, $post_types )) {
+		    add_meta_box(
+			    'sfly_post_features'
+			    ,__( 'Post Settings', 'sf-impact' )
+			    ,array( $this, 'render_meta_box_content' )
+			    ,$post_type
+			    ,'side'
+			    ,'high'
+		    );
+                }
+	    }
+
+	    /**
+	     * Save the meta when the post is saved.
+	     *
+	     * @param int $post_id The ID of the post being saved.
+	     */
+	    public function save( $post_id ) {
+	
+		    /*
+		     * We need to verify this came from the our screen and with proper authorization,
+		     * because save_post can be triggered at other times.
+		     */
+
+		    // Check if our nonce is set.
+		    if ( ! isset( $_POST['sf_impact_inner_custom_box_nonce'] ) )
+            {
+                write_log( 'invalid nonce');
+			    return $post_id;
+            }
+     
+      
+            $this->updateCheckBox($post_id, "hide_featured_image");
+       
+ 
+		    $nonce = $_POST['sf_impact_inner_custom_box_nonce'];
+
+		    // Verify that the nonce is valid.
+		    if ( ! wp_verify_nonce( $nonce, 'sf_impact_inner_custom_box' ) )
+            {
+                write_log( 'invalid nonce');
+			    return $post_id;
+            }
+		    // If this is an autosave, our form has not been submitted,
+                    //     so we don't want to do anything.
+		    if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) 
+			    return $post_id;
+
+		    // Check the user's permissions.
+		    if ( 'page' == $_POST['post_type'] ) {
+				    return $post_id;
+	
+		    } else {
+
+			    if ( ! current_user_can( 'edit_post', $post_id ) )
+				    return $post_id;
+		    }
+            $this->updateCheckbox($post_id, "post_hide_sidebar");
+            $this->updateCheckbox($post_id, "post_show_in_slideshow");
+	
+	    }
+
+        function add_image_meta( $content ) {
+     
+                global $post;
+                if ($post->post_type === 'post') {
+                    $text = __( 'Don\'t display image in post.', 'sf-impact' );
+      
+                    $defvalue = !get_theme_mod('sf_impact_post_featured', TRUE);
+    
+        
+                    $meta = get_post_meta( $post->ID, "hide_featured_image", true );
+        
+                    if ($meta != NULL)
+                        $value = get_post_meta( $post->ID, "hide_featured_image", true );
+                    else 
+                        $value = $defvalue;
+     
+                     $label = '<label for="hide_featured_image" class="selectit">
+                        <input name="hide_featured_image" type="checkbox" id="hide_featured_image" ' . checked( $value, 1, false) .'> ' . $text .'
+                        </label>';
+                     $content .= $label;
+                }
+                return $content;
+            }
+        public function updateCheckbox($post_id, $id)
+        {
+           $value =  isset( $_POST[$id]) && $_POST[$id]  ? 1 : 0;
+     
+
+            update_post_meta( $post_id, esc_attr($id), $value ); //save value
+        }
+         public function createCheckbox($id, $label, $default = NULL)
+         {
+            global $post;
+            if (!$default)
+              $default = FALSE;
+            $meta = esc_attr( get_post_meta( $post->ID, $id, true ) );
+            $value = $meta != NULL ? $meta : $default;
+ 
+            echo '<div><label for="' . $id . '" class="selectit"><input name="' . $id . '" type="checkbox" id="' . $id . '" value="' . $value . ' "'. checked( $value, 1, false) .'> ' . $label .'</label></div>';
+	    }
+        /**
+	     * Render Meta Box content.
+	     *
+	     * @param WP_Post $post The post object.
+	     */
+	    public function render_meta_box_content( $post ) {
+	
+		    // Add an nonce field so we can check for it later.
+		    wp_nonce_field( 'sf_impact_inner_custom_box', 'sf_impact_inner_custom_box_nonce' );
+            $defaultval = !get_theme_mod('sf_impact_post_sidebar', FALSE);
+            $this->createCheckbox("post_hide_sidebar", "Hide Sidebar (Full Page)", $defaultval);
+            $this->createCheckbox("post_show_in_slideshow", "Include in Slide Show", TRUE);
+
+                    
+	
+	    }
+    }
+endif;
 if (!class_exists('sf_impact_CustomLinkThemes')):
 {
     class sf_impact_CustomLinkThemes {
@@ -600,5 +1448,207 @@ function sf_impact_count_sticky($category = NULL)
 		    <?php wp_nav_menu( $menu_settings ); ?>
 	    </nav>        
 <?php }
+ if (!function_exists('sf_impact_get_url')):
+function sf_impact_get_url() {
+    // preg_match( '/<a\s[^>]*?href=[\'"](.+?)[\'"]/is', get_the_content(), $matches ) ;
+        //return false;
+        $pattern = '#(www\.|https?://)?[a-z0-9]+\.[a-z0-9]{2,4}\S*#i';
+if (!preg_match_all($pattern, get_the_content(), $matches, PREG_PATTERN_ORDER))
+    return false;
+
+    return esc_url_raw( $matches[0][0]);
+}
+endif;
+
+add_filter( 'the_content', 'sf_impact_format_content' );
+
+function sf_impact_format_content( $content ) {
+
+	/* Check if we're displaying a 'quote' post. */
+	if ( has_post_format( 'quote' ) ) {
+
+		/* Match any <blockquote> elements. */
+		preg_match( '/<blockquote.*?>/', $content, $matches );
+
+		/* If no <blockquote> elements were found, wrap the entire content in one. */
+		if ( empty( $matches ) )
+			$content = "<blockquote>{$content}</blockquote>";
+	}
+ 
+    if ( has_post_format( 'aside' ) && !is_singular() )
+		$content .= ' <a href="' . get_permalink() . '">&#8734;</a>';
+
+
+
+    if (has_post_format( 'chat'))
+        return (sf_impact_chat_content($content));
+
+	return $content;
+}
+function sf_impact_chat_content( $content ) {
+	global $_post_format_chat_ids;
+
+	/* If this is not a 'chat' post, return the content. */
+	if ( !has_post_format( 'chat' ) )
+		return $content;
+       
+	/* Set the global variable of speaker IDs to a new, empty array for this chat. */
+	$_post_format_chat_ids = array();
+
+	/* Allow the separator (separator for speaker/text) to be filtered. */
+	$separator = apply_filters( 'my_post_format_chat_separator', ':' );
+
+	/* Open the chat transcript div and give it a unique ID based on the post ID. */
+	$chat_output = "\n\t\t\t" . '<div id="chat-transcript-' . esc_attr( get_the_ID() ) . '" class="chat-transcript">';
+
+	/* Split the content to get individual chat rows. */
+	$chat_rows = preg_split( "/(\r?\n)+|(<br\s*\/?>\s*)+/", $content );
+
+	/* Loop through each row and format the output. */
+	foreach ( $chat_rows as $chat_row ) {
+
+		/* If a speaker is found, create a new chat row with speaker and text. */
+		if ( strpos( $chat_row, $separator ) ) {
+
+			/* Split the chat row into author/text. */
+			$chat_row_split = explode( $separator, trim( $chat_row ), 2 );
+
+			/* Get the chat author and strip tags. */
+			$chat_author = strip_tags( trim( $chat_row_split[0] ) );
+
+			/* Get the chat text. */
+			$chat_text = trim( $chat_row_split[1] );
+
+			/* Get the chat row ID (based on chat author) to give a specific class to each row for styling. */
+			$speaker_id = sf_impact_chat_row_id( $chat_author );
+
+			/* Open the chat row. */
+			$chat_output .= "\n\t\t\t\t" . '<div class="chat-row ' . sanitize_html_class( "chat-speaker-{$speaker_id}" ) . '">';
+
+			/* Add the chat row author. */
+			$chat_output .= "\n\t\t\t\t\t" . '<div class="chat-author ' . sanitize_html_class( strtolower( "chat-author-{$chat_author}" ) ) . ' vcard"><cite class="fn">' . apply_filters( 'my_post_format_chat_author', $chat_author, $speaker_id ) . $separator . '</cite></div>';
+
+			/* Add the chat row text. */
+			$chat_output .= "\n\t\t\t\t\t" . '<div class="chat-text">' . str_replace( array( "\r", "\n", "\t" ), '', apply_filters( 'my_post_format_chat_text', $chat_text, $chat_author, $speaker_id ) ) . '</div>';
+
+			/* Close the chat row. */
+			$chat_output .= "\n\t\t\t\t" . '</div><!-- .chat-row -->';
+		}
+
+		/**
+		 * If no author is found, assume this is a separate paragraph of text that belongs to the
+		 * previous speaker and label it as such, but let's still create a new row.
+		 */
+		else {
+
+			/* Make sure we have text. */
+			if ( !empty( $chat_row ) ) {
+
+				/* Open the chat row. */
+				$chat_output .= "\n\t\t\t\t" . '<div class="chat-row ' . sanitize_html_class( "chat-speaker-{$speaker_id}" ) . '">';
+
+				/* Don't add a chat row author.  The label for the previous row should suffice. */
+
+				/* Add the chat row text. */
+				$chat_output .= "\n\t\t\t\t\t" . '<div class="chat-text">' . str_replace( array( "\r", "\n", "\t" ), '', apply_filters( 'my_post_format_chat_text', $chat_row, $chat_author, $speaker_id ) ) . '</div>';
+
+				/* Close the chat row. */
+				$chat_output .= "\n\t\t\t</div><!-- .chat-row -->";
+			}
+		}
+	}
+
+	/* Close the chat transcript div. */
+	$chat_output .= "\n\t\t\t</div><!-- .chat-transcript -->\n";
+
+	/* Return the chat content and apply filters for developers. */
+	return apply_filters( 'my_post_format_chat_content', $chat_output );
+}
+
+/**
+ * This function returns an ID based on the provided chat author name.  It keeps these IDs in a global 
+ * array and makes sure we have a unique set of IDs.  The purpose of this function is to provide an "ID"
+ * that will be used in an HTML class for individual chat rows so they can be styled.  So, speaker "John" 
+ * will always have the same class each time he speaks.  And, speaker "Mary" will have a different class 
+ * from "John" but will have the same class each time she speaks.
+ *
+ * @author David Chandra
+ * @link http://www.turtlepod.org
+ * @author Justin Tadlock
+ * @link http://justintadlock.com
+ * @copyright Copyright (c) 2012
+ * @license http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+ * @link http://justintadlock.com/archives/2012/08/21/post-formats-chat
+ *
+ * @global array $_post_format_chat_ids An array of IDs for the chat rows based on the author.
+ * @param string $chat_author Author of the current chat row.
+ * @return int The ID for the chat row based on the author.
+ */
+function sf_impact_chat_row_id( $chat_author ) {
+	global $_post_format_chat_ids;
+
+	/* Let's sanitize the chat author to avoid craziness and differences like "John" and "john". */
+	$chat_author = strtolower( strip_tags( $chat_author ) );
+
+	/* Add the chat author to the array. */
+	$_post_format_chat_ids[] = $chat_author;
+
+	/* Make sure the array only holds unique values. */
+	$_post_format_chat_ids = array_unique( $_post_format_chat_ids );
+
+	/* Return the array key for the chat author and add "1" to avoid an ID of "0". */
+	return absint( array_search( $chat_author, $_post_format_chat_ids ) ) + 1;
+}
+ /*
+* Main code for the header image
+*/
+if (!function_exists('sf_impact_header')):
+    function sf_impact_header($the_slide_query = NULL)
+    {
+        $top = TRUE;
+      
+  
+        $sf_impact_header_image = get_theme_mod('sf_impact_header_image', '');
+        $sf_impact_logo_location = get_theme_mod('sf_impact_logo_location', 'image');
+        $sf_impact_home_header_type = get_theme_mod('sf_impact_home_header_type', '3');
+     
+      
+        if ($sf_impact_header_image && $sf_impact_logo_location == 'image')
+            $top = FALSE;
+            
+        $style = sf_impact_get_home_header_style();
+ 
+    
+   
+         if ($sf_impact_home_header_type == "1" && isset($the_slide_query))
+         {     
+            $wstyle = sf_impact_get_home_header_width();
+            $hstyle = sf_impact_get_home_header_height();
+            sf_impact_get_slideshow($the_slide_query, $wstyle, $hstyle);
+         }
+         else 
+         {
+             if ($sf_impact_header_image && $sf_impact_home_header_type == "0")
+             {
+                ?>
+
+                <img class="headerimg headerimg-home" alt="header" style="<?php echo  $style?>;" src="<?php echo $sf_impact_header_image?>"/>
+           
+                <?php 
+                $output = "";
+                $output = apply_filters('sf_impact_home_post_bar', $output);
+                if ( $output != '' )
+                {
+                    ?><div id="homepostbar">
+                    <?php
+                            echo $output;?>
+                    </div>
+                    <?php
+                }
+             }
+         }
+    
+    }
+endif;
 
 ?>
