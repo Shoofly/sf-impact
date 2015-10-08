@@ -23,8 +23,9 @@
 	12.2 Galleries
  13.0 Page Elements
 --------------------------------------------------------------*/
-.flexslider {
+.flexslider, .slides {
   margin: auto;
+  margin-bottom: 0px;
 }
 
 .flex-caption {
@@ -46,10 +47,13 @@ span, a {
   display: inline;
 }
 
+body {
+  line-height: 1;
+}
+
 html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td {
   font-family: Actor, Helvetica, arial, serif;
   font-size: 15px;
-  line-height: 26px;
   margin-bottom: 0px;
   margin-left: 0px;
   margin-right: 0px;
@@ -58,6 +62,10 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
   transition-duration: 0.2s;
   transition-property: left;
   transition-timing-function: ease-out;
+}
+
+p {
+  line-height: 26px;
 }
 
 body {
@@ -348,15 +356,21 @@ dd {
 
 .mejs-inner {
   padding-top: 20px !important;
+  line-height: 1;
 }
 
-.mejs-container {
+.mejs-inner .mejs-container {
   padding-top: 15px;
-  line-height: normal;
+  line-height: 1;
 }
 
-.mejs-container * {
-  line-height: normal;
+.mejs-inner .mejs-container * {
+  line-height: 1;
+}
+
+.mejs-inner .mejs-container .mejs-controls div {
+  line-height: 1 !important;
+  padding-top: 10px !important;
 }
 
 .entry-video embed, .entry-video iframe, .entry-video object {
@@ -659,6 +673,10 @@ textarea:focus {
 5.0 Navigation
 --------------------------------------------------------------*/
 /* Navigation */
+.navdivider {
+  clear: both;
+}
+
 .site-navigation ul {
   list-style: none;
   margin: 0;
@@ -690,6 +708,10 @@ textarea:focus {
 
 .primary-navigation .menu-toggle:focus, .primary-navigation .menu-toggle:active {
   outline: 0;
+}
+
+.primary-navigation a, .primary-navigation span, .primary-navigation div {
+  line-height: 22px;
 }
 
 .primary-navigation a {
@@ -952,6 +974,14 @@ a:visited {
 
 .widget select {
   max-width: 100%;
+}
+
+.widget li {
+  line-height: 26px;
+}
+
+.widget li a {
+  line-height: 26px;
 }
 
 /* Make sure select elements fit in widgets */

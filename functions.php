@@ -116,7 +116,7 @@ function sf_impact_setup() {
     {
         $defaultpath =        get_template_directory_uri() . '/images/';
         $defaultlogo = $defaultpath . "logo.png"; 
- //       $defaultheader = $defaultpath . "impact.png";
+        $defaultheader = $defaultpath . "impact.png";
         $defaultheadertype = "3";
   
         set_theme_mod('sf_impact_header_image', $defaultheader);
@@ -125,11 +125,11 @@ function sf_impact_setup() {
         set_theme_mod('sf_impact_home_header_type', $defaultheadertype);
         set_theme_mod('sf_impact_highlight_boxes', 2);
         set_theme_mod('sf_impact_highlight_header1', 'Up to 3 highlights');
-        set_theme_mod('sf_impact_highlight_image1', $defaultpath . 'idea.png');
+        set_theme_mod('sf_impact_highlight_image1', $defaultpath . 'flowers.png');
         set_theme_mod('sf_impact_highlight_text1', 'Create up to 3 highlight boxes!');
         set_theme_mod('sf_impact_highlight_link1', '#'); 
         set_theme_mod('sf_impact_highlight_header2', 'Home Page features');
-        set_theme_mod('sf_impact_highlight_image2', $defaultpath . 'home.png');
+        set_theme_mod('sf_impact_highlight_image2', $defaultpath . 'drop.png');
         set_theme_mod('sf_impact_highlight_text2', 'Display an image or a slide show!');
         set_theme_mod('sf_impact_highlight_link2', '#'); 
         set_theme_mod('sf_impact_home_featured_highlights', true);
