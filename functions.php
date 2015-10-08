@@ -979,13 +979,13 @@ if (!function_exists('sf_impact_get_slideshow')):
                                 $hid = "title" . $id;
                                 ?>
                  	            <li <?php echo $datathumb?>>
-		    		            <a href="<?php echo $permalink ?>"><img src="<?php echo $image_url?>" alt="<?php echo $hid?>" <?php echo $fhstyle; ?>/>
+		    		            <a href="<?php echo $permalink ?>"><img src="<?php echo $image_url?>" alt="<?php echo $title?>" <?php echo $fhstyle; ?>/>
                                 <?php if ($sf_impact_slider_captions==true) { ?>
-		    		                <p class="flex-caption"><?php echo $hid?></p>
+		    		                <p class="flex-caption"><?php echo $title?></p>
 		    	                <?php } ?></a>
                                  </li>
                            <?php }
-                     
+                                 
                      endwhile;
                      wp_reset_query();
    
@@ -1258,15 +1258,10 @@ if ( is_admin() ) {
                     $text = __( 'Don\'t display image in post.', 'sf-impact' );
       
                     $defvalue = !get_theme_mod('sf_impact_post_featured', TRUE);
-    
         
                     $meta = get_post_meta( $post->ID, "hide_featured_image", true );
-        
-                    if ($meta != NULL)
-                        $value = get_post_meta( $post->ID, "hide_featured_image", true );
-                    else 
-                        $value = $defvalue;
-     
+                    $value = $meta != NULL ? $meta : $defvalue;
+                
                      $label = '<label for="hide_featured_image" class="selectit">
                         <input name="hide_featured_image" type="checkbox" id="hide_featured_image" ' . checked( $value, 1, false) .'> ' . $text .'
                         </label>';

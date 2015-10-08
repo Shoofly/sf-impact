@@ -18,8 +18,20 @@
 <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>">
 
 <?php 
-    wp_head(); 
+    wp_head();
     $url = (get_header_image());        //get the default header image
+  
+    if (is_single())
+    {
+        $sf_impact_post_header = get_theme_mod('sf_impact_post_header', false);
+        if ($sf_impact_post_header)
+        {
+             $image_id = get_post_thumbnail_id();
+             $image_atts = wp_get_attachment_image_src($image_id, "full", true);
+             if (isset($image_atts) && $image_atts[1] >= HEADER_IMAGE_WIDTH ) $url = $image_atts[0] ;
+        }                 
+    }
+                     
     //Get the settings for the header
     $sf_impact_logo_location = get_theme_mod('sf_impact_logo_location', 'image');
     $sf_impact_menu_location = get_theme_mod('sf_impact_menu_location', 'above');
@@ -123,7 +135,7 @@
                 {
                     ?>
             
-                    <img class="headerimg headerimg-page" src="<?php echo header_image() ?>" height="<?php echo get_custom_header()->height; ?>" width="<?php echo get_custom_header()->width; ?>" alt="" />
+                    <img class="headerimg headerimg-page" src="<?php echo $url ?>" height="<?php echo get_custom_header()->height; ?>" width="<?php echo get_custom_header()->width; ?>" alt="" />
                 <?php  
                 }
             }
@@ -194,4 +206,4 @@
 	</header><!-- #masthead -->
     
 	<div id="content" class="site-content">
-     <?php if ($sf_impact_social_above_content) sf_impact_social_media_icons(); ?>
+     <?php if ($sf_impact_social_above_content) sf_impact_social_media_icons(); ?>     
