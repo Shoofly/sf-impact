@@ -430,6 +430,25 @@
                 'priority' => 10,
                 'type'     => 'checkbox',
             ) );
+            //Setting to featured image on posts
+            $wp_customize->add_setting( 'sf_impact_post_header', 
+                array(
+                'default' => false, 
+                'type' => 'theme_mod', 
+                'capability' => 'edit_theme_options', 
+                'transport' => 'refresh', 
+                'sanitize_callback' => 'sf_impact_sanitize_checkbox'
+                ) 
+            );      
+                   
+            $wp_customize->add_control( 'sf_impact_post_header', array(
+                'settings' => 'sf_impact_post_header',
+                'label'    => __( 'Display the featured image as the header on posts', 'sf-impact'), 
+                'description' => __('When featured images are displayed on post pages display them as the header', 'sf-impact'),
+                'section'  => 'sf_impact_general_options',
+                'priority' => 10,
+                'type'     => 'checkbox',
+            ) );
                     //Options to display posts on the home page
  
    
@@ -752,9 +771,9 @@
                 'priority' => 10, 
                 'type'     => 'radio',
 		        'choices'  => array(
-                "2" => __('None', 'sf-impact'),
+                    "2" => __('None', 'sf-impact'),
                     "3" => __('Default', 'sf-impact'),
-			        "0"  => __('Header Image', 'sf-impact'),
+			        "0"  => __('Custom Header Image', 'sf-impact'),
 			        "1" => __('Slideshow', 'sf-impact'),
                  
                 
@@ -1239,7 +1258,7 @@
                     array(   'transport' => 'refresh', 
                     'sanitize_callback' => 'sanitize_text_field') );
             $wp_customize->add_control(
-                new Arbitrary_Custom_Line(
+                new Arbitrary_Custom_Control(
                     $wp_customize,
                     'line1',
                     array(
@@ -1352,11 +1371,11 @@
                 );        
                 
             $wp_customize->add_control(
-            new Arbitrary_Custom_Line(
+            new Arbitrary_Custom_Control(
                     $wp_customize,
                     "$line",
                     array(
-                 
+                        'type' => 'line',
                         'section' => 'sf_impact_highlight_options', 
                         'settings' => "$line", 
                         'priority' => 10, 

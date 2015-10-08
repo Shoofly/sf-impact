@@ -45,7 +45,7 @@ function sf_impact_page_menu( $args = array() ) {
 	// Show Home in the menu
 	if ( ! empty($args['show_home']) ) {
 		if ( true === $args['show_home'] || '1' === $args['show_home'] || 1 === $args['show_home'] )
-			$text = __('Home');
+			$text = __('Home', 'sf-impact');
 		else
 			$text = $args['show_home'];
 		$class = '';
@@ -182,7 +182,8 @@ class sf_impact_Walker_Page extends Walker_Page {
 
 		if ( '' === $page->post_title ) {
 			/* translators: %d: ID of a post */
-			$page->post_title = sprintf( __( '#%d (no title)' ), $page->ID );
+            $str = __('(no title)', 'sf-impact');
+			$page->post_title = sprintf( "#%d $str", $page->ID);
 		}
 
 		$args['link_before'] = empty( $args['link_before'] ) ? '' : $args['link_before'];

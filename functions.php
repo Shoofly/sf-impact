@@ -119,7 +119,7 @@ function sf_impact_setup() {
         $defaultheader = $defaultpath . "impact.png";
         $defaultheadertype = "3";
   
-        set_theme_mod('sf_impact_header_image', $defaultheader);
+      
         set_theme_mod('sf_impact_logo_image', $defaultlogo);
         set_theme_mod('sf_impact_logo_location', 'image');
         set_theme_mod('sf_impact_home_header_type', $defaultheadertype);
@@ -890,42 +890,89 @@ endif;
         return $grid;
     }
 endif;
+
+/*
+* Check to see if this is the home page or the front page (not the blog page)
+* Returns Boolean
+*/
+if (!function_exists('sf_impact_is_home_page')):
+
+    function sf_impact_is_home_page()
+    {
+       if ((is_home() || is_front_page()))
+       {
+           if ((isset($wp_query) && $wp_query -> is_posts_page))
+                return FALSE;
+          else
+            return TRUE;
+       }
+        else
+            return FALSE;
+       
+    }
+endif;
+
+if (!function_exists('sf_impact_slideshow_query')):
+    function sf_impact_slideshow_query()
+    {
+        wp_reset_query();
+            $args = array(
+                'post_type' => 'post',
+                'posts_per_page' => 5,
+                'meta_query' => array(
+                array(
+                    'key' => 'post_show_in_slideshow',
+                    'value' => 1,
+                ),
+                array(
+                    'key' => '_thumbnail_id',
+                    'compare' => 'EXISTS'
+                )
+                ));
+        $the_query =   new WP_Query($args);
+        return $the_query;        
+    }
+endif;
 /*
 * HTML for the Home Page Slide Show
 * $style - style for the slide show, height and width if not default
 */
 if (!function_exists('sf_impact_get_slideshow')):
-    function sf_impact_get_slideshow($wstyle, $hstyle)
+    function sf_impact_get_slideshow($the_query, $wstyle, $hstyle)
     {
         
           $format =  get_theme_mod('sf_impact_slider_style', 'default');
           $sf_impact_slider_captions = get_theme_mod('sf_impact_slider_captions', TRUE) ;
+          $istyle = "";
           if ($wstyle) 
-                $fstyle = "style=$wstyle;"; 
+          {
+                $fstyle = "style=$wstyle"; 
+                $istyle .= $wstyle;
+          }
            else 
                 $fstyle="";
            if ($hstyle)
+           {
                 $fhstyle = "style=$hstyle";
+                $istyle .= $hstyle;
+           }
             else
                 $fhstyle = "";
+
+            if ($istyle)
+            {
+             $istyle = "style=$istyle";   
+            }
             ?>
+
          
-    		<div class="flexslider"  <?php echo $fstyle;?>> 
-		    <ul class="slides">
+    		<div class="flexslider" > 
+		    <ul class="slides" <?php echo $istyle;?>>
 		   
   
                     <?php 
-                     wp_reset_query();
-                     $args = array(
-                            'post_type' => 'post',
-                            'posts_per_page' => 5,
-                            'meta_query' => array(
-                            array(
-                            'key' => 'post_show_in_slideshow',
-                            'value' => 1,
-                            )));
-                    $the_query =   new WP_Query($args);
-               
+                    
+                     
                      $sf_impact_slider_thumbnails = get_theme_mod('sf_impact_slider_thumbnails', false) == TRUE ? "true" : "false";
                      while ( $the_query->have_posts() )  :$the_query->the_post();
                             $permalink = get_permalink();
@@ -945,14 +992,14 @@ if (!function_exists('sf_impact_get_slideshow')):
                             {
                                 $hid = "title" . $id;
                                 ?>
-                 	            <li <?php echo $datathumb?>>
-		    		            <a href="<?php echo $permalink ?>"><img src="<?php echo $image_url?>" alt="<?php echo $hid?>" <?php echo $fhstyle; ?>/>
+                 	            <li <?php echo $datathumb?> <?php echo $istyle?> >
+		    		            <a href="<?php echo $permalink ?>"><img src="<?php echo $image_url?>" alt="<?php echo $title?>" <?php echo $istyle; ?>/>
                                 <?php if ($sf_impact_slider_captions==true) { ?>
-		    		                <p class="flex-caption"><?php echo $hid?></p>
+		    		                <p class="flex-caption"><?php echo $title?></p>
 		    	                <?php } ?></a>
                                  </li>
-                           <?php }
-                     
+                             <?php }
+                                 
                      endwhile;
                      wp_reset_query();
    
@@ -1054,6 +1101,7 @@ if ( ! function_exists( 'sf_impact_postContentFull' ) ) :
      return $full;
     }
 endif;
+
 /*
 * Get the base current URL
 */
@@ -1224,15 +1272,10 @@ if ( is_admin() ) {
                     $text = __( 'Don\'t display image in post.', 'sf-impact' );
       
                     $defvalue = !get_theme_mod('sf_impact_post_featured', TRUE);
-    
         
                     $meta = get_post_meta( $post->ID, "hide_featured_image", true );
-        
-                    if ($meta != NULL)
-                        $value = get_post_meta( $post->ID, "hide_featured_image", true );
-                    else 
-                        $value = $defvalue;
-     
+                    $value = $meta != NULL ? $meta : $defvalue;
+                
                      $label = '<label for="hide_featured_image" class="selectit">
                         <input name="hide_featured_image" type="checkbox" id="hide_featured_image" ' . checked( $value, 1, false) .'> ' . $text .'
                         </label>';
@@ -1565,4 +1608,56 @@ function sf_impact_chat_row_id( $chat_author ) {
 	/* Return the array key for the chat author and add "1" to avoid an ID of "0". */
 	return absint( array_search( $chat_author, $_post_format_chat_ids ) ) + 1;
 }
+ /*
+* Main code for the header image
+*/
+if (!function_exists('sf_impact_header')):
+    function sf_impact_header($the_slide_query = NULL)
+    {
+        $top = TRUE;
+      
+  
+        $sf_impact_header_image = get_theme_mod('sf_impact_header_image', '');
+        $sf_impact_logo_location = get_theme_mod('sf_impact_logo_location', 'image');
+        $sf_impact_home_header_type = get_theme_mod('sf_impact_home_header_type', '3');
+     
+      
+        if ($sf_impact_header_image && $sf_impact_logo_location == 'image')
+            $top = FALSE;
+            
+        $style = sf_impact_get_home_header_style();
+ 
+    
+   
+         if ($sf_impact_home_header_type == "1" && isset($the_slide_query))
+         {     
+            $wstyle = sf_impact_get_home_header_width();
+            $hstyle = sf_impact_get_home_header_height();
+            sf_impact_get_slideshow($the_slide_query, $wstyle, $hstyle);
+         }
+         else 
+         {
+             if ($sf_impact_header_image && $sf_impact_home_header_type == "0")
+             {
+                ?>
+
+                <img class="headerimg headerimg-home" alt="header" style="<?php echo  $style?>;" src="<?php echo $sf_impact_header_image?>"/>
+           
+                <?php 
+                $output = "";
+                $output = apply_filters('sf_impact_home_post_bar', $output);
+                if ( $output != '' )
+                {
+                    ?><div id="homepostbar">
+                    <?php
+                            echo $output;?>
+                    </div>
+                    <?php
+                }
+             }
+         }
+    
+    }
+endif;
+
 ?>

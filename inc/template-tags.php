@@ -300,20 +300,23 @@ if (!function_exists('sf_impact_thumbnail')):
 
  function sf_impact_thumbnail()
  {
-      global $post;
+     global $post;
+    $sf_impact_post_header = get_theme_mod('sf_impact_post_header', false);
+    if ($sf_impact_post_header)
+        return;
     $hide_featured = !get_theme_mod('sfly_theme1_post_featured', TRUE);
     $id = 'hide_featured_image';
          $hidethumb = esc_attr( get_post_meta( $post->ID, $id, true ) ) != NULL ? esc_attr( get_post_meta( $post->ID, $id, true ) ) : $hide_featured;
          if (!$hidethumb):
      
      ?>
-            <div class="post_img">
-		    <?php 
-            if ( has_post_thumbnail() ) { // check if the post has a Post Thumbnail assigned to it.
-              the_post_thumbnail();?>
-              <hr><?php            
-            }?>
-            </div><!--post_img-->
+        <div class="post_img">
+		<?php 
+        if ( has_post_thumbnail() ) { // check if the post has a Post Thumbnail assigned to it.
+            the_post_thumbnail();?>
+            <hr><?php            
+        }?>
+        </div><!--post_img-->
  <?php 
         endif;
     
