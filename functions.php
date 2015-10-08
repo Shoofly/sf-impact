@@ -942,18 +942,31 @@ if (!function_exists('sf_impact_get_slideshow')):
         
           $format =  get_theme_mod('sf_impact_slider_style', 'default');
           $sf_impact_slider_captions = get_theme_mod('sf_impact_slider_captions', TRUE) ;
+          $istyle = "";
           if ($wstyle) 
-                $fstyle = "style=$wstyle;"; 
+          {
+                $fstyle = "style=$wstyle"; 
+                $istyle .= $wstyle;
+          }
            else 
                 $fstyle="";
            if ($hstyle)
+           {
                 $fhstyle = "style=$hstyle";
+                $istyle .= $hstyle;
+           }
             else
                 $fhstyle = "";
+
+            if ($istyle)
+            {
+             $istyle = "style=$istyle";   
+            }
             ?>
+
          
-    		<div class="flexslider"  <?php echo $fstyle;?>> 
-		    <ul class="slides">
+    		<div class="flexslider" > 
+		    <ul class="slides" <?php echo $istyle;?>>
 		   
   
                     <?php 
@@ -978,13 +991,13 @@ if (!function_exists('sf_impact_get_slideshow')):
                             {
                                 $hid = "title" . $id;
                                 ?>
-                 	            <li <?php echo $datathumb?>>
-		    		            <a href="<?php echo $permalink ?>"><img src="<?php echo $image_url?>" alt="<?php echo $title?>" <?php echo $fhstyle; ?>/>
+                 	            <li <?php echo $datathumb?> <?php echo $istyle?> >
+		    		            <a href="<?php echo $permalink ?>"><img src="<?php echo $image_url?>" alt="<?php echo $title?>" <?php echo $istyle; ?>/>
                                 <?php if ($sf_impact_slider_captions==true) { ?>
 		    		                <p class="flex-caption"><?php echo $title?></p>
 		    	                <?php } ?></a>
                                  </li>
-                           <?php }
+                             <?php }
                                  
                      endwhile;
                      wp_reset_query();
