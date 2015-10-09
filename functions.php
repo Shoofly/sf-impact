@@ -130,7 +130,7 @@ function sf_impact_setup() {
         set_theme_mod('sf_impact_highlight_link1', '#'); 
         set_theme_mod('sf_impact_highlight_header2', 'Home Page features');
         set_theme_mod('sf_impact_highlight_image2', $defaultpath . 'drop.png');
-        set_theme_mod('sf_impact_highlight_text2', 'Display an image or a slide show!');
+        set_theme_mod('sf_impact_highlight_text2', 'Display a custom heaer image or a slide show!');
         set_theme_mod('sf_impact_highlight_link2', '#'); 
         set_theme_mod('sf_impact_home_featured_highlights', true);
         set_theme_mod('sf_impact_demo_data', false);
@@ -917,13 +917,16 @@ if (!function_exists('sf_impact_slideshow_query')):
     {
         wp_reset_query();
             $args = array(
+                'ignore_sticky_posts' => TRUE,
                 'post_type' => 'post',
                 'posts_per_page' => 5,
                 'meta_query' => array(
+                'relationship' => 'AND',
                 array(
                     'key' => 'post_show_in_slideshow',
                     'value' => 1,
                 ),
+
                 array(
                     'key' => '_thumbnail_id',
                     'compare' => 'EXISTS'
@@ -1263,7 +1266,7 @@ if ( is_admin() ) {
             $this->updateCheckbox($post_id, "post_hide_sidebar");
             $this->updateCheckbox($post_id, "post_show_in_slideshow");
 	
-	    }
+	        }
 
         function add_image_meta( $content ) {
      
@@ -1311,8 +1314,10 @@ if ( is_admin() ) {
 		    wp_nonce_field( 'sf_impact_inner_custom_box', 'sf_impact_inner_custom_box_nonce' );
             $defaultval = !get_theme_mod('sf_impact_post_sidebar', FALSE);
             $this->createCheckbox("post_hide_sidebar", "Hide Sidebar (Full Page)", $defaultval);
-            $this->createCheckbox("post_show_in_slideshow", "Include in Slide Show", TRUE);
-
+            if (is_edit_page('new'))
+               $this->createCheckbox("post_show_in_slideshow", "Include in Slide Show", TRUE);
+            else
+                $this->createCheckbox("post_show_in_slideshow", "Include in Slide Show");
                     
 	
 	    }
@@ -1659,5 +1664,28 @@ if (!function_exists('sf_impact_header')):
     
     }
 endif;
+/**
+ * is_edit_page 
+ * function to check if the current page is a post edit page
+ * 
+ * @author Ohad Raz <admin@bainternet.info>
+ * 
+ * @param  string  $new_edit what page to check for accepts new - new post page ,edit - edit post page, null for either
+ * @return boolean
+ */
+if (!function_exists(is_eit_page)):
+function is_edit_page($new_edit = null){
+    global $pagenow;
+    //make sure we are on the backend
+    if (!is_admin()) return false;
 
+
+    if($new_edit == "edit")
+        return in_array( $pagenow, array( 'post.php',  ) );
+    elseif($new_edit == "new") //check for new post page
+        return in_array( $pagenow, array( 'post-new.php' ) );
+    else //check for either new or edit
+        return in_array( $pagenow, array( 'post.php', 'post-new.php' ) );
+}
+endif;
 ?>
