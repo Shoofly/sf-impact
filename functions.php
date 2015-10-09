@@ -109,7 +109,8 @@ if (!function_exists('sf_impact_theme_mods')) {
 
             $defaultheader = $defaultpath . "impact.png";
             $defaultheadertype = "0";
-      
+
+            $sf_impact_Theme_Mods->setMod('header_textcolor','000099');      
             $sf_impact_Theme_Mods->setMod('sf_impact_header_image', $defaultheader);
             $sf_impact_Theme_Mods->setMod('sf_impact_logo_image', $defaultlogo);
             $sf_impact_Theme_Mods->setMod('sf_impact_logo_location', 'image');
