@@ -115,19 +115,21 @@ if (!function_exists('sf_impact_theme_mods')) {
             $sf_impact_Theme_Mods->setMod('sf_impact_home_header_type', $defaultheadertype);
             $sf_impact_Theme_Mods->setMod('sf_impact_highlight_boxes', 2);
             $sf_impact_Theme_Mods->setMod('sf_impact_highlight_header1', 'Up to 3 highlights');
-            $sf_impact_Theme_Mods->setMod('sf_impact_highlight_image1', $defaultpath . 'idea.png');
+            $sf_impact_Theme_Mods->setMod('sf_impact_highlight_image1', $defaultpath . 'flowers.png');
             $sf_impact_Theme_Mods->setMod('sf_impact_highlight_text1', 'Create up to 3 highlight boxes!');
             $sf_impact_Theme_Mods->setMod('sf_impact_highlight_link1', '#'); 
             $sf_impact_Theme_Mods->setMod('sf_impact_highlight_header2', 'Home Page features');
-            $sf_impact_Theme_Mods->setMod('sf_impact_highlight_image2', $defaultpath . 'home.png');
+            $sf_impact_Theme_Mods->setMod('sf_impact_highlight_image2', $defaultpath . 'drop.png');
             $sf_impact_Theme_Mods->setMod('sf_impact_highlight_text2', 'Display an image or a slide show!');
             $sf_impact_Theme_Mods->setMod('sf_impact_highlight_link2', '#'); 
             $sf_impact_Theme_Mods->setMod('sf_impact_home_featured_highlights', true);
             
             $sf_impact_Theme_Mods->setMod('sf_impact_color_theme', 'light');
+            
         }
     }
 }
+
 
 sf_impact_theme_mods();
 
@@ -231,32 +233,6 @@ function sf_impact_setup() {
     //add excerpt support for posts
      add_post_type_support( 'page', 'excerpt' );
 
-
-     //defaults
-    $sf_impact_demo_data = $sf_impact_Theme_Mods->getMod( "sf_impact_demo_data", TRUE);
-    if ($sf_impact_demo_data)
-    {
-        $defaultpath =        get_template_directory_uri() . '/images/';
-        $defaultlogo = $defaultpath . "logo.png"; 
-        $defaultheader = $defaultpath . "impact.png";
-        $defaultheadertype = "3";
-  
-      
-        set_theme_mod('sf_impact_logo_image', $defaultlogo);
-        set_theme_mod('sf_impact_logo_location', 'image');
-        set_theme_mod('sf_impact_home_header_type', $defaultheadertype);
-        set_theme_mod('sf_impact_highlight_boxes', 2);
-        set_theme_mod('sf_impact_highlight_header1', 'Up to 3 highlights');
-        set_theme_mod('sf_impact_highlight_image1', $defaultpath . 'flowers.png');
-        set_theme_mod('sf_impact_highlight_text1', 'Create up to 3 highlight boxes!');
-        set_theme_mod('sf_impact_highlight_link1', '#'); 
-        set_theme_mod('sf_impact_highlight_header2', 'Home Page features');
-        set_theme_mod('sf_impact_highlight_image2', $defaultpath . 'drop.png');
-        set_theme_mod('sf_impact_highlight_text2', 'Display a custom heaer image or a slide show!');
-        set_theme_mod('sf_impact_highlight_link2', '#'); 
-        set_theme_mod('sf_impact_home_featured_highlights', true);
-        set_theme_mod('sf_impact_demo_data', false);
-     }
 }
 endif; // sf_impact_setup
 add_action( 'after_setup_theme', 'sf_impact_setup' );
@@ -398,7 +374,8 @@ if (!function_exists('sf_impact_scripts')):
         $themedir = get_template_directory_uri();
         
        
-        $custom_style =  $sf_impact_Theme_Mods->getMod( 'sf_impact_color_theme' ) ;
+        $custom_style =  $sf_impact_Theme_Mods->getMod( 'sf_impact_color_theme', 'light' ) ;
+
         $linkTheme = new sf_impact_CustomLinkThemes( 'sf_impact' );
         
         wp_register_style('sf_impact_theme_styles', $themedir . '/styles/app.css', '1.0');

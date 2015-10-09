@@ -8,8 +8,12 @@
  */
 ?>
 <?php   
+require_once ( dirname(__DIR__) . "/inc/theme-mods.php" );
 
- $sf_impact_logo_image = get_theme_mod("sf_impact_logo_image", '');
+$sf_impact_Theme_Mods = sf_impact_Theme_Mods::get_instance('sf_impact');
+
+$sf_impact_logo_image = $sf_impact_Theme_Mods->getMod('sf_impact_logo_image');
+
 ?>
     <div id="site-logo-title">
 
