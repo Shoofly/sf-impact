@@ -781,12 +781,12 @@ if (!function_exists('sf_impact_get_highlightboxes')):
     
             <div class="home-highlight-boxes fixed sfcenter">
                 <?php
- 
+             
                 $grid = 12/$boxcount;
                 for ($x = 1; $x <= $boxcount; $x++)  :?>
 
                     <div class="highlight-<?php echo $boxcount ?>-col highlight-box highlight-box-<?php echo $boxcount?> grid_<?php echo $grid;?> sfchild">
-                       <div class="highlight-box-container fixed " >
+                       <div class="highlight-box-container fixed highlight-box-<?php echo $x?>" >
                         <?php 
                         switch ($sf_impact_highlight_style)
                         {
