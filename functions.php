@@ -384,12 +384,8 @@ if (!function_exists('sf_impact_scripts')):
         $custom_css = ob_get_clean();
         
         $custom_css .= '
-            .foreground-color {
-                background-color: '. $sf_impact_Theme_Mods->getMod(  'sf_impact_content_background' ) .';   
-            }
-            
-            .background-color {
-                background-color: '. $sf_impact_Theme_Mods->getMod(  'background_color' ) .';
+            .home-highlight-boxes .highlight-span h2 {
+                color: #' . get_header_textcolor() . ';
             }';
          
         wp_add_inline_style( 'sf_impact_theme_styles', $custom_css );

@@ -180,7 +180,7 @@
    
         $wp_customize->get_setting( 'blogname' )->transport         = 'postMessage';
         $wp_customize->get_setting( 'blogdescription' )->transport  = 'postMessage';
-        $wp_customize->get_setting( 'header_textcolor' )->transport = 'postMessage';
+        $wp_customize->get_setting( 'header_textcolor' )->transport = 'refresh';
 }
     function sf_impact_generalOptions($wp_customize)
     {
