@@ -6,7 +6,7 @@ a:hover, a:focus {
 	color: #1ABEF6;
 }
 
-article:last-child {
+nav.navigation.posts-navigation {
     border-color: #008BC3;
 }
 

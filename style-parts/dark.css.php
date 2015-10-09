@@ -6,7 +6,7 @@ a:hover {
 	color: #0069BA;
 }
 
-article:last-child {
+nav.navigation.posts-navigation {
     border-color: #000276;    
 }
 
