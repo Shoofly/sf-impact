@@ -44,8 +44,12 @@ Version: 1.0
 
 .home-thumb
 {
-        padding-top: 25px;
-    padding-left: 15px;
+    padding: 5px 0;
+    clear: both;
+}
+
+.home-thumb h1 {
+    margin: 10px 0px 5px;
 }
 
 .shoofly-home-branding
@@ -115,6 +119,10 @@ hr.home1
 
 .highlight-full .highlight-span h2, .highlight-full .highlihgt-span p {
     float: none;
+    text-align: center;
+}
+
+.highlight-top-img .highlight-span h2, .highlight-top-img .highlight-span p {
     text-align: center;
 }
 

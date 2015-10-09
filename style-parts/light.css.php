@@ -26,6 +26,11 @@ article:last-child {
 	background-color: white;
 }
 
+.sfly-headerimg {
+    background-color: <?php echo $sf_impact_Theme_Mods->getMod( 'sf_impact_header_background' );  ?>;
+    background-image: <?php echo $sf_impact_Theme_Mods->getMod( 'sf_impact_header_opacity' ); ?>;  
+}
+
 #content {
 	background: whitesmoke;
 	color: #3a3a3a; 
@@ -163,11 +168,11 @@ h1, h3, h4, h5, h6 {
 }
 
 .entry-title, .page-title, .entry-title a, .page-title a, .entry-title a:visited, .page-title a:visited {
-	color: #002900;
+    color: #F64D19;
 }
 
 .entry-title a:hover, .page-title a:hover, .entry-title a:focus, .page-title a:focus {
-    color: #1A431A;
+    color: #0069BA;
 }
 
 .site-info {

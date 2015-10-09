@@ -583,9 +583,60 @@ dd {
   margin: 0 1.5em 1.5em;
 }
 
-.headerimg {
+.headerimg, .sfly-headerimg {
   height: auto;
   width: 100%;
+  display: block;
+  margin: 0px auto;
+}
+
+.headerimg .flexslider, .sfly-headerimg .flexslider {
+  margin: 0px;
+  padding: 0px;
+  border: 0;
+  background-color: transparent;
+}
+
+.headerimg .flexslider .flex-active-slide, .sfly-headerimg .flexslider .flex-active-slide {
+  position: relative;
+}
+
+.headerimg .flexslider .flex-active-slide .flex-caption, .sfly-headerimg .flexslider .flex-active-slide .flex-caption {
+  margin: 0px;
+  text-align: center;
+}
+
+.headerimg .flexslider .flex-control-paging, .sfly-headerimg .flexslider .flex-control-paging {
+  bottom: -1px;
+  position: relative;
+}
+
+.headerimg .flexslider .flex-direction-nav a, .sfly-headerimg .flexslider .flex-direction-nav a {
+  line-height: 1;
+}
+
+.headerimg .flexslider .slides li, .sfly-headerimg .flexslider .slides li {
+  left: -100%;
+  visibility: hidden;
+}
+
+.headerimg .flexslider .slides li img, .sfly-headerimg .flexslider .slides li img {
+  display: none;
+  height: 0px;
+  visibility: hidden;
+  transition: visibility 0.5s height 5s;
+}
+
+.headerimg .flexslider .slides li.flex-active-slide, .sfly-headerimg .flexslider .slides li.flex-active-slide {
+  left: 0;
+  visibility: visible;
+}
+
+.headerimg .flexslider .slides li.flex-active-slide img, .sfly-headerimg .flexslider .slides li.flex-active-slide img {
+  display: block;
+  height: auto;
+  visibility: visible;
+  transition: visibility 0.5s height 5s;
 }
 
 figure {
@@ -1318,6 +1369,7 @@ footer {
   display: block;
   float: right;
   margin-right: 15px;
+  padding-right: 5px;
 }
 
 .site-info span, .site-info a {
@@ -1339,6 +1391,7 @@ footer {
 
 #shoofly-footer {
   margin-left: 15px;
+  padding-left: 5px;
   float: left;
 }
 
@@ -1462,12 +1515,6 @@ footer {
   padding-left: 20px;
   padding-right: 20px;
   margin-top: 25px;
-}
-
-.home-thumb {
-  clear: both;
-  padding-top: 5px;
-  margin-top: 5px;
 }
 
 .read-more {

@@ -23,6 +23,11 @@ article:last-child {
 	background-color: white;
 }
 
+.sfly-headerimg {
+    background-color: <?php echo $sf_impact_Theme_Mods->getMod( 'sf_impact_header_background' );  ?>;
+    background-image: <?php echo $sf_impact_Theme_Mods->getMod( 'sf_impact_header_opacity' ); ?>;  
+}
+
 #comments {
   background-color: rgba(255,255,255,0.7);
 }
@@ -119,11 +124,11 @@ h3, h4, h5, h6 {
 }
 
 .entry-title, .page-title, .entry-title a, .page-title a, .entry-title a:visited, .page-title a:visited {
-	color: #A96E11;
+    color: cadetblue;
 }
 
 .entry-title a:hover, .page-title a:hover, .entry-title a:focus, .page-title a:focus {
-    color: #267539;
+    color: #0069BA;
 }
 
 .site-info span {

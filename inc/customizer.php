@@ -31,20 +31,21 @@
     
     public function  sf_impact_customize_register( $wp_customize ) {
         include get_template_directory() . '/inc/highlightsettings.php';
-     
-      $wp_customize->add_setting( 'sf_impact_demo_data', 
-                 array(
+        global $sf_impact_Theme_Mods;
+      
+        $wp_customize->add_setting( 'sf_impact_demo_data', 
+                array(
                     'default' => false, 
                     'type' => 'theme_mod', 
                     'capability' => 'edit_theme_options', 
                     'transport' => 'refresh', 
                     'sanitize_callback' => 'sf_impact_sanitize_checkbox'
-                 ) 
-              );      
+                ) 
+            );      
        
-         $wp_customize->add_panel( 'sf_impact_panel', array(
+        $wp_customize->add_panel( 'sf_impact_panel', array(
             'title' =>  __('Theme Options', 'sf-impact'),
-             'capability' => 'edit_theme_options', //Capability needed to tweak
+            'capability' => 'edit_theme_options', //Capability needed to tweak
             'description' =>  __('Customize Theme Options.', 'sf-impact'),
             'priority' => 2,
       
@@ -1480,39 +1481,34 @@
 
     public function sf_impact_header_output() 
     {
+        global $sf_impact_Theme_Mods;
             ?>
             <!--Customizer CSS--> 
             <style type="text/css">
                 <?php 
                  
-                $sf_impact_header_background = get_theme_mod( 'sf_impact_header_background', "#3A3A3A");
-                $sf_impact_content_background  = get_theme_mod( 'sf_impact_content_background', "#F5F5F5");
-                $sf_impact_header_opacity = get_theme_mod('sf_impact_header_opacity', 0);
-                if ($sf_impact_header_opacity < 100)
-                {
+                $sf_impact_header_background = $sf_impact_Theme_Mods->getMod( 'sf_impact_header_background' );
+                $sf_impact_content_background  = $sf_impact_Theme_Mods->getMod( 'sf_impact_content_background' );
+                $sf_impact_header_opacity = $sf_impact_Theme_Mods->getMod( 'sf_impact_header_opacity' );
+                
+                if ($sf_impact_header_opacity < 100) {
                     $hstyle = sf_impact_rbgastyle($sf_impact_header_background, $sf_impact_header_opacity);
                     echo "#topmasthead {" . $hstyle . "}";
-                }
-                else
-                    {
+                } else {
                     $outu = sprintf("%s {%s:%s;}", "#topmasthead", "background-color", $sf_impact_header_background); 
                     echo $outu;
-                    }   
+                }   
                 $site = get_header_textcolor();
                 $outu = sprintf("%s {%s:%s;}", "#site-title a", "color", $site); 
                 $background = get_background_color();
                 $outu = sprintf("%s {%s:%s;}", "body", "background-color", $background); 
                 echo $outu;
               
-                $sf_impact_content_opacity = get_theme_mod('sf_impact_content_opacity', 100);
-                if ($sf_impact_content_opacity < 100)
-                {
+                $sf_impact_content_opacity = $sf_impact_Theme_Mods->getMod( 'sf_impact_content_opacity' );
+                if ($sf_impact_content_opacity < 100) {
                     $hstyle = sf_impact_rbgastyle($sf_impact_content_background,  $sf_impact_content_opacity);
                     echo "#masthead, #content {" . $hstyle . "}";
-  
-                }
-                else
-                {
+                } else {
                     $outu = sprintf("%s {%s:%s;}", "#masthead, #content", "background-color", $sf_impact_content_background);                      echo $outu;
                 }           
 
@@ -1625,5 +1621,4 @@ if  ($found) return $fvalue; else return $setting->default;
 // If the input is a valid key, return it; otherwise, return the default.*/
 //return ( array_key_exists( $input, $choices ) ? $input : $setting->default );
 }
-
 ?>
