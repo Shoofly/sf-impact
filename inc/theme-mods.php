@@ -22,8 +22,8 @@ class sf_impact_Theme_Mods
         return self::$_this[$handle];
     }
     
-    public function setMod($key, $default) {
-        
+    public function setMod($key, $default) 
+    {
         $this->setDefault($key, $default);
         
         set_theme_mod($key, $default);
@@ -31,7 +31,8 @@ class sf_impact_Theme_Mods
         return self::$mods[$this->handle][$key];   
     }
 
-    public function setDefault($key, $default) {
+    public function setDefault($key, $default) 
+    {
         
         self::$default[$this->handle][$key] = $default;
         
