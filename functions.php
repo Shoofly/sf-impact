@@ -100,6 +100,32 @@ if (!function_exists('sf_impact_theme_mods')) {
                 $icons[] = $social_icons[$i];
             }
         } 
+    
+        $sfimpact_demo_data = $sf_impact_Theme_Mods->setMod("sfimpact_demo_data", TRUE);
+        
+        if ($sfimpact_demo_data) {
+            $defaultpath =        get_template_directory_uri() . '/images/';
+            $defaultlogo = $defaultpath . "logo.png"; 
+            $defaultheader = $defaultpath . "impact.png";
+            $defaultheadertype = "0";
+      
+            $sf_impact_Theme_Mods->setMod('sf_impact_header_image', $defaultheader);
+            $sf_impact_Theme_Mods->setMod('sf_impact_logo_image', $defaultlogo);
+            $sf_impact_Theme_Mods->setMod('sf_impact_logo_location', 'image');
+            $sf_impact_Theme_Mods->setMod('sf_impact_home_header_type', $defaultheadertype);
+            $sf_impact_Theme_Mods->setMod('sf_impact_highlight_boxes', 2);
+            $sf_impact_Theme_Mods->setMod('sf_impact_highlight_header1', 'Up to 3 highlights');
+            $sf_impact_Theme_Mods->setMod('sf_impact_highlight_image1', $defaultpath . 'idea.png');
+            $sf_impact_Theme_Mods->setMod('sf_impact_highlight_text1', 'Create up to 3 highlight boxes!');
+            $sf_impact_Theme_Mods->setMod('sf_impact_highlight_link1', '#'); 
+            $sf_impact_Theme_Mods->setMod('sf_impact_highlight_header2', 'Home Page features');
+            $sf_impact_Theme_Mods->setMod('sf_impact_highlight_image2', $defaultpath . 'home.png');
+            $sf_impact_Theme_Mods->setMod('sf_impact_highlight_text2', 'Display an image or a slide show!');
+            $sf_impact_Theme_Mods->setMod('sf_impact_highlight_link2', '#'); 
+            $sf_impact_Theme_Mods->setMod('sf_impact_home_featured_highlights', true);
+            
+            $sf_impact_Theme_Mods->setMod('sf_impact_color_theme', 'light');
+        }
     }
 }
 
@@ -422,6 +448,7 @@ if (!function_exists('sf_impact_scripts')):
    
     
            $sf_impact_home_header_type = $sf_impact_Theme_Mods->getMod( 'sf_impact_home_header_type' );
+           
             if ($sf_impact_home_header_type == "1")
             {
               

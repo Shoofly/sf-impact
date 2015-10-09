@@ -135,6 +135,10 @@ h3, h4, h5, h6 {
     color: #A96E11;
 }
 
+#site-logo-title, #site-logo-title div {
+    color: #<?php echo get_header_textcolor(); ?>;    
+}
+
 #shoofly-footer {
     color: #000276;
 }

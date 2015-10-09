@@ -10,6 +10,8 @@ class sf_impact_Theme_Mods
     
     public function setMod($key, $default) {
         $this->mods[$key] = $default;
+        
+        return $this->mods[$key];
     }
     
     public function getMod($key) {

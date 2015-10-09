@@ -33,6 +33,7 @@
         include get_template_directory() . '/inc/highlightsettings.php';
         global $sf_impact_Theme_Mods;
       
+      
         $wp_customize->add_setting( 'sf_impact_demo_data', 
                 array(
                     'default' => false, 
