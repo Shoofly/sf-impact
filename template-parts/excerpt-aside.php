@@ -21,5 +21,4 @@
 
 		?>
 	</div><!-- .entry-content -->
- </article>
- 
+ </article> 

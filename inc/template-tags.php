@@ -219,7 +219,7 @@ if ( ! function_exists( 'sf_impact_entry_footer' ) ) :
 
     if (is_single() || is_page())
     {
-        echo 'hello';
+        
 	    if ( 'post' == get_post_type() ) {
    
 		    /* translators: used between list items, there is a space after the comma */

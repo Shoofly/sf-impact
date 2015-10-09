@@ -28,36 +28,25 @@ class Arbitrary_Custom_Control extends WP_Customize_Control {
         switch ( $this->type ) {
             default:
             case 'text' :
-                echo '<p class="description">' . $this->label . '</p>';
+                echo '<p class="customize-control-text description">' . $this->label . '</p>';
                 break;
-            case "h1"  || "h2" || "h3" || "h4" || "h5" || "h6":
-                echo "<$this->type>" . esc_html( $this->label ) . "</$this->type>";
+            case "h1":
+            case "h2": 
+            case "h3":
+            case "h4":
+            case "h5":
+            case "h6":
+                echo "<$this->type class=customize-control-$this->type>" . esc_html( $this->label ) . "</$this->type>";
                 break;
             case 'heading':
                 echo '<span class="customize-control-title">' . esc_html( $this->label ) . '</span>';
                 break;
- 
+            case "line":
+             echo '<hr style="margin-top:15px;" />';
         
         }
     
  
-	}
-}
-endif;
-
-
-if ( class_exists( 'WP_Customize_Control' ) && ! class_exists( 'Arbitrary_Custom_Line' ) ) :
-class Arbitrary_Custom_Line extends WP_Customize_Control {
-
-	// Whitelist content parameter
-	public $content = '';
-
-
-	public function render_content() {
- 
-                echo '<hr style="margin-top:15px;" />';
-             
-        
 	}
 }
 endif;

@@ -5,7 +5,6 @@
   * @subpackage sfimpact
  * @since sfImpact 1.0
  */
- 
 $myLink = sf_impact_get_url(); 
 if (!$myLink) $post_format = "standard";
 
