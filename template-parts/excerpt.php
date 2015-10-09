@@ -24,7 +24,7 @@
             }
     		the_excerpt( );
             wp_link_pages( array(
-			'before' => '<div class="page-links">' . __( 'Pages:', 'sfimpact' ),
+			'before' => '<div class="page-links">' . __( 'Pages:', 'sf-impact' ),
 			'after'  => '</div>',
 			) );
 		?>

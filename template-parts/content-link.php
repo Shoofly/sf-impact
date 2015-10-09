@@ -26,7 +26,7 @@
                 if (!($myLink))
                 {
 			        the_content( sprintf(
-				        __( 'Continue reading %s <span class="meta-nav">&rarr;</span>', 'sfimpact' ),
+				        __( 'Continue reading %s <span class="meta-nav">&rarr;</span>', 'sf-impact' ),
 				        the_title( '<span class="screen-reader-text">', '</span>', false )
 			        ) );
                 }
@@ -38,7 +38,7 @@
                 }
 
 		        wp_link_pages( array(
-				    'before' => '<div class="page-links">' . esc_html__( 'Pages:', 'sfimpact' ),
+				    'before' => '<div class="page-links">' . esc_html__( 'Pages:', 'sf-impact' ),
 				    'after'  => '</div>',
 			    ) );
 		    ?>
