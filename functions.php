@@ -23,64 +23,64 @@ if (!function_exists('sf_impact_theme_mods')) {
         global $sf_impact_Theme_Mods;
         
         //Color settings
-        $sf_impact_Theme_Mods->setMod( 'sf_impact_header_background', "#5b5b5b" );
-        $sf_impact_Theme_Mods->setMod( 'sf_impact_content_background', "#F5F5F5" );
-        $sf_impact_Theme_Mods->setMod( 'sf_impact_header_opacity', 0 );
-        $sf_impact_Theme_Mods->setMod( 'sf_impact_content_opacity', 100 );
+        $sf_impact_Theme_Mods->setDefault( 'sf_impact_header_background', "#5b5b5b" );
+        $sf_impact_Theme_Mods->setDefault( 'sf_impact_content_background', "#F5F5F5" );
+        $sf_impact_Theme_Mods->setDefault( 'sf_impact_header_opacity', 0 );
+        $sf_impact_Theme_Mods->setDefault( 'sf_impact_content_opacity', 100 );
 
         //Home settings
-        $sf_impact_Theme_Mods->setMod( 'sf_impact_home_rp_categoryid', "" );
+        $sf_impact_Theme_Mods->setDefault( 'sf_impact_home_rp_categoryid', "" );
         
         //Header and Icon mods
-        $sf_impact_Theme_Mods->setMod( 'sf_impact_icon_size', 'lg' );
-        $sf_impact_Theme_Mods->setMod( 'sf_impact_header_height', "" );
-        $sf_impact_Theme_Mods->setMod( 'sf_impact_header_width', "100%" );
-        $sf_impact_Theme_Mods->setMod( 'sf_impact_header_image', '' );
-        $sf_impact_Theme_Mods->setMod( 'sf_impact_logo_location', 'image' );
-        $sf_impact_Theme_Mods->setMod( 'sf_impact_home_header_type', '3' );
+        $sf_impact_Theme_Mods->setDefault( 'sf_impact_icon_size', 'lg' );
+        $sf_impact_Theme_Mods->setDefault( 'sf_impact_header_height', "" );
+        $sf_impact_Theme_Mods->setDefault( 'sf_impact_header_width', "100%" );
+        $sf_impact_Theme_Mods->setDefault( 'sf_impact_header_image', '' );
+        $sf_impact_Theme_Mods->setDefault( 'sf_impact_logo_location', 'image' );
+        $sf_impact_Theme_Mods->setDefault( 'sf_impact_home_header_type', '3' );
         
         //Slider mods
-        $sf_impact_Theme_Mods->setMod( 'sf_impact_slider_transition', 'fade' );
-        $sf_impact_Theme_Mods->setMod( 'sf_impact_slider_animspeed', '500' );
-        $sf_impact_Theme_Mods->setMod( 'sf_impact_slider_speed', '7000' );
-        $sf_impact_Theme_Mods->setMod( 'sf_impact_slider_automate', true );
-        $sf_impact_Theme_Mods->setMod( 'sf_impact_slider_direction', 'horizontal');
-        $sf_impact_Theme_Mods->setMod( 'sf_impact_slider_navigation', FALSE );
-        $sf_impact_Theme_Mods->setMod( 'sf_impact_slider_navdirection', FALSE );
-        $sf_impact_Theme_Mods->setMod( 'sf_impact_slider_keyboard', true );
-        $sf_impact_Theme_Mods->setMod( 'sf_impact_slider_mousewheel', true );
-        $sf_impact_Theme_Mods->setMod( 'sf_impact_slider_pauseonhover', false );
+        $sf_impact_Theme_Mods->setDefault( 'sf_impact_slider_transition', 'fade' );
+        $sf_impact_Theme_Mods->setDefault( 'sf_impact_slider_animspeed', '500' );
+        $sf_impact_Theme_Mods->setDefault( 'sf_impact_slider_speed', '7000' );
+        $sf_impact_Theme_Mods->setDefault( 'sf_impact_slider_automate', true );
+        $sf_impact_Theme_Mods->setDefault( 'sf_impact_slider_direction', 'horizontal');
+        $sf_impact_Theme_Mods->setDefault( 'sf_impact_slider_navigation', FALSE );
+        $sf_impact_Theme_Mods->setDefault( 'sf_impact_slider_navdirection', FALSE );
+        $sf_impact_Theme_Mods->setDefault( 'sf_impact_slider_keyboard', true );
+        $sf_impact_Theme_Mods->setDefault( 'sf_impact_slider_mousewheel', true );
+        $sf_impact_Theme_Mods->setDefault( 'sf_impact_slider_pauseonhover', false );
         
         //Highlight box mods 
-        $sf_impact_Theme_Mods->setMod( 'sf_impact_highlight_boxes', 0 );
-        $sf_impact_Theme_Mods->setMod( 'sf_impact_highlight_style', "L" );
+        $sf_impact_Theme_Mods->setDefault( 'sf_impact_highlight_boxes', 0 );
+        $sf_impact_Theme_Mods->setDefault( 'sf_impact_highlight_style', "L" );
         
         for($x=0; $x <= 3; ++$x)
         {
-            $sf_impact_Theme_Mods->setMod( 'sf_impact_highlight_image' . $x, '' );
-            $sf_impact_Theme_Mods->setMod( 'sf_impact_highlight_header' . $x, '' );
-            $sf_impact_Theme_Mods->setMod( 'sf_impact_highlight_text' . $x, '' );
-            $sf_impact_Theme_Mods->setMod( 'sf_impact_highlight_link' . $x, '#' );
+            $sf_impact_Theme_Mods->setDefault( 'sf_impact_highlight_image' . $x, '' );
+            $sf_impact_Theme_Mods->setDefault( 'sf_impact_highlight_header' . $x, '' );
+            $sf_impact_Theme_Mods->setDefault( 'sf_impact_highlight_text' . $x, '' );
+            $sf_impact_Theme_Mods->setDefault( 'sf_impact_highlight_link' . $x, '#' );
         }
         
         
         //Grid mods
-        $sf_impact_Theme_Mods->setMod( 'sf_impact_grid_display', FALSE );
-        $sf_impact_Theme_Mods->setMod( 'sf_impact_grid_display_all', FALSE );
+        $sf_impact_Theme_Mods->setDefault( 'sf_impact_grid_display', FALSE );
+        $sf_impact_Theme_Mods->setDefault( 'sf_impact_grid_display_all', FALSE );
         
         //Slider mods
-        $sf_impact_Theme_Mods->setMod( 'sf_impact_slider_style', 'default' );
-        $sf_impact_Theme_Mods->setMod( 'sf_impact_slider_captions', TRUE ) ;
+        $sf_impact_Theme_Mods->setDefault( 'sf_impact_slider_style', 'default' );
+        $sf_impact_Theme_Mods->setDefault( 'sf_impact_slider_captions', TRUE ) ;
         
         //Thumbnail mods
-        $sf_impact_Theme_Mods->setMod( 'sf_impact_slider_thumbnails', false );
+        $sf_impact_Theme_Mods->setDefault( 'sf_impact_slider_thumbnails', false );
          
         //Post mods   
-        $sf_impact_Theme_Mods->setMod( 'sf_impact_show_full_sticky_post', true );
-        $sf_impact_Theme_Mods->setMod( 'sf_impact_show_excerpt_archive_post', true );
-        $sf_impact_Theme_Mods->setMod( 'sf_impact_show_excerpt_blog_post', TRUE );
-        $sf_impact_Theme_Mods->setMod( 'sf_impact_post_featured', TRUE );
-        $sf_impact_Theme_Mods->setMod( 'sf_impact_post_sidebar', FALSE );
+        $sf_impact_Theme_Mods->setDefault( 'sf_impact_show_full_sticky_post', true );
+        $sf_impact_Theme_Mods->setDefault( 'sf_impact_show_excerpt_archive_post', true );
+        $sf_impact_Theme_Mods->setDefault( 'sf_impact_show_excerpt_blog_post', TRUE );
+        $sf_impact_Theme_Mods->setDefault( 'sf_impact_post_featured', TRUE );
+        $sf_impact_Theme_Mods->setDefault( 'sf_impact_post_sidebar', FALSE );
         
         //Social settings
         $social_sites = sf_impact_social_media_array();
@@ -101,7 +101,7 @@ if (!function_exists('sf_impact_theme_mods')) {
             }
         } 
     
-        $sfimpact_demo_data = $sf_impact_Theme_Mods->setMod("sfimpact_demo_data", TRUE);
+        $sfimpact_demo_data = $sf_impact_Theme_Mods->setDefault("sfimpact_demo_data", TRUE);
         
         if ($sfimpact_demo_data) {
             $defaultpath =        get_template_directory_uri() . '/images/';
@@ -123,8 +123,8 @@ if (!function_exists('sf_impact_theme_mods')) {
             $sf_impact_Theme_Mods->setMod('sf_impact_highlight_text2', 'Display an image or a slide show!');
             $sf_impact_Theme_Mods->setMod('sf_impact_highlight_link2', '#'); 
             $sf_impact_Theme_Mods->setMod('sf_impact_home_featured_highlights', true);
-            
             $sf_impact_Theme_Mods->setMod('sf_impact_color_theme', 'light');
+            $sf_impact_Theme_Mods->setMod('sf_impact_demo_data', FALSE);
             
         }
     }

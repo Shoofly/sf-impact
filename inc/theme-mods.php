@@ -5,7 +5,7 @@
  */
 class sf_impact_Theme_Mods 
 {
-    private static $_this, $mods;
+    private static $_this, $mods, $default;
     private $handle;
     
     private function __construct()
@@ -24,24 +24,32 @@ class sf_impact_Theme_Mods
     
     public function setMod($key, $default) {
         
-        self::$mods[$this->handle][$key] = $default;
+        $this->setDefault($key, $default);
         
         set_theme_mod($key, $default);
         
         return self::$mods[$this->handle][$key];   
     }
+
+    public function setDefault($key, $default) {
+        
+        self::$default[$this->handle][$key] = $default;
+        
+        return self::$mods[$this->handle][$key];   
+    }
     
-    public function setMods(Array $array) {
-        self::$mods[$this->handle] = array_merge(self::$mods[$this->handle],$array);
+    public function setDefaults(Array $array) {
+        self::$defaults[$this->handle] = array_merge(self::$defaults[$this->handle],$array);
+        
     }
     
     public function getMod($key, $default=null) {
         $mods = get_theme_mods();
         
  
-        if(isset(self::$mods[$this->handle][$key])) {
+        if(isset(self::$default[$this->handle][$key])) {
             
-            return get_theme_mod($key, self::$mods[$this->handle][$key]);
+            return get_theme_mod($key, self::$default[$this->handle][$key]);
         } elseif ( isset($default) ) {
             return $default;
         } else {
