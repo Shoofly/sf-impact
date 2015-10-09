@@ -502,7 +502,7 @@
  
                 $wp_customize->add_control( 'sf_impact_grid_display_all', array(
                     'settings' => 'sf_impact_grid_display_all',
-                    'label'    => __( 'Display the grid on all pages' , 'sf-impact'),
+                    'label'    => __( 'Display the thumbnail grid on all pages (not including the home page/ front page)' , 'sf-impact'),
                     'section'  => 'sf_impact_grid_options',
                                 'priority' => 10,
                     'type'     => 'checkbox',
@@ -854,25 +854,6 @@
            
                 ) 
             ) );
-      //Setting to display featured highlights on the home page    
-            $wp_customize->add_setting( 'sf_impact_home_featured_highlights', 
-                array(
-                'default' => false, 
-                'type' => 'theme_mod', 
-                'capability' => 'edit_theme_options', 
-                'transport' => 'refresh', 
-                'sanitize_callback' => 'sf_impact_sanitize_checkbox'
-                ) 
-            );      
-     
-            $wp_customize->add_control( 'sf_impact_home_featured_highlights', array(
-                'settings' => 'sf_impact_home_featured_highlights',
-                'label'    => __( 'Display featured highlights on the home page?', 'sf-impact' ), 
-                'description' => __('Turn on to display the featured highlight area.', 'sf-impact'),
-                'section'  => 'sf_impact_home_options',
-                            'priority' => 10,
-                'type'     => 'checkbox',
-            ) );       
          //Setting to display posts on the home page    
             $wp_customize->add_setting( 'sf_impact_home_posts', 
                 array(
@@ -1252,7 +1233,26 @@
                 ) 
             ); 
 
- 
+       //Setting to display featured highlights on the home page    
+            $wp_customize->add_setting( 'sf_impact_home_featured_highlights', 
+                array(
+                'default' => false, 
+                'type' => 'theme_mod', 
+                'capability' => 'edit_theme_options', 
+                'transport' => 'refresh', 
+                'sanitize_callback' => 'sf_impact_sanitize_checkbox'
+                ) 
+            );      
+     
+            $wp_customize->add_control( 'sf_impact_home_featured_highlights', array(
+                'settings' => 'sf_impact_home_featured_highlights',
+                'label'    => __( 'Display featured highlights on the home page?', 'sf-impact' ), 
+                'description' => __('Turn on to display the featured highlight area.', 'sf-impact'),
+                'section'  => 'sf_impact_highlight_options',
+                            'priority' => 10,
+                'type'     => 'checkbox',
+            ) );       
+
            $wp_customize->add_setting( 
                     'linex', 
                     array(   'transport' => 'refresh', 
@@ -1325,8 +1325,6 @@
             $wp_customize->add_setting( 
             'line1', array(   'transport' => 'refresh', 
                 'sanitize_callback' => 'sanitize_text_field') );
-  
-            
     
         for ($x = 1; $x <= 3; ++$x) 
             :
