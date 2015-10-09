@@ -27,7 +27,7 @@ get_header(); ?>
 
 			<?php /* Start the Loop */ ?>
 			<?php while ( have_posts() ) : the_post(); 
-                $full  = sf_impact_postContentFull();
+                $full  = sf_impact_postContentFullPage();
                 if ($full)
 				    get_template_part( 'template-parts/content', get_post_format() );
                 else

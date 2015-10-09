@@ -1040,7 +1040,7 @@ if (!function_exists('sf_impact_get_slideshow')):
 if (!function_exists('sf_impact_posts')):
     function sf_impact_posts($the_query, $stickycount = 0)
     {
-        $full  = sf_impact_postContentFull();
+        $full  = sf_impact_postContentFullPage();
     
 
         if ( $the_query->have_posts() ) :  ?>
@@ -1049,19 +1049,19 @@ if (!function_exists('sf_impact_posts')):
 		<?php while ( $the_query->have_posts() ) : $the_query->the_post(); ?>
                <?php
                 $current_post_index = $the_query->current_post ;   //Get the current index
-                $full  = sf_impact_postContentFull();  //Check to see if the option to display excerpts is on or off
+                $full  = sf_impact_postContentFullPage();  //Check to see if the option to display excerpts is on or off
                 $sf_impact_show_full_sticky_post = FALSE;  //Check to see if the sticky as full post option is on 
                 if (is_sticky() && !$full)  //The sticky as full post is only valid when excerpts are enabled.
                    $sf_impact_show_full_sticky_post = (get_theme_mod('sf_impact_show_full_sticky_post', true) && $current_post_index  == 0);      //Make sure that all sticky posts at the top display as full if this is set
                 ?>      
 			<?php
-                if ($full || get_post_format() == "link")
+                if ($full)
 				    get_template_part( 'template-parts/content', get_post_format() );
                 else
                     if ($sf_impact_show_full_sticky_post)
                         get_template_part('template-parts/content', 'sticky_full');
                     else
-                        get_template_part('template-parts/excerpt', 'get_post_format');
+                        get_template_part('template-parts/excerpt', get_post_format());
 			?>
 
 		<?php endwhile; ?>
@@ -1079,8 +1079,8 @@ endif;
 /*
 * Check to see if the full post should be displayed or the excerpt
 */
-if ( ! function_exists( 'sf_impact_postContentFull' ) ) :
-    function sf_impact_postContentFull()
+if ( ! function_exists( 'sf_impact_postContentFullPage' ) ) :
+    function sf_impact_postContentFullPage()
     {
      $full = TRUE;
 
@@ -1466,6 +1466,7 @@ function sf_impact_count_sticky($category = NULL)
 function sf_impact_get_url() {
     // preg_match( '/<a\s[^>]*?href=[\'"](.+?)[\'"]/is', get_the_content(), $matches ) ;
         //return false;
+      
         $pattern = '#(www\.|https?://)?[a-z0-9]+\.[a-z0-9]{2,4}\S*#i';
 if (!preg_match_all($pattern, get_the_content(), $matches, PREG_PATTERN_ORDER))
     return false;
@@ -1673,7 +1674,7 @@ endif;
  * @param  string  $new_edit what page to check for accepts new - new post page ,edit - edit post page, null for either
  * @return boolean
  */
-if (!function_exists(is_eit_page)):
+if (!function_exists('is_edit_page')):
 function is_edit_page($new_edit = null){
     global $pagenow;
     //make sure we are on the backend

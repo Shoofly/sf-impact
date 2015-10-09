@@ -6,13 +6,14 @@
  * @subpackage sfimpact
  * @since sfImpact 1.0
  */
+
  $myLink = sf_impact_get_url(); 
 ?>
 
     <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
        <header class="entry-header">
  	        <div class="entry-meta">
-                <?php <?php sf_impact_thumbnail();?>      
+                <?php sf_impact_thumbnail();?>      
 		        <?php sf_impact_posted_on(); ?>
                 <?php sf_impact_title(); ?>
             </div><!-- .entry-meta -->
