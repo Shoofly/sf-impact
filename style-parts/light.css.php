@@ -143,6 +143,10 @@ hr {
 	color: #312525;
 }
 
+#site-logo-title, #site-logo-title div {
+    color: #<?php echo get_header_textcolor(); ?>;    
+}
+
 .site-title {
 	color: white;
 }
