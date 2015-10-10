@@ -19,7 +19,6 @@
 
 <?php 
     wp_head();
-    $url = (get_header_image());        //get the default header image
   
     if (is_single())
     {
@@ -30,6 +29,8 @@
              $image_atts = wp_get_attachment_image_src($image_id, "full", true);
              if (isset($image_atts) && $image_atts[1] >= HEADER_IMAGE_WIDTH ) $url = $image_atts[0] ;
         }                 
+    } else {
+        $url = (get_header_image());        //get the default header image
     }
                      
     //Get the settings for the header
@@ -49,15 +50,15 @@
     $menu = $sf_impact_menu_location;
     $the_slide_query  = NULL;
     $isnoimage = FALSE;
- 
+  
     if ($sf_impact_home_header_type == "2" ||
         ($sf_impact_home_header_type == "3" && $url == "") ||
-         ($sf_impact_home_header_type == "0"  && $sf_impact_header_image=="") )
+         ($sf_impact_home_header_type == "0"  && $sf_impact_header_image=="") ) {
             $isnoimage = TRUE;
-    if ($homeimage)
-    { 
-        if ($sf_impact_home_header_type = 1)
-        {
+    }
+    
+    if ($homeimage === TRUE) { 
+        if ($sf_impact_home_header_type == 1) {
             $the_slide_query = sf_impact_slideshow_query();
             if ($the_slide_query->post_count <= 0)
             { 
@@ -67,13 +68,12 @@
         }
 
 
-        if ($isnoimage)
+        if ($isnoimage === TRUE)
             {       
                $logo = "top"; //No Header Image
                 $menu = "above";                     
             }
-    } elseif (!$url)     
-    {
+    } elseif (!$url) {
         $logo="top";
         $menu = "above";
     }
@@ -113,7 +113,7 @@
         </div><!--topmasthead-->
  	<header id="masthead" class="site-header" role="banner">
         <?php
-        if ($homeimage)
+        if ($homeimage === TRUE)
             $xClass="sfly-headerimg-home";
         else
             $xClass = "";
