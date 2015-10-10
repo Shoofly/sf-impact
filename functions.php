@@ -18,9 +18,72 @@ require get_template_directory() . '/inc/functions-social.php';
  */
 require get_template_directory() . '/inc/theme-mods.php';
 
-if (!function_exists('sf_impact_theme_mods')) {
-    function sf_impact_theme_mods() {
-        global $sf_impact_Theme_Mods;
+
+if ( ! function_exists( 'sf_impact_setup' ) ) :
+/**
+ * Sets up theme defaults and registers support for various WordPress features.
+ *
+ * Note that this function is hooked into the after_setup_theme hook, which
+ * runs before the init hook. The init hook is too late for some features, such
+ * as indicating support for post thumbnails.
+ */
+function sf_impact_setup() {
+    global $sf_impact_Theme_Mods;
+
+	load_theme_textdomain( 'sf-impact', get_template_directory() . '/languages' );
+
+
+    //add blog page template
+    add_filter( 'template_include', 'blog_template' );
+    /*
+    * Overwrite page with blog template for thumbnail grid when no post category
+    */
+    function blog_template( $template ) {
+        global $post, $sf_impact_Theme_Mods;
+        $sf_impact_home_rp_categoryid = $sf_impact_Theme_Mods->getMod( 'sf_impact_home_rp_categoryid' );
+        $sf_impact_thumbnail_more_page = $sf_impact_Theme_Mods->getMod( 'sf_impact_thumbnail_more_page' );
+        if (is_page() && $post) //Only display on a page if the post exists
+        { 
+       
+            if(( $post->ID == $sf_impact_thumbnail_more_page) && ($sf_impact_home_rp_categoryid == "0" || $sf_impact_home_rp_categoryid == ""))
+            {
+           
+                $template = get_template_directory() . '/inc/more-posts.php';
+                if( file_exists( $template ) ) {
+                        return $template;
+                }
+
+            }
+        }
+
+        $sfimpact_demo_data = $sf_impact_Theme_Mods->getMod('sf_impact_demo_data', TRUE);
+     
+        if ($sfimpact_demo_data) {
+            $defaultpath =        get_template_directory_uri() . '/images/';
+            $defaultlogo = $defaultpath . "logo.png"; 
+
+            $defaultheader = $defaultpath . "impact.png";
+            $defaultheadertype = "0";
+
+            $sf_impact_Theme_Mods->setMod('header_textcolor','000099');      
+            $sf_impact_Theme_Mods->setMod('sf_impact_header_image', $defaultheader);
+            $sf_impact_Theme_Mods->setMod('sf_impact_logo_image', $defaultlogo);
+            $sf_impact_Theme_Mods->setMod('sf_impact_logo_location', 'image');
+            $sf_impact_Theme_Mods->setMod('sf_impact_home_header_type', $defaultheadertype);
+            $sf_impact_Theme_Mods->setMod('sf_impact_highlight_boxes', 2);
+            $sf_impact_Theme_Mods->setMod('sf_impact_highlight_header1', 'Up to 3 highlights');
+            $sf_impact_Theme_Mods->setMod('sf_impact_highlight_image1', $defaultpath . 'flowers.png');
+            $sf_impact_Theme_Mods->setMod('sf_impact_highlight_text1', 'Create up to 3 highlight boxes!');
+            $sf_impact_Theme_Mods->setMod('sf_impact_highlight_link1', '#'); 
+            $sf_impact_Theme_Mods->setMod('sf_impact_highlight_header2', 'Home Page features');
+            $sf_impact_Theme_Mods->setMod('sf_impact_highlight_image2', $defaultpath . 'drop.png');
+            $sf_impact_Theme_Mods->setMod('sf_impact_highlight_text2', 'Display an image or a slide show!');
+            $sf_impact_Theme_Mods->setMod('sf_impact_highlight_link2', '#'); 
+            $sf_impact_Theme_Mods->setMod('sf_impact_home_featured_highlights', true);
+            $sf_impact_Theme_Mods->setMod('sf_impact_color_theme', 'light');
+            $sf_impact_Theme_Mods->setMod('sf_impact_demo_data', FALSE);
+          
+        }
         
         //Color settings
         $sf_impact_Theme_Mods->setDefault( 'sf_impact_header_background', "#5b5b5b" );
@@ -99,79 +162,7 @@ if (!function_exists('sf_impact_theme_mods')) {
                 $links[] = $sf_impact_Theme_Mods->getMod( $social_site );
                 $icons[] = $social_icons[$i];
             }
-        } 
-    
-        $sfimpact_demo_data = $sf_impact_Theme_Mods->getMod("sf_impact_demo_data", TRUE);
-        
-        if ($sfimpact_demo_data) {
-            $defaultpath =        get_template_directory_uri() . '/images/';
-            $defaultlogo = $defaultpath . "logo.png"; 
-
-            $defaultheader = $defaultpath . "impact.png";
-            $defaultheadertype = "0";
-
-            $sf_impact_Theme_Mods->setMod('header_textcolor','000099');      
-            $sf_impact_Theme_Mods->setMod('sf_impact_header_image', $defaultheader);
-            $sf_impact_Theme_Mods->setMod('sf_impact_logo_image', $defaultlogo);
-            $sf_impact_Theme_Mods->setMod('sf_impact_logo_location', 'image');
-            $sf_impact_Theme_Mods->setMod('sf_impact_home_header_type', $defaultheadertype);
-            $sf_impact_Theme_Mods->setMod('sf_impact_highlight_boxes', 2);
-            $sf_impact_Theme_Mods->setMod('sf_impact_highlight_header1', 'Up to 3 highlights');
-            $sf_impact_Theme_Mods->setMod('sf_impact_highlight_image1', $defaultpath . 'flowers.png');
-            $sf_impact_Theme_Mods->setMod('sf_impact_highlight_text1', 'Create up to 3 highlight boxes!');
-            $sf_impact_Theme_Mods->setMod('sf_impact_highlight_link1', '#'); 
-            $sf_impact_Theme_Mods->setMod('sf_impact_highlight_header2', 'Home Page features');
-            $sf_impact_Theme_Mods->setMod('sf_impact_highlight_image2', $defaultpath . 'drop.png');
-            $sf_impact_Theme_Mods->setMod('sf_impact_highlight_text2', 'Display an image or a slide show!');
-            $sf_impact_Theme_Mods->setMod('sf_impact_highlight_link2', '#'); 
-            $sf_impact_Theme_Mods->setMod('sf_impact_home_featured_highlights', true);
-            $sf_impact_Theme_Mods->setMod('sf_impact_color_theme', 'light');
-            $sf_impact_Theme_Mods->setMod('sf_impact_demo_data', FALSE);
-            
-        }
-    }
-}
-
-
-sf_impact_theme_mods();
-
-if ( ! function_exists( 'sf_impact_setup' ) ) :
-/**
- * Sets up theme defaults and registers support for various WordPress features.
- *
- * Note that this function is hooked into the after_setup_theme hook, which
- * runs before the init hook. The init hook is too late for some features, such
- * as indicating support for post thumbnails.
- */
-function sf_impact_setup() {
-    global $sf_impact_Theme_Mods;
-    
-	load_theme_textdomain( 'sf-impact', get_template_directory() . '/languages' );
-
-
-    //add blog page template
-    add_filter( 'template_include', 'blog_template' );
-    /*
-    * Overwrite page with blog template for thumbnail grid when no post category
-    */
-    function blog_template( $template ) {
-        global $post, $sf_impact_Theme_Mods;
-        $sf_impact_home_rp_categoryid = $sf_impact_Theme_Mods->getMod( 'sf_impact_home_rp_categoryid' );
-        $sf_impact_thumbnail_more_page = $sf_impact_Theme_Mods->getMod( 'sf_impact_thumbnail_more_page' );
-        if (is_page() && $post) //Only display on a page if the post exists
-        { 
-       
-            if(( $post->ID == $sf_impact_thumbnail_more_page) && ($sf_impact_home_rp_categoryid == "0" || $sf_impact_home_rp_categoryid == ""))
-            {
-           
-                $template = get_template_directory() . '/inc/more-posts.php';
-                if( file_exists( $template ) ) {
-                        return $template;
-                }
-
-            }
-        }
-    
+        }     
         return $template;
     }    
 	// Add default posts and comments RSS feed links to head.
@@ -424,15 +415,9 @@ if (!function_exists('sf_impact_scripts')):
         $home = is_home() || is_front_page();
         if ($home)
         {
-   
-    
            $sf_impact_home_header_type = $sf_impact_Theme_Mods->getMod( 'sf_impact_home_header_type' );
            
-            if ($sf_impact_home_header_type == "1")
-            {
-              
-               add_action( 'wp_footer', 'sf_impact_slideshow_scripts');
-            }
+
            wp_register_style( '_sf_impact_header_styles', $themedir . '/styles/home.css', array(), '1.0');
            wp_enqueue_style( '_sf_impact_header_styles' );
            if ($sf_impact_home_header_type == "1")
@@ -677,7 +662,7 @@ if (!function_exists('sf_impact_homeheader')):
       
         if ($sf_impact_header_image && $sf_impact_logo_location == 'image')
             $top = FALSE;
-            
+  
         $style = sf_impact_get_home_header_style();
  
     
@@ -1650,8 +1635,6 @@ if (!function_exists('sf_impact_header')):
         global $sf_impact_Theme_Mods;
         
         $top = TRUE;
-      
-  
         $sf_impact_header_image = $sf_impact_Theme_Mods->getMod( 'sf_impact_header_image' );
         $sf_impact_logo_location = $sf_impact_Theme_Mods->getMod( 'sf_impact_logo_location' );
         $sf_impact_home_header_type = $sf_impact_Theme_Mods->getMod( 'sf_impact_home_header_type' );

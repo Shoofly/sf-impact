@@ -17,6 +17,7 @@ class sf_impact_Theme_Mods
         if( !isset(self::$_this[$handle]) ) {
             self::$_this[$handle] = new self();    
             self::$_this[$handle]->handle = $handle;
+            self::$default[$handle] = get_theme_mods();
         } 
         
         return self::$_this[$handle];
@@ -24,42 +25,45 @@ class sf_impact_Theme_Mods
     
     public function setMod($key, $default) 
     {
-        $this->setDefault($key, $default);
-        
         set_theme_mod($key, $default);
-        
-        return self::$mods[$this->handle][$key];   
+        $this->setDefault($key, $default);
+        return $this->getMod($key, $default); 
     }
 
     public function setDefault($key, $default) 
     {
-        
+
+        if($default === false) $default = 0;
         self::$default[$this->handle][$key] = $default;
+        
+       $this->getMod($key);
+
+ 
         
         return self::$mods[$this->handle][$key];   
     }
     
     public function setDefaults(Array $array) {
-        self::$defaults[$this->handle] = array_merge(self::$defaults[$this->handle],$array);
         
-    }
+        self::$defaults[$this->handle] = array_merge(self::$defaults[$this->handle],$array);
+   }
     
     public function getMod($key, $default=null) {
-        $mods = get_theme_mods();
-        
- 
-        if(isset(self::$default[$this->handle][$key])) {
-            
-            return get_theme_mod($key, self::$default[$this->handle][$key]);
-        } elseif ( isset($default) ) {
-            return $default;
-        } else {
-            return get_theme_mod($key);
+
+        switch(true) {
+            case isset(self::$default[$this->handle][$key]): 
+                return get_theme_mod($key, self::$default[$this->handle][$key]);
+                break;
+            case isset($default):
+                return get_theme_mod($key, $default);
+                break;
+            default:
+                return get_theme_mod($key);
         }
     }
     
     public function dumpAll() {
-        var_dump(self::$mods[$this->handle]);
+        var_dump(self::$default[$this->handle]);
     }
 }
 
