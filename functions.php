@@ -101,7 +101,7 @@ if (!function_exists('sf_impact_theme_mods')) {
             }
         } 
     
-        $sfimpact_demo_data = $sf_impact_Theme_Mods->getMod("sfimpact_demo_data", TRUE);
+        $sfimpact_demo_data = $sf_impact_Theme_Mods->getMod("sf_impact_demo_data", TRUE);
         
         if ($sfimpact_demo_data) {
             $defaultpath =        get_template_directory_uri() . '/images/';
