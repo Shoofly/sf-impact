@@ -416,7 +416,7 @@
             //Setting to featured image on posts
             $wp_customize->add_setting( 'sf_impact_post_featured', 
                 array(
-                'default' => true, 
+                'default' => false, 
                 'type' => 'theme_mod', 
                 'capability' => 'edit_theme_options', 
                 'transport' => 'refresh', 
@@ -427,7 +427,7 @@
             $wp_customize->add_control( 'sf_impact_post_featured', array(
                 'settings' => 'sf_impact_post_featured',
                 'label'    => __( 'Display the featured image on posts', 'sf-impact'), 
-                'description' => __('This is a default setting that you can override for individual posts', 'sf-impact'),
+                'description' => __('This is a default setting. You change this for individual posts by clicking on the checkbox below the featured image and updating the post.', 'sf-impact'),
                 'section'  => 'sf_impact_general_options',
                 'priority' => 10,
                 'type'     => 'checkbox',
@@ -446,7 +446,7 @@
             $wp_customize->add_control( 'sf_impact_post_header', array(
                 'settings' => 'sf_impact_post_header',
                 'label'    => __( 'Display the featured image as the header on posts', 'sf-impact'), 
-                'description' => __('When the above option is selected, display the featured image as the header instead of the default header. If there is no featured image, the default image will be displayed if there is one.', 'sf-impact'),
+                'description' => __('If you choose to display the featured image for any posts by using the checkbox below the featured image, this option will determine where they are displayed. If this option is selected, featured images will display in the header. If this option is not selected, featured images will display above the post and below the header if there is one.', 'sf-impact'),
                 'section'  => 'sf_impact_general_options',
                 'priority' => 10,
                 'type'     => 'checkbox',

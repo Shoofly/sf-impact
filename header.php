@@ -5,7 +5,7 @@
  * Displays all of the <head> section and everything up till <div id="content">
  *
  * @package shoofly
-  * @subpackage sf-impact
+ * @subpackage sf-impact
  * @since sf-impact 1.0
  */
 
@@ -14,23 +14,19 @@
 <?php 
     wp_head();
     $reghead = TRUE;
-
+    $url = get_header_image();        //get the default header image
+    $sf_impact_post_header = get_theme_mod('sf_impact_post_header', false);
+    $sf_impact_post_featured = get_theme_mod('sf_impact_post_featured', true);
     //If this is a post check to see if the option to use the featured image as the header is set and IF there is a
     //featured image, use that instead of the default wordpress header
-    if (is_single() && $sf_impact_post_header)
+ 
+    if (is_single() && $sf_impact_post_header && $sf_impact_post_featured)
     {
-        $sf_impact_post_header = get_theme_mod('sf_impact_post_header', false);
-        if ($sf_impact_post_header)
-        {
              $image_id = get_post_thumbnail_id();
              $image_atts = wp_get_attachment_image_src($image_id, "full", true);
              if (isset($image_atts) && $image_atts[1] >= HEADER_IMAGE_WIDTH ) 
-                 
-                $url = $image_atts[0] ;
-        }                 
+                $url = $image_atts[0] ; //Replace the default header
     } 
-    if (! isset($url))        //If the header has not been set for a single post
-        $url = get_header_image();        //get the default header image
     
                      
     //Get the settings for the header
@@ -40,7 +36,6 @@
     $sf_impact_header_image = get_theme_mod('sf_impact_header_image', '');
     $sf_impact_social_above_content = get_theme_mod('sf_impact_social_above_content', true);
     $sf_impact_social_above_menu = get_theme_mod('sf_impact_social_above_menu', false);
-    $sf_impact_thumbnail_more_page = get_theme_mod('sf_impact_thumbnail_more_page', '');
     //Is this the home page or the front page (and not the blog page) and the header type is not default display the custom home page header image/slide show
     if ((is_home() || is_front_page()) && $sf_impact_home_header_type != "3" && !$wp_query -> is_posts_page)
         $homeimage = TRUE;      //Display the custom home page header
@@ -50,40 +45,47 @@
     $logo = $sf_impact_logo_location; 
     $menu = $sf_impact_menu_location;
     $the_slide_query  = NULL;
-    $isnoimage = FALSE;
-  
+    $noheaderimg = FALSE;
+
     if ($homeimage) //This check is only going to happen for the home page or the front page
     {
-        //Check to see if there is no image. If there is no image, then the logo & menu are always on top
-        if ($sf_impact_home_header_type == "2" ||   //The type is NONE
-            ($sf_impact_home_header_type == "3" && $url == "") || //The type is DEFAULT 
-             ($sf_impact_home_header_type == "0"  && $sf_impact_header_image=="") ) { //The type is custom header
-                $isnoimage = TRUE;
-                echo '<p style="color:lightblue">There is a setting for a header here on the home page but there is nothing to show</p>';
-        }
-      
-        if ($sf_impact_home_header_type == 1) {         //The type is slide show
-            $the_slide_query = sf_impact_slideshow_query(); //Make sure that there are slides
+        $noheaderimg = FALSE;
+        switch ($sf_impact_home_header_type)
+        {
+            default:
+            case NOHEADER:
+                $noheaderimg = TRUE;
+                break;
+            case DEFAULTHEADER:
+                if ($url == "")
+                    $noheaderimg = TRUE;
+                break;
+            case CUSTOMHEADER:
+                 if ($sf_impact_header_image=="")
+                    $noheaderimg = TRUE;
+                break;
+            case SLIDEHEADER:
+                $the_slide_query = sf_impact_slideshow_query(); //Make sure that there are slides
                
-            if ($the_slide_query->post_count <= 0)
-            { 
+                if ($the_slide_query->post_count <= 0)
+                { 
             
-                $sf_impact_home_header_type = 2;
-                $isnoimage = TRUE;
-                $the_slide_query = NULL;
-            }
-           
+                    $sf_impact_home_header_type = 2;
+                    $noheaderimg = TRUE;
+                    $the_slide_query = NULL;
+                }
+                break;
         }
-        if ($isnoimage === TRUE) //If there is no image, then always put the logo on top and the menu on top
-            {       
-               $logo = "top"; //No Header Image
-               $menu = "above";                     
-            }
-    } elseif (!$url) { //This check only occurs on pages that are not the front page or home page
+    } 
+     elseif (!$url) { //This check only occurs on pages that are not the front page or home page 
+        $noheaderimg = TRUE;
+    }
+    if ($noheaderimg)
+    {
         $logo="top";
         $menu = "above";
-    }
-      
+        
+    }      
 ?>
 
 <body <?php body_class();?>><div id="page" class="hfeed site  clear">
@@ -134,9 +136,6 @@
 		        </div>
              <?php 
             }
-           // echo "<p style='color:yellow'>";
-           // echo  $homeimage ? "This is the home page or the front page" : "The default wordpress header is being displayed or this is not the home page or the front page";
-           // echo "</p>";
             if (!$homeimage) //If this is not the home image or the front page, display the url
             {
                 if ( $url )
@@ -149,12 +148,7 @@
             }
             else
             {
-           // echo "<p style='color:yellow'>";
-           // echo   "This is the where the home page header is displayed";
-           // echo "</p>";
                 sf_impact_header($sf_impact_home_header_type, $sf_impact_header_image, $sf_impact_logo_location, $the_slide_query );
-                //sf_impact_header($the_slide_query); /*code to display header on home page*/
-              
             }
     
         ?>
@@ -185,29 +179,16 @@
                
             ?> <div class="sfly-grid">
           <?php
-            $sf_impact_grid_more = get_theme_mod( 'sf_impact_grid_more', 'More');
-            $sf_impact_grid_display = get_theme_mod('sf_impact_grid_display', FALSE);
-            $sf_impact_grid_display_all = get_theme_mod('sf_impact_grid_display_all', FALSE);
-            $sf_impact_grid_title = get_theme_mod( 'sf_impact_grid_title', "Recent Posts");
-            $sf_impact_grid_type = get_theme_mod('sf_impact_grid_type', 'post');
-    
-            $sf_impact_grid_posts = get_theme_mod( 'sf_impact_grid_posts', '4');
-            $sf_impact_grid_image_height = get_theme_mod( 'sf_impact_grid_image_height',"" );
-            $sf_impact_grid_image_width= get_theme_mod( 'sf_impact_grid_image_width',"" );
-            $sf_impact_grid_cell_width = get_theme_mod( 'sf_impact_grid_cell_width',  "" );
-            $sf_impact_grid_cell_height = get_theme_mod( 'sf_impact_grid_cell_height', "");
-            $sf_impact_post_category = get_theme_mod( 'sf_impact_post_category', "");
-            $sf_impact_image_size_name = get_theme_mod( 'sf_impact_image_size_name', 'thumbnail');
-
-            $arra = sf_impact_get_thumbnailarray($sf_impact_grid_type, $sf_impact_post_category, $sf_impact_grid_posts, $sf_impact_grid_image_height, $sf_impact_grid_image_width,  $sf_impact_image_size_name, $sf_impact_grid_cell_width, $sf_impact_grid_cell_height, $sf_impact_grid_image_width, "99%");
-            $url = sf_impact_get_thumbnailurl($sf_impact_post_category, $sf_impact_thumbnail_more_page);
-                    
+            $arra = sf_impact_get_thumbnailarray();  //Get the settings for the thumbnail grid
+            $url = sf_impact_get_thumbnailurl();     //Get the url for the read more link
+            $sf_impact_grid_title =  get_theme_mod('sf_impact_grid_title', 'Recent Posts');
+            $sf_impact_grid_more = get_theme_mod('sf_impact_grid_more', 'More Recent Posts')        
                 ?>
             <div class="home-thumb fixed">
                 <h1><?php echo $sf_impact_grid_title  ?></h1>
                 <?php 
                 $tg = new sfly_thumbnailgrid();
-                echo  $tg->thumbnailgrid_function($arra);?>
+                echo  $tg->thumbnailgrid_function($arra);?> 
                 <div class="more-link"><a href="<?php echo $url?>"><?php echo $sf_impact_grid_more?></a></div>
                 </div>
             <hr>

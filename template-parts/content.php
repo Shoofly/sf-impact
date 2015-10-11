@@ -9,7 +9,7 @@
  ?>
 
     <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
- 
+
         <?php sf_impact_thumbnail();?>
        
 	    <header class="entry-header">

@@ -301,10 +301,13 @@ if (!function_exists('sf_impact_thumbnail')):
  function sf_impact_thumbnail()
  {
      global $post;
-    $sf_impact_post_header = get_theme_mod('sf_impact_post_header', false);
+$sf_impact_post_featured = get_theme_mod('sf_impact_post_featured', true);
+    $sf_impact_post_header = get_theme_mod('sf_impact_post_header', false); //Check if this should go in the header instead 
+
     if ($sf_impact_post_header)
         return;
-    $hide_featured = !get_theme_mod('sfly_theme1_post_featured', TRUE);
+   
+    $hide_featured = !get_theme_mod('sf_impact_post_featured', TRUE);
     $id = 'hide_featured_image';
          $hidethumb = esc_attr( get_post_meta( $post->ID, $id, true ) ) != NULL ? esc_attr( get_post_meta( $post->ID, $id, true ) ) : $hide_featured;
          if (!$hidethumb):
