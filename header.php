@@ -54,25 +54,26 @@
   
     if ($homeimage) //This check is only going to happen for the home page or the front page
     {
-       
         //Check to see if there is no image. If there is no image, then the logo & menu are always on top
         if ($sf_impact_home_header_type == "2" ||   //The type is NONE
             ($sf_impact_home_header_type == "3" && $url == "") || //The type is DEFAULT 
              ($sf_impact_home_header_type == "0"  && $sf_impact_header_image=="") ) { //The type is custom header
                 $isnoimage = TRUE;
+                echo '<p style="color:lightblue">There is a setting for a header here on the home page but there is nothing to show</p>';
         }
       
         if ($sf_impact_home_header_type == 1) {         //The type is slide show
             $the_slide_query = sf_impact_slideshow_query(); //Make sure that there are slides
+               
             if ($the_slide_query->post_count <= 0)
             { 
+            
                 $sf_impact_home_header_type = 2;
                 $isnoimage = TRUE;
                 $the_slide_query = NULL;
             }
+           
         }
-
-
         if ($isnoimage === TRUE) //If there is no image, then always put the logo on top and the menu on top
             {       
                $logo = "top"; //No Header Image
@@ -133,9 +134,11 @@
 		        </div>
              <?php 
             }
-             if (!$homeimage)
+           // echo "<p style='color:yellow'>";
+           // echo  $homeimage ? "This is the home page or the front page" : "The default wordpress header is being displayed or this is not the home page or the front page";
+           // echo "</p>";
+            if (!$homeimage) //If this is not the home image or the front page, display the url
             {
-                
                 if ( $url )
                 {
                     ?>
@@ -146,7 +149,11 @@
             }
             else
             {
-                sf_impact_header($the_slide_query); /*code to display header on home page*/
+           // echo "<p style='color:yellow'>";
+           // echo   "This is the where the home page header is displayed";
+           // echo "</p>";
+                sf_impact_header($sf_impact_home_header_type, $sf_impact_header_image, $sf_impact_logo_location, $the_slide_query );
+                //sf_impact_header($the_slide_query); /*code to display header on home page*/
               
             }
     

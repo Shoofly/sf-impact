@@ -43,43 +43,108 @@ function sf_impact_setup() {
     }
 
     //add blog page template
-    add_filter( 'template_include', 'blog_template' );
+    add_filter( 'template_include', 'blog_template' ); //This will be called every time a template is loaded - I was wrong, it should always be called.
     /*
     * Overwrite page with blog template for thumbnail grid when no post category
     */
     function blog_template( $template ) {
+        //This template will always be called when a page is loaded and will check below to see if this is the read more page before executing anything.  
+        
         global $post, $sf_impact_Theme_Mods;
+    
         $sf_impact_home_rp_categoryid = $sf_impact_Theme_Mods->getMod( 'sf_impact_home_rp_categoryid' );
         $sf_impact_thumbnail_more_page = $sf_impact_Theme_Mods->getMod( 'sf_impact_thumbnail_more_page' );
-        if (is_page() && $post) //Only display on a page if the post exists
-        { 
-       
-            if(( $post->ID == $sf_impact_thumbnail_more_page) && ($sf_impact_home_rp_categoryid == "0" || $sf_impact_home_rp_categoryid == ""))
-            {
+        //this conditional is the only thing that should be happening here.
+        if (is_page() && $post && $post->ID == $sf_impact_thumbnail_more_page && ($sf_impact_home_rp_categoryid == "0" || $sf_impact_home_rp_categoryid == ""))
+        {
            
-                $template = get_template_directory() . '/inc/more-posts.php';
-                if( file_exists( $template ) ) {
-                        return $template;
-                }
-
+            $template = get_template_directory() . '/inc/more-posts.php';
+            if( file_exists( $template ) ) {
+                    return $template;
             }
-        }
 
-        $sfimpact_demo_data = $sf_impact_Theme_Mods->getMod('sf_impact_demo_data', TRUE);
+        }
+        //moved settings out of here
      
+        return $template;
+    }    
+	// Add default posts and comments RSS feed links to head.
+	add_theme_support( 'automatic-feed-links' );
+
+	/*
+	 * Let WordPress manage the document title.
+	 * By adding theme support, we declare that this theme does not use a
+	 * hard-coded <title> tag in the document head, and expect WordPress to
+	 * provide it for us.
+	 */
+	add_theme_support( 'title-tag' );
+
+	/*
+	 * Enable support for Post Thumbnails on posts and pages.
+	 *
+	 * @link https://developer.wordpress.org/themes/functionality/featured-images-post-thumbnails/
+	 */
+	add_theme_support( 'post-thumbnails' );
+
+	// This theme uses wp_nav_menu() in one location.
+	register_nav_menus( array(
+		'primary' => esc_html__( 'Primary Menu', 'sf-impact' ),
+	) );
+
+	/*
+	 * Switch default core markup for search form, comment form, and comments
+	 * to output valid HTML5.
+	 */
+	add_theme_support( 'html5', array(
+		'search-form',
+		'comment-form',
+		'comment-list',
+		'gallery',
+		'caption',
+	) );
+
+	/*
+	 * Enable support for Post Formats.
+	 * See https://developer.wordpress.org/themes/functionality/post-formats/
+	 */
+	add_theme_support( 'post-formats', array(
+		'aside',
+		'image',
+		'video',
+		'quote',
+		'link',
+	) );
+
+	// Set up the WordPress core custom background feature.
+	add_theme_support( 'custom-background', apply_filters( 'sf_impact_custom_background_args', array(
+		'default-color' => '#3A3A3A',
+		'default-image' => '',
+	) ) );
+    $args = array(
+	    'width'         => 980,
+	    'height'        => 60,
+	    'default-image' => get_template_directory_uri() . '/images/impact.png',
+    );
+    add_theme_support( 'custom-header', $args );
+    //add excerpt support for posts
+     add_post_type_support( 'page', 'excerpt' );
+
+     //settings moved here
+        $sfimpact_demo_data = $sf_impact_Theme_Mods->getMod('sf_impact_demo_data', TRUE); //This is not really a setting, it's a switch. 
         if ($sfimpact_demo_data) {
+           
             $defaultpath =        get_template_directory_uri() . '/images/';
             $defaultlogo = $defaultpath . "logo.png"; 
 
-            //$defaultheader = $defaultpath . "impact.png";
-            $defaultheadertype = "3";
-
+            $defaultheader = $defaultpath . "impact.png";
+            $defaultheadertype = "3"; //This should be 2
             $sf_impact_Theme_Mods->setMod('header_textcolor','000099');      
-          //  $sf_impact_Theme_Mods->setMod('sf_impact_header_image', $defaultheader);
+         //   $sf_impact_Theme_Mods->setMod('sf_impact_header_image', $defaultheader); //this should not be set
+         
             $sf_impact_Theme_Mods->setMod('sf_impact_logo_image', $defaultlogo);
             $sf_impact_Theme_Mods->setMod('sf_impact_logo_location', 'image');
             $sf_impact_Theme_Mods->setMod('sf_impact_home_header_type', $defaultheadertype);
-            
+          
             $sf_impact_Theme_Mods->setMod('sf_impact_highlight_boxes', 2);
             $sf_impact_Theme_Mods->setMod('sf_impact_highlight_header1', 'Up to 3 highlights');
             $sf_impact_Theme_Mods->setMod('sf_impact_highlight_image1', $defaultpath . 'flowers.png');
@@ -173,68 +238,6 @@ function sf_impact_setup() {
                 $icons[] = $social_icons[$i];
             }
         }     
-        return $template;
-    }    
-	// Add default posts and comments RSS feed links to head.
-	add_theme_support( 'automatic-feed-links' );
-
-	/*
-	 * Let WordPress manage the document title.
-	 * By adding theme support, we declare that this theme does not use a
-	 * hard-coded <title> tag in the document head, and expect WordPress to
-	 * provide it for us.
-	 */
-	add_theme_support( 'title-tag' );
-
-	/*
-	 * Enable support for Post Thumbnails on posts and pages.
-	 *
-	 * @link https://developer.wordpress.org/themes/functionality/featured-images-post-thumbnails/
-	 */
-	add_theme_support( 'post-thumbnails' );
-
-	// This theme uses wp_nav_menu() in one location.
-	register_nav_menus( array(
-		'primary' => esc_html__( 'Primary Menu', 'sf-impact' ),
-	) );
-
-	/*
-	 * Switch default core markup for search form, comment form, and comments
-	 * to output valid HTML5.
-	 */
-	add_theme_support( 'html5', array(
-		'search-form',
-		'comment-form',
-		'comment-list',
-		'gallery',
-		'caption',
-	) );
-
-	/*
-	 * Enable support for Post Formats.
-	 * See https://developer.wordpress.org/themes/functionality/post-formats/
-	 */
-	add_theme_support( 'post-formats', array(
-		'aside',
-		'image',
-		'video',
-		'quote',
-		'link',
-	) );
-
-	// Set up the WordPress core custom background feature.
-	add_theme_support( 'custom-background', apply_filters( 'sf_impact_custom_background_args', array(
-		'default-color' => '#3A3A3A',
-		'default-image' => '',
-	) ) );
-    $args = array(
-	    'width'         => 980,
-	    'height'        => 60,
-	    'default-image' => get_template_directory_uri() . '/images/impact.png',
-    );
-    add_theme_support( 'custom-header', $args );
-    //add excerpt support for posts
-     add_post_type_support( 'page', 'excerpt' );
 
 }
 endif; // sf_impact_setup
@@ -954,6 +957,7 @@ if (!function_exists('sf_impact_slideshow_query')):
                 )
                 ));
         $the_query =   new WP_Query($args);
+     
         return $the_query;        
     }
 endif;
@@ -966,6 +970,7 @@ if (!function_exists('sf_impact_get_slideshow')):
     {
         global $sf_impact_Theme_Mods;
           $format =  $sf_impact_Theme_Mods->getMod( 'sf_impact_slider_style' );
+         
           $sf_impact_slider_captions = $sf_impact_Theme_Mods->getMod( 'sf_impact_slider_captions', TRUE) ;
           $istyle = "";
           if ($wstyle) 
@@ -1014,6 +1019,7 @@ if (!function_exists('sf_impact_get_slideshow')):
                                 $datathumb = "";
                             if ($image_url && strpos($image_url, 'default.png') == FALSE)
                             {
+                              
                                 $hid = "title" . $id;
                                 ?>
                  	            <li <?php echo $datathumb?> <?php echo $istyle?> >
@@ -1639,15 +1645,16 @@ function sf_impact_chat_row_id( $chat_author ) {
 * Main code for the header image
 */
 if (!function_exists('sf_impact_header')):
-    function sf_impact_header($the_slide_query = NULL)
+    function sf_impact_header($sf_impact_home_header_type, $sf_impact_header_image, $sf_impact_logo_location, $the_slide_query = NULL)
     {
-        global $sf_impact_Theme_Mods;
+       // global $sf_impact_Theme_Mods;
         
         $top = TRUE;
-        $sf_impact_header_image = $sf_impact_Theme_Mods->getMod( 'sf_impact_header_image' );
+ 
+/*        $sf_impact_header_image = $sf_impact_Theme_Mods->getMod( 'sf_impact_header_image' );
         $sf_impact_logo_location = $sf_impact_Theme_Mods->getMod( 'sf_impact_logo_location' );
         $sf_impact_home_header_type = $sf_impact_Theme_Mods->getMod( 'sf_impact_home_header_type' );
-     
+  */   
         if ($sf_impact_header_image && $sf_impact_logo_location == 'image')
             $top = FALSE;
             

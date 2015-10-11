@@ -768,17 +768,16 @@
                 'sf_impact_home_header_type', 
                 array(
                 'label' => __( 'Home page Header', 'sf-impact' ), 
+                'description' => __('What do you want to display as the header on your home page?', 'sf-impact'),
                 'section' => 'sf_impact_home_options', 
                 'settings' => 'sf_impact_home_header_type', 
                 'priority' => 10, 
                 'type'     => 'radio',
 		        'choices'  => array(
-                    "2" => __('None', 'sf-impact'),
-                    "3" => __('Default', 'sf-impact'),
-			        "0"  => __('Custom Header Image', 'sf-impact'),
-			        "1" => __('Slideshow', 'sf-impact'),
-                 
-                
+                    "2" => __('Nothing', 'sf-impact'),
+                    "3" => __('Display the default WordPress header', 'sf-impact'),
+			        "0"  => __('Display the Home Page Custom Header Image I select below', 'sf-impact'),
+			        "1" => __('Display a Slideshow. I will pick the posts to include.', 'sf-impact'),
                 )
                 ) 
             ) );
@@ -824,7 +823,7 @@
                 'sf_impact_header_height', 
                 array(
                 'label' => __( 'Header image height' , 'sf-impact'),
-                'description' => __('Height when home page header or slideshow is selected. If not the default height, use measurement (px, %, em)', 'sf-impact' ), 
+                'description' => __('Height when custom home page header or slideshow is selected. If blank the default height will be used, use measurement (px, %, em)', 'sf-impact' ), 
                 'section' => 'sf_impact_home_options', 
                 'settings' => 'sf_impact_header_height', 
                 'priority' => 10, 
@@ -849,7 +848,7 @@
                 'sf_impact_header_width', 
                 array(
                 'label' => __( 'Header width', 'sf-impact' ), 
-                    'description' => __('Width when home page header or slideshow is selected. If not default, use measurement (px, %, em)', 'sf-impact' ), 
+                    'description' => __('Width when home page header or slideshow is selected. If blank, the default (100%) will be used. Use a measurement (px, %, em)', 'sf-impact' ), 
                 'section' => 'sf_impact_home_options', 
                 'settings' => 'sf_impact_header_width', 
                 'priority' => 10, 
