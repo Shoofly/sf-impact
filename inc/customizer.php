@@ -446,7 +446,7 @@
             $wp_customize->add_control( 'sf_impact_post_header', array(
                 'settings' => 'sf_impact_post_header',
                 'label'    => __( 'Display the featured image as the header on posts', 'sf-impact'), 
-                'description' => __('When featured images are displayed on post pages display them as the header', 'sf-impact'),
+                'description' => __('When the above option is selected, display the featured image as the header instead of the default header. If there is no featured image, the default image will be displayed if there is one.', 'sf-impact'),
                 'section'  => 'sf_impact_general_options',
                 'priority' => 10,
                 'type'     => 'checkbox',
@@ -768,16 +768,16 @@
                 'sf_impact_home_header_type', 
                 array(
                 'label' => __( 'Home page Header', 'sf-impact' ), 
-                'description' => __('What do you want to display as the header on your home page?', 'sf-impact'),
+                'description' => __('What do you want to display as the header on your home page or front page?', 'sf-impact'),
                 'section' => 'sf_impact_home_options', 
                 'settings' => 'sf_impact_home_header_type', 
                 'priority' => 10, 
                 'type'     => 'radio',
 		        'choices'  => array(
-                    "2" => __('Nothing', 'sf-impact'),
+                    "2" => __('Display Nothing. My home page is beautiful without anything in the header.', 'sf-impact'),
                     "3" => __('Display the default WordPress header', 'sf-impact'),
 			        "0"  => __('Display the Home Page Custom Header Image I select below', 'sf-impact'),
-			        "1" => __('Display a Slideshow. I will pick the posts to include.', 'sf-impact'),
+			        "1" => __('Display a Slideshow. I will pick which featured images will be displayed by selecting "include in slideshow" on the post.', 'sf-impact'),
                 )
                 ) 
             ) );
