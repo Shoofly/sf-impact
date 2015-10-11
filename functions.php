@@ -32,6 +32,15 @@ function sf_impact_setup() {
 
 	load_theme_textdomain( 'sf-impact', get_template_directory() . '/languages' );
 
+    add_filter('wp_head', 'sf_impact_header_code');
+    function sf_impact_header_code()
+    {?>
+        <meta charsett="<?php bloginfo( 'charset' ); ?>">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="profile" href="http://gmpg.org/xfn/11">
+        <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>">
+       <?php 
+    }
 
     //add blog page template
     add_filter( 'template_include', 'blog_template' );

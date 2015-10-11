@@ -11,27 +11,27 @@
 
 ?><!DOCTYPE html>
 <html <?php language_attributes(); ?>>
-<head>
-<meta charset="<?php bloginfo( 'charset' ); ?>">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="profile" href="http://gmpg.org/xfn/11">
-<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>">
-
 <?php 
     wp_head();
-  
-    if (is_single())
+    $reghead = TRUE;
+
+    //If this is a post check to see if the option to use the featured image as the header is set and IF there is a
+    //featured image, use that instead of the default wordpress header
+    if (is_single() && $sf_impact_post_header)
     {
         $sf_impact_post_header = get_theme_mod('sf_impact_post_header', false);
         if ($sf_impact_post_header)
         {
              $image_id = get_post_thumbnail_id();
              $image_atts = wp_get_attachment_image_src($image_id, "full", true);
-             if (isset($image_atts) && $image_atts[1] >= HEADER_IMAGE_WIDTH ) $url = $image_atts[0] ;
+             if (isset($image_atts) && $image_atts[1] >= HEADER_IMAGE_WIDTH ) 
+                 
+                $url = $image_atts[0] ;
         }                 
-    } else {
-        $url = (get_header_image());        //get the default header image
-    }
+    } 
+    if (! isset($url))        //If the header has not been set for a single post
+        $url = get_header_image();        //get the default header image
+    
                      
     //Get the settings for the header
     $sf_impact_logo_location = get_theme_mod('sf_impact_logo_location', 'image');
@@ -46,34 +46,40 @@
         $homeimage = TRUE;      //Display the custom home page header
     else
         $homeimage = FALSE;     //Do not display the custom home page header
+    
     $logo = $sf_impact_logo_location; 
     $menu = $sf_impact_menu_location;
     $the_slide_query  = NULL;
     $isnoimage = FALSE;
   
-    if ($sf_impact_home_header_type == "2" ||
-        ($sf_impact_home_header_type == "3" && $url == "") ||
-         ($sf_impact_home_header_type == "0"  && $sf_impact_header_image=="") ) {
-            $isnoimage = TRUE;
-    }
-    
-    if ($homeimage === TRUE) { 
-        if ($sf_impact_home_header_type == 1) {
-            $the_slide_query = sf_impact_slideshow_query();
+    if ($homeimage) //This check is only going to happen for the home page or the front page
+    {
+        echo $sf_impact_home_header_type;
+       echo $sf_impact_header_image;
+        //Check to see if there is no image. If there is no image, then the logo & menu are always on top
+        if ($sf_impact_home_header_type == "2" ||   //The type is NONE
+            ($sf_impact_home_header_type == "3" && $url == "") || //The type is DEFAULT 
+             ($sf_impact_home_header_type == "0"  && $sf_impact_header_image=="") ) { //The type is custom header
+                $isnoimage = TRUE;
+        }
+        echo $isnoimage;
+        if ($sf_impact_home_header_type == 1) {         //The type is slide show
+            $the_slide_query = sf_impact_slideshow_query(); //Make sure that there are slides
             if ($the_slide_query->post_count <= 0)
             { 
                 $sf_impact_home_header_type = 2;
                 $isnoimage = TRUE;
+                $the_slide_query = NULL;
             }
         }
 
 
-        if ($isnoimage === TRUE)
+        if ($isnoimage === TRUE) //If there is no image, then always put the logo on top and the menu on top
             {       
                $logo = "top"; //No Header Image
-                $menu = "above";                     
+               $menu = "above";                     
             }
-    } elseif (!$url) {
+    } elseif (!$url) { //This check only occurs on pages that are not the front page or home page
         $logo="top";
         $menu = "above";
     }
