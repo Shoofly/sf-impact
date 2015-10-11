@@ -54,15 +54,14 @@
   
     if ($homeimage) //This check is only going to happen for the home page or the front page
     {
-        echo $sf_impact_home_header_type;
-       echo $sf_impact_header_image;
+       
         //Check to see if there is no image. If there is no image, then the logo & menu are always on top
         if ($sf_impact_home_header_type == "2" ||   //The type is NONE
             ($sf_impact_home_header_type == "3" && $url == "") || //The type is DEFAULT 
              ($sf_impact_home_header_type == "0"  && $sf_impact_header_image=="") ) { //The type is custom header
                 $isnoimage = TRUE;
         }
-        echo $isnoimage;
+      
         if ($sf_impact_home_header_type == 1) {         //The type is slide show
             $the_slide_query = sf_impact_slideshow_query(); //Make sure that there are slides
             if ($the_slide_query->post_count <= 0)

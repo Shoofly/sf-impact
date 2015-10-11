@@ -71,11 +71,11 @@ function sf_impact_setup() {
             $defaultpath =        get_template_directory_uri() . '/images/';
             $defaultlogo = $defaultpath . "logo.png"; 
 
-            $defaultheader = $defaultpath . "impact.png";
-            $defaultheadertype = "0";
+            //$defaultheader = $defaultpath . "impact.png";
+            $defaultheadertype = "3";
 
             $sf_impact_Theme_Mods->setMod('header_textcolor','000099');      
-            $sf_impact_Theme_Mods->setMod('sf_impact_header_image', $defaultheader);
+          //  $sf_impact_Theme_Mods->setMod('sf_impact_header_image', $defaultheader);
             $sf_impact_Theme_Mods->setMod('sf_impact_logo_image', $defaultlogo);
             $sf_impact_Theme_Mods->setMod('sf_impact_logo_location', 'image');
             $sf_impact_Theme_Mods->setMod('sf_impact_home_header_type', $defaultheadertype);
