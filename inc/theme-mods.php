@@ -23,11 +23,11 @@ class sf_impact_Theme_Mods
         return self::$_this[$handle];
     }
     
-    public function setMod($key, $default) 
+    public function setMod($key, $val) 
     {
-        set_theme_mod($key, $default);
-        $this->setDefault($key, $default);
-        return $this->getMod($key, $default); 
+        set_theme_mod($key, $val);
+        
+        return $val;
     }
 
     public function setDefault($key, $default) 
