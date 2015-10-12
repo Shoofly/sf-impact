@@ -665,11 +665,11 @@ dd {
   display: none;
 }
 
-.headerimg .flexslider .slides.has-caption, .sfly-headerimg .flexslider .slides.has-caption {
+.headerimg .flexslider .slides.has_captions, .sfly-headerimg .flexslider .slides.has_captions {
   margin-bottom: 20px;
 }
 
-.headerimg .flexslider .slides.has-caption li p.flex-caption, .sfly-headerimg .flexslider .slides.has-caption li p.flex-caption {
+.headerimg .flexslider .slides.has_captions li p.flex-caption, .sfly-headerimg .flexslider .slides.has_captions li p.flex-caption {
   display: block;
 }
 
