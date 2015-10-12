@@ -564,27 +564,18 @@ if (!function_exists('sf_impact_home_category')):
 /*
 * Generate Style for the home page header 
 */
-if (!function_exists('sf_impact_get_home_header_style')):
-    function sf_impact_get_home_header_style()
-    {
-        global $sf_impact_Theme_Mods;
-            $sf_impact_header_height = $sf_impact_Theme_Mods->getMod( 'sf_impact_header_height' );
-            $sf_impact_header_width = $sf_impact_Theme_Mods->getMod( 'sf_impact_header_width' );
-            $style = sf_impact_get_home_header_width() . sf_impact_get_home_header_height();
-            return $style;
-    }
-endif;
-if (!function_exists('sf_impact_get_home_header_width')):
-    function sf_impact_get_home_header_width()
+
+if (!function_exists('sf_impact_get_home_header_class')):
+    function sf_impact_get_home_header_class()
     {
         global $sf_impact_Theme_Mods;
         $sf_impact_header_stretch = $sf_impact_Theme_Mods->getMod('sf_impact_header_stretch', true) ? TRUE : FALSE; 
         if ($sf_impact_header_stretch)
-            $style = "width:100%;";
+            $class = "sfly-img-stretch";
         else
-            $style="width:auto;";
+            $class="sfly-img-fit";
   
-        return $style;
+        return $class;
     }
 endif;
 if (!function_exists('sf_impact_get_home_header_height')):
@@ -678,23 +669,23 @@ if (!function_exists('sf_impact_homeheader')):
         if ($sf_impact_header_image && $sf_impact_logo_location == 'image')
             $top = FALSE;
   
-        $style = sf_impact_get_home_header_style();
+        $hstyle = sf_impact_get_home_header_height();
  
-    
+        $wclass = sf_impact_get_home_header_class();
    
          if ($sf_impact_home_header_type == "1")
          {     
-            $wstyle = sf_impact_get_home_header_width();
-            $hstyle = sf_impact_get_home_header_height();
-            sf_impact_get_slideshow($wstyle, $hstyle);
+        
+         
+            sf_impact_get_slideshow($wclass, $hstyle);
          }
          else 
          {
              if ($sf_impact_header_image && $sf_impact_home_header_type == "0")
              {
                 ?>
-                <div class="header-containter-home">
-                    <img class="headerimg headerimg-home" alt="header" style="<?php echo  $style?>;" src="<?php echo $sf_impact_header_image?>"/>
+                <div class="header-containter-home ">
+                    <img class="headerimg headerimg-home <?php echo $wclass?>" alt="header" style="<?php echo  $hstyle?>;" src="<?php echo $sf_impact_header_image?>"/>
                 </div>           
                 <?php 
                 $output = "";
@@ -991,42 +982,26 @@ endif;
 * $style - style for the slide show, height and width if not default
 */
 if (!function_exists('sf_impact_get_slideshow')):
-    function sf_impact_get_slideshow($the_query, $wstyle, $hstyle)
+    function sf_impact_get_slideshow($the_query, $wclass, $hstyle)
     {
         global $sf_impact_Theme_Mods;
           $format =  $sf_impact_Theme_Mods->getMod( 'sf_impact_slider_style' );
          
           $sf_impact_slider_captions = $sf_impact_Theme_Mods->getMod( 'sf_impact_slider_captions', TRUE) ;
           $istyle = "";
-          if ($wstyle) 
-          {
-                $fstyle = "style=$wstyle"; 
-                $istyle .= $wstyle;
-          }
-           else 
-                $fstyle="";
+  
            if ($hstyle)
            {
                 $fhstyle = "style=$hstyle";
-                $istyle .= $hstyle;
+              
            }
-            else
-                $fhstyle = "";
-
-            if ($istyle)
-            {
-             $istyle = "style=$istyle";   
-            }
+       
             ?>
 
          
-    		<div class="flexslider" > 
-		    <ul class="slides" <?php echo $istyle;?>>
-		   
-  
+    		<div class="flexslider"> 
+		    <ul class="slides <?php echo $wclass?>"  <?php echo $hstyle;?>>
                     <?php 
-                    
-                     
                      $sf_impact_slider_thumbnails = $sf_impact_Theme_Mods->getMod( 'sf_impact_slider_thumbnails', false) == TRUE ? "true" : "false";
                      while ( $the_query->have_posts() )  :$the_query->the_post();
                             $permalink = get_permalink();
@@ -1035,7 +1010,6 @@ if (!function_exists('sf_impact_get_slideshow')):
                             $image_id = get_post_thumbnail_id();
                             $image_atts = wp_get_attachment_image_src($image_id, "full", true);
                             $image_url = $image_atts[0] ;
-
                             $tnimage_atts = wp_get_attachment_image_src($image_id, "thumbnail", true);
                             $tnimage_url = $tnimage_atts[0];
                             if ($sf_impact_slider_thumbnails)
@@ -1047,8 +1021,8 @@ if (!function_exists('sf_impact_get_slideshow')):
                               
                                 $hid = "title" . $id;
                                 ?>
-                 	            <li <?php echo $datathumb?> <?php echo $istyle?> >
-		    		            <a href="<?php echo $permalink ?>"><img src="<?php echo $image_url?>" alt="<?php echo $title?>" <?php echo $istyle; ?>/>
+                 	            <li <?php echo $datathumb?> <?php echo $fstyle?> >
+		    		            <a href="<?php echo $permalink ?>"><img src="<?php echo $image_url?>" alt="<?php echo $title?>" <?php echo $fstyle; ?>/>
                                 <?php if ($sf_impact_slider_captions==true) { ?>
 		    		                <p class="flex-caption"><?php echo $title?></p>
 		    	                <?php } ?></a>
@@ -1683,15 +1657,15 @@ if (!function_exists('sf_impact_header')):
         if ($sf_impact_header_image && $sf_impact_logo_location == 'image')
             $top = FALSE;
             
-        $style = sf_impact_get_home_header_style();
+       
  
     
    
          if ($sf_impact_home_header_type == "1" && isset($the_slide_query))
          {     
-            $wstyle = sf_impact_get_home_header_width();
+            $wclass = sf_impact_get_home_header_class();
             $hstyle = sf_impact_get_home_header_height();
-            sf_impact_get_slideshow($the_slide_query, $wstyle, $hstyle);
+            sf_impact_get_slideshow($the_slide_query, $wclass, $hstyle);
          }
          else 
          {
