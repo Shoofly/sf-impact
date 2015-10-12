@@ -109,10 +109,13 @@ function sf_impact_setup() {
 	 */
 	add_theme_support( 'post-formats', array(
 		'aside',
-		'image',
+        'chat',
+		'gallery',
+        'image',
 		'video',
 		'quote',
 		'link',
+        
 	) );
 
 	// Set up the WordPress core custom background feature.
