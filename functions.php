@@ -1661,13 +1661,13 @@ if (!function_exists('sf_impact_header')):
             $top = FALSE;
             
        
- 
+         $wclass = sf_impact_get_home_header_class();
+         $hstyle = sf_impact_get_home_header_height();
     
    
          if ($sf_impact_home_header_type == "1" && isset($the_slide_query))
          {     
-            $wclass = sf_impact_get_home_header_class();
-            $hstyle = sf_impact_get_home_header_height();
+          
             sf_impact_get_slideshow($the_slide_query, $wclass, $hstyle);
          }
          else 
