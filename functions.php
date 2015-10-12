@@ -1676,7 +1676,7 @@ if (!function_exists('sf_impact_header')):
              {
                 ?>
 
-                <img class="headerimg headerimg-home" alt="header" style="<?php echo  $hstyle?>;" src="<?php echo $sf_impact_header_image?>"/>
+                <img class="headerimg headerimg-home <?php echo $wclass?>" alt="header" style="<?php echo  $hstyle?>;" src="<?php echo $sf_impact_header_image?>"/>
            
                 <?php 
                 $output = "";
