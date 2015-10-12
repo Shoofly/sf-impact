@@ -687,8 +687,8 @@ if (!function_exists('sf_impact_homeheader')):
              if ($sf_impact_header_image && $sf_impact_home_header_type == "0")
              {
                 ?>
-                <div class="header-containter-home ">
-                    <img class="headerimg headerimg-home <?php echo $wclass?>" alt="header" style="<?php echo  $hstyle?>!important;" src="<?php echo $sf_impact_header_image?>"/>
+                <div class="header-containter-home <?php echo $wclass?> ">
+                    <img class="headerimg headerimg-home" alt="header" style="<?php echo  $hstyle?>!important;" src="<?php echo $sf_impact_header_image?>"/>
                 </div>           
                 <?php 
                 $output = "";
