@@ -1021,8 +1021,8 @@ if (!function_exists('sf_impact_get_slideshow')):
                               
                                 $hid = "title" . $id;
                                 ?>
-                 	            <li <?php echo $datathumb?> <?php echo $fstyle?> >
-		    		            <a href="<?php echo $permalink ?>"><img src="<?php echo $image_url?>" alt="<?php echo $title?>" <?php echo $fstyle; ?>/>
+                 	            <li <?php echo $datathumb?> <?php echo $fhstyle?> >
+		    		            <a href="<?php echo $permalink ?>"><img src="<?php echo $image_url?>" alt="<?php echo $title?>" <?php echo $fhstyle; ?>/>
                                 <?php if ($sf_impact_slider_captions==true) { ?>
 		    		                <p class="flex-caption"><?php echo $title?></p>
 		    	                <?php } ?></a>
@@ -1035,7 +1035,7 @@ if (!function_exists('sf_impact_get_slideshow')):
                     ?> 
                 </ul><!--slides-->
                 </div><!--flexslider-->
-        
+                  
          <?php
     }
  endif;
