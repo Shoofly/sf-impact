@@ -987,12 +987,14 @@ endif;
 if (!function_exists('sf_impact_get_slideshow')):
     function sf_impact_get_slideshow($the_query, $wclass, $hstyle)
     {
-        global $sf_impact_Theme_Mods;
+          global $sf_impact_Theme_Mods;
           $format =  $sf_impact_Theme_Mods->getMod( 'sf_impact_slider_style' );
          
           $sf_impact_slider_captions = $sf_impact_Theme_Mods->getMod( 'sf_impact_slider_captions', TRUE) ;
           $istyle = "";
-  
+          if ($sf_impact_slider_captions) $wclass .= " has_captions";
+          $sf_impact_slider_navigation = $sf_impact_Theme_Mods->getMod('sf_impact_slider_navigation', FALSE);
+          if ($sf_impact_slider_navigation) $wclass .= " has_navigation";
            if ($hstyle)
            {
                 $fhstyle = "style=$hstyle";
