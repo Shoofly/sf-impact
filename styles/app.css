@@ -585,6 +585,9 @@ dd {
   width: 100%;
   display: block;
   margin: 0px auto;
+  text-align: center;
+  background-color: #F5F5F5;
+  background-image: 100;
 }
 
 .headerimg img, .sfly-headerimg img {
@@ -592,19 +595,19 @@ dd {
   display: block;
 }
 
-.headerimg.sfly-img-stretch, .sfly-headerimg.sfly-img-stretch {
+.headerimg .header-container-home.sfly-img-stretch, .sfly-headerimg .header-container-home.sfly-img-stretch {
   padding: 5px 0;
 }
 
-.headerimg.sfly-img-stretch img, .sfly-headerimg.sfly-img-stretch img {
+.headerimg .header-container-home.sfly-img-stretch img, .sfly-headerimg .header-container-home.sfly-img-stretch img {
   width: 100%;
 }
 
-.headerimg.sfly-img-fit, .sfly-headerimg.sfly-img-fit {
+.headerimg .header-container-home.sfly-img-fit, .sfly-headerimg .header-container-home.sfly-img-fit {
   padding: 5px 0;
 }
 
-.headerimg.sfly-img-fit img, .sfly-headerimg.sfly-img-fit img {
+.headerimg .header-container-home.sfly-img-fit img, .sfly-headerimg .header-container-home.sfly-img-fit img {
   width: auto;
   box-sizing: content-box;
   padding: 1px;
@@ -613,9 +616,9 @@ dd {
 
 .headerimg .flexslider, .sfly-headerimg .flexslider {
   margin: 0px auto;
-  display: block;
   padding: 0px;
   border: 0;
+  display: inline-block !important;
   background-color: transparent;
 }
 
