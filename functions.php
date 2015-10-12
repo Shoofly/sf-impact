@@ -992,9 +992,11 @@ if (!function_exists('sf_impact_get_slideshow')):
          
           $sf_impact_slider_captions = $sf_impact_Theme_Mods->getMod( 'sf_impact_slider_captions', TRUE) ;
           $istyle = "";
-          if ($sf_impact_slider_captions) $wclass .= " has-captions";
+          if ($sf_impact_slider_captions) 
+                $wclass .= " has-captions";
           $sf_impact_slider_navigation = $sf_impact_Theme_Mods->getMod('sf_impact_slider_navigation', FALSE);
-          if ($sf_impact_slider_navigation) $wclass .= " has-navigation";
+          if ($sf_impact_slider_navigation)
+           $wclass .= " has-navigation";
     
        
             ?>
