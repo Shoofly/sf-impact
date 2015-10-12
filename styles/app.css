@@ -665,11 +665,11 @@ dd {
   display: none;
 }
 
-.headerimg .flexslider .slides.has_captions, .sfly-headerimg .flexslider .slides.has_captions {
+.headerimg .flexslider .slides.has-captions, .sfly-headerimg .flexslider .slides.has-captions {
   margin-bottom: 20px;
 }
 
-.headerimg .flexslider .slides.has_captions li p.flex-caption, .sfly-headerimg .flexslider .slides.has_captions li p.flex-caption {
+.headerimg .flexslider .slides.has-captions li p.flex-caption, .sfly-headerimg .flexslider .slides.has-captions li p.flex-caption {
   display: block;
 }
 
@@ -1610,6 +1610,20 @@ footer {
     margin: 25px;
     clear: both;
   }
+  .highlight-right-text span.highlight-span h2, .highlight-left-text span.highlight-span h2 {
+    font-size: 1.5em;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  #content, #masthead, #innermasthead, .site-footer, #bottomwrapper {
+    width: 1200px;
+    margin: auto;
+  }
+  #topmasthead {
+    margin-bottom: 0;
+    padding-top: 25px;
+  }
 }
 
 @media only screen and (min-width: 391px) and (max-width: 750px) {
@@ -1619,16 +1633,6 @@ footer {
   }
   .fimage-center {
     padding: 5% 0 0 0;
-  }
-}
-
-@media only screen and (max-width: 390px) {
-  .fimage-title-large .title {
-    font-size: 90%;
-    line-height: 1.35em;
-  }
-  .fimage-center {
-    padding: 0 0 0 0;
   }
 }
 
@@ -1643,18 +1647,6 @@ footer {
 }
 
 @media only screen and (max-width: 800px) {
-  #site-logo-title {
-    max-width: 30%;
-  }
-}
-
-@media only screen and (max-width: 700px) {
-  #footersidebar .widget-footer {
-    width: 350px;
-    margin: auto;
-    display: block;
-    float: left;
-  }
   #site-logo-title {
     max-width: 30%;
   }
@@ -1826,17 +1818,6 @@ footer {
   }
 }
 
-@media only screen and (min-width: 1200px) {
-  #content, #masthead, #innermasthead, .site-footer, #bottomwrapper {
-    width: 1200px;
-    margin: auto;
-  }
-  #topmasthead {
-    margin-bottom: 0;
-    padding-top: 25px;
-  }
-}
-
 @media only screen and (max-width: 782px) {
   .skip-link {
     margin: 0 15px;
@@ -1851,35 +1832,100 @@ footer {
   .site-branding.fixed {
     margin-left: 15px;
   }
-  .primary-navigation a {
+  .sfly-headerimg {
+    min-height: 200px;
+  }
+  .sfly-headerimg .sfly-img-fit {
+    padding: 0px;
+  }
+  .sfly-headerimg .sfly-img-fit img {
+    padding: 0px;
+    border: 0px;
+  }
+  .highlight-right-img img.highlight-img, .highlight-left-img img.highlight-img {
+    width: 100%;
+    height: auto;
+  }
+  #primary-navigation a {
     float: left;
   }
-  #primary-menu {
+  #primary-navigation #primary-menu {
     padding: 0 25px;
     margin: 15px;
   }
-  #primary-menu a {
+  #primary-navigation #primary-menu .menu-item-has-children {
+    position: relative;
+  }
+  #primary-navigation #primary-menu a {
     border-bottom: 1px transparent solid;
   }
-  #primary-menu a:hover, #primary-menu a:focus {
+  #primary-navigation #primary-menu a:hover, #primary-navigation #primary-menu a:focus {
     border-bottom: 1px white solid;
   }
-  #primary-menu .menu-item .menu-item a, #primary-menu .menu-item .menu-item a:hover, #primary-menu .menu-item .menu-item a:focus {
+  #primary-navigation #primary-menu .menu-item .menu-item a, #primary-navigation #primary-menu .menu-item .menu-item a:hover, #primary-navigation #primary-menu .menu-item .menu-item a:focus {
     background-color: transparent;
   }
-  .primary-navigation ul li {
+  #primary-navigation #primary-menu .sub-menu {
+    box-shadow: none;
+  }
+  #primary-navigation ul li {
     float: left;
     clear: both;
+  }
+  #primary-navigation.toggled-on {
+    z-index: 1001;
+  }
+  #primary-navigation.toggled-on #primary-menu {
+    margin-left: 0px;
+    background: rgba(0, 0, 0, 0.8);
+    width: 100%;
+    position: absolute;
+    z-index: 1000;
+  }
+  #primary-navigation.toggled-on #primary-menu li {
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  #footersidebar .widget-footer {
+    width: 350px;
+    margin: auto;
+    display: block;
+    float: left;
+  }
+  #site-logo-title {
+    max-width: 30%;
+  }
+  .highlight-right-text span.highlight-span h2, .highlight-left-text span.highlight-span h2 {
+    font-size: 1.9em;
+  }
+  .highlight-right-img img.highlight-img, .highlight-left-img img.highlight-img {
+    width: auto;
+    height: 150px;
   }
 }
 
 @media only screen and (max-width: 480px) {
-  .site-info {
+  #page .site-info {
     display: block;
     float: left;
     margin-left: 15px;
   }
-  .site-info span, .site-info a {
+  #page .site-info span, #page .site-info a {
     float: left;
+  }
+  .highlight-right-text span.highlight-span h2, .highlight-left-text span.highlight-span h2 {
+    font-size: 1.5em;
+  }
+}
+
+@media only screen and (max-width: 390px) {
+  .fimage-title-large .title {
+    font-size: 90%;
+    line-height: 1.35em;
+  }
+  .fimage-center {
+    padding: 0 0 0 0;
   }
 }
