@@ -1000,8 +1000,8 @@ if (!function_exists('sf_impact_get_slideshow')):
             ?>
 
          
-    		<div class="flexslider" style="<?php echo $hstyle;?>"> 
-		    <ul class="slides <?php echo $wclass?>" style="<?php echo $hstyle;?>">
+    		<div class="flexslider"> 
+		    <ul class="slides <?php echo $wclass?>">
                     <?php 
                      $sf_impact_slider_thumbnails = $sf_impact_Theme_Mods->getMod( 'sf_impact_slider_thumbnails', false) == TRUE ? "true" : "false";
                      while ( $the_query->have_posts() )  :$the_query->the_post();
@@ -1022,7 +1022,7 @@ if (!function_exists('sf_impact_get_slideshow')):
                               
                                 $hid = "title" . $id;
                                 ?>
-                 	            <li <?php echo $datathumb?>  >
+                 	            <li <?php echo $datathumb?>  style="<?php echo $hstyle;?>">
 		    		            <a href="<?php echo $permalink ?>"><img src="<?php echo $image_url?>" alt="<?php echo $title?>" style="<?php echo $hstyle; ?>"/>
                                 <?php if ($sf_impact_slider_captions==true) { ?>
 		    		                <p class="flex-caption"><?php echo $title?></p>
