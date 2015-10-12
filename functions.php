@@ -653,59 +653,7 @@ if (!function_exists('sf_impact_slideshow_scripts')):
      }
  endif;
 
-/*
-* Main code for the Home Page Header
-*/
-if (!function_exists('sf_impact_homeheader')):
-    function sf_impact_homeheader()
-    {
-        global $sf_impact_Theme_Mods;
-        
-        $top = TRUE;
-      
-  
-        $sf_impact_header_image = $sf_impact_Theme_Mods->getMod( 'sf_impact_header_image' );
-        $sf_impact_logo_location = $sf_impact_Theme_Mods->getMod( 'sf_impact_logo_location' );
-        $sf_impact_home_header_type = $sf_impact_Theme_Mods->getMod( 'sf_impact_home_header_type' );
-     
-      
-        if ($sf_impact_header_image && $sf_impact_logo_location == 'image')
-            $top = FALSE;
-  
-        $hstyle = sf_impact_get_home_header_height();
- 
-        $wclass = sf_impact_get_home_header_class();
-   
-         if ($sf_impact_home_header_type == "1")
-         {     
-        
-         
-            sf_impact_get_slideshow($wclass, $hstyle);
-         }
-         else 
-         {
-             if ($sf_impact_header_image && $sf_impact_home_header_type == "0")
-             {
-                ?>
-                <div class="header-containter-home <?php echo $wclass?> ">
-                    <img class="headerimg headerimg-home" alt="header" style="<?php echo  $hstyle?>!important;" src="<?php echo $sf_impact_header_image?>"/>
-                </div>           
-                <?php 
-                $output = "";
-                $output = apply_filters('sf_impact_home_post_bar', $output);
-                if ( $output != '' )
-                {
-                    ?><div id="homepostbar">
-                    <?php
-                            echo $output;?>
-                    </div>
-                    <?php
-                }
-             }
-         }
-    
-    }
-endif;
+
 
 /*
 * Create the settings for the thumbnail grid array. 
@@ -1675,9 +1623,9 @@ if (!function_exists('sf_impact_header')):
              if ($sf_impact_header_image && $sf_impact_home_header_type == "0")
              {
                 ?>
-
-                <img class="headerimg headerimg-home <?php echo $wclass?>" alt="header" style="<?php echo  $hstyle?>;" src="<?php echo $sf_impact_header_image?>"/>
-           
+              <div class="header-containter-home <?php echo $wclass?> ">
+                <img class="headerimg headerimg-home" alt="header" style="<?php echo  $hstyle?>;" src="<?php echo $sf_impact_header_image?>"/>
+               </div>
                 <?php 
                 $output = "";
                 $output = apply_filters('sf_impact_home_post_bar', $output);
