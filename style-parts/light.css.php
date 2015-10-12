@@ -22,6 +22,11 @@ nav.navigation.posts-navigation {
     color: #0095CC;    
 }
 
+.primary-navigation.toggled-on .menu-toggle {
+    color: #008BC3;
+    outline: 0;    
+}
+
 .author-info {
 	background-color: white;
 }
