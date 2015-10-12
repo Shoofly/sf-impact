@@ -1002,8 +1002,8 @@ if (!function_exists('sf_impact_get_slideshow')):
             ?>
 
          
-    		<div class="flexslider"> 
-		    <ul class="slides <?php echo $wclass?>"  <?php echo $hstyle;?>>
+    		<div class="flexslider" style="<?php echo $hstyle;?>"> 
+		    <ul class="slides <?php echo $wclass?>" style="<?php echo $hstyle;?>">
                     <?php 
                      $sf_impact_slider_thumbnails = $sf_impact_Theme_Mods->getMod( 'sf_impact_slider_thumbnails', false) == TRUE ? "true" : "false";
                      while ( $the_query->have_posts() )  :$the_query->the_post();
@@ -1676,7 +1676,7 @@ if (!function_exists('sf_impact_header')):
              {
                 ?>
 
-                <img class="headerimg headerimg-home" alt="header" style="<?php echo  $style?>;" src="<?php echo $sf_impact_header_image?>"/>
+                <img class="headerimg headerimg-home" alt="header" style="<?php echo  $hstyle?>;" src="<?php echo $sf_impact_header_image?>"/>
            
                 <?php 
                 $output = "";
