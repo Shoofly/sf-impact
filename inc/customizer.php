@@ -52,6 +52,7 @@
       
           ));
           $this->sf_impact_generalOptions($wp_customize);
+          $this->sf_impact_postOptions($wp_customize);
           $this->sf_impact_thumbnailGridOptions($wp_customize);
           $this->sf_impact_homePageOptions($wp_customize);
           $this->sf_impact_sliderOptions($wp_customize);
@@ -91,7 +92,7 @@
   
         $wp_customize->add_setting( 'sf_impact_header_opacity', 
             array(
-                'default' => "1", 
+                'default' => "0", 
                 'type' => 'theme_mod', 
                 'capability' => 'edit_theme_options', 
                 'transport' => 'refresh', 
@@ -103,7 +104,8 @@
             'sf_impact_header_opacity', 
             array(
             'type' => 'range',
-            'label' => __( 'Header Background Opacity', 'sf-impact' ), 
+            'label' => __( 'Site Header Background Opacity', 'sf-impact' ), 
+            'description' => __('The background opacity for area above the header image & content', 'sf-impact'), 
             'section' => 'colors', 
             'settings' => 'sf_impact_header_opacity', 
             'min' => '0',
@@ -128,6 +130,7 @@
 	    'sf_impact_header_background_color', 
 	    array(
 		    'label'      => __( 'Site Header Background Color', 'sf-impact' ),
+            'descriptin' => __( ' The background color for the area above the header and content. ', 'sf-impact'),
 		    'section'    => 'colors',
 		    'settings'   => 'sf_impact_header_background',
 	    ) ) 
@@ -147,6 +150,7 @@
             array(
             'type' => 'range',
             'label' => __( 'Content Background Opacity', 'sf-impact' ), 
+            'description' => __('The background color opacity for site content', 'sf-impact'),
             'section' => 'colors', 
             'settings' => 'sf_impact_content_opacity', 
             'min' => '0',
@@ -172,6 +176,7 @@
 			    array(
 		            
 				    'label'      => __( 'Content Background Color', 'sf-impact' ),
+                    'description' => __('The background color for site content'),
 				    'section'    => 'colors',
 				    'settings'   => 'sf_impact_content_background',
 			    ) 
@@ -303,25 +308,29 @@
            
                 ) 
             ));
-            //Setting to show thumbnail excerpts
-            $wp_customize->add_setting( 'sf_impact_show_thumbnail_excerpt', 
+  
+ 
+          
+    }
+
+   function sf_impact_postOptions($wp_customize)
+    {
+            $wp_customize->add_section( 'sf_impact_post_options', 
                 array(
-                'default' => FALSE, 
-                'type' => 'theme_mod', 
-                'capability' => 'edit_theme_options', 
-                'transport' => 'refresh', 
-                'sanitize_callback' => 'sf_impact_sanitize_checkbox',
+                'title' => __( 'Post Options', 'sf-impact' ), //Visible title of section
+                'priority' => 1, //Determines what order this appears in
+                'capability' => 'edit_theme_options', //Capability needed to tweak
+                'description' => __('Custom post settings.', 'sf-impact'), //Descriptive tooltip
+                'panel' => 'sf_impact_panel',
                 ) 
-            );      
-            $wp_customize->add_control( 'sf_impact_show_thumbnail_excerpt', array(
-                'settings' => 'sf_impact_show_thumbnail_excerpt',
-                'label'    => __( 'Display the thumbnail on excerpts', 'sf-impact'),
-                'section'  => 'sf_impact_general_options',
-                'priority' => 10,
-                'type'     => 'checkbox',
-            ) );
-        
-            //Setting to show author
+            );
+           
+            $wp_customize->add_setting( "postlabel1", array(   'transport' => 'refresh', 'sanitize_callback' => 'sanitize_text_field') );
+
+             $wp_customize->add_control( new Arbitrary_Custom_Control($wp_customize,  "postlabel1",
+                    array('type' => "h3",  'label' =>__('Post Settings', 'sf-impact'), 'section' => 'sf_impact_post_options',  'settings' => "postlabel1", 'priority' => 10, ) ) );
+ 
+           //Setting to show author
             $wp_customize->add_setting( 'sf_impact_show_author', 
                 array(
                 'default' => true, 
@@ -334,67 +343,21 @@
             $wp_customize->add_control( 'sf_impact_show_author', array(
                 'settings' => 'sf_impact_show_author',
                 'label'    => __( 'Display author information on posts', 'sf-impact'),
-                'section'  => 'sf_impact_general_options',
+                'section'  => 'sf_impact_post_options',
                 'priority' => 10,
                 'type'     => 'checkbox',
-            ) );
-          
-            //Setting to show full posts or excerpts on archive pages
-            $wp_customize->add_setting( 'sf_impact_show_excerpt_archive_post', 
-                array(
-                'default' => TRUE, 
-                'type' => 'theme_mod', 
-                'capability' => 'edit_theme_options', 
-                'transport' => 'refresh', 
-                'sanitize_callback' => 'sf_impact_sanitize_checkbox',
-                ) 
-            );      
-            
-            $wp_customize->add_control( 'sf_impact_show_excerpt_archive_post', array(
-                'settings' => 'sf_impact_show_excerpt_archive_post',
-                'label'    => __( 'Display excerpts on archive pages', 'sf-impact'),
-                'section'  => 'sf_impact_general_options',
-                            'priority' => 10,
-                'type'     => 'checkbox',
-            ) );
-            //Setting to show full page or excerpts on blog pages
-            $wp_customize->add_setting( 'sf_impact_show_excerpt_blog_post', 
-                array(
-                'default' => TRUE, 
-                'type' => 'theme_mod', 
-                'capability' => 'edit_theme_options', 
-                'transport' => 'refresh', 
-                'sanitize_callback' => 'sf_impact_sanitize_checkbox'
-                ) 
-            );      
-            
-            $wp_customize->add_control( 'sf_impact_show_excerpt_blog_post', array(
-                'settings' => 'sf_impact_show_excerpt_blog_post',
-                'label'    => __( 'Display excerpts on the blog/home pages', 'sf-impact'),
-                'section'  => 'sf_impact_general_options',
-                            'priority' => 10,
-                'type'     => 'checkbox',
-            ) );
-                //Setting to show full posts or excerpts for sticky posts
-            $wp_customize->add_setting( 'sf_impact_show_full_sticky_post', 
-                array(
-                'default' => true, 
-                'type' => 'theme_mod', 
-                'capability' => 'edit_theme_options', 
-                'transport' => 'refresh', 
-                'sanitize_callback' => 'sf_impact_sanitize_checkbox',
-                ) 
-            );      
-            
-            $wp_customize->add_control( 'sf_impact_show_full_sticky_post', array(
-                'settings' => 'sf_impact_show_full_sticky_post',
-                'label'    => __( 'Display first sticky post as header', 'sf-impact'), 
-                'description' => __("If this option is selected, the first sticky post can be used as a header on your home page (or alternately your blog page if your front page is a static page') when posts are displayed as excerpts", 'sf-impact'),
-                'section'  => 'sf_impact_general_options',
-                            'priority' => 10,
-                'type'     => 'checkbox',
-            ) );   
-            //Setting to display sidebar on posts
+            ) ); 
+
+           $wp_customize->add_setting( "postlabel3", array(   'transport' => 'refresh', 'sanitize_callback' => 'sanitize_text_field') );
+
+           $wp_customize->add_control( new Arbitrary_Custom_Control($wp_customize,  "postlabel3",
+                    array('type' => "h3",  'label' => __('Default Post Settings', 'sf-impact'), 'section' => 'sf_impact_post_options',  'settings' => "postlabel3", 'priority' => 10, ) ) );
+ 
+           $wp_customize->add_setting( "postlabel4", array(   'transport' => 'refresh', 'sanitize_callback' => 'sanitize_text_field') );
+
+             $wp_customize->add_control( new Arbitrary_Custom_Control($wp_customize,  "postlabel4",
+                    array('type' => "text", 'style' => 'font-style:italic;',  'label' => __('The following settings are default settings for options that you choose while editing posts.', 'sf-impact'), 'section' => 'sf_impact_post_options',  'settings' => "postlabel4", 'priority' => 10, ) ) );
+           //Setting to display sidebar on posts
             $wp_customize->add_setting( 'sf_impact_post_sidebar', 
                 array(
                 'default' => FALSE, 
@@ -408,8 +371,7 @@
             $wp_customize->add_control( 'sf_impact_post_sidebar', array(
                 'settings' => 'sf_impact_post_sidebar',
                 'label'    => __( 'Display the sidebar on post pages', 'sf-impact'), 
-                'description' => __('This is a default setting that you can override for individual posts', 'sf-impact'),
-                'section'  => 'sf_impact_general_options',
+                'section'  => 'sf_impact_post_options',
                 'priority' => 10,
                 'type'     => 'checkbox',
             ) );
@@ -427,11 +389,18 @@
             $wp_customize->add_control( 'sf_impact_post_featured', array(
                 'settings' => 'sf_impact_post_featured',
                 'label'    => __( 'Display the featured image on posts', 'sf-impact'), 
-                'description' => __('This is a default setting. You change this for individual posts by clicking on the checkbox below the featured image and updating the post.', 'sf-impact'),
-                'section'  => 'sf_impact_general_options',
+                'section'  => 'sf_impact_post_options',
                 'priority' => 10,
                 'type'     => 'checkbox',
             ) );
+                       $wp_customize->add_setting( "postlabel6", array(   'transport' => 'refresh', 'sanitize_callback' => 'sanitize_text_field') );
+
+             $wp_customize->add_control( new Arbitrary_Custom_Control($wp_customize,  "postlabel6",
+                    array('type' => "h3",  'label' => __('Custom Post Header Images', 'sf-impact'), 'section' => 'sf_impact_post_options',  'settings' => "postlabel6", 'priority' => 10, ) ) );
+            $wp_customize->add_setting( "postlabel5", array(   'transport' => 'refresh', 'sanitize_callback' => 'sanitize_text_field') );
+
+             $wp_customize->add_control( new Arbitrary_Custom_Control($wp_customize,  "postlabel5",
+                    array('type' => "text", 'style' => 'font-style:italic;',  'label' => __('When you select to display the featured header on a post, you can elect to have it display in place of the header instead of above above the post & below the header.', 'sf-impact'), 'section' => 'sf_impact_post_options',  'settings' => "postlabel5", 'priority' => 10, ) ) );
             //Setting to featured image on posts
             $wp_customize->add_setting( 'sf_impact_post_header', 
                 array(
@@ -446,19 +415,109 @@
             $wp_customize->add_control( 'sf_impact_post_header', array(
                 'settings' => 'sf_impact_post_header',
                 'label'    => __( 'Display the featured image as the header on posts', 'sf-impact'), 
-                'description' => __('If you choose to display the featured image for any posts by using the checkbox below the featured image, this option will determine where they are displayed. If this option is selected, featured images will display in the header. If this option is not selected, featured images will display above the post and below the header if there is one.', 'sf-impact'),
-                'section'  => 'sf_impact_general_options',
+              
+                'section'  => 'sf_impact_post_options',
                 'priority' => 10,
                 'type'     => 'checkbox',
             ) );
+                                   $wp_customize->add_setting( "postlabel2", array(   'transport' => 'refresh', 'sanitize_callback' => 'sanitize_text_field') );
+
+                $wp_customize->add_control( new Arbitrary_Custom_Control($wp_customize,  "postlabel2",
+                    array('type' => "h3",   'label' => __('Post Lists', 'sf-impact'), 'section' => 'sf_impact_post_options',  'settings' => "postlabel2", 'priority' => 10, ) ) );
+ 
+ //'style'="font-style:italic"
+            //Setting to show thumbnail excerpts
+            $wp_customize->add_setting( 'sf_impact_show_thumbnail_excerpt', 
+                array(
+                'default' => FALSE, 
+                'type' => 'theme_mod', 
+                'capability' => 'edit_theme_options', 
+                'transport' => 'refresh', 
+                'sanitize_callback' => 'sf_impact_sanitize_checkbox',
+                ) 
+            );      
+            $wp_customize->add_control( 'sf_impact_show_thumbnail_excerpt', array(
+                'settings' => 'sf_impact_show_thumbnail_excerpt',
+                'label'    => __( 'Display the thumbnail on excerpts', 'sf-impact'),
+                'section'  => 'sf_impact_post_options',
+                'priority' => 10,
+                'type'     => 'checkbox',
+            ) );
+        
+ 
+          
+            //Setting to show full posts or excerpts on archive pages
+            $wp_customize->add_setting( 'sf_impact_show_excerpt_archive_post', 
+                array(
+                'default' => TRUE, 
+                'type' => 'theme_mod', 
+                'capability' => 'edit_theme_options', 
+                'transport' => 'refresh', 
+                'sanitize_callback' => 'sf_impact_sanitize_checkbox',
+                ) 
+            );      
+            
+            $wp_customize->add_control( 'sf_impact_show_excerpt_archive_post', array(
+                'settings' => 'sf_impact_show_excerpt_archive_post',
+                'label'    => __( 'Display excerpts on archive pages', 'sf-impact'),
+                'section'  => 'sf_impact_post_options',
+                            'priority' => 10,
+                'type'     => 'checkbox',
+            ) );
+            //Setting to show full page or excerpts on blog pages
+            $wp_customize->add_setting( 'sf_impact_show_excerpt_blog_post', 
+                array(
+                'default' => TRUE, 
+                'type' => 'theme_mod', 
+                'capability' => 'edit_theme_options', 
+                'transport' => 'refresh', 
+                'sanitize_callback' => 'sf_impact_sanitize_checkbox'
+                ) 
+            );      
+            
+            $wp_customize->add_control( 'sf_impact_show_excerpt_blog_post', array(
+                'settings' => 'sf_impact_show_excerpt_blog_post',
+                'label'    => __( 'Display excerpts on the blog/home pages', 'sf-impact'),
+                'section'  => 'sf_impact_post_options',
+                            'priority' => 10,
+                'type'     => 'checkbox',
+            ) );
+
+                                   $wp_customize->add_setting( "postlabel9", array(   'transport' => 'refresh', 'sanitize_callback' => 'sanitize_text_field') );
+
+                $wp_customize->add_control( new Arbitrary_Custom_Control($wp_customize,  "postlabel9",
+                    array('type' => "h3",   'label' => __('Custom Post Listing Sticky', 'sf-impact'), 'section' => 'sf_impact_post_options',  'settings' => "postlabel9", 'priority' => 10, ) ) );
+   
+                                    $wp_customize->add_setting( "postlabel8", array(   'transport' => 'refresh', 'sanitize_callback' => 'sanitize_text_field') );
+
+                $wp_customize->add_control( new Arbitrary_Custom_Control($wp_customize,  "postlabel8",
+                    array('type' => "text", 'style' => 'font-style:italic;',   'label' => __('You can use a sticky post as a header for your post listings when the listing displays excerpts.', 'sf-impact'), 'section' => 'sf_impact_post_options',  'settings' => "postlabel8", 'priority' => 10, ) ) );
+                //Setting to show full posts or excerpts for sticky posts
+            $wp_customize->add_setting( 'sf_impact_show_full_sticky_post', 
+                array(
+                'default' => true, 
+                'type' => 'theme_mod', 
+                'capability' => 'edit_theme_options', 
+                'transport' => 'refresh', 
+                'sanitize_callback' => 'sf_impact_sanitize_checkbox',
+                ) 
+            );      
+            
+            $wp_customize->add_control( 'sf_impact_show_full_sticky_post', array(
+                'settings' => 'sf_impact_show_full_sticky_post',
+                'label'    => __( 'Display first sticky post as full post', 'sf-impact'), 
+                'description' => __("", 'sf-impact'),
+                'section'  => 'sf_impact_post_options',
+                            'priority' => 10,
+                'type'     => 'checkbox',
+            ) );   
+ 
                     //Options to display posts on the home page
  
    
  
           
-    }
-
-  
+    }  
     function sf_impact_thumbnailGridOptions($wp_customize)
     {
         //Thumbnail Grid Options
@@ -712,7 +771,7 @@
                 new Arbitrary_Custom_Control(
                     $wp_customize,  "gridlabel",
                     array(
-                        'type' => "h2",  'label' => 'The Featured Image Thumbnail Plugin is required to use this feature.', 'section' => 'sf_impact_grid_options', 
+                        'type' => "h3",  'label' => __('The Featured Image Thumbnail Plugin is required to use this feature.', 'sf-impact'), 'section' => 'sf_impact_grid_options', 
                         'settings' => "gridlabel", 'priority' => 10, 
                     )
                 )
@@ -830,31 +889,39 @@
                 ) 
             ) );
             //Header width on home page 
-            $default = sprintf("%s", "100%");
-            $wp_customize->add_setting( 'sf_impact_header_width', 
+           
+            $wp_customize->add_setting( 'sf_impact_header_stretch', 
                 array(
-                'default' => "", 
+                'default' => true, 
                 'type' => 'theme_mod', 
                 'capability' => 'edit_theme_options', 
                 'transport' => 'refresh', 
-                'sanitize_callback' => 'esc_textarea'
+                'sanitize_callback' => 'sf_impact_sanitize_checkbox'
                 ) 
             );      
             
-     
+           $wp_customize->add_setting( "homelabel1", array(   'transport' => 'refresh', 'sanitize_callback' => 'sanitize_text_field') );
+
+            $wp_customize->add_control( new Arbitrary_Custom_Control($wp_customize,  "homelabel1",
+                    array('type' => "text", 'style' => 'font-style:italic',   'label' => __('Stretch the image when custom home page header or slideshow is selected.', 'sf-impact'), 'sf-impact', 'section' => 'sf_impact_home_posts',  'settings' => "homelabel1", 'priority' => 10, ) ) );    
             $wp_customize->add_control( new WP_Customize_Control (
    
                 $wp_customize, 
-                'sf_impact_header_width', 
+                'sf_impact_header_stretch', 
                 array(
-                'label' => __( 'Header width', 'sf-impact' ), 
-                    'description' => __('Width when home page header or slideshow is selected. If blank, the default (100%) will be used. Use a measurement (px, %, em)', 'sf-impact' ), 
-                'section' => 'sf_impact_home_options', 
-                'settings' => 'sf_impact_header_width', 
+                'label' => __( 'Stretch the header image?', 'sf-impact' ), 
+                 'section' => 'sf_impact_home_options', 
+                'settings' => 'sf_impact_header_stretch', 
                 'priority' => 10, 
-           
+                 'type' => 'checkbox',
+                 
+                 
                 ) 
             ) );
+           $wp_customize->add_setting( "homelabel2", array(   'transport' => 'refresh', 'sanitize_callback' => 'sanitize_text_field') );
+
+            $wp_customize->add_control( new Arbitrary_Custom_Control($wp_customize,  "homelabel2",
+                    array('type' => "text", 'style' => 'font-style:italic',   'label' => __('Check this option to display posts on the home page (this does not effect a static front page or blog page).', 'sf-impact'), 'sf-impact', 'section' => 'sf_impact_home_posts',  'settings' => "homelabel2", 'priority' => 10, ) ) );    
          //Setting to display posts on the home page    
             $wp_customize->add_setting( 'sf_impact_home_posts', 
                 array(
@@ -869,11 +936,15 @@
             $wp_customize->add_control( 'sf_impact_home_posts', array(
                 'settings' => 'sf_impact_home_posts',
                 'label'    => __( 'Display posts on the home page?', 'sf-impact' ), 
-                'description' => __('You can turn off the post section of the home page. This option does not apply to the  static front page', 'sf-impact'),
+             
                 'section'  => 'sf_impact_home_options',
                             'priority' => 10,
                 'type'     => 'checkbox',
             ) );      
+           $wp_customize->add_setting( "homelabel3", array(   'transport' => 'refresh', 'sanitize_callback' => 'sanitize_text_field') );
+
+            $wp_customize->add_control( new Arbitrary_Custom_Control($wp_customize,  "homelabel3",
+                    array('type' => "text", 'style' => 'font-style:italic',   'label' => __('You can display all posts or choose a single category in the dropdown box to display on the home page or alternately the blog page when a static front page is use.', 'sf-impact'),  'section' => 'sf_impact_home_posts',  'settings' => "homelabel3", 'priority' => 10, ) ) );     
             //Category for posts on the home page
             $wp_customize->add_setting( 'sf_impact_home_rp_categoryid', array(
                 'default'        => '0',
@@ -884,7 +955,7 @@
 
             ) );
             $wp_customize->add_control( new Category_Dropdown_Custom_Control( $wp_customize, 'sf_impact_home_rp_categoryid', array(
-                'label' => __('Home page post category', 'sf-impact'),
+                'label' => __('Post listing category', 'sf-impact'),
                 'description'   => __( 'You can display all posts or choose a single category in the dropdown box to display on the home page or alternately the blog page when a static front page is used ', 'sf-impact' ), 
                 'section' => 'sf_impact_home_options',
                 'settings'   => 'sf_impact_home_rp_categoryid',
@@ -905,7 +976,10 @@
                 'panel' => 'sf_impact_panel',
                 ) 
             ); 
-    
+          $wp_customize->add_setting( "slidelabel1", array(   'transport' => 'refresh', 'sanitize_callback' => 'sanitize_text_field') );
+
+            $wp_customize->add_control( new Arbitrary_Custom_Control($wp_customize,  "slidelabel1",
+                    array('type' => "text", 'style' => 'font-style:italic',   'label' => __('Create navigation for paging control of each clide? Note: Leave true for manualControls usage', 'sf-impact'), 'section' => 'sf_impact_slider_options',  'settings' => "slidelabel1", 'priority' => 10, ) ) );         
         $wp_customize->add_setting('sf_impact_slider_navigation', 
             array ('default' => false, 
             'type' => 'theme_mod',
@@ -916,11 +990,15 @@
         $wp_customize->add_control( 'sf_impact_slider_navigation', array(
             'settings' => 'sf_impact_slider_navigation',
             'label'    => __( 'Show navigation buttons', 'sf-impact'),
-            'description' => __('Create navigation for paging control of each clide? Note: Leave true for manualControls usage', 'sf-impact'),
+     
             'section'  => 'sf_impact_slider_options',
             'priority' => 10,
             'type'     => 'checkbox',
         ) );
+         $wp_customize->add_setting( "slidelabel2", array(   'transport' => 'refresh', 'sanitize_callback' => 'sanitize_text_field') );
+
+            $wp_customize->add_control( new Arbitrary_Custom_Control($wp_customize,  "slidelabel2",
+                    array('type' => "text", 'style' => 'font-style:italic',   'label' => __('navigation for previous/next navigation', 'sf-impact'),  'section' => 'sf_impact_slider_options',  'settings' => "slidelabel2", 'priority' => 10, ) ) );         
         $wp_customize->add_setting('sf_impact_slider_navdirection', 
             array ('default' => false, 
             'type' => 'theme_mod',
@@ -932,13 +1010,15 @@
         $wp_customize->add_control( 'sf_impact_slider_navdirection', array(
             'settings' => 'sf_impact_slider_navdirection',
             'label'    => __( 'Show direction navigation', 'sf-impact'),
-            'description' => __('navigation for previous/next navigation', 'sf-impact'),
             'section'  => 'sf_impact_slider_options',
             'priority' => 10,
             'type'     => 'checkbox',
         ) );
 
+         $wp_customize->add_setting( "slidelabel3", array(   'transport' => 'refresh', 'sanitize_callback' => 'sanitize_text_field') );
 
+            $wp_customize->add_control( new Arbitrary_Custom_Control($wp_customize,  "slidelabel3",
+                    array('type' => "text", 'style' => 'font-style:italic',   'label' => __('Allow slider navigating via keyboard left/right keys', 'sf-impact'),  'section' => 'sf_impact_slider_options',  'settings' => "slidelabel3", 'priority' => 10, ) ) );         
         $wp_customize->add_setting('sf_impact_slider_keyboard', 
             array ('default' => true, 
             'type' => 'theme_mod',
@@ -949,13 +1029,16 @@
         $wp_customize->add_control( 'sf_impact_slider_keyboard', array(
             'settings' => 'sf_impact_slider_keyboard',
             'label'    => __( 'Enable keyboard navigation', 'sf-impact'),
-            'description' => __('Allow slider navigating via keyboard left/right keys', 'sf-impact'),
-            'section'  => 'sf_impact_slider_options',
+           'section'  => 'sf_impact_slider_options',
             'priority' => 10,
             'type'     => 'checkbox',
         ) );
+           $wp_customize->add_setting( "slidelabel4", array(   'transport' => 'refresh', 'sanitize_callback' => 'sanitize_text_field') );
+
+            $wp_customize->add_control( new Arbitrary_Custom_Control($wp_customize,  "slidelabel4",
+                    array('type' => "text", 'style' => 'font-style:italic',   'label' =>  __(' Allow slider navigating via mousewheel', 'sf-impact'),   'section' => 'sf_impact_slider_options',  'settings' => "slidelabel4", 'priority' => 10, ) ) );         
         $wp_customize->add_setting('sf_impact_slider_mousewheel', 
-            array ('default' => true, 
+            array ('default' => false, 
             'type' => 'theme_mod',
             'capability' => 'edit_theme_options',
             'transport' => 'refresh',
@@ -964,11 +1047,15 @@
         $wp_customize->add_control( 'sf_impact_slider_mousewheel', array(
             'settings' => 'sf_impact_slider_mousewheel',
             'label'    => __( 'Enable mousewheel navigation', 'sf-impact'),
-            'description' => __(' Allow slider navigating via mousewheel', 'sf-impact'),
+     
             'section'  => 'sf_impact_slider_options',
             'priority' => 10,
             'type'     => 'checkbox',
         ) );
+         $wp_customize->add_setting( "slidelabel5", array(   'transport' => 'refresh', 'sanitize_callback' => 'sanitize_text_field') );
+
+            $wp_customize->add_control( new Arbitrary_Custom_Control($wp_customize,  "slidelabel5",
+                    array('type' => "text", 'style' => 'font-style:italic',   'label' =>  __(' Pause the slideshow when hovering over slider, then resume when no longer hovering', 'sf-impact'),   'section' => 'sf_impact_slider_options',  'settings' => "slidelabel5", 'priority' => 10, ) ) );         
         $wp_customize->add_setting('sf_impact_slider_pauseonhover', 
             array ('default' => false, 
             'type' => 'theme_mod',
@@ -979,7 +1066,6 @@
         $wp_customize->add_control( 'sf_impact_slider_pauseonhover', array(
             'settings' => 'sf_impact_slider_pauseonhover',
             'label'    => __( 'Pause on hover', 'sf-impact'),
-            'description' => __(' Pause the slideshow when hovering over slider, then resume when no longer hovering', 'sf-impact'),
             'section'  => 'sf_impact_slider_options',
             'priority' => 10,
             'type'     => 'checkbox',
@@ -1013,8 +1099,7 @@
             $wp_customize, 'sf_impact_slider_transition',
                 array(
                 'label' => __( 'Slide Show transition type', 'sf-impact' ), 
-                'description' => __('Select your animation type, "fade" or "slide"', 'sf-impact'),
-                'section' => 'sf_impact_slider_options', 
+                 'section' => 'sf_impact_slider_options', 
                 'settings' => 'sf_impact_slider_transition', 
                 'priority' => 10, 
                 'type' => 'select',
@@ -1037,8 +1122,7 @@
             $wp_customize, 'sf_impact_slider_direction',
                 array(
                 'label' => __( 'Slide Show direction', 'sf-impact' ),
-                'description' => __('Select the sliding direction, "horizontal" or "vertical"', 'sf-impact'),
-                'section' => 'sf_impact_slider_options', 
+                 'section' => 'sf_impact_slider_options', 
                 'settings' => 'sf_impact_slider_direction', 
                 'priority' => 10, 
                 'type' => 'select',
@@ -1048,6 +1132,7 @@
                 ) 
             )
             ));
+ 
            $wp_customize->add_setting('sf_impact_slider_automate', 
                 array ('default' => true, 
                 'type' => 'theme_mod',
@@ -1057,8 +1142,7 @@
         ));
         $wp_customize->add_control( 'sf_impact_slider_automate', array(
             'settings' => 'sf_impact_slider_automate',
-            'label'    => __( 'Show captions', 'sf-impact'),
-            'description' => __('Animate slider automatically', 'sf-impact'),
+            'label'    => __( 'Animate slider automatically', 'sf-impact'),
             'section'  => 'sf_impact_slider_options',
             'priority' => 10,
             'type'     => 'checkbox',
@@ -1233,7 +1317,10 @@
                 'panel' => 'sf_impact_panel',
                 ) 
             ); 
+        $wp_customize->add_setting( "hlabel6", array(   'transport' => 'refresh', 'sanitize_callback' => 'sanitize_text_field') );
 
+            $wp_customize->add_control( new Arbitrary_Custom_Control($wp_customize,  "hlabel6",
+                    array('type' => "text", 'style' => 'font-style:italic',   'label' =>  __('Turn on to display the featured highlight area.', 'sf-impact'),   'section' => 'sf_impact_highlight_options',  'settings' => "hlabel6", 'priority' => 10, ) ) );         
        //Setting to display featured highlights on the home page    
             $wp_customize->add_setting( 'sf_impact_home_featured_highlights', 
                 array(
@@ -1248,7 +1335,6 @@
             $wp_customize->add_control( 'sf_impact_home_featured_highlights', array(
                 'settings' => 'sf_impact_home_featured_highlights',
                 'label'    => __( 'Display featured highlights on the home page?', 'sf-impact' ), 
-                'description' => __('Turn on to display the featured highlight area.', 'sf-impact'),
                 'section'  => 'sf_impact_highlight_options',
                             'priority' => 10,
                 'type'     => 'checkbox',
@@ -1388,7 +1474,7 @@
                     $wp_customize,
                     "$label",
                     array(
-                        'type' => "h2",
+                        'type' => "h3",
                         'label' => $title, 
                         'section' => 'sf_impact_highlight_options', 
                         'settings' => "$label", 

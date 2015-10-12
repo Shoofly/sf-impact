@@ -14,7 +14,8 @@ class Arbitrary_Custom_Control extends WP_Customize_Control {
 
 	// Whitelist content parameter
 	public $content = '';
-
+    public $class = '';
+    public $style= '';
 	/**
 	 * Render the control's content.
 	 *
@@ -24,25 +25,31 @@ class Arbitrary_Custom_Control extends WP_Customize_Control {
 	 * @return  void
 	 */
 	public function render_content() {
-
+        if ($this->style != '')
+            $style = "style='$this->style'";
+        else
+            $style = "";
         switch ( $this->type ) {
-            default:
+             default:
             case 'text' :
-                echo '<p class="customize-control-text description">' . $this->label . '</p>';
+                echo "<p class='customize-control-text description' $style>$this->label</p>";
                 break;
+    
             case "h1":
             case "h2": 
             case "h3":
             case "h4":
             case "h5":
             case "h6":
-                echo "<$this->type class=customize-control-$this->type>" . esc_html( $this->label ) . "</$this->type>";
+                echo "<$this->type class=customize-control-$this->type $style>" . esc_html( $this->label ) . "</$this->type>";
                 break;
             case 'heading':
-                echo '<span class="customize-control-title">' . esc_html( $this->label ) . '</span>';
+                echo "<span class='customize-control-title' $style>" . esc_html( $this->label ) . '</span>';
                 break;
             case "line":
-             echo '<hr style="margin-top:15px;" />';
+            if ($style = '') $style="style='margin-top:15px;'";
+                
+             echo "<hr  $style />";
         
         }
     

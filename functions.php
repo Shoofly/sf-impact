@@ -192,7 +192,7 @@ function sf_impact_setup() {
         $sf_impact_Theme_Mods->setDefault( 'sf_impact_slider_navigation', FALSE );
         $sf_impact_Theme_Mods->setDefault( 'sf_impact_slider_navdirection', FALSE );
         $sf_impact_Theme_Mods->setDefault( 'sf_impact_slider_keyboard', true );
-        $sf_impact_Theme_Mods->setDefault( 'sf_impact_slider_mousewheel', true );
+        $sf_impact_Theme_Mods->setDefault( 'sf_impact_slider_mousewheel', false );
         $sf_impact_Theme_Mods->setDefault( 'sf_impact_slider_pauseonhover', false );
         
         //Highlight box mods 
@@ -578,14 +578,13 @@ if (!function_exists('sf_impact_get_home_header_width')):
     function sf_impact_get_home_header_width()
     {
         global $sf_impact_Theme_Mods;
-           
-            $sf_impact_header_width = $sf_impact_Theme_Mods->getMod( 'sf_impact_header_width' );
-            $style = "";
-            if ($sf_impact_header_width != '')
-                        $style .= "width:" . $sf_impact_header_width . "!important;";
-        
+        $sf_impact_header_stretch = $sf_impact_Theme_Mods->getMod('sf_impact_header_stretch', true) ? TRUE : FALSE; 
+        if ($sf_impact_header_stretch)
+            $style = "width:100%;";
+        else
+            $style="width:auto;";
   
-            return $style;
+        return $style;
     }
 endif;
 if (!function_exists('sf_impact_get_home_header_height')):
@@ -621,7 +620,7 @@ if (!function_exists('sf_impact_slideshow_scripts')):
         $sf_impact_slider_navigation = $sf_impact_Theme_Mods->getMod( 'sf_impact_slider_navigation', FALSE) == TRUE ? "true" : "false";
         $sf_impact_slider_navdirection = $sf_impact_Theme_Mods->getMod( 'sf_impact_slider_navdirection', FALSE) == TRUE ? "true" : "false";
         $sf_impact_slider_keyboard = $sf_impact_Theme_Mods->getMod( 'sf_impact_slider_keyboard', true) == TRUE ? "true" : "false";
-        $sf_impact_slider_mousewheel = $sf_impact_Theme_Mods->getMod( 'sf_impact_slider_mousewheel', true) == TRUE ? "true" : "false";
+        $sf_impact_slider_mousewheel = $sf_impact_Theme_Mods->getMod( 'sf_impact_slider_mousewheel', FALSE) == TRUE ? "true" : "false";
         $sf_impact_slider_pauseonhover = $sf_impact_Theme_Mods->getMod( 'sf_impact_slider_pauseonhover', false) == TRUE ? "true" : "false";
 
          ?>
@@ -696,9 +695,9 @@ if (!function_exists('sf_impact_homeheader')):
              if ($sf_impact_header_image && $sf_impact_home_header_type == "0")
              {
                 ?>
-
-                <img class="headerimg headerimg-home" alt="header" style="<?php echo  $style?>;" src="<?php echo $sf_impact_header_image?>"/>
-           
+                <div class="header-containter-home">
+                    <img class="headerimg headerimg-home" alt="header" style="<?php echo  $style?>;" src="<?php echo $sf_impact_header_image?>"/>
+                </div>           
                 <?php 
                 $output = "";
                 $output = apply_filters('sf_impact_home_post_bar', $output);
