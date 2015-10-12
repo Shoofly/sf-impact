@@ -11,12 +11,6 @@
 /**
  * Social Functions
  */
-
-define ('NOHEADER', 2);
-define ('DEFAULTHEADER', 3);
-define ('CUSTOMHEADER', 0);
-define ('SLIDEHEADER', 1);
-
 require get_template_directory() . '/inc/functions-social.php';
 
 /**
@@ -143,7 +137,7 @@ function sf_impact_setup() {
             $defaultlogo = $defaultpath . "logo.png"; 
 
             $defaultheader = $defaultpath . "impact.png";
-            $defaultheadertype = "3"; 
+            $defaultheadertype = "3"; //This should be 2
             $sf_impact_Theme_Mods->setMod('header_textcolor','000099');      
          //   $sf_impact_Theme_Mods->setMod('sf_impact_header_image', $defaultheader); //this should not be set
          
@@ -165,7 +159,7 @@ function sf_impact_setup() {
             $sf_impact_Theme_Mods->setMod('sf_impact_demo_data', FALSE);
           
         }
-        
+       
         //Color settings
         $sf_impact_Theme_Mods->setDefault( 'sf_impact_header_background', "#5b5b5b" );
         $sf_impact_Theme_Mods->setDefault( 'sf_impact_content_background', "#F5F5F5" );
@@ -223,7 +217,7 @@ function sf_impact_setup() {
         $sf_impact_Theme_Mods->setDefault( 'sf_impact_show_full_sticky_post', true );
         $sf_impact_Theme_Mods->setDefault( 'sf_impact_show_excerpt_archive_post', true );
         $sf_impact_Theme_Mods->setDefault( 'sf_impact_show_excerpt_blog_post', TRUE );
-        $sf_impact_Theme_Mods->setDefault( 'sf_impact_post_featured', false );
+        $sf_impact_Theme_Mods->setDefault( 'sf_impact_post_featured', TRUE );
         $sf_impact_Theme_Mods->setDefault( 'sf_impact_post_sidebar', FALSE );
         
         //Social settings
@@ -441,12 +435,11 @@ if (!function_exists('sf_impact_scripts')):
            wp_enqueue_style( '_sf_impact_header_styles' );
            if ($sf_impact_home_header_type == "1")
            {
-               
                 wp_register_style( 'flex_style', $themedir . '/flexslider/flexslider.css', array(), '2.5.0');
                 wp_enqueue_style("flex_style");
                 wp_register_script('flex_script', $themedir . '/flexslider/jquery.flexslider-min.js', array(), "2.5.0");
                 wp_enqueue_script('flex_script');
-                add_filter('wp_footer', 'sf_impact_slideshow_scripts');
+  
 
            }
         }
@@ -456,13 +449,16 @@ if (!function_exists('sf_impact_scripts')):
             wp_enqueue_script("thumbnail_grid_script");
         }
 
+	  //  wp_enqueue_style( 'shoofly-style', get_stylesheet_uri() );
 	    wp_enqueue_script( 'shoofly-navigation', get_template_directory_uri() . '/js/functions.js', array(), '20120206', true );
         wp_register_style('font_awesome', get_template_directory_uri() . "/font-awesome/css/font-awesome.min.css", '4.4');
         wp_enqueue_style('font_awesome');
+    /*	wp_enqueue_script( 'shoofly-skip-link-focus-fix', get_template_directory_uri() . '/js/skip-link-focus-fix.js', array(), '20130115', true );*/
 
 	    if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		    wp_enqueue_script( 'comment-reply' );
 	    }
+       // add_editor_style('style.css');
     }
 endif;
 add_action( 'wp_enqueue_scripts', 'sf_impact_scripts' );
@@ -665,8 +661,6 @@ if (!function_exists('sf_impact_slideshow_scripts')):
 if (!function_exists('sf_impact_homeheader')):
     function sf_impact_homeheader()
     {
-
-
         global $sf_impact_Theme_Mods;
         
         $top = TRUE;
@@ -727,29 +721,19 @@ endif;
 * $cellheight - not currently used
 */
 if (!function_exists('sf_impact_get_thumbnailarray')):
-    function sf_impact_get_thumbnailarray() 
+    function sf_impact_get_thumbnailarray($type, $category, $posts, $height, $width,  $imagesize, $cellwidth, $cellheight, $captionwidth, $gridwidth )
     {
-        global $sf_impact_Theme_Mods;      
-        $type = get_theme_mod('sf_impact_grid_type', 'post');
-        $gridwidth = "99%";
-        $posts = get_theme_mod( 'sf_impact_grid_posts', '4');
-        $height = get_theme_mod( 'sf_impact_grid_image_height',"" );
-        $width= get_theme_mod( 'sf_impact_grid_image_width',"" );
-         $cellwidth = get_theme_mod( 'sf_impact_grid_cell_width',  "" );
-         $cellheight = get_theme_mod( 'sf_impact_grid_cell_height', "");
-        $category = get_theme_mod( 'sf_impact_post_category', "");
-        $imagesize = get_theme_mod( 'sf_impact_image_size_name', 'thumbnail');
-        $captionwidth = $width;
-        $arra = array('post_type' => $type, 'posts_per_page' => $posts,  'aligngrid' => 'autocenter',   'imagesize' => $imagesize, 'cellwidth' => $cellwidth, 'cellheight'=>$cellheight, 'captionwidth' => $captionwidth, 'ignore_sticky_posts' => 1);
+    
+         $arra = array('post_type' => $type, 'posts_per_page' => $posts,  'aligngrid' => 'autocenter',   'imagesize' => $imagesize, 'cellwidth' => $cellwidth, 'cellheight'=>$cellheight, 'captionwidth' => $captionwidth, 'ignore_sticky_posts' => 1);
 
-        if ($height)
-            $arra['height'] = $height;
-        if ($width)
-            $arra['width'] = $width;
+           if ($height)
+                $arra['height'] = $height;
+            if ($width)
+                $arra['width'] = $width;
         if ($category)
                 $arra['cat']  = $category;
         if ($gridwidth)
-            $arra['gridwidth'] = "99%";
+            $arra['gridwidth'] = $gridwidth;
         return ($arra);
     }
 endif;
@@ -758,12 +742,8 @@ endif;
 */
 //Get thumbnail url
 if (!function_exists('sf_impact_get_thumbnailurl')):
-    function sf_impact_get_thumbnailurl()
+    function sf_impact_get_thumbnailurl($category, $page)
     {
-         global $sf_impact_Theme_Mods;      
-        $category = get_theme_mod( 'sf_impact_post_category', "");
-        $page = get_theme_mod('sf_impact_thumbnail_more_page', '');
-
         if ($category)
             $url = get_category_link($category);
         else
@@ -1320,8 +1300,8 @@ if ( is_admin() ) {
                 if ($post->post_type === 'post') {
                     $text = __( 'Don\'t display image in post.', 'sf-impact' );
       
-                    $defvalue = !$sf_impact_Theme_Mods->getMod( 'sf_impact_post_featured', false);
-       
+                    $defvalue = !$sf_impact_Theme_Mods->getMod( 'sf_impact_post_featured', TRUE);
+        
                     $meta = get_post_meta( $post->ID, "hide_featured_image", true );
                     $value = $meta != NULL ? $meta : $defvalue;
                 
