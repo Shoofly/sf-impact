@@ -399,6 +399,9 @@ if (!function_exists('sf_impact_scripts')):
         $custom_css .= '
             .home-highlight-boxes .highlight-span h2 {
                 color: #' . get_header_textcolor() . ';
+            }
+            .flexslider {
+                min-height: ' . $sf_impact_Theme_Mods->getMod('sf_impact_header_height') . ';
             }';
          
         wp_add_inline_style( 'sf_impact_theme_styles', $custom_css );

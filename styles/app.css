@@ -610,12 +610,31 @@ dd {
 }
 
 .headerimg .flexslider .flex-control-paging, .sfly-headerimg .flexslider .flex-control-paging {
-  bottom: -1px;
+  bottom: -6px;
   position: relative;
 }
 
 .headerimg .flexslider .flex-direction-nav a, .sfly-headerimg .flexslider .flex-direction-nav a {
   line-height: 1;
+}
+
+.headerimg .flexslider .slides.sfly-img-stretch, .sfly-headerimg .flexslider .slides.sfly-img-stretch {
+  padding: 5px 0;
+}
+
+.headerimg .flexslider .slides.sfly-img-stretch img, .sfly-headerimg .flexslider .slides.sfly-img-stretch img {
+  width: 100%;
+}
+
+.headerimg .flexslider .slides.sfly-img-fit, .sfly-headerimg .flexslider .slides.sfly-img-fit {
+  padding: 5px 0;
+}
+
+.headerimg .flexslider .slides.sfly-img-fit img, .sfly-headerimg .flexslider .slides.sfly-img-fit img {
+  width: auto;
+  box-sizing: content-box;
+  padding: 1px;
+  border: 1px solid black;
 }
 
 .headerimg .flexslider .slides li, .sfly-headerimg .flexslider .slides li {
@@ -640,6 +659,18 @@ dd {
   height: auto;
   visibility: visible;
   transition: visibility 0.5s height 5s;
+}
+
+.headerimg .flexslider .slides li p.flex-caption, .sfly-headerimg .flexslider .slides li p.flex-caption {
+  display: none;
+}
+
+.headerimg .flexslider .slides.has-caption, .sfly-headerimg .flexslider .slides.has-caption {
+  margin-bottom: 20px;
+}
+
+.headerimg .flexslider .slides.has-caption li p.flex-caption, .sfly-headerimg .flexslider .slides.has-caption li p.flex-caption {
+  display: block;
 }
 
 figure {
