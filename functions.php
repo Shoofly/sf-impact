@@ -589,7 +589,7 @@ if (!function_exists('sf_impact_get_home_header_height')):
             $style = "";
         
             if ($sf_impact_header_height)
-                    $style .= "height:" . $sf_impact_header_height . "!important;";
+                    $style .= "height:" . $sf_impact_header_height . ";";
             return $style;
     }
 endif;
@@ -688,7 +688,7 @@ if (!function_exists('sf_impact_homeheader')):
              {
                 ?>
                 <div class="header-containter-home ">
-                    <img class="headerimg headerimg-home <?php echo $wclass?>" alt="header" style="<?php echo  $hstyle?>;" src="<?php echo $sf_impact_header_image?>"/>
+                    <img class="headerimg headerimg-home <?php echo $wclass?>" alt="header" style="<?php echo  $hstyle?>!important;" src="<?php echo $sf_impact_header_image?>"/>
                 </div>           
                 <?php 
                 $output = "";
@@ -995,11 +995,7 @@ if (!function_exists('sf_impact_get_slideshow')):
           if ($sf_impact_slider_captions) $wclass .= " has-captions";
           $sf_impact_slider_navigation = $sf_impact_Theme_Mods->getMod('sf_impact_slider_navigation', FALSE);
           if ($sf_impact_slider_navigation) $wclass .= " has-navigation";
-           if ($hstyle)
-           {
-                $fhstyle = "style=$hstyle";
-              
-           }
+    
        
             ?>
 
@@ -1026,8 +1022,8 @@ if (!function_exists('sf_impact_get_slideshow')):
                               
                                 $hid = "title" . $id;
                                 ?>
-                 	            <li <?php echo $datathumb?> <?php echo $fhstyle?> >
-		    		            <a href="<?php echo $permalink ?>"><img src="<?php echo $image_url?>" alt="<?php echo $title?>" <?php echo $fhstyle; ?>/>
+                 	            <li <?php echo $datathumb?>  >
+		    		            <a href="<?php echo $permalink ?>"><img src="<?php echo $image_url?>" alt="<?php echo $title?>" style="<?php echo $hstyle; ?>"/>
                                 <?php if ($sf_impact_slider_captions==true) { ?>
 		    		                <p class="flex-caption"><?php echo $title?></p>
 		    	                <?php } ?></a>
