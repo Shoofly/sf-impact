@@ -1652,7 +1652,7 @@ if (!function_exists('sf_impact_header')):
              {
                 ?>
               <div class="header-container-home <?php echo $wclass?> ">
-                <img alt="header" style="<?php echo  $hstyle?>;" src="<?php echo $sf_impact_header_image?>"/>
+                <img class="headerimg" alt="header" style="<?php echo  $hstyle?>;" src="<?php echo $sf_impact_header_image?>"/>
                </div>
                 <?php 
                 $output = "";
