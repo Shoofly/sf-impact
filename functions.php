@@ -512,9 +512,8 @@ require get_template_directory() . '/inc/arbitrary-custom-control.php';         
 require get_template_directory() . '/inc/color-custom-control.php';                 //Color
 require get_template_directory() . '/inc/number-custom-control.php';                //Number & Range
 
-//Use the addin Advanced Excerpts for Excerpt display
-//Filters
 
+//Filters
 
 /**
 * Woo Commerce
@@ -542,26 +541,12 @@ endif;
 if (!function_exists('sf_impact_wrapper_end')):			
             				      
 
-function sf_impact_wrapper_end() {
+    function sf_impact_wrapper_end() {
   echo '		</main><!-- #main -->
 	</div><!-- #primary -->';
 }
 endif;
-/* 
-* Restrict WP_Query to category on the home page
-* Query - the query
-*/
-if (!function_exists('sf_impact_home_category')):                           
-  function sf_impact_home_category( $query ) {
-    global $sf_impact_Theme_Mods;
-    
-    $sf_impact_home_rp_categoryid = $sf_impact_Theme_Mods->getMod( 'sf_impact_home_rp_categoryid' );
-    if ( $query->is_home() && $query->is_main_query() ) {
-        $query->set( 'cat', $sf_impact_home_rp_categoryid );
-    }
-  }
-       
- endif;  
+
 
 //=========================================================Functions
 /*
@@ -593,9 +578,6 @@ if (!function_exists('sf_impact_get_home_header_height')):
             return $style;
     }
 endif;
-/* 
-* Custom Styles
-*/
 
 /*
 * Footer style for the home page if the header is a slideshow
@@ -652,9 +634,7 @@ if (!function_exists('sf_impact_slideshow_scripts')):
         <?php        
      }
  endif;
-
-
-
+ 
 /*
 * Create the settings for the thumbnail grid array. 
 * $type = page or post
@@ -739,12 +719,7 @@ if (!function_exists('sf_impact_get_highlightboxes')):
                 ${'sf_impact_highlight_text' . $x} = $sf_impact_Theme_Mods->getMod( 'sf_impact_highlight_text' . $x, '');
                 ${'sf_impact_highlight_link' . $x} = $sf_impact_Theme_Mods->getMod( 'sf_impact_highlight_link' . $x, '#');
             }
-
- 
-    
-    
          ?>
-    
             <div class="home-highlight-boxes fixed sfcenter">
                 <?php
              
@@ -760,23 +735,23 @@ if (!function_exists('sf_impact_get_highlightboxes')):
                         case ('L'):
                         {
                            if (${'sf_impact_highlight_image' . $x} != "")
-                           {    sf_impact_getHightlightImg(${'sf_impact_highlight_image' . $x}, "highlight-left-img highlight-img-$x", ${"sf_impact_highlight_text$x"});     
+                           {    sf_impact_genHightlightImg(${'sf_impact_highlight_image' . $x}, "highlight-left-img highlight-img-$x", ${"sf_impact_highlight_text$x"});     
                                 $class="highlight-right-text highlight-text-$x";
                             }
                             else
                             {
                                     $class="highlight-full highlight-text-$x";
                             }
-                            sf_impact_getHightlightText  (${"sf_impact_highlight_header$x"} ,  ${"sf_impact_highlight_text$x"}, $class); 
+                            sf_impact_genHightlightText  (${"sf_impact_highlight_header$x"} ,  ${"sf_impact_highlight_text$x"}, $class); 
                         break;
                         }
                         case ("T"):
                         {
                             if (${'sf_impact_highlight_image' . $x} != "")
                             {
-                                 sf_impact_getHightlightImg(${'sf_impact_highlight_image' . $x}, "highlight-top-img highlight-img-$x", ${"sf_impact_highlight_text$x"});
+                                 sf_impact_genHightlightImg(${'sf_impact_highlight_image' . $x}, "highlight-top-img highlight-img-$x", ${"sf_impact_highlight_text$x"});
                             }
-                             sf_impact_getHightlightText  (${"sf_impact_highlight_header$x"} ,  ${"sf_impact_highlight_text$x"}); 
+                             sf_impact_genHightlightText  (${"sf_impact_highlight_header$x"} ,  ${"sf_impact_highlight_text$x"}); 
                             break;
                          }        
                         case ("R"):
@@ -790,10 +765,10 @@ if (!function_exists('sf_impact_get_highlightboxes')):
                             {
                                     $class="highlight-full highlight-text-$x";
                             }
-                             sf_impact_getHightlightText  (${"sf_impact_highlight_header$x"} ,  ${"sf_impact_highlight_text$x"}, $class); 
+                             sf_impact_genHightlightText  (${"sf_impact_highlight_header$x"} ,  ${"sf_impact_highlight_text$x"}, $class); 
                             if (${'sf_impact_highlight_image' . $x} != "")
                             {        
-                                 sf_impact_getHightlightImg(${'sf_impact_highlight_image' . $x}, "highlight-right-img highlight-img-$x", ${"sf_impact_highlight_text$x"});    
+                                 sf_impact_genHightlightImg(${'sf_impact_highlight_image' . $x}, "highlight-right-img highlight-img-$x", ${"sf_impact_highlight_text$x"});    
                             }
                            break;
                     
@@ -825,8 +800,8 @@ endif;
 * $imagename - path to the image
 * $class - class for the img div (Image can be on top, left or right of box)
 */
-if (!function_exists('sf_impact_getHightlightImg')):
-    function sf_impact_getHightlightImg($imagename, $class, $alt)
+if (!function_exists('sf_impact_genHightlightImg')):
+    function sf_impact_genHightlightImg($imagename, $class, $alt)
     {
         ?>
             <div class="<?php echo $class?>">
@@ -841,8 +816,8 @@ endif;
 * $text - highlight description text
 * $class - div class (text can be below image, to the right or to the left)
 */ 
-if (!function_exists('sf_impact_getHightlightText')):
-    function sf_impact_getHightlightText($header, $text, $class="highlight-full")
+if (!function_exists('sf_impact_genHightlightText')):
+    function sf_impact_genHightlightText($header, $text, $class="highlight-full")
     {        
     ?>
         <div class="<?php echo $class?>"> 
@@ -902,7 +877,9 @@ if (!function_exists('sf_impact_is_home_page')):
        
     }
 endif;
-
+/*
+* Generate Query for the Slideshow
+*/
 if (!function_exists('sf_impact_slideshow_query')):
     function sf_impact_slideshow_query()
     {
@@ -930,7 +907,9 @@ if (!function_exists('sf_impact_slideshow_query')):
 endif;
 /*
 * HTML for the Home Page Slide Show
-* $style - style for the slide show, height and width if not default
+* $the_query - the query result 
+* $wclass - class fit or stretch
+* $hstyle - style for the slide show, height 
 */
 if (!function_exists('sf_impact_get_slideshow')):
     function sf_impact_get_slideshow($the_query, $wclass, $hstyle)
@@ -990,6 +969,9 @@ if (!function_exists('sf_impact_get_slideshow')):
          <?php
     }
  endif;
+ /*
+ * Query & display post list for the home page or the blog page
+ */
  if (!function_exists('sf_impact_home_query')):
  function sf_impact_home_query()
  {
@@ -1012,7 +994,7 @@ if (!function_exists('sf_impact_get_slideshow')):
  }
  endif;
  /*
- * Display the blog posts on the home page or the blog page when the home page is a static page
+ * Display the post list on the home page or the blog page 
  */
 if (!function_exists('sf_impact_posts')):
     function sf_impact_posts($the_query, $stickycount = 0)
@@ -1054,7 +1036,7 @@ if (!function_exists('sf_impact_posts')):
 	<?php endif; 
    }
 endif;
-//Utility Functions
+
 /*
 * Check to see if the full post should be displayed or the excerpt
 */
@@ -1082,6 +1064,9 @@ if ( ! function_exists( 'sf_impact_postContentFullPage' ) ) :
     }
 endif;
 
+// end functions
+
+//Utility Functions
 /*
 * Get the base current URL
 */
@@ -1148,9 +1133,6 @@ if ( ! function_exists('write_log')) {
 /*
 * Post Meta
 */
-
-
-
 /**
  * Calls the class on the post edit screen to create custom meta values
  */
@@ -1168,7 +1150,6 @@ if ( is_admin() ) {
  */
  if (!class_exists('sfly_post_meta')):
     class sfly_post_meta {
-
 	    /**
 	     * Hook into the appropriate actions when the class is constructed.
 	     */
@@ -1201,7 +1182,6 @@ if ( is_admin() ) {
 	     * @param int $post_id The ID of the post being saved.
 	     */
 	    public function save( $post_id ) {
-	
 		    /*
 		     * We need to verify this came from the our screen and with proper authorization,
 		     * because save_post can be triggered at other times.
@@ -1300,8 +1280,7 @@ if ( is_admin() ) {
                $this->createCheckbox("post_show_in_slideshow", "Include in Slide Show", TRUE);
             else
                 $this->createCheckbox("post_show_in_slideshow", "Include in Slide Show");
-                    
-	
+
 	    }
     }
 endif;
