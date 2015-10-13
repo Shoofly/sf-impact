@@ -16,7 +16,7 @@ $indexClass="site-main fullpage";
   <div id="wrap" class="page-full">
     <div id="primary" class="<?php $indexClass; ?>">
 	    <div id="main" class="<?php $indexClass; ?> content_16" role="main">
-
+        <?php sf_impact_thumbnail();?>
 	    <?php if ( have_posts() ) : ?>
 
 		    <?php /* Start the Loop */ ?>

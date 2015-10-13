@@ -15,19 +15,15 @@
     wp_head();
     $reghead = TRUE;
     $url = get_header_image();        //get the default header image
-    $sf_impact_post_header = get_theme_mod('sf_impact_post_header', false);
-    $sf_impact_post_featured = get_theme_mod('sf_impact_post_featured', true);
-    //If this is a post check to see if the option to use the featured image as the header is set and IF there is a
-    //featured image, use that instead of the default wordpress header
- 
-    if (is_single() && $sf_impact_post_header && $sf_impact_post_featured)
-    {
-             $image_id = get_post_thumbnail_id();
-             $image_atts = wp_get_attachment_image_src($image_id, "full", true);
-             if (isset($image_atts) && $image_atts[1] >= HEADER_IMAGE_WIDTH ) 
-                $url = $image_atts[0] ; //Replace the default header
-    } 
     
+    //If this is a post check to see if the option to use the featured image as the header is set and IF there is a
+
+    //featured image, use that instead of the default wordpress header
+    if (is_single()  || (is_page() && !is_front_page()))
+    {
+        $url = sf_impact_getCustomUrl($url);    
+  
+    }
                      
     //Get the settings for the header
     $sf_impact_logo_location = get_theme_mod('sf_impact_logo_location', 'image');

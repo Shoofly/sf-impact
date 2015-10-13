@@ -1206,7 +1206,9 @@ if ( is_admin() ) {
 		     * We need to verify this came from the our screen and with proper authorization,
 		     * because save_post can be triggered at other times.
 		     */
-
+            $this->updateCheckBox($post_id, "hide_featured_image");
+            if ( 'page' == $_POST['post_type'] ) 
+				    return $post_id;
 		    // Check if our nonce is set.
 		    if ( ! isset( $_POST['sf_impact_inner_custom_box_nonce'] ) )
             {
@@ -1214,9 +1216,6 @@ if ( is_admin() ) {
 			    return $post_id;
             }
      
-      
-            $this->updateCheckBox($post_id, "hide_featured_image");
-       
  
 		    $nonce = $_POST['sf_impact_inner_custom_box_nonce'];
 
@@ -1236,23 +1235,29 @@ if ( is_admin() ) {
 				    return $post_id;
 	
 		    } else {
-
-			    if ( ! current_user_can( 'edit_post', $post_id ) )
+              $this->updateCheckbox($post_id, "post_hide_sidebar");
+              $this->updateCheckbox($post_id, "post_show_in_slideshow");
+		      if ( ! current_user_can( 'edit_post', $post_id ) )
 				    return $post_id;
 		    }
-            $this->updateCheckbox($post_id, "post_hide_sidebar");
-            $this->updateCheckbox($post_id, "post_show_in_slideshow");
-	
-	        }
+ 		    
+	   }
 
         function add_image_meta( $content ) {
      
                 global $post, $sf_impact_Theme_Mods;
-                if ($post->post_type === 'post') {
-                    $text = __( 'Don\'t display image in post.', 'sf-impact' );
-      
-                    
-                    $defvalue = !$sf_impact_Theme_Mods->getMod( 'sf_impact_post_featured', false);
+                $posttype = $post->post_type;
+                if ($posttype === 'post' || $posttype=='page') {
+                    if ($posttype == 'post')
+                    {
+                        $text = __( "Don\'t display image in post", 'sf-impact' );
+                        $defvalue = !$sf_impact_Theme_Mods->getMod( 'sf_impact_post_featured', false);
+                    }
+                    else
+                    {
+                        $text = __( "Don\'t display image in page", 'sf-impact' );
+                        $defvalue = !$sf_impact_Theme_Mods->getMod( 'sf_impact_page_featured', false);
+                    }
                     $meta = get_post_meta( $post->ID, "hide_featured_image", true );
                     $value = $meta != NULL ? $meta : $defvalue;
                 
@@ -1300,6 +1305,29 @@ if ( is_admin() ) {
 	    }
     }
 endif;
+if (!function_exists('sf_impact_getCustomUrl')):
+function sf_impact_getCustomUrl($url)
+{
+      if (is_single()) {
+            $sf_impact_post_header = get_theme_mod('sf_impact_post_header', false);
+            $sf_impact_post_featured = get_theme_mod('sf_impact_post_featured', true);
+        } elseif (is_page()) {
+            $sf_impact_post_header = get_theme_mod('sf_impact_page_header', false);
+            $sf_impact_post_featured = get_theme_mod('sf_impact_page_featured', true);  
+        }        
+        echo $sf_impact_post_header;
+        echo $sf_impact_post_featured;
+        if (( $sf_impact_post_header && $sf_impact_post_featured) )
+        {
+                 $image_id = get_post_thumbnail_id();
+                 $image_atts = wp_get_attachment_image_src($image_id, "full", true);
+                 if (isset($image_atts) && $image_atts[1] >= HEADER_IMAGE_WIDTH ) 
+                    $url = $image_atts[0] ; //Replace the default header
+                   
+        }
+         return $url;
+}
+endif; 
 if (!class_exists('sf_impact_CustomLinkThemes')):
 {
     class sf_impact_CustomLinkThemes {

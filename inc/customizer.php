@@ -52,9 +52,10 @@
       
           ));
           $this->sf_impact_generalOptions($wp_customize);
-          $this->sf_impact_postOptions($wp_customize);
-          $this->sf_impact_thumbnailGridOptions($wp_customize);
           $this->sf_impact_homePageOptions($wp_customize);
+          $this->sf_impact_postOptions($wp_customize);
+          $this->sf_impact_pageOptions($wp_customize);
+          $this->sf_impact_thumbnailGridOptions($wp_customize);
           $this->sf_impact_sliderOptions($wp_customize);
           $this->sf_impact_socialMediaOptions($wp_customize);
           $this->sf_impact_highlightSettings($wp_customize);
@@ -312,7 +313,68 @@
  
           
     }
+function sf_impact_pageOptions($wp_customize)
+{
+                $wp_customize->add_setting( "pagelabel4", array(   'transport' => 'refresh', 'sanitize_callback' => 'sanitize_text_field') );
 
+             $wp_customize->add_control( new Arbitrary_Custom_Control($wp_customize,  "pagelabel4",
+                    array('type' => "text", 'style' => 'font-style:italic;',  'label' => __('This is a default setting. Yu can override it for individual pages.', 'sf-impact'), 'section' => 'sf_impact_page_options',  'settings' => "pagelabel4", 'priority' => 10, ) ) );
+
+               $wp_customize->add_section( 'sf_impact_page_options', 
+                array(
+                'title' => __( 'Page Options', 'sf-impact' ), //Visible title of section
+                'priority' => 1, //Determines what order this appears in
+                'capability' => 'edit_theme_options', //Capability needed to tweak
+                'description' => __('Custom page settings.', 'sf-impact'), //Descriptive tooltip
+                'panel' => 'sf_impact_panel',
+                ) 
+            );
+            //Setting to featured image on pages
+            $wp_customize->add_setting( 'sf_impact_page_featured', 
+                array(
+                'default' => false, 
+                'type' => 'theme_mod', 
+                'capability' => 'edit_theme_options', 
+                'transport' => 'refresh', 
+                'sanitize_callback' => 'sf_impact_sanitize_checkbox'
+                ) 
+            );      
+                   
+            $wp_customize->add_control( 'sf_impact_page_featured', array(
+                'settings' => 'sf_impact_page_featured',
+                'label'    => __( 'Display the featured image on pages', 'sf-impact'), 
+                'section'  => 'sf_impact_page_options',
+                'priority' => 10,
+                'type'     => 'checkbox',
+            ) );
+         $wp_customize->add_setting( "pagelabel6", array(   'transport' => 'refresh', 'sanitize_callback' => 'sanitize_text_field') );
+
+             $wp_customize->add_control( new Arbitrary_Custom_Control($wp_customize,  "pagelabel6",
+                    array('type' => "h3",  'label' => __('Custom Page Header Images', 'sf-impact'), 'section' => 'sf_impact_page_options',  'settings' => "pagelabel6", 'priority' => 10, ) ) );
+            $wp_customize->add_setting( "pagelabel5", array(   'transport' => 'refresh', 'sanitize_callback' => 'sanitize_text_field') );
+
+             $wp_customize->add_control( new Arbitrary_Custom_Control($wp_customize,  "pagelabel5",
+                    array('type' => "text", 'style' => 'font-style:italic;',  'label' => __('When you select to display the featured header on a page, you can elect to have it display in place of the header instead of above above the page & below the header.', 'sf-impact'), 'section' => 'sf_impact_page_options',  'settings' => "pagelabel5", 'priority' => 10, ) ) );
+            //Setting to featured image on pages
+            $wp_customize->add_setting( 'sf_impact_page_header', 
+                array(
+                'default' => false, 
+                'type' => 'theme_mod', 
+                'capability' => 'edit_theme_options', 
+                'transport' => 'refresh', 
+                'sanitize_callback' => 'sf_impact_sanitize_checkbox'
+                ) 
+            );      
+                   
+            $wp_customize->add_control( 'sf_impact_page_header', array(
+                'settings' => 'sf_impact_page_header',
+                'label'    => __( 'Display the featured image as the header on pages', 'sf-impact'), 
+              
+                'section'  => 'sf_impact_page_options',
+                'priority' => 10,
+                'type'     => 'checkbox',
+            ) );    
+}
    function sf_impact_postOptions($wp_customize)
     {
             $wp_customize->add_section( 'sf_impact_post_options', 

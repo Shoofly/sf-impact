@@ -26,7 +26,7 @@ get_header();
   <div id="wrap" class="page-default">
 	<div id="primary" class="content-area <?php echo $class?>">
 		<main id="main" class="site-main" role="main">
-        
+            <?php if (!is_front_page()) sf_impact_thumbnail();?>
 			<?php while ( have_posts() ) : the_post(); ?>
 
 				<?php get_template_part( 'template-parts/content', 'page' ); ?>
