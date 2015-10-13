@@ -137,8 +137,8 @@
                 if ( $url )
                 {
                     ?>
-                    <div class="header-containter-inner <?php echo $wclass?> ">
-                        <img class="headerimg headerimg-home" alt="header" style="<?php echo  $hstyle?>;" src="<?php echo $sf_impact_header_image?>"/>
+                    <div class="header-container-inner">
+                        <img class="headerimg headerimg-page" src="<?php echo header_image() ?>" height="<?php echo get_custom_header()->height; ?>" width="<?php echo get_custom_header()->width; ?>" alt="" />
                     </div><?php  
                 }
             }
