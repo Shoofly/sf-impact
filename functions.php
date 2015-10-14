@@ -222,6 +222,7 @@ function sf_impact_setup() {
         $sf_impact_Theme_Mods->setDefault( 'sf_impact_show_excerpt_archive_post', true );
         $sf_impact_Theme_Mods->setDefault( 'sf_impact_show_excerpt_blog_post', TRUE );
         $sf_impact_Theme_Mods->setDefault( 'sf_impact_post_featured', false );
+        $sf_impact_Theme_Mods->setDefault( 'sf_impact_page_featured', false );
         $sf_impact_Theme_Mods->setDefault( 'sf_impact_post_sidebar', FALSE );
         
         //Social settings
@@ -1156,23 +1157,29 @@ if ( is_admin() ) {
 	    public function __construct() {
 		    add_action( 'add_meta_boxes', array( $this, 'add_meta_box' ) );
 		    add_action( 'save_post', array( $this, 'save' ) );
-            add_filter( 'admin_post_thumbnail_html', array($this, 'add_image_meta' ));
+  
 	    }
 
 	    /**
 	     * Adds the meta box container.
 	     */
 	    public function add_meta_box( $post_type ) {
-                $post_types = array('post');     //limit meta box to certain post types
+            
+                $post_types = array('post', 'page');     //limit meta box to certain post types
                 if ( in_array( $post_type, $post_types )) {
-		    add_meta_box(
-			    'sfly_post_features'
-			    ,__( 'Post Settings', 'sf-impact' )
-			    ,array( $this, 'render_meta_box_content' )
-			    ,$post_type
-			    ,'side'
-			    ,'high'
-		    );
+                    if ($post_type == "post")
+                        $title =  __( 'Post Settings', 'sf-impact' );
+                    elseif ($post_type == "page")
+                        $title =  __( 'Page Settings', 'sf-impact' );
+		            add_meta_box(
+			                'sfly_post_features'
+			                , $title
+			                ,array( $this, 'render_meta_box_content' )
+			                ,$post_type
+			                ,'side'
+			                ,'high'
+		                );
+
                 }
 	    }
 
@@ -1186,9 +1193,7 @@ if ( is_admin() ) {
 		     * We need to verify this came from the our screen and with proper authorization,
 		     * because save_post can be triggered at other times.
 		     */
-            $this->updateCheckBox($post_id, "hide_featured_image");
-            if ( 'page' == $_POST['post_type'] ) 
-				    return $post_id;
+         global $post;
 		    // Check if our nonce is set.
 		    if ( ! isset( $_POST['sf_impact_inner_custom_box_nonce'] ) )
             {
@@ -1206,63 +1211,45 @@ if ( is_admin() ) {
 			    return $post_id;
             }
 		    // If this is an autosave, our form has not been submitted,
-                    //     so we don't want to do anything.
+            //     so we don't want to do anything.
 		    if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) 
 			    return $post_id;
-
-		    // Check the user's permissions.
-		    if ( 'page' == $_POST['post_type'] ) {
-				    return $post_id;
-	
-		    } else {
-              $this->updateCheckbox($post_id, "post_hide_sidebar");
-              $this->updateCheckbox($post_id, "post_show_in_slideshow");
-		      if ( ! current_user_can( 'edit_post', $post_id ) )
-				    return $post_id;
-		    }
- 		    
-	   }
-
-        function add_image_meta( $content ) {
      
-                global $post, $sf_impact_Theme_Mods;
-                $posttype = $post->post_type;
-                if ($posttype === 'post' || $posttype=='page') {
-                    if ($posttype == 'post')
-                    {
-                        $text = __( "Don\'t display image in post", 'sf-impact' );
-                        $defvalue = !$sf_impact_Theme_Mods->getMod( 'sf_impact_post_featured', false);
-                    }
-                    else
-                    {
-                        $text = __( "Don\'t display image in page", 'sf-impact' );
-                        $defvalue = !$sf_impact_Theme_Mods->getMod( 'sf_impact_page_featured', false);
-                    }
-                    $meta = get_post_meta( $post->ID, "hide_featured_image", true );
-                    $value = $meta != NULL ? $meta : $defvalue;
-                
-                     $label = '<label for="hide_featured_image" class="selectit">
-                        <input name="hide_featured_image" type="checkbox" id="hide_featured_image" ' . checked( $value, 1, false) .'> ' . $text .'
-                        </label>';
-                     $content .= $label;
-                }
-                return $content;
-            }
+             $posttype = get_post_type($post);
+         
+	        
+         
+              if ('post' == $posttype)
+              {
+                 if ( ! current_user_can( 'edit_posts', $post_id ) )
+				    return $post_id;
+                  $this->updateCheckbox($post_id, "post_hide_sidebar");
+                  $this->updateCheckbox($post_id, "post_show_in_slideshow");
+             
+		      }
+              else
+                    if ( ! current_user_can( 'edit_pages', $post_id ) )
+				    return $post_id;
+            
+		      $this->updateCheckBox($post_id, "show_featured_image");
+ 		  
+	   }
+ 
         public function updateCheckbox($post_id, $id)
         {
-           $value =  isset( $_POST[$id]) && $_POST[$id]  ? 1 : 0;
-     
-
+            $value =  isset( $_POST[$id]) && $_POST[$id]  ? 1 : 0;
+        
             update_post_meta( $post_id, esc_attr($id), $value ); //save value
         }
-         public function createCheckbox($id, $label, $default = NULL)
+         public function createCheckbox($id, $label, $newpost = FALSE,  $default = NULL)
          {
             global $post;
             if (!$default)
               $default = FALSE;
-            $meta = esc_attr( get_post_meta( $post->ID, $id, true ) );
-            $value = $meta != NULL ? $meta : $default;
- 
+            $meta = get_post_meta( $post->ID, $id, true ) ;
+  
+            $value = $newpost ? esc_attr($default) : esc_attr($meta);
+
             echo '<div><label for="' . $id . '" class="selectit"><input name="' . $id . '" type="checkbox" id="' . $id . '" value="' . $value . ' "'. checked( $value, 1, false) .'> ' . $label .'</label></div>';
 	    }
         /**
@@ -1273,15 +1260,34 @@ if ( is_admin() ) {
 	    public function render_meta_box_content( $post ) {
             global $sf_impact_Theme_Mods;
 		    // Add an nonce field so we can check for it later.
+             $posttype = get_post_type($post);
 		    wp_nonce_field( 'sf_impact_inner_custom_box', 'sf_impact_inner_custom_box_nonce' );
-            $defaultval = !$sf_impact_Theme_Mods->getMod( 'sf_impact_post_sidebar', FALSE);
-            $this->createCheckbox("post_hide_sidebar", "Hide Sidebar (Full Page)", $defaultval);
-            if (is_edit_page('new'))
-               $this->createCheckbox("post_show_in_slideshow", "Include in Slide Show", TRUE);
-            else
-                $this->createCheckbox("post_show_in_slideshow", "Include in Slide Show");
-
-	    }
+            $newpost = is_edit_page('new');
+            if ($posttype == "post")
+            {
+                $defaultval = !$sf_impact_Theme_Mods->getMod( 'sf_impact_post_sidebar', FALSE);
+                $this->createCheckbox("post_hide_sidebar", "Hide Sidebar (Full Page)", $newpost, $defaultval);
+                $this->createCheckbox("post_show_in_slideshow", "Include in Slide Show", $newpost, TRUE);
+            }
+           
+            if ($posttype === 'post' || $posttype=='page') {
+                if ($posttype == 'post')
+                {
+                    $text = __( "Display featured image in post", 'sf-impact' );
+                    $defvalue = $sf_impact_Theme_Mods->getMod( 'sf_impact_post_featured',  false);
+                }
+                else
+                {
+                    $text = __( "Display featured image in page", 'sf-impact' );
+                    $defvalue = $sf_impact_Theme_Mods->getMod( 'sf_impact_page_featured', false);
+                }
+               
+               
+                $this->createCheckbox("show_featured_image", $text, $newpost, $defvalue);
+                
+                
+        	}
+        }
     }
 endif;
 if (!function_exists('sf_impact_getCustomUrl')):
@@ -1294,8 +1300,7 @@ function sf_impact_getCustomUrl($url)
             $sf_impact_post_header = get_theme_mod('sf_impact_page_header', false);
             $sf_impact_post_featured = get_theme_mod('sf_impact_page_featured', true);  
         }        
-        echo $sf_impact_post_header;
-        echo $sf_impact_post_featured;
+     
         if (( $sf_impact_post_header && $sf_impact_post_featured) )
         {
                  $image_id = get_post_thumbnail_id();
