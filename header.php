@@ -24,7 +24,7 @@
         $url = sf_impact_getCustomUrl($url);    
   
     }
-                     
+                
     //Get the settings for the header
     $sf_impact_logo_location = get_theme_mod('sf_impact_logo_location', 'image');
     $sf_impact_menu_location = get_theme_mod('sf_impact_menu_location', 'above');
@@ -137,9 +137,9 @@
                 if ( $url )
                 {
                     ?>
-                    <div class="header-container-inner">
-                        <img class="headerimg headerimg-page" src="<?php echo header_image() ?>" height="<?php echo get_custom_header()->height; ?>" width="<?php echo get_custom_header()->width; ?>" alt="" />
-                    </div><?php  
+            
+                    <img class="headerimg headerimg-page" src="<?php echo $url ?>" height="<?php echo get_custom_header()->height; ?>" width="<?php echo get_custom_header()->width; ?>" alt="" />
+                <?php  
                 }
             }
             else

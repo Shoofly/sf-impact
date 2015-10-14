@@ -308,16 +308,15 @@ if (!function_exists('sf_impact_thumbnail')):
      }
      else
      {
-         $sf_impact_post_featured = get_theme_mod('sf_impact_page_featured', true);
-        $sf_impact_post_header = get_theme_mod('sf_impact_page_header', false); //Check if this should go in the header instead         
+       $sf_impact_post_featured = get_theme_mod('sf_impact_page_featured', true);
+        $sf_impact_post_header = get_theme_mod('sf_impact_page_header', false); 
      }
-    if ($sf_impact_post_header)
+    if ($sf_impact_post_header)  //This is going to go into the header instead
         return;
-   
-    $hide_featured = !$sf_impact_post_featured;
-    $id = 'hide_featured_image';
-         $hidethumb = esc_attr( get_post_meta( $post->ID, $id, true ) ) != NULL ? esc_attr( get_post_meta( $post->ID, $id, true ) ) : $hide_featured;
-         if (!$hidethumb):
+    $meta = get_post_meta( $post->ID, 'show_featured_image', $sf_impact_post_featured  ) ;
+ 
+    $showthumb = esc_attr( get_post_meta( $post->ID, 'show_featured_image', true ) ) != NULL ? esc_attr( get_post_meta( $post->ID, 'show_featured_image', true ) ) :  $sf_impact_post_featured;;
+         if ($showthumb):
      
      ?>
         <div class="post_img">
