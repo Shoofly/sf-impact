@@ -8,7 +8,7 @@
  */
 ?>
 <?php   
-require_once ( dirname(__DIR__) . "/inc/theme-mods.php" );
+require_once ( get_template_directory() . "/inc/theme-mods.php" );
 
 $sf_impact_Theme_Mods = sf_impact_Theme_Mods::get_instance('sf_impact');
 
