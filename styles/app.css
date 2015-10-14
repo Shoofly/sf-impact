@@ -1881,8 +1881,12 @@ footer {
     float: left;
   }
   #primary-navigation #primary-menu {
-    padding: 0 25px;
+    padding: 10 25px 0px 25px;
     margin: 15px;
+    z-index: 20;
+  }
+  #primary-navigation #primary-menu button.menu-toggle {
+    z-index: 21;
   }
   #primary-navigation #primary-menu .menu-item-has-children {
     position: relative;
@@ -1903,15 +1907,13 @@ footer {
     float: left;
     clear: both;
   }
-  #primary-navigation.toggled-on {
-    z-index: 1001;
-  }
   #primary-navigation.toggled-on #primary-menu {
+    padding: 10px 25px 0px 25px;
+    margin-top: 10px;
     margin-left: 0px;
-    background: rgba(0, 0, 0, 0.8);
     width: 100%;
-    position: absolute;
-    z-index: 1000;
+    position: relative;
+    z-index: 20;
   }
   #primary-navigation.toggled-on #primary-menu li {
     width: 100%;

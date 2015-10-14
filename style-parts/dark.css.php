@@ -23,10 +23,6 @@ nav.navigation.posts-navigation {
 	background-color: white;
 }
 
-.sfly-headerimg {
-    background-color: transparent; 
-}
-
 #comments {
   background-color: rgba(255,255,255,0.7);
 }

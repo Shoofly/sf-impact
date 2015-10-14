@@ -395,6 +395,9 @@ if (!function_exists('sf_impact_scripts')):
         
         ob_start();
         include( $linkTheme->getCustomThemePath($custom_style) );
+        
+        $menuhex = $sf_impact_Theme_Mods->getMod('sf_impact_content_background');
+        
         $custom_css = ob_get_clean();
         
         $custom_css .= '
