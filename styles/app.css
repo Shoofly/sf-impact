@@ -598,6 +598,7 @@ dd {
 }
 
 .sfly-headerimg .header-container-home.sfly-img-stretch {
+  width: 100%;
   padding: 0px;
 }
 
@@ -606,6 +607,7 @@ dd {
 }
 
 .sfly-headerimg .header-container-home.sfly-img-fit {
+  width: auto;
   padding: 5px 0;
 }
 
@@ -643,6 +645,7 @@ dd {
 }
 
 .sfly-headerimg .flexslider .slides.sfly-img-stretch {
+  width: 100%;
   padding: 0px;
 }
 
@@ -651,6 +654,7 @@ dd {
 }
 
 .sfly-headerimg .flexslider .slides.sfly-img-fit {
+  width: auto;
   padding: 5px 0;
 }
 
@@ -1856,6 +1860,9 @@ footer {
   .site-branding.fixed {
     margin-left: 15px;
   }
+  .sfly-headerimg {
+    background: transparent;
+  }
   .sfly-headerimg, .sfly-headerimg .flexslider {
     min-height: 200px;
   }
@@ -1874,8 +1881,12 @@ footer {
     float: left;
   }
   #primary-navigation #primary-menu {
-    padding: 0 25px;
+    padding: 10 25px 0px 25px;
     margin: 15px;
+    z-index: 20;
+  }
+  #primary-navigation #primary-menu button.menu-toggle {
+    z-index: 21;
   }
   #primary-navigation #primary-menu .menu-item-has-children {
     position: relative;
@@ -1896,15 +1907,13 @@ footer {
     float: left;
     clear: both;
   }
-  #primary-navigation.toggled-on {
-    z-index: 1001;
-  }
   #primary-navigation.toggled-on #primary-menu {
+    padding: 10px 25px 0px 25px;
+    margin-top: 10px;
     margin-left: 0px;
-    background: rgba(0, 0, 0, 0.8);
     width: 100%;
-    position: absolute;
-    z-index: 1000;
+    position: relative;
+    z-index: 20;
   }
   #primary-navigation.toggled-on #primary-menu li {
     width: 100%;

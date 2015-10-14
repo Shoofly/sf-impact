@@ -31,10 +31,6 @@ nav.navigation.posts-navigation {
 	background-color: white;
 }
 
-.sfly-headerimg {
-    background-color: transparent;
-}
-
 #content {
 	background: whitesmoke;
 	color: #3a3a3a; 
@@ -190,6 +186,7 @@ h1, h3, h4, h5, h6 {
 #shoofly-footer {
     color: #008BC3;
 }
+
 @media only screen and (max-width: 782px) {
     #primary-menu a:hover, #primary-menu a:focus {
         border-bottom-color: #9a9ac1;

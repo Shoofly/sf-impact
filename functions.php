@@ -395,6 +395,9 @@ if (!function_exists('sf_impact_scripts')):
         
         ob_start();
         include( $linkTheme->getCustomThemePath($custom_style) );
+        
+        $menuhex = $sf_impact_Theme_Mods->getMod('sf_impact_content_background');
+        
         $custom_css = ob_get_clean();
         
         $custom_css .= '
@@ -1305,10 +1308,13 @@ function sf_impact_getCustomUrl($url)
      
         if (( $sf_impact_post_header && $meta) )
         {
-                 $image_id = get_post_thumbnail_id();
-                 $image_atts = wp_get_attachment_image_src($image_id, "full", true);
-                 if (isset($image_atts) && $image_atts[1] >= HEADER_IMAGE_WIDTH ) 
-                    $url = $image_atts[0] ; //Replace the default header
+             $image_id = get_post_thumbnail_id();
+             $image_atts = wp_get_attachment_image_src($image_id, "full", true);
+             
+             if (isset($image_atts) && $image_atts[1] >= HEADER_IMAGE_WIDTH ) {
+                $url = $image_atts[0] ; //Replace the default header
+
+             }
                    
         }
          return $url;
