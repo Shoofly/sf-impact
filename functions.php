@@ -1361,7 +1361,7 @@ if (!class_exists('sf_impact_CustomLinkThemes')):
                 $dir = get_stylesheet_directory();
                 $uri = get_stylesheet_directory_uri();
             } else {
-                throw new \Exception ('Incorrect usage, should be const::parent or const::child');
+                die('Incorrect usage, should be const::parent or const::child');
             }
             if(is_dir( $dir )) {
                 $files = scandir( $dir . $folder );
