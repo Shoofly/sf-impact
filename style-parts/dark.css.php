@@ -24,8 +24,7 @@ nav.navigation.posts-navigation {
 }
 
 .sfly-headerimg {
-    background-color: <?php echo $sf_impact_Theme_Mods->getMod( 'sf_impact_content_background' );  ?>;
-    background-image: <?php echo $sf_impact_Theme_Mods->getMod( 'sf_impact_content_opacity' ); ?>;  
+    background-color: transparent; 
 }
 
 #comments {
