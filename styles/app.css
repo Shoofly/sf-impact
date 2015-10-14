@@ -598,6 +598,7 @@ dd {
 }
 
 .sfly-headerimg .header-container-home.sfly-img-stretch {
+  width: 100%;
   padding: 0px;
 }
 
@@ -606,6 +607,7 @@ dd {
 }
 
 .sfly-headerimg .header-container-home.sfly-img-fit {
+  width: auto;
   padding: 5px 0;
 }
 
@@ -643,6 +645,7 @@ dd {
 }
 
 .sfly-headerimg .flexslider .slides.sfly-img-stretch {
+  width: 100%;
   padding: 0px;
 }
 
@@ -651,6 +654,7 @@ dd {
 }
 
 .sfly-headerimg .flexslider .slides.sfly-img-fit {
+  width: auto;
   padding: 5px 0;
 }
 
