@@ -138,7 +138,7 @@
                 {
                     ?>
                     <div class="header-container-inner">
-                        <img class="headerimg headerimg-page" src="<?php echo header_image() ?>" height="<?php echo get_custom_header()->height; ?>" width="<?php echo get_custom_header()->width; ?>" alt="" />
+                        <img class="headerimg headerimg-page" src="<?php echo $url; ?>" alt="" />
                     </div><?php  
                 }
             }

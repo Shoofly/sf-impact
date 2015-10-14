@@ -1303,10 +1303,13 @@ function sf_impact_getCustomUrl($url)
      
         if (( $sf_impact_post_header && $sf_impact_post_featured) )
         {
-                 $image_id = get_post_thumbnail_id();
-                 $image_atts = wp_get_attachment_image_src($image_id, "full", true);
-                 if (isset($image_atts) && $image_atts[1] >= HEADER_IMAGE_WIDTH ) 
-                    $url = $image_atts[0] ; //Replace the default header
+             $image_id = get_post_thumbnail_id();
+             $image_atts = wp_get_attachment_image_src($image_id, "full", true);
+             
+             if (isset($image_atts) && $image_atts[1] >= HEADER_IMAGE_WIDTH ) {
+                $url = $image_atts[0] ; //Replace the default header
+                echo $url;
+             }
                    
         }
          return $url;
