@@ -60,6 +60,61 @@
           $this->sf_impact_socialMediaOptions($wp_customize);
           $this->sf_impact_highlightSettings($wp_customize);
 
+
+            //Setting and control or the Logo Image
+  
+
+            $wp_customize->add_setting( 'sf_impact_logo_image', 
+                array(
+                'default' => $sf_impact_Theme_Mods->getMod('sf_impact_logo_image'),
+                'type' => 'theme_mod', 
+                'capability' => 'edit_theme_options', 
+                'transport' => 'refresh', 
+                'sanitize_callback' => 'sf_impact_sanitize_image'
+                ) 
+            );      
+            
+  
+        
+            $wp_customize->add_control( new WP_Customize_Image_Control(
+   
+                $wp_customize, 
+                'sf_impact_logo_image', 
+                array(
+                'label' => __( 'Logo', 'sf-impact' ), 
+                'section' => 'title_tagline', 
+                'settings' => 'sf_impact_logo_image', 
+                'priority' => 10, 
+                ) 
+            ) );
+
+            //Setting for Logo or title location above or on image (if there is an image)               
+            $wp_customize->add_setting( 'sf_impact_logo_location', 
+                array(
+                'default' => "image", 
+                'type' => 'theme_mod', 
+                'capability' => 'edit_theme_options', 
+                'transport' => 'refresh', 
+                'sanitize_callback' => 'sf_impact_sanitize_select'
+                ) 
+            );      
+
+            $wp_customize->add_control( new WP_Customize_Control ( //TODO Not Working!
+   
+                $wp_customize, 
+                'sf_impact_logo_location', 
+                array(
+                'label' => __( 'Where should the logo or site title displayed?', 'sf-impact' ), 
+                'section' => 'title_tagline', 
+                'settings' => 'sf_impact_logo_location', 
+                'priority' => 10, 
+                'type'     => 'radio',
+		    'choices'  => array(
+			    'image'  => __('On top of header images', 'sf-impact'),
+			    'top' => __('Above header images', 'sf-impact'),
+                )
+                ) 
+            ) );   
         $wp_customize->add_setting( 'sf_impact_color_theme',
             array(
     	        'default' 		=> 'light',
@@ -203,60 +258,7 @@
            
            
  
-            //Setting and control or the Logo Image
-  
 
-            $wp_customize->add_setting( 'sf_impact_logo_image', 
-                array(
-                'default' => '',
-                'type' => 'theme_mod', 
-                'capability' => 'edit_theme_options', 
-                'transport' => 'refresh', 
-                'sanitize_callback' => 'sf_impact_sanitize_image'
-                ) 
-            );      
-            
-  
-        
-            $wp_customize->add_control( new WP_Customize_Image_Control(
-   
-                $wp_customize, 
-                'sf_impact_logo_image', 
-                array(
-                'label' => __( 'Logo', 'sf-impact' ), 
-                'section' => 'sf_impact_general_options', 
-                'settings' => 'sf_impact_logo_image', 
-                'priority' => 10, 
-                ) 
-            ) );
-
-            //Setting for Logo or title location above or on image (if there is an image)               
-            $wp_customize->add_setting( 'sf_impact_logo_location', 
-                array(
-                'default' => "image", 
-                'type' => 'theme_mod', 
-                'capability' => 'edit_theme_options', 
-                'transport' => 'refresh', 
-                'sanitize_callback' => 'sf_impact_sanitize_select'
-                ) 
-            );      
-
-            $wp_customize->add_control( new WP_Customize_Control ( //TODO Not Working!
-   
-                $wp_customize, 
-                'sf_impact_logo_location', 
-                array(
-                'label' => __( 'Where should the Logo be displayed?', 'sf-impact' ), 
-                'section' => 'sf_impact_general_options', 
-                'settings' => 'sf_impact_logo_location', 
-                'priority' => 10, 
-                'type'     => 'radio',
-		    'choices'  => array(
-			    'image'  => __('On top of header images', 'sf-impact'),
-			    'top' => __('Above header images', 'sf-impact'),
-                )
-                ) 
-            ) );   
             //Setting for Logo or title location above or on image (if there is an image)               
             $wp_customize->add_setting( 'sf_impact_menu_location', 
                 array(
