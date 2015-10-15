@@ -235,8 +235,8 @@ if ( ! function_exists( 'sf_impact_entry_footer' ) ) :
 		    }
 	    }
     
-        $sfly_theme1_show_author = get_theme_mod('sfly_theme1_show_author', true);
-   	    if ( is_single() &&   $sfly_theme1_show_author  ) :
+        $sf_impact_show_author = get_theme_mod('sf_impact_show_author', true);
+   	    if ( is_single() &&   $sf_impact_show_author  ) :
 			    get_template_part( 'template-parts/author-bio' );
 		    endif;
     
