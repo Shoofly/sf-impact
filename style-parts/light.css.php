@@ -53,6 +53,10 @@ hr {
 	background-color: transparent;
 }
 
+ol.comment-list li.bypostauthor .comment-content p {
+    background-color: #F3F6F9;    
+}
+
 #page {
 	background-color: transparent;
 }
@@ -143,10 +147,6 @@ hr {
 	color: #312525;
 }
 
-#site-logo-title, #site-logo-title div {
-    color: #<?php echo get_header_textcolor(); ?>;    
-}
-
 .site-title {
 	color: white;
 }
@@ -190,5 +190,12 @@ h1, h3, h4, h5, h6 {
 @media only screen and (max-width: 782px) {
     #primary-menu a:hover, #primary-menu a:focus {
         border-bottom-color: #9a9ac1;
+    }
+}
+
+
+@media screen and (min-width: 783px) {
+    .post-navigation {
+        border-top-color: #00398F;
     }
 }
