@@ -1,0 +1,205 @@
+<?php
+if (!function_exists('sf_impact_get_url')):
+function sf_impact_get_url() {
+    // preg_match( '/<a\s[^>]*?href=[\'"](.+?)[\'"]/is', get_the_content(), $matches ) ;
+        //return false;
+      
+        $pattern = '#(www\.|https?://)?[a-z0-9]+\.[a-z0-9]{2,4}\S*#i';
+if (!preg_match_all($pattern, get_the_content(), $matches, PREG_PATTERN_ORDER))
+    return false;
+
+    return esc_url_raw( $matches[0][0]);
+}
+endif;
+
+add_filter( 'the_content', 'sf_impact_format_content' );
+
+function sf_impact_format_content( $content ) {
+
+	/* Check if we're displaying a 'quote' post. */
+	if ( has_post_format( 'quote' ) ) {
+
+		/* Match any <blockquote> elements. */
+		preg_match( '/<blockquote.*?>/', $content, $matches );
+
+		/* If no <blockquote> elements were found, wrap the entire content in one. */
+		if ( empty( $matches ) )
+			$content = "<blockquote>{$content}</blockquote>";
+	}
+ 
+    if ( has_post_format( 'aside' ) && !is_singular() )
+		$content .= ' <a href="' . get_permalink() . '">&#8734;</a>';
+
+
+
+    if (has_post_format( 'chat'))
+        return (sf_impact_chat_content($content));
+
+	return $content;
+}
+function sf_impact_chat_content( $content ) {
+	global $_post_format_chat_ids;
+
+	/* If this is not a 'chat' post, return the content. */
+	if ( !has_post_format( 'chat' ) )
+		return $content;
+       
+	/* Set the global variable of speaker IDs to a new, empty array for this chat. */
+	$_post_format_chat_ids = array();
+
+	/* Allow the separator (separator for speaker/text) to be filtered. */
+	$separator = apply_filters( 'my_post_format_chat_separator', ':' );
+
+	/* Open the chat transcript div and give it a unique ID based on the post ID. */
+	$chat_output = "\n\t\t\t" . '<div id="chat-transcript-' . esc_attr( get_the_ID() ) . '" class="chat-transcript">';
+
+	/* Split the content to get individual chat rows. */
+	$chat_rows = preg_split( "/(\r?\n)+|(<br\s*\/?>\s*)+/", $content );
+
+	/* Loop through each row and format the output. */
+	foreach ( $chat_rows as $chat_row ) {
+
+		/* If a speaker is found, create a new chat row with speaker and text. */
+		if ( strpos( $chat_row, $separator ) ) {
+
+			/* Split the chat row into author/text. */
+			$chat_row_split = explode( $separator, trim( $chat_row ), 2 );
+
+			/* Get the chat author and strip tags. */
+			$chat_author = strip_tags( trim( $chat_row_split[0] ) );
+
+			/* Get the chat text. */
+			$chat_text = trim( $chat_row_split[1] );
+
+			/* Get the chat row ID (based on chat author) to give a specific class to each row for styling. */
+			$speaker_id = sf_impact_chat_row_id( $chat_author );
+
+			/* Open the chat row. */
+			$chat_output .= "\n\t\t\t\t" . '<div class="chat-row ' . sanitize_html_class( "chat-speaker-{$speaker_id}" ) . '">';
+
+			/* Add the chat row author. */
+			$chat_output .= "\n\t\t\t\t\t" . '<div class="chat-author ' . sanitize_html_class( strtolower( "chat-author-{$chat_author}" ) ) . ' vcard"><cite class="fn">' . apply_filters( 'my_post_format_chat_author', $chat_author, $speaker_id ) . $separator . '</cite></div>';
+
+			/* Add the chat row text. */
+			$chat_output .= "\n\t\t\t\t\t" . '<div class="chat-text">' . str_replace( array( "\r", "\n", "\t" ), '', apply_filters( 'my_post_format_chat_text', $chat_text, $chat_author, $speaker_id ) ) . '</div>';
+
+			/* Close the chat row. */
+			$chat_output .= "\n\t\t\t\t" . '</div><!-- .chat-row -->';
+		}
+
+		/**
+		 * If no author is found, assume this is a separate paragraph of text that belongs to the
+		 * previous speaker and label it as such, but let's still create a new row.
+		 */
+		else {
+
+			/* Make sure we have text. */
+			if ( !empty( $chat_row ) ) {
+
+				/* Open the chat row. */
+				$chat_output .= "\n\t\t\t\t" . '<div class="chat-row ' . sanitize_html_class( "chat-speaker-{$speaker_id}" ) . '">';
+
+				/* Don't add a chat row author.  The label for the previous row should suffice. */
+
+				/* Add the chat row text. */
+				$chat_output .= "\n\t\t\t\t\t" . '<div class="chat-text">' . str_replace( array( "\r", "\n", "\t" ), '', apply_filters( 'my_post_format_chat_text', $chat_row, $chat_author, $speaker_id ) ) . '</div>';
+
+				/* Close the chat row. */
+				$chat_output .= "\n\t\t\t</div><!-- .chat-row -->";
+			}
+		}
+	}
+
+	/* Close the chat transcript div. */
+	$chat_output .= "\n\t\t\t</div><!-- .chat-transcript -->\n";
+
+	/* Return the chat content and apply filters for developers. */
+	return apply_filters( 'my_post_format_chat_content', $chat_output );
+}
+
+/**
+ * This function returns an ID based on the provided chat author name.  It keeps these IDs in a global 
+ * array and makes sure we have a unique set of IDs.  The purpose of this function is to provide an "ID"
+ * that will be used in an HTML class for individual chat rows so they can be styled.  So, speaker "John" 
+ * will always have the same class each time he speaks.  And, speaker "Mary" will have a different class 
+ * from "John" but will have the same class each time she speaks.
+ *
+ * @author David Chandra
+ * @link http://www.turtlepod.org
+ * @author Justin Tadlock
+ * @link http://justintadlock.com
+ * @copyright Copyright (c) 2012
+ * @license http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+ * @link http://justintadlock.com/archives/2012/08/21/post-formats-chat
+ *
+ * @global array $_post_format_chat_ids An array of IDs for the chat rows based on the author.
+ * @param string $chat_author Author of the current chat row.
+ * @return int The ID for the chat row based on the author.
+ */
+function sf_impact_chat_row_id( $chat_author ) {
+	global $_post_format_chat_ids;
+
+	/* Let's sanitize the chat author to avoid craziness and differences like "John" and "john". */
+	$chat_author = strtolower( strip_tags( $chat_author ) );
+
+	/* Add the chat author to the array. */
+	$_post_format_chat_ids[] = $chat_author;
+
+	/* Make sure the array only holds unique values. */
+	$_post_format_chat_ids = array_unique( $_post_format_chat_ids );
+
+	/* Return the array key for the chat author and add "1" to avoid an ID of "0". */
+	return absint( array_search( $chat_author, $_post_format_chat_ids ) ) + 1;
+}
+ /*
+* Main code for the header image
+*/
+if (!function_exists('sf_impact_header')):
+    function sf_impact_header($sf_impact_home_header_type, $sf_impact_header_image, $sf_impact_logo_location, $the_slide_query = NULL)
+    {
+       // global $sf_impact_Theme_Mods;
+        
+        $top = TRUE;
+ 
+/*        $sf_impact_header_image = $sf_impact_Theme_Mods->getMod( 'sf_impact_header_image' );
+        $sf_impact_logo_location = $sf_impact_Theme_Mods->getMod( 'sf_impact_logo_location' );
+        $sf_impact_home_header_type = $sf_impact_Theme_Mods->getMod( 'sf_impact_home_header_type' );
+  */   
+        if ($sf_impact_header_image && $sf_impact_logo_location == 'image')
+            $top = FALSE;
+            
+       
+         $wclass = sf_impact_get_home_header_class();
+         $hstyle = sf_impact_get_home_header_height();
+    
+   
+         if ($sf_impact_home_header_type == "1" && isset($the_slide_query))
+         {     
+          
+            sf_impact_get_slideshow($the_slide_query, $wclass, $hstyle);
+         }
+         else 
+         {
+             if ($sf_impact_header_image && $sf_impact_home_header_type == "0")
+             {
+                ?>
+              <div class="header-container-home <?php echo $wclass?> ">
+                <img class="headerimg" alt="header" style="<?php echo  $hstyle?>;" src="<?php echo $sf_impact_header_image?>"/>
+               </div>
+                <?php 
+                $output = "";
+                $output = apply_filters('sf_impact_home_post_bar', $output);
+                if ( $output != '' )
+                {
+                    ?><div id="homepostbar">
+                    <?php
+                            echo $output;?>
+                    </div>
+                    <?php
+                }
+             }
+         }
+    
+    }
+endif;
+?>
