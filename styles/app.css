@@ -380,9 +380,16 @@ dd {
   margin: auto;
 }
 
+h1.entry-title, h1.page-title {
+  font-weight: 700;
+}
+
+h2.entry-title, h2.page-title {
+  font-weight: 500;
+}
+
 .entry-title, .page-title {
   text-transform: uppercase;
-  font-weight: 700;
   letter-spacing: 1px;
   line-height: 26px;
   text-decoration: none;
@@ -390,6 +397,7 @@ dd {
 
 .entry-title a, .entry-title a:visited, .page-title a, .page-title a:visited {
   font-size: inherit;
+  font-weight: inherit;
 }
 
 .page-title, .entry-title {
