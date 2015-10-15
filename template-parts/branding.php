@@ -17,7 +17,7 @@ $sf_impact_logo_image = $sf_impact_Theme_Mods->getMod('sf_impact_logo_image');
 $headerLogo = false;
 
 $headerText = false;
-
+$logoCss = "";
 if ($sf_impact_logo_image != '') {
     $headerLogo = true;
     $logoCss = ' class="site-logo"';
