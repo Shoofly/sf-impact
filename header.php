@@ -9,10 +9,23 @@
  * @since sf-impact 1.0
  */
 
-?><!DOCTYPE html>
+?>
+ 
+<!DOCTYPE html>
 <html <?php language_attributes(); ?>>
+    <head>
+        <meta charset="<?php bloginfo( 'charset' ); ?>" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title><?php wp_title(); ?></title>
+        <link rel="profile" href="http://gmpg.org/xfn/11" />
+        <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
+        <?php if ( is_singular() && get_option( 'thread_comments' ) ) wp_enqueue_script( 'comment-reply' ); ?>
+        <html <?php language_attributes(); ?>>
+        <?php wp_head(); ?>
+    </head>
+    
 <?php 
-    wp_head();
+  
     $reghead = TRUE;
     $url = get_header_image();        //get the default header image
     

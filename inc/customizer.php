@@ -232,7 +232,7 @@
 			    array(
 		            
 				    'label'      => __( 'Content Background Color', 'sf-impact' ),
-                    'description' => __('The background color for site content'),
+                    'description' => __('The background color for site content', 'sf-impact'),
 				    'section'    => 'colors',
 				    'settings'   => 'sf_impact_content_background',
 			    ) 
@@ -335,7 +335,7 @@ function sf_impact_pageOptions($wp_customize)
             $wp_customize->add_setting( "pagelabel5", array(   'transport' => 'refresh', 'sanitize_callback' => 'sanitize_text_field') );
 
              $wp_customize->add_control( new Arbitrary_Custom_Control($wp_customize,  "pagelabel5",
-                    array('type' => "text", 'style' => 'font-style:italic;',  'label' => __('When you select to display the featured header on a page, you can elect to have it display in place of the header instead of above above the page & below the header.', 'sf-impact'), 'section' => 'sf_impact_page_options',  'settings' => "pagelabel5", 'priority' => 10, ) ) );
+                    array('type' => "text", 'style' => 'font-style:italic;',  'label' => __('If a post has the display featured image option selected, you can elect to display these images in the header or above the post by toggling this option.', 'sf-impact'), 'section' => 'sf_impact_page_options',  'settings' => "pagelabel5", 'priority' => 10, ) ) );
             //Setting to featured image on pages
             $wp_customize->add_setting( 'sf_impact_page_header', 
                 array(
@@ -414,7 +414,6 @@ function sf_impact_pageOptions($wp_customize)
             $wp_customize->add_control( 'sf_impact_post_header', array(
                 'settings' => 'sf_impact_post_header',
                 'label'    => __( 'Display the featured image as the header on posts', 'sf-impact'), 
-              
                 'section'  => 'sf_impact_post_options',
                 'priority' => 10,
                 'type'     => 'checkbox',
