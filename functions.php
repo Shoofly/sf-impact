@@ -714,7 +714,33 @@ if ( is_admin() ) {
         }
     }
 endif;
+if (!function_exists('sf_impact_getCustomUrl')):
+function sf_impact_getCustomUrl($url)
+{
+    global $post;
+      if (is_single()) {
+           $sf_impact_post_header = get_theme_mod('sf_impact_post_header', false);
+            $sf_impact_post_featured = get_theme_mod('sf_impact_post_featured', true);
+        } elseif (is_page()) {
+            $sf_impact_post_header = get_theme_mod('sf_impact_page_header', false);
+            $sf_impact_post_featured = get_theme_mod('sf_impact_page_featured', true);  
+        }        
+        $meta = get_post_meta( $post->ID, 'show_featured_image', true  ) ;
+     
+        if (( $sf_impact_post_header && $meta) )
+        {
+             $image_id = get_post_thumbnail_id();
+             $image_atts = wp_get_attachment_image_src($image_id, "full", true);
+             
+             if (isset($image_atts) && $image_atts[1] >= HEADER_IMAGE_WIDTH ) {
+                $url = $image_atts[0] ; //Replace the default header
 
+             }
+                   
+        }
+         return $url;
+}
+endif; 
 if (!class_exists('sf_impact_CustomLinkThemes')):
 {
     class sf_impact_CustomLinkThemes {
