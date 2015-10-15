@@ -59,7 +59,7 @@
           $this->sf_impact_sliderOptions($wp_customize);
           $this->sf_impact_socialMediaOptions($wp_customize);
           $this->sf_impact_highlightSettings($wp_customize);
-
+          $this->sf_impact_editorDefaults($wp_customize);
 
             //Setting and control or the Logo Image
   
@@ -317,10 +317,7 @@
     }
 function sf_impact_pageOptions($wp_customize)
 {
-                $wp_customize->add_setting( "pagelabel4", array(   'transport' => 'refresh', 'sanitize_callback' => 'sanitize_text_field') );
-
-             $wp_customize->add_control( new Arbitrary_Custom_Control($wp_customize,  "pagelabel4",
-                    array('type' => "text", 'style' => 'font-style:italic;',  'label' => __('This is a default setting. Yu can override it for individual pages.', 'sf-impact'), 'section' => 'sf_impact_page_options',  'settings' => "pagelabel4", 'priority' => 10, ) ) );
+ 
 
                $wp_customize->add_section( 'sf_impact_page_options', 
                 array(
@@ -331,24 +328,7 @@ function sf_impact_pageOptions($wp_customize)
                 'panel' => 'sf_impact_panel',
                 ) 
             );
-            //Setting to featured image on pages
-            $wp_customize->add_setting( 'sf_impact_page_featured', 
-                array(
-                'default' => false, 
-                'type' => 'theme_mod', 
-                'capability' => 'edit_theme_options', 
-                'transport' => 'refresh', 
-                'sanitize_callback' => 'sf_impact_sanitize_checkbox'
-                ) 
-            );      
-                   
-            $wp_customize->add_control( 'sf_impact_page_featured', array(
-                'settings' => 'sf_impact_page_featured',
-                'label'    => __( 'Display the featured image on pages', 'sf-impact'), 
-                'section'  => 'sf_impact_page_options',
-                'priority' => 10,
-                'type'     => 'checkbox',
-            ) );
+ 
          $wp_customize->add_setting( "pagelabel6", array(   'transport' => 'refresh', 'sanitize_callback' => 'sanitize_text_field') );
 
              $wp_customize->add_control( new Arbitrary_Custom_Control($wp_customize,  "pagelabel6",
@@ -412,51 +392,7 @@ function sf_impact_pageOptions($wp_customize)
                 'type'     => 'checkbox',
             ) ); 
 
-           $wp_customize->add_setting( "postlabel3", array(   'transport' => 'refresh', 'sanitize_callback' => 'sanitize_text_field') );
-
-           $wp_customize->add_control( new Arbitrary_Custom_Control($wp_customize,  "postlabel3",
-                    array('type' => "h3",  'label' => __('Default Post Settings', 'sf-impact'), 'section' => 'sf_impact_post_options',  'settings' => "postlabel3", 'priority' => 10, ) ) );
- 
-           $wp_customize->add_setting( "postlabel4", array(   'transport' => 'refresh', 'sanitize_callback' => 'sanitize_text_field') );
-
-             $wp_customize->add_control( new Arbitrary_Custom_Control($wp_customize,  "postlabel4",
-                    array('type' => "text", 'style' => 'font-style:italic;',  'label' => __('The following settings are default settings for options that you choose while editing posts.', 'sf-impact'), 'section' => 'sf_impact_post_options',  'settings' => "postlabel4", 'priority' => 10, ) ) );
-           //Setting to display sidebar on posts
-            $wp_customize->add_setting( 'sf_impact_post_sidebar', 
-                array(
-                'default' => FALSE, 
-                'type' => 'theme_mod', 
-                'capability' => 'edit_theme_options', 
-                'transport' => 'refresh', 
-                'sanitize_callback' => 'sf_impact_sanitize_checkbox'
-                ) 
-            );      
-                   
-            $wp_customize->add_control( 'sf_impact_post_sidebar', array(
-                'settings' => 'sf_impact_post_sidebar',
-                'label'    => __( 'Display the sidebar on post pages', 'sf-impact'), 
-                'section'  => 'sf_impact_post_options',
-                'priority' => 10,
-                'type'     => 'checkbox',
-            ) );
-            //Setting to featured image on posts
-            $wp_customize->add_setting( 'sf_impact_post_featured', 
-                array(
-                'default' => false, 
-                'type' => 'theme_mod', 
-                'capability' => 'edit_theme_options', 
-                'transport' => 'refresh', 
-                'sanitize_callback' => 'sf_impact_sanitize_checkbox'
-                ) 
-            );      
-                   
-            $wp_customize->add_control( 'sf_impact_post_featured', array(
-                'settings' => 'sf_impact_post_featured',
-                'label'    => __( 'Display the featured image on posts', 'sf-impact'), 
-                'section'  => 'sf_impact_post_options',
-                'priority' => 10,
-                'type'     => 'checkbox',
-            ) );
+          
                        $wp_customize->add_setting( "postlabel6", array(   'transport' => 'refresh', 'sanitize_callback' => 'sanitize_text_field') );
 
              $wp_customize->add_control( new Arbitrary_Custom_Control($wp_customize,  "postlabel6",
@@ -1367,7 +1303,80 @@ function sf_impact_pageOptions($wp_customize)
 		
 	    }
     }
+      function sf_impact_editorDefaults($wp_customize)
+    {
+          /*Featured Highlight Section*/
+                $wp_customize->add_section( 'sf_impact_editor_defaults', 
+            array(
+                'title' => __( ' Editor Defaults ', 'sf-impact' ), //Visible title of section
+                'priority' => 1, //Determines what order this appears in
+                'capability' => 'edit_theme_options', //Capability needed to tweak
+                'description' => __('Save time when editing posts and pages by setting these default values', 'sf-impact'), //Descriptive tooltip
+                'panel' => 'sf_impact_panel',
+                ) 
+            ); 
+  
+ 
+           $wp_customize->add_setting( "postlabel4", array(   'transport' => 'refresh', 'sanitize_callback' => 'sanitize_text_field') );
 
+             $wp_customize->add_control( new Arbitrary_Custom_Control($wp_customize,  "postlabel4",
+                    array('type' => "text", 'style' => 'font-style:italic;',  'label' => __('The following settings are default settings for options that you choose while editing posts or pages. Changing these options will have no effect on appearance although they will effect posts or pages that  existed prior to installing this theme.  ', 'sf-impact'), 'section' => 'sf_impact_editor_defaults',  'settings' => "postlabel4", 'priority' => 10, ) ) );
+           //Setting to display sidebar on posts
+            $wp_customize->add_setting( 'sf_impact_post_sidebar', 
+                array(
+                'default' => FALSE, 
+                'type' => 'theme_mod', 
+                'capability' => 'edit_theme_options', 
+                'transport' => 'refresh', 
+                'sanitize_callback' => 'sf_impact_sanitize_checkbox'
+                ) 
+            );      
+                   
+            $wp_customize->add_control( 'sf_impact_post_sidebar', array(
+                'settings' => 'sf_impact_post_sidebar',
+                'label'    => __( 'Display the sidebar on post pages', 'sf-impact'), 
+                'section'  => 'sf_impact_editor_defaults',
+                'priority' => 10,
+                'type'     => 'checkbox',
+            ) );
+            //Setting to featured image on posts
+            $wp_customize->add_setting( 'sf_impact_post_featured', 
+                array(
+                'default' => false, 
+                'type' => 'theme_mod', 
+                'capability' => 'edit_theme_options', 
+                'transport' => 'refresh', 
+                'sanitize_callback' => 'sf_impact_sanitize_checkbox'
+                ) 
+            );      
+                   
+            $wp_customize->add_control( 'sf_impact_post_featured', array(
+                'settings' => 'sf_impact_post_featured',
+                'label'    => __( 'Display the featured image on posts', 'sf-impact'), 
+                'section'  => 'sf_impact_editor_defaults',
+                'priority' => 10,
+                'type'     => 'checkbox',
+            ) );
+
+                       //Setting to featured image on pages
+            $wp_customize->add_setting( 'sf_impact_page_featured', 
+                array(
+                'default' => false, 
+                'type' => 'theme_mod', 
+                'capability' => 'edit_theme_options', 
+                'transport' => 'refresh', 
+                'sanitize_callback' => 'sf_impact_sanitize_checkbox'
+                ) 
+            );      
+                   
+            $wp_customize->add_control( 'sf_impact_page_featured', array(
+                'settings' => 'sf_impact_page_featured',
+                'label'    => __( 'Display the featured image on pages', 'sf-impact'), 
+                'section'  => 'sf_impact_editor_defaults',
+                'priority' => 10,
+                'type'     => 'checkbox',
+            ) );
+    }
     function sf_impact_highlightSettings($wp_customize)
     {
             //********************************************************************************************************
