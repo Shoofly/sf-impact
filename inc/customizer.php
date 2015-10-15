@@ -1421,6 +1421,7 @@ function sf_impact_pageOptions($wp_customize)
     }
     function sf_impact_highlightSettings($wp_customize)
     {
+            global $sf_impact_Theme_Mods;
             //********************************************************************************************************
             /*Featured Highlight Section*/
                 $wp_customize->add_section( 'sf_impact_highlight_options', 
@@ -1498,7 +1499,7 @@ function sf_impact_pageOptions($wp_customize)
 
             $wp_customize->add_setting( 'sf_impact_highlight_style', 
                 array(
-                'default' => "L", 
+                'default' => $sf_impact_Theme_Mods->getMod( 'sf_impact_highlight_style', 'T' ),
                 'type' => 'theme_mod', 
                 'capability' => 'edit_theme_options', 
                 'transport' => 'refresh', 
@@ -1542,7 +1543,7 @@ function sf_impact_pageOptions($wp_customize)
     
                 $wp_customize->add_setting( "$name", 
                     array(
-                    'default' => "", 
+                     'default' => $sf_impact_Theme_Mods->getMod( $name, "" ),
                     'type' => 'theme_mod', 
                     'capability' => 'edit_theme_options', 
                     'transport' => 'refresh', 
@@ -1552,7 +1553,7 @@ function sf_impact_pageOptions($wp_customize)
                     $name = "sf_impact_highlight_image$x";
                 $wp_customize->add_setting( "$name", 
                     array(
-                    'default' => "", 
+                    'default' => $sf_impact_Theme_Mods->getMod( $name, "" ),
                     'type' => 'theme_mod', 
                     'capability' => 'edit_theme_options', 
                     'transport' => 'refresh', 
@@ -1562,7 +1563,7 @@ function sf_impact_pageOptions($wp_customize)
                 $name = "sf_impact_highlight_text$x";
                 $wp_customize->add_setting( "$name", 
                     array(
-                    'default' => "", 
+                    'default' => $sf_impact_Theme_Mods->getMod( $name, "" ),
                     'type' => 'theme_mod', 
                     'capability' => 'edit_theme_options', 
                     'transport' => 'refresh', 

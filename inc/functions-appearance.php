@@ -276,10 +276,10 @@ if (!function_exists('sf_impact_genHightlightText')):
     {        
     ?>
         <div class="<?php echo $class?>"> 
-            <span class="highlight-span">
+            <div class="highlight-span">
                 <h2><?php echo $header?></h2>
                 <p><?php echo $text;?></p>
-            </span>
+            </div>
         </div><!--<?php echo $class?>-->
     <?php
      }

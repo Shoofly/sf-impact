@@ -141,7 +141,7 @@ function sf_impact_setup() {
             $sf_impact_Theme_Mods->setMod('sf_impact_logo_image', $defaultlogo);
             $sf_impact_Theme_Mods->setMod('sf_impact_logo_location', 'image');
             $sf_impact_Theme_Mods->setMod('sf_impact_home_header_type', $defaultheadertype);
-          
+            $sf_impact_highlight_style->setMod('sf_impact_highlight_style', 'T');
             $sf_impact_Theme_Mods->setMod('sf_impact_highlight_boxes', 2);
             $sf_impact_Theme_Mods->setMod('sf_impact_highlight_header1', 'Up to 3 highlights');
             $sf_impact_Theme_Mods->setMod('sf_impact_highlight_image1', $defaultpath . 'flowers.png');
