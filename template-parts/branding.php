@@ -32,7 +32,7 @@ if ($sf_impact_logo_image != '') {
             <?php if($sf_impact_logo_image != '')
             {?>
         	<a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home">
-                <img src="<?php echo $sf_impact_logo_image; ?>"/>
+                <img src="<?php echo $sf_impact_logo_image; ?>" alt="Logo"/>
         	</a>
             <?php 
             }

@@ -1744,7 +1744,7 @@ footer.entry-footer .author-bio {
     margin: 25px;
     clear: both;
   }
-  .highlight-right-text span.highlight-span h2, .highlight-left-text span.highlight-span h2 {
+  .highlight-right-text .highlight-span h2, .highlight-left-text .highlight-span h2 {
     font-size: 1.5em;
   }
 }
@@ -2039,7 +2039,7 @@ footer.entry-footer .author-bio {
   #site-logo-title.site-logo {
     max-width: 30%;
   }
-  .highlight-right-text span.highlight-span h2, .highlight-left-text span.highlight-span h2 {
+  .highlight-right-text .highlight-span h2, .highlight-left-text .highlight-span h2 {
     font-size: 1.9em;
   }
   .highlight-right-img img.highlight-img, .highlight-left-img img.highlight-img {
@@ -2060,7 +2060,7 @@ footer.entry-footer .author-bio {
   #page .site-info span, #page .site-info a {
     float: left;
   }
-  .highlight-right-text span.highlight-span h2, .highlight-left-text span.highlight-span h2 {
+  .highlight-right-text .highlight-span h2, .highlight-left-text .highlight-span h2 {
     font-size: 1.5em;
   }
 }

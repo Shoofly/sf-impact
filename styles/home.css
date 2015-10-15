@@ -126,7 +126,7 @@ hr.home1
     text-align: center;
 }
 
-span.highlight-span h2 {
+.highlight-span h2 {
     overflow-wrap: break-word;
     font-size: 2em;
     text-transform: uppercase;
@@ -138,7 +138,7 @@ span.highlight-span h2 {
     margin: auto;
 }
 
-span.highlight-span p {
+.highlight-span p {
     text-align: left;
     font-weight: 100;
     margin: 8px 0px 15px 0px;
