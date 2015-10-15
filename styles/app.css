@@ -620,7 +620,9 @@ dd {
 }
 
 .sfly-headerimg .header-container-home.sfly-img-fit img {
+  max-width: 100%;
   width: auto;
+  height: auto;
   box-sizing: content-box;
   padding: 1px;
   border: 1px solid black;
@@ -667,7 +669,9 @@ dd {
 }
 
 .sfly-headerimg .flexslider .slides.sfly-img-fit img {
+  max-width: 100%;
   width: auto;
+  height: auto;
   box-sizing: content-box;
   padding: 1px;
   border: 1px solid black;
@@ -933,13 +937,13 @@ a:visited {
 .alignleft {
   display: inline;
   float: left;
-  margin-right: 1.5em;
+  margin-right: 1em;
 }
 
 .alignright {
   display: inline;
   float: right;
-  margin-left: 1.5em;
+  margin-left: 1em;
 }
 
 .aligncenter {
@@ -961,9 +965,38 @@ a:visited {
   display: table;
 }
 
-.comment-content:before, .comment-content:after {
+ol.comment-list {
+  padding-left: 0px;
+}
+
+ol.comment-list li a {
+  font-size: 1.3rem;
+}
+
+ol.comment-list li .edit-link:before {
+  content: "| ";
+}
+
+ol.comment-list li.bypostauthor .comment-content:before, ol.comment-list li.bypostauthor .comment-content:after {
   content: "";
   display: table;
+}
+
+ol.comment-list li.bypostauthor .comment-content p {
+  border: 1px solid black;
+  border-radius: 7px;
+  box-shadow: 1px 1px 1px black;
+  padding: 5px;
+  background-color: white;
+  /* For backwards compatibility */
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+ol.comment-list li.bypostauthor .comment-content p:after {
+  content: "Author";
+  float: right;
+  font-weight: 800;
+  font-style: italic;
 }
 
 .site-header:before, .site-header:after {
@@ -998,9 +1031,16 @@ a:visited {
   font-size: 0;
 }
 
-#site-logo-title {
-  max-width: 240px;
+#site-logo-title.site-logo {
   float: left;
+}
+
+#site-logo-title.site-logo.site-logo {
+  max-width: 240px;
+}
+
+#site-logo-title.site-logo.site-text {
+  max-width: auto;
 }
 
 .site-branding {
@@ -1036,27 +1076,16 @@ a:visited {
   padding: 0px 15px 15px 0;
 }
 
-.site-title {
-  padding: 25px 25px 0;
+#site-logo-title .site-title {
   font-style: italic;
   text-transform: uppercase;
   font-size: 2em;
-  color: white;
   font-weight: bold;
 }
 
-@media only screen and (min-width: 501px) {
-  .site-title {
-    padding: 0 15px 0;
-    font-style: italic;
-    text-transform: uppercase;
-    font-size: 2em;
-    color: white;
-    font-weight: bold;
-  }
-  .site-description {
-    padding-left: 15px;
-  }
+#site-logo-title .site-title a {
+  color: inherit;
+  font-size: inherit;
 }
 
 @media only screen and (max-width: 900px) {
@@ -1065,7 +1094,6 @@ a:visited {
     /* padding: 0px 25px 0; */
   }
   .site-branding {
-    margin-top: 5px;
     display: block;
   }
   .primary-navigation {
@@ -1079,9 +1107,22 @@ a:visited {
   }
 }
 
+@media only screen and (min-width: 501px) {
+  .site-title {
+    padding: 0 15px 0;
+    font-style: italic;
+    text-transform: uppercase;
+    font-size: 2em;
+    font-weight: bold;
+  }
+  .site-description {
+    padding-left: 15px;
+  }
+}
+
 @media only screen and (max-width: 500px) {
   .site-title {
-    padding: 0px 15px 0 15px;
+    padding: 0px 15px 0 25px;
     font-size: 90%;
   }
 }
@@ -1183,6 +1224,10 @@ hr {
   width: 100% !important;
 }
 
+.content-area-full article {
+  margin-right: 8rem;
+}
+
 #content #primary {
   float: left;
   width: 70%;
@@ -1219,6 +1264,8 @@ hr {
 .sticky, .category-sticky {
   display: block;
   background-color: antiquewhite;
+  /* For backwards compatibility */
+  background-color: rgba(250, 235, 215, 0.5);
 }
 
 /*  .hentry {
@@ -1420,10 +1467,22 @@ embed, iframe, object {
 .author-info {
   padding: 15px;
   background-color: white;
-  border-radius: 1.5em;
-  box-shadow: black 0.5em 0.5em 1em;
-  border: solid 1px;
+  /* For backwards compatibility */
+  background-color: rgba(255, 255, 255, 0.8);
+  box-shadow: black 0.1em 0.1em 1em;
+  border: solid 0px;
   margin-bottom: 25px;
+}
+
+.author-info h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.author-info h3 {
+  font-size: 1.4rem;
+  font-weight: 700;
 }
 
 .author-description {
@@ -1439,6 +1498,45 @@ embed, iframe, object {
 /**FOOTER*/
 footer {
   padding: 5px 0px;
+}
+
+footer.entry-footer .footer-links {
+  display: block;
+}
+
+footer.entry-footer .author-info {
+  display: inline-block;
+}
+
+footer.entry-footer .author-avatar {
+  float: left;
+}
+
+footer.entry-footer .author-links {
+  float: left;
+  display: block;
+  float: left;
+  width: 100%;
+}
+
+footer.entry-footer .author-description {
+  z-index: 9;
+  float: left;
+  width: 100%;
+  margin: 0px;
+  margin-right: -100px;
+  clear: right;
+  box-sizing: border-box;
+  margin-left: -70px;
+  padding-left: 70px;
+}
+
+footer.entry-footer .author-description p {
+  padding-left: 20px;
+}
+
+footer.entry-footer .author-bio {
+  z-index: 11;
 }
 
 /*Footer Sidebar*/
@@ -1483,7 +1581,7 @@ footer {
 }
 
 #content {
-  padding-top: 50px;
+  padding-top: 30px;
   background: whitesmoke;
   color: #3a3a3a;
 }
@@ -1683,7 +1781,7 @@ footer {
 }
 
 @media only screen and (max-width: 800px) {
-  #site-logo-title {
+  #site-logo-title.site-logo {
     max-width: 30%;
   }
 }
@@ -1847,10 +1945,13 @@ footer {
     width: 50%;
   }
   .post-navigation {
-    border-top: dotted;
+    border-top: dotted 2px;
   }
   .nav-links {
     margin-bottom: 25px;
+  }
+  .site-branding {
+    margin: 20px;
   }
 }
 
@@ -1871,13 +1972,13 @@ footer {
   .sfly-headerimg {
     background: transparent;
   }
-  .sfly-headerimg, .sfly-headerimg .flexslider {
+  .sfly-headerimg .flexslider {
     min-height: 200px;
   }
-  .sfly-headerimg .slides.sfly-img-fit, .sfly-headerimg .flexslider .slides.sfly-img-fit {
+  .sfly-headerimg .flexslider .slides.sfly-img-fit {
     padding: 0px;
   }
-  .sfly-headerimg .slides.sfly-img-fit img, .sfly-headerimg .flexslider .slides.sfly-img-fit img {
+  .sfly-headerimg .flexslider .slides.sfly-img-fit img {
     padding: 0px;
     border: 0px;
   }
@@ -1935,7 +2036,7 @@ footer {
     display: block;
     float: left;
   }
-  #site-logo-title {
+  #site-logo-title.site-logo {
     max-width: 30%;
   }
   .highlight-right-text span.highlight-span h2, .highlight-left-text span.highlight-span h2 {
@@ -1948,6 +2049,9 @@ footer {
 }
 
 @media only screen and (max-width: 480px) {
+  #page #site-logo-title.site-text .site-title {
+    font-size: 1.5em;
+  }
   #page .site-info {
     display: block;
     float: left;

@@ -237,12 +237,11 @@
 				    'settings'   => 'sf_impact_content_background',
 			    ) 
 	    	) 
-        );   
+        );    
         
-   
         $wp_customize->get_setting( 'blogname' )->transport         = 'postMessage';
         $wp_customize->get_setting( 'blogdescription' )->transport  = 'postMessage';
-        $wp_customize->get_setting( 'header_textcolor' )->transport = 'refresh';
+        $wp_customize->get_setting( 'header_textcolor' )->transport = 'postMessage';
 }
     function sf_impact_generalOptions($wp_customize)
     {
@@ -1631,7 +1630,7 @@ function sf_impact_pageOptions($wp_customize)
     * Binds JS handlers to make Theme Customizer preview reload changes asynchronously.
     */
     public function sf_impact_customize_preview_js() {
-	    wp_enqueue_script( 'sf_impact_customizer', get_template_directory_uri() . '/js/customizer.js', array( 'customize-preview' ), '20130508', true );
+	    wp_enqueue_script( 'sf_impact_customizer', get_template_directory_uri() . '/js/customizer.js', array( 'jquery', 'customize-preview' ), '20130508', true );
     }
 
 
@@ -1647,18 +1646,17 @@ function sf_impact_pageOptions($wp_customize)
                 $sf_impact_header_background = $sf_impact_Theme_Mods->getMod( 'sf_impact_header_background' );
                 $sf_impact_content_background  = $sf_impact_Theme_Mods->getMod( 'sf_impact_content_background' );
                 $sf_impact_header_opacity = $sf_impact_Theme_Mods->getMod( 'sf_impact_header_opacity' );
-                
+                $outu = "";
                 if ($sf_impact_header_opacity < 100) {
                     $hstyle = sf_impact_rbgastyle($sf_impact_header_background, $sf_impact_header_opacity);
                     echo "#topmasthead {" . $hstyle . "}";
                 } else {
-                    $outu = sprintf("%s {%s:%s;}", "#topmasthead", "background-color", $sf_impact_header_background); 
-                    echo $outu;
+                    $outu .= sprintf("%s {%s:%s;}", "#topmasthead", "background-color", $sf_impact_header_background); 
                 }   
                 $site = get_header_textcolor();
-                $outu = sprintf("%s {%s:%s;}", "#site-title a", "color", $site); 
+                $outu .= sprintf("%s {%s:%s;}", ".site-title", "color", $site); 
                 $background = get_background_color();
-                $outu = sprintf("%s {%s:%s;}", "body", "background-color", $background); 
+                $outu .= sprintf("%s {%s:%s;}", "body", "background-color", $background); 
                 echo $outu;
               
                 $sf_impact_content_opacity = $sf_impact_Theme_Mods->getMod( 'sf_impact_content_opacity' );

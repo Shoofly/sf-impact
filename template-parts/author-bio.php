@@ -25,11 +25,6 @@
 
 		?>
         <h3 class="author-title"><?php echo get_the_author(); ?></h3>
-           <div class="author-links">			
-        <a class="author-link" href="<?php echo esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ); ?>" rel="author">
-				<?php printf( __( 'View all posts by %s', 'sf-impact' ), get_the_author() ); ?>
-	    </a>
-    </div>
 	</div><!-- .author-avatar -->
 
 	<div class="author-description">
@@ -41,5 +36,9 @@
 		</p><!-- .author-bio -->
 
 	</div><!-- .author-description -->
- 
+     <div class="author-links">			
+        <a class="author-link" href="<?php echo esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ); ?>" rel="author">
+    			<?php printf( __( 'View all posts by %s', 'sf-impact' ), get_the_author() ); ?>
+        </a>
+    </div>
 </div><!-- .author-info -->

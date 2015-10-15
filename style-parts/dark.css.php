@@ -130,10 +130,6 @@ h3, h4, h5, h6 {
     color: #A96E11;
 }
 
-#site-logo-title, #site-logo-title div {
-    color: #<?php echo get_header_textcolor(); ?>;    
-}
-
 #shoofly-footer {
     color: #000276;
 }
@@ -141,5 +137,11 @@ h3, h4, h5, h6 {
 @media only screen and (max-width: 782px) {
     #primary-menu a:hover, #primary-menu a:focus {
         border-bottom-color: #6e6e6e;
+    }
+}
+
+@media screen and (min-width: 783px) {
+    .post-navigation {
+        border-top-color: #00398F;
     }
 }
