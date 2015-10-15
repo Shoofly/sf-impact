@@ -46,7 +46,7 @@
        
         $wp_customize->add_panel( 'sf_impact_panel', array(
             'title' =>  __('Theme Options', 'sf-impact'),
-            'capability' => 'edit_theme_options', //Capability needed to tweak
+            'capability' => 'edit_theme_options',
             'description' =>  __('Customize Theme Options.', 'sf-impact'),
             'priority' => 2,
       
@@ -60,7 +60,7 @@
           $this->sf_impact_socialMediaOptions($wp_customize);
           $this->sf_impact_highlightSettings($wp_customize);
           $this->sf_impact_editorDefaults($wp_customize);
-
+          $this->sf_impact_customCSS($wp_customize);
             //Setting and control or the Logo Image
   
 
@@ -248,9 +248,9 @@
     {
             $wp_customize->add_section( 'sf_impact_general_options', 
                 array(
-                'title' => __( 'General Options', 'sf-impact' ), //Visible title of section
-                'priority' => 1, //Determines what order this appears in
-                'capability' => 'edit_theme_options', //Capability needed to tweak
+                'title' => __( 'General Options', 'sf-impact' ), 
+                'priority' => 1, 
+                'capability' => 'edit_theme_options',
                 'description' => __('Genearal Theme Settings.', 'sf-impact'), //Descriptive tooltip
                 'panel' => 'sf_impact_panel',
                 ) 
@@ -321,9 +321,9 @@ function sf_impact_pageOptions($wp_customize)
 
                $wp_customize->add_section( 'sf_impact_page_options', 
                 array(
-                'title' => __( 'Page Options', 'sf-impact' ), //Visible title of section
-                'priority' => 1, //Determines what order this appears in
-                'capability' => 'edit_theme_options', //Capability needed to tweak
+                'title' => __( 'Page Options', 'sf-impact' ), 
+                'priority' => 1, 
+                'capability' => 'edit_theme_options',
                 'description' => __('Custom page settings.', 'sf-impact'), //Descriptive tooltip
                 'panel' => 'sf_impact_panel',
                 ) 
@@ -361,9 +361,9 @@ function sf_impact_pageOptions($wp_customize)
     {
             $wp_customize->add_section( 'sf_impact_post_options', 
                 array(
-                'title' => __( 'Post Options', 'sf-impact' ), //Visible title of section
-                'priority' => 1, //Determines what order this appears in
-                'capability' => 'edit_theme_options', //Capability needed to tweak
+                'title' => __( 'Post Options', 'sf-impact' ), 
+                'priority' => 1, 
+                'capability' => 'edit_theme_options',
                 'description' => __('Custom post settings.', 'sf-impact'), //Descriptive tooltip
                 'panel' => 'sf_impact_panel',
                 ) 
@@ -522,9 +522,9 @@ function sf_impact_pageOptions($wp_customize)
         //Thumbnail Grid Options
             $wp_customize->add_section( 'sf_impact_grid_options', 
             array(
-                'title' => __( 'Thumbnail Grid Options', 'sf-impact' ), //Visible title of section
-                'priority' => 1, //Determines what order this appears in
-                'capability' => 'edit_theme_options', //Capability needed to tweak
+                'title' => __( 'Thumbnail Grid Options', 'sf-impact' ), 
+                'priority' => 1, 
+                'capability' => 'edit_theme_options',
                 'description' => __('Customize a thumbnail grid that displays below the header (This feature requires the Featured Image Thumbnail Grid Plugin)', 'sf-impact'), //Descriptive tooltip
                  'panel' => 'sf_impact_panel',
                 ) 
@@ -783,9 +783,9 @@ function sf_impact_pageOptions($wp_customize)
                 //Home Page Settings
             $wp_customize->add_section( 'sf_impact_home_options', 
             array(
-                'title' => __( 'Home Page & Blog Page Options', 'sf-impact' ), //Visible title of section
-                'priority' => 1, //Determines what order this appears in
-                'capability' => 'edit_theme_options', //Capability needed to tweak
+                'title' => __( 'Home Page & Blog Page Options', 'sf-impact' ), 
+                'priority' => 1, 
+                'capability' => 'edit_theme_options',
                 'description' => __('General Options for the Home Page', 'sf-impact'), //Descriptive tooltip
                 'panel' => 'sf_impact_panel',
                 ) 
@@ -968,9 +968,9 @@ function sf_impact_pageOptions($wp_customize)
     {
             $wp_customize->add_section( 'sf_impact_slider_options', 
             array(
-                'title' => __( 'Slide Show Options', 'sf-impact' ), //Visible title of section
-                'priority' => 1, //Determines what order this appears in
-                'capability' => 'edit_theme_options', //Capability needed to tweak
+                'title' => __( 'Slide Show Options', 'sf-impact' ), 
+                'priority' => 1, 
+                'capability' => 'edit_theme_options',
                 'description' => __('Slide show options', 'sf-impact'), //Descriptive tooltip
                 'panel' => 'sf_impact_panel',
                 ) 
@@ -1194,8 +1194,8 @@ function sf_impact_pageOptions($wp_customize)
     {
         $wp_customize->add_section( 'sf_impact_social_media', array(
 			    'title'          => __('Icon Menu', 'sf-impact'),
-			    'priority'       => 10,
-                'capability' => 'edit_theme_options', //Capability needed to tweak
+			    'priority'       => 2,
+                'capability' => 'edit_theme_options',
                 'description' => __('Social Media Icons', 'sf-impact'), //Descriptive tooltip
                 'panel' => 'sf_impact_panel',
 	    ) );
@@ -1302,14 +1302,58 @@ function sf_impact_pageOptions($wp_customize)
 		
 	    }
     }
+        function sf_impact_customCSS($wp_customize)
+    {
+              $wp_customize->add_section( 'sf_impact_custom_css', 
+            array(
+                'title' => __( ' Custom CSS Styles ', 'sf-impact' ), 
+                'priority' => 2, 
+                'capability' => 'edit_theme_options',
+                'description' => __('Add custom CSS styles'), //Descriptive tooltip
+                'panel' => 'sf_impact_panel',
+                ) 
+            ); 
+            $wp_customize->add_setting( 'sf_impact_custom_head_css', array(
+	        'default' => '',
+	        'type' => 'theme_mod',
+	        'capability' => 'edit_theme_options',
+	        'transport' => '',
+	        'sanitize_callback' => 'esc_textarea',
+        ) );
+
+        $wp_customize->add_control( 'sf_impact_custom_head_css', array(
+         'settings' => 'sf_impact_custom_head_css',
+            'type' => 'textarea',
+            'priority' => 10,
+            'section' => 'sf_impact_custom_css',
+            'label' => __( 'Custom CSS for the header', 'textdomain' ),
+            'description' => '',
+        ) );
+          $wp_customize->add_setting( 'sf_impact_custom_footer_css', array(
+	        'default' => '',
+	        'type' => 'theme_mod',
+	        'capability' => 'edit_theme_options',
+	        'transport' => '',
+	        'sanitize_callback' => 'esc_textarea',
+        ) );
+
+        $wp_customize->add_control( 'sf_impact_custom_footer_css', array(
+            'settings' => 'sf_impact_custom_footer_css',
+            'type' => 'textarea',
+            'priority' => 10,
+            'section' => 'sf_impact_custom_css',
+            'label' => __( 'Custom CSS for the footer', 'textdomain' ),
+            'description' => '',
+        ) );
+    }
       function sf_impact_editorDefaults($wp_customize)
     {
-          /*Featured Highlight Section*/
+        
                 $wp_customize->add_section( 'sf_impact_editor_defaults', 
             array(
-                'title' => __( ' Editor Defaults ', 'sf-impact' ), //Visible title of section
-                'priority' => 1, //Determines what order this appears in
-                'capability' => 'edit_theme_options', //Capability needed to tweak
+                'title' => __( ' Editor Defaults ', 'sf-impact' ), 
+                'priority' => 3, 
+                'capability' => 'edit_theme_options',
                 'description' => __('Save time when editing posts and pages by setting these default values', 'sf-impact'), //Descriptive tooltip
                 'panel' => 'sf_impact_panel',
                 ) 
@@ -1382,9 +1426,9 @@ function sf_impact_pageOptions($wp_customize)
             /*Featured Highlight Section*/
                 $wp_customize->add_section( 'sf_impact_highlight_options', 
             array(
-                'title' => __( ' Featured Highlights', 'sf-impact' ), //Visible title of section
-                'priority' => 1, //Determines what order this appears in
-                'capability' => 'edit_theme_options', //Capability needed to tweak
+                'title' => __( ' Featured Highlights', 'sf-impact' ), 
+                'priority' => 1, 
+                'capability' => 'edit_theme_options',
                 'description' => __('Customize the highlight section on the home page', 'sf-impact'), //Descriptive tooltip
                 'panel' => 'sf_impact_panel',
                 ) 
