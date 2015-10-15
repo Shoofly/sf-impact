@@ -151,55 +151,5 @@ function sf_impact_chat_row_id( $chat_author ) {
 	/* Return the array key for the chat author and add "1" to avoid an ID of "0". */
 	return absint( array_search( $chat_author, $_post_format_chat_ids ) ) + 1;
 }
- /*
-* Main code for the header image
-*/
-if (!function_exists('sf_impact_header')):
-    function sf_impact_header($sf_impact_home_header_type, $sf_impact_header_image, $sf_impact_logo_location, $the_slide_query = NULL)
-    {
-       // global $sf_impact_Theme_Mods;
-        
-        $top = TRUE;
- 
-/*        $sf_impact_header_image = $sf_impact_Theme_Mods->getMod( 'sf_impact_header_image' );
-        $sf_impact_logo_location = $sf_impact_Theme_Mods->getMod( 'sf_impact_logo_location' );
-        $sf_impact_home_header_type = $sf_impact_Theme_Mods->getMod( 'sf_impact_home_header_type' );
-  */   
-        if ($sf_impact_header_image && $sf_impact_logo_location == 'image')
-            $top = FALSE;
-            
-       
-         $wclass = sf_impact_get_home_header_class();
-         $hstyle = sf_impact_get_home_header_height();
-    
-   
-         if ($sf_impact_home_header_type == "1" && isset($the_slide_query))
-         {     
-          
-            sf_impact_get_slideshow($the_slide_query, $wclass, $hstyle);
-         }
-         else 
-         {
-             if ($sf_impact_header_image && $sf_impact_home_header_type == "0")
-             {
-                ?>
-              <div class="header-container-home <?php echo $wclass?> ">
-                <img class="headerimg" alt="header" style="<?php echo  $hstyle?>;" src="<?php echo $sf_impact_header_image?>"/>
-               </div>
-                <?php 
-                $output = "";
-                $output = apply_filters('sf_impact_home_post_bar', $output);
-                if ( $output != '' )
-                {
-                    ?><div id="homepostbar">
-                    <?php
-                            echo $output;?>
-                    </div>
-                    <?php
-                }
-             }
-         }
-    
-    }
-endif;
+
 ?>

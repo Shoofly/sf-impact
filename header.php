@@ -137,20 +137,19 @@
         ?>
             
         <div class="sfly-headerimg <?php echo $xClass; ?>">
-            <?php    
-             if ($logo=="image")
-            {?>
-                <div class="site-branding fixed shoofly-branding-image" >
-                    <?php get_template_part('template-parts/branding');?>
-		        </div>
-             <?php 
-            }
+            <?php
             if (!$homeimage) //If this is not the home image or the front page, display the url
             {
                 if ( $url )
                 {
-                    ?>
-                  
+                     
+                     if ($logo=="image")
+                    {?>
+                        <div class="site-branding fixed shoofly-branding-image" >
+                            <?php get_template_part('template-parts/branding');?>
+		                </div>
+                     <?php 
+                    }?>
                     <div class="header-container-inner">
                         <img class="headerimg headerimg-page" src="<?php echo $url; ?>" alt="header" >
                     </div>
@@ -159,7 +158,7 @@
             }
             else
             {
-                sf_impact_header($sf_impact_home_header_type, $sf_impact_header_image, $sf_impact_logo_location, $the_slide_query );
+                sf_impact_header($sf_impact_home_header_type, $sf_impact_header_image, $sf_impact_logo_location, $the_slide_query, $logo );
             }
     
         ?>

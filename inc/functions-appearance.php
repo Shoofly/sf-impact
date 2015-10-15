@@ -18,14 +18,18 @@ if (!function_exists('sf_impact_get_home_header_class')):
     }
 endif;
 if (!function_exists('sf_impact_get_home_header_height')):
-    function sf_impact_get_home_header_height()
+    function sf_impact_get_home_header_height($max=false)
     {
         global $sf_impact_Theme_Mods;
             $sf_impact_header_height = $sf_impact_Theme_Mods->getMod( 'sf_impact_header_height' );
             $style = "";
-        
+            
             if ($sf_impact_header_height)
-                    $style .= "height:" . $sf_impact_header_height . ";";
+            {
+                if ($max) $h = "max-height"; else $h = "height";
+                $style .="$h:$sf_impact_header_height;";
+            }
+                    
             return $style;
     }
 endif;
@@ -514,7 +518,71 @@ if ( ! function_exists( 'sf_impact_postContentFullPage' ) ) :
         return $full;
     }
 endif;
+ /*
+* Main code for the header image
+*/
+if (!function_exists('sf_impact_header')):
+    function sf_impact_header($sf_impact_home_header_type, $sf_impact_header_image, $sf_impact_logo_location, $the_slide_query = NULL, $logo="top")
+    {
+       // global $sf_impact_Theme_Mods;
+        
+        $top = TRUE;
+ 
+/*        $sf_impact_header_image = $sf_impact_Theme_Mods->getMod( 'sf_impact_header_image' );
+        $sf_impact_logo_location = $sf_impact_Theme_Mods->getMod( 'sf_impact_logo_location' );
+        $sf_impact_home_header_type = $sf_impact_Theme_Mods->getMod( 'sf_impact_home_header_type' );
+  */   
+        if ($sf_impact_header_image && $sf_impact_logo_location == 'image')
+            $top = FALSE;
+            
+       
+         $wclass = sf_impact_get_home_header_class();
+        
+    
+   
+         if ($sf_impact_home_header_type == "1" && isset($the_slide_query))
+         {     
+           $hstyle = sf_impact_get_home_header_height();
+            sf_impact_get_slideshow($the_slide_query, $wclass, $hstyle);
+         }
+         else 
+         {
+             if ($sf_impact_header_image && $sf_impact_home_header_type == "0")
+             {
+                  $hstyle = sf_impact_get_home_header_height(true);
+                  if ($hstyle) $hstyle = "style='$hstyle'";
+                ?>
+              <div class="header-container-home <?php echo $wclass?> ">
 
+            <?php    
+             if ($logo=="image")
+            {?>
+                <div class="header-container-home-inner">
+                <div class="site-branding fixed shoofly-branding-image" >
+                    <?php get_template_part('template-parts/branding');?>
+		        </div>
+             <?php 
+            }?>
+                <img class="headerimg" alt="header" <?php echo  $hstyle?> src="<?php echo $sf_impact_header_image?>"/>
+               </div>
+                <?php if ($logo == "image") ?>
+                    </div>
+                <?php 
+                $output = "";
+                $output = apply_filters('sf_impact_home_post_bar', $output);
+                if ( $output != '' )
+                {
+                    ?><div id="homepostbar">
+                    <?php
+                            echo $output;?>
+                    </div>
+                    <?php
+                }
+             }
+         }
+    
+    }
+endif;
 // end functions
 
 ?>

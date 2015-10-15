@@ -22,8 +22,8 @@
         add_action( 'customize_register' , array( $this , 'sf_impact_customize_register' ) );
 
         // Output custom CSS to live site
-        add_action( 'wp_head' , array( $this , 'sf_impact_header_output' ) );
-
+        add_action( 'wp_head' , array( $this, 'sf_impact_header_output' ) );
+        add_action( 'wp_footer', array($this, 'sf_impact_footer_output'));
         // Enqueue live preview javascript in Theme Customizer admin screen
         add_action( 'customize_preview_init' , array( $this , 'sf_impact_customize_preview_js' ) );     
     }
@@ -1676,7 +1676,17 @@ function sf_impact_pageOptions($wp_customize)
 	    wp_enqueue_script( 'sf_impact_customizer', get_template_directory_uri() . '/js/customizer.js', array( 'jquery', 'customize-preview' ), '20130508', true );
     }
 
-
+    public function sf_impact_footer_output()
+    {
+       
+          $sf_impact_custom_footer_css = $sf_impact_Theme_Mods->getMod( 'sf_impact_custom_footer_css', '' );
+          if ($sf_impact_custom_footer_css != '') 
+          {
+             ?>
+            <style><?php echo $sf_impact_custom_footer_css;?></style>
+            <?php
+          }
+    }
 
     public function sf_impact_header_output() 
     {
@@ -1685,7 +1695,8 @@ function sf_impact_pageOptions($wp_customize)
             <!--Customizer CSS--> 
             <style type="text/css">
                 <?php 
-                 
+                $sf_impact_custom_head_css = $sf_impact_Theme_Mods->getMod( 'sf_impact_custom_head_css', '' );
+              
                 $sf_impact_header_background = $sf_impact_Theme_Mods->getMod( 'sf_impact_header_background' );
                 $sf_impact_content_background  = $sf_impact_Theme_Mods->getMod( 'sf_impact_content_background' );
                 $sf_impact_header_opacity = $sf_impact_Theme_Mods->getMod( 'sf_impact_header_opacity' );
@@ -1709,12 +1720,13 @@ function sf_impact_pageOptions($wp_customize)
                 } else {
                     $outu = sprintf("%s {%s:%s;}", "#masthead, #content", "background-color", $sf_impact_content_background);                      echo $outu;
                 }           
-
+                if ($sf_impact_custom_head_css != '') 
+                    echo $sf_impact_custom_head_css;
                 ?>
             </style> 
             <!--/Customizer CSS-->
             <?php
-        }
+    }
    
 // Output custom CSS to live site
 
