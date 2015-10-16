@@ -30,7 +30,7 @@
 
     
     public function  sf_impact_customize_register( $wp_customize ) {
-        include get_template_directory() . '/inc/highlightsettings.php';
+     
         global $sf_impact_Theme_Mods;
       
       
