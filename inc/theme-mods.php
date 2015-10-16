@@ -31,14 +31,13 @@ class sf_impact_Theme_Mods
     }
     public function getDefault($key)
     {
-        
-       return get_theme_mod($key, self::$default[$this->handle][$key]) ? get_theme_mod($key, self::$default[$this->handle][$key]) : NULL;
+       return get_theme_mod($key, $this->retrieveDefault($key)) ? get_theme_mod($key, $this->retrieveDefault($key)) : NULL;
         
     }
     public function setDefault($key, $default) 
     {
 
-        if($default === false) $default = 0;
+        if( $default === false ) $default = 0;
         self::$default[$this->handle][$key] = $default;
         
        $this->getMod($key);
@@ -51,7 +50,16 @@ class sf_impact_Theme_Mods
     public function setDefaults(Array $array) {
         
         self::$defaults[$this->handle] = array_merge(self::$defaults[$this->handle],$array);
-   }
+    }
+    
+    private function retrieveDefault($key) {
+        if ( isset(self::$default[$this->handle][$key]) ) {
+            return self::$default[$this->handle][$key];
+        } else {
+            return null;
+        }
+    }
+    
     /*
     * Get the theme mod setting
     * $key - the name of the modification
