@@ -15,12 +15,11 @@
 <html <?php language_attributes(); ?>>
     <head>
         <meta charset="<?php bloginfo( 'charset' ); ?>" />
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title><?php wp_title(); ?></title>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
         <link rel="profile" href="http://gmpg.org/xfn/11" />
         <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
-        <?php if ( is_singular() && get_option( 'thread_comments' ) ) wp_enqueue_script( 'comment-reply' ); ?>
-        <html <?php language_attributes(); ?>>
+
+    
         <?php wp_head(); ?>
     </head>
     
@@ -43,7 +42,7 @@
     $sf_impact_menu_location = get_theme_mod('sf_impact_menu_location', 'above');
     $sf_impact_home_header_type = get_theme_mod('sf_impact_home_header_type', '3');
     $sf_impact_header_image = get_theme_mod('sf_impact_header_image', '');
-    $sf_impact_social_above_content = get_theme_mod('sf_impact_social_above_content', true);
+    $sf_impact_social_above_content = get_theme_mod('sf_impact_social_above_content', false);
     $sf_impact_social_above_menu = get_theme_mod('sf_impact_social_above_menu', false);
     //Is this the home page or the front page (and not the blog page) and the header type is not default display the custom home page header image/slide show
     if ((is_home() || is_front_page()) && $sf_impact_home_header_type != "3" && !$wp_query -> is_posts_page)

@@ -32,12 +32,12 @@ if ($sf_impact_logo_image != '') {
             <?php if($sf_impact_logo_image != '')
             {?>
         	<a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home">
-                <img src="<?php echo $sf_impact_logo_image; ?>" alt="Logo"/>
+                <img src="<?php echo $sf_impact_logo_image; ?>" alt="get_the_title"/>
         	</a>
             <?php 
             }
             else
-                {?>
+            {?>
                 <div class="site-title">
                     <a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home">
                         <?php echo get_bloginfo('name'); ?>
@@ -46,7 +46,8 @@ if ($sf_impact_logo_image != '') {
                 <div class="site-description">
                     <?php echo get_bloginfo('description');?>
                 </div>
-                <?php } 
+                <?php
+            } 
             ?>
-        </a>
+      
 </div>

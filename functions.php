@@ -385,7 +385,7 @@ if (!function_exists('sf_impact_scripts')):
         wp_register_style('sf_impact_theme_styles', $themedir . '/styles/app.css', '1.0');
       
         wp_enqueue_style("sf_impact_theme_styles");
-        
+  
         ob_start();
         include( $linkTheme->getCustomThemePath($custom_style) );
         

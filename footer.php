@@ -13,7 +13,9 @@
 	</div><!-- #content -->
  
 	<footer id="colophon" class="site-footer fixed" role="contentinfo">
-      
+       <?php $sf_impact_social_above_footer = get_theme_mod('sf_impact_social_above_footer', false);
+           
+            if ($sf_impact_social_above_footer) sf_impact_social_media_icons(); ?>
         <?php get_sidebar('footer');
         $footer =   $sf_impact_footer_text = get_theme_mod("sf_impact_footer_text", "&copy; 2015 Shoofly Solutions ");
         ?>

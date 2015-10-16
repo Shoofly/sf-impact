@@ -44,13 +44,13 @@
                 ) 
             );      
        
-        $wp_customize->add_panel( 'sf_impact_panel', array(
+       /* $wp_customize->add_panel( 'sf_impact_panel', array(
             'title' =>  __('Theme Options', 'sf-impact'),
             'capability' => 'edit_theme_options',
             'description' =>  __('Customize Theme Options.', 'sf-impact'),
             'priority' => 2,
       
-          ));
+          ));*/
           $this->sf_impact_generalOptions($wp_customize);
           $this->sf_impact_homePageOptions($wp_customize);
           $this->sf_impact_postOptions($wp_customize);
@@ -247,11 +247,11 @@
     {
             $wp_customize->add_section( 'sf_impact_general_options', 
                 array(
-                'title' => __( 'General Options', 'sf-impact' ), 
+                'title' => __( 'General Theme Options', 'sf-impact' ), 
                 'priority' => 1, 
                 'capability' => 'edit_theme_options',
                 'description' => __('Genearal Theme Settings.', 'sf-impact'), //Descriptive tooltip
-                'panel' => 'sf_impact_panel',
+                //'panel' => 'sf_impact_panel',
                 ) 
             );
            
@@ -324,7 +324,7 @@ function sf_impact_pageOptions($wp_customize)
                 'priority' => 1, 
                 'capability' => 'edit_theme_options',
                 'description' => __('Custom page settings.', 'sf-impact'), //Descriptive tooltip
-                'panel' => 'sf_impact_panel',
+                //'panel' => 'sf_impact_panel',
                 ) 
             );
  
@@ -364,7 +364,7 @@ function sf_impact_pageOptions($wp_customize)
                 'priority' => 1, 
                 'capability' => 'edit_theme_options',
                 'description' => __('Custom post settings.', 'sf-impact'), //Descriptive tooltip
-                'panel' => 'sf_impact_panel',
+                //'panel' => 'sf_impact_panel',
                 ) 
             );
            
@@ -525,7 +525,7 @@ function sf_impact_pageOptions($wp_customize)
                 'priority' => 1, 
                 'capability' => 'edit_theme_options',
                 'description' => __('Customize a thumbnail grid that displays below the header (This feature requires the Featured Image Thumbnail Grid Plugin)', 'sf-impact'), //Descriptive tooltip
-                 'panel' => 'sf_impact_panel',
+                 //'panel' => 'sf_impact_panel',
                 ) 
             ); 
            if (class_exists('sfly_thumbnailgrid'))
@@ -786,7 +786,7 @@ function sf_impact_pageOptions($wp_customize)
                 'priority' => 1, 
                 'capability' => 'edit_theme_options',
                 'description' => __('General Options for the Home Page', 'sf-impact'), //Descriptive tooltip
-                'panel' => 'sf_impact_panel',
+                //'panel' => 'sf_impact_panel',
                 ) 
             );
    
@@ -971,7 +971,7 @@ function sf_impact_pageOptions($wp_customize)
                 'priority' => 1, 
                 'capability' => 'edit_theme_options',
                 'description' => __('Slide show options', 'sf-impact'), //Descriptive tooltip
-                'panel' => 'sf_impact_panel',
+                //'panel' => 'sf_impact_panel',
                 ) 
             ); 
           $wp_customize->add_setting( "slidelabel1", array(   'transport' => 'refresh', 'sanitize_callback' => 'sanitize_text_field') );
@@ -1196,7 +1196,7 @@ function sf_impact_pageOptions($wp_customize)
 			    'priority'       => 2,
                 'capability' => 'edit_theme_options',
                 'description' => __('Social Media Icons', 'sf-impact'), //Descriptive tooltip
-                'panel' => 'sf_impact_panel',
+                //'panel' => 'sf_impact_panel',
 	    ) );
             $wp_customize->add_setting( 'sf_impact_social_above_menu', 
                 array(
@@ -1222,9 +1222,11 @@ function sf_impact_pageOptions($wp_customize)
                 )
                  
             ) );  
+ 
+ 
             $wp_customize->add_setting( 'sf_impact_social_above_content', 
                 array(
-                'default' => true, 
+                'default' => false, 
                 'type' => 'theme_mod', 
                 'capability' => 'edit_theme_options', 
                 'transport' => 'refresh', 
@@ -1245,7 +1247,31 @@ function sf_impact_pageOptions($wp_customize)
 
                 )
                   
-            ) );  
+            ) ); 
+             $wp_customize->add_setting( 'sf_impact_social_above_footer', 
+                array(
+                'default' => false, 
+                'type' => 'theme_mod', 
+                'capability' => 'edit_theme_options', 
+                'transport' => 'refresh', 
+                'sanitize_callback' => 'sf_impact_sanitize_checkbox'
+                ) 
+            );      
+
+            $wp_customize->add_control( new WP_Customize_Control (
+   
+                $wp_customize, 
+                'sf_impact_social_above_footer', 
+                array(
+                'label' => __( 'Display above footer', 'sf-impact' ), 
+                'section' => 'sf_impact_social_media', 
+                'settings' => 'sf_impact_social_above_footer', 
+                'priority' => 10, 
+                'type'     => 'checkbox',
+
+                )
+                 
+            ) );              
             $wp_customize->add_setting( 'sf_impact_icon_size', 
                 array(
                 'default' => "1g", 
@@ -1309,7 +1335,7 @@ function sf_impact_pageOptions($wp_customize)
                 'priority' => 2, 
                 'capability' => 'edit_theme_options',
                 'description' => __('Add custom CSS styles'), //Descriptive tooltip
-                'panel' => 'sf_impact_panel',
+                //'panel' => 'sf_impact_panel',
                 ) 
             ); 
             $wp_customize->add_setting( 'sf_impact_custom_head_css', array(
@@ -1354,7 +1380,7 @@ function sf_impact_pageOptions($wp_customize)
                 'priority' => 3, 
                 'capability' => 'edit_theme_options',
                 'description' => __('Save time when editing posts and pages by setting these default values', 'sf-impact'), //Descriptive tooltip
-                'panel' => 'sf_impact_panel',
+                //'panel' => 'sf_impact_panel',
                 ) 
             ); 
   
@@ -1430,7 +1456,7 @@ function sf_impact_pageOptions($wp_customize)
                 'priority' => 1, 
                 'capability' => 'edit_theme_options',
                 'description' => __('Customize the highlight section on the home page', 'sf-impact'), //Descriptive tooltip
-                'panel' => 'sf_impact_panel',
+                //'panel' => 'sf_impact_panel',
                 ) 
             ); 
         $wp_customize->add_setting( "hlabel6", array(   'transport' => 'refresh', 'sanitize_callback' => 'sanitize_text_field') );
@@ -1679,7 +1705,7 @@ function sf_impact_pageOptions($wp_customize)
 
     public function sf_impact_footer_output()
     {
-       
+       global $sf_impact_Theme_Mods;
           $sf_impact_custom_footer_css = $sf_impact_Theme_Mods->getMod( 'sf_impact_custom_footer_css', '' );
           if ($sf_impact_custom_footer_css != '') 
           {
