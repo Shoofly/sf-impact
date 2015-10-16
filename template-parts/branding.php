@@ -21,13 +21,16 @@ $logoCss = "";
 if ($sf_impact_logo_image != '') {
     $headerLogo = true;
     $logoCss = ' class="site-logo"';
+    $brandingCss = ' site-branding-logo';
 } elseif (display_header_text() == 1) {
     $headerText = true;
     $logoCss = ' class="site-text"';
+    $brandingCss = ' site-branding-text';
 }
 ?>
-    <div id="site-logo-title"<?php echo $logoCss; ?>>
 
+<div class="site-branding fixed<?php echo $brandingCss; ?>" >
+    <div id="site-logo-title"<?php echo $logoCss; ?>>
 
             <?php if($sf_impact_logo_image != '')
             {?>
@@ -49,5 +52,6 @@ if ($sf_impact_logo_image != '') {
                 <?php
             } 
             ?>
-      
+            
+    </div>
 </div>

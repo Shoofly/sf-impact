@@ -109,11 +109,9 @@
                 if ($logo == "top")   //If the logo or title is on top, display it here 
                 {
                     ?>
-                    <div class="site-branding fixed" >
                     <?php
                     get_template_part('template-parts/branding');
-                    ?>
-                    </div>               
+                    ?>             
                 <?php
             
                 }?>
