@@ -892,6 +892,15 @@ if (!function_exists('sf_impact_setDefaults')):
         $sf_impact_Theme_Mods->setDefault( 'sf_impact_menu_location', 'above');
         $sf_impact_Theme_Mods->setDefault( 'sf_impact_header_stretch', true);
         $sf_impact_Theme_Mods->setDefault('sf_impact_social_above_menu', true);
+        $sf_impact_Theme_Mods->setDefault('sf_impact_show_author', FALSE);
+        $sf_impact_Theme_Mods->setDefault('sf_impact_post_header', FALSE);
+        $sf_impact_Theme_Mods->setDefault('sf_impact_show_thumbnail_excerpt', false);
+        $sf_impact_Theme_Mods->setDefault('sf_impact_page_header', false);
+        $sf_impact_Theme_Mods->setDefault('sf_impact_social_above_content', false); 
+        $sf_impact_Theme_Mods->setDefault('sf_impact_social_above_footer', false);
+        $sf_impact_Theme_Mods->setDefault('sf_impact_custom_head_css', '');
+        $sf_impact_Theme_Mods->setDefault('sf_impact_social_above_footer', '');
+   
     }
 endif;
 ?>
