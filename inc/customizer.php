@@ -36,7 +36,7 @@
       
         $wp_customize->add_setting( 'sf_impact_demo_data', 
                 array(
-                    'default' => false, 
+                    'default' => $sf_impact_Theme_Mods->getDefault('sf_impact_demo_data'),
                     'type' => 'theme_mod', 
                     'capability' => 'edit_theme_options', 
                     'transport' => 'refresh', 
@@ -66,7 +66,7 @@
 
             $wp_customize->add_setting( 'sf_impact_logo_image', 
                 array(
-                'default' => $sf_impact_Theme_Mods->getMod('sf_impact_logo_image'),
+                'default' => $sf_impact_Theme_Mods->getDefault('sf_impact_logo_image'),
                 'type' => 'theme_mod', 
                 'capability' => 'edit_theme_options', 
                 'transport' => 'refresh', 
@@ -91,7 +91,7 @@
             //Setting for Logo or title location above or on image (if there is an image)               
             $wp_customize->add_setting( 'sf_impact_logo_location', 
                 array(
-                'default' => "image", 
+                'default' => $sf_impact_Theme_Mods->getDefault('sf_impact_logo_location'), 
                 'type' => 'theme_mod', 
                 'capability' => 'edit_theme_options', 
                 'transport' => 'refresh', 
@@ -117,7 +117,7 @@
             ) );   
         $wp_customize->add_setting( 'sf_impact_color_theme',
             array(
-    	        'default' 		=> 'light',
+    	        'default' => $sf_impact_Theme_Mods->getDefault('sf_impact_color_theme'),
     	        'type' 			=> 'theme_mod',
     	        'capability' 	=> 'edit_theme_options',
     	        'transport' 	=> 'refresh',
@@ -148,7 +148,7 @@
   
         $wp_customize->add_setting( 'sf_impact_header_opacity', 
             array(
-                'default' => "0", 
+               'default' => $sf_impact_Theme_Mods->getDefault('sf_impact_header_opacity'),
                 'type' => 'theme_mod', 
                 'capability' => 'edit_theme_options', 
                 'transport' => 'refresh', 
@@ -173,7 +173,7 @@
         ) );  
         $wp_customize->add_setting( 'sf_impact_header_background', 
             array(
-            'default' => '#3A3A3A', 
+            'default' => $sf_impact_Theme_Mods->getDefault('sf_impact_header_background'),
             'type' => 'theme_mod', 
             'capability' => 'edit_theme_options', 
             'transport' => 'refresh', 
@@ -193,7 +193,7 @@
         );
       $wp_customize->add_setting( 'sf_impact_content_opacity', 
             array(
-            'default' => "100", 
+            'default' => $sf_impact_Theme_Mods->getDefault('sf_impact_content_opacity'),
             'type' => 'theme_mod', 
             'capability' => 'edit_theme_options', 
             'transport' => 'refresh', 
@@ -218,7 +218,7 @@
         ) );  
         $wp_customize->add_setting( 'sf_impact_content_background', 
             array(
-            'default' => '#F5F5F5', 
+            'default' => $sf_impact_Theme_Mods->getDefault('sf_impact_content_background'),
             'type' => 'theme_mod', 
             'capability' => 'edit_theme_options', 
             'transport' => 'refresh', 
@@ -245,6 +245,7 @@
 }
     function sf_impact_generalOptions($wp_customize)
     {
+        global $sf_impact_Theme_Mods;
             $wp_customize->add_section( 'sf_impact_general_options', 
                 array(
                 'title' => __( 'General Theme Options', 'sf-impact' ), 
@@ -261,7 +262,7 @@
             //Setting for Logo or title location above or on image (if there is an image)               
             $wp_customize->add_setting( 'sf_impact_menu_location', 
                 array(
-                'default' => "above", 
+                'default' => $sf_impact_Theme_Mods->getDefault('sf_impact_menu_location'),
                 'type' => 'theme_mod', 
                 'capability' => 'edit_theme_options', 
                 'transport' => 'refresh', 
@@ -290,8 +291,8 @@
             $data = __( '© 2015 Shoofly Solutions', 'sf-impact' );
             $wp_customize->add_setting( 'sf_impact_footer_text', 
                 array(
-                'default' =>  $data, 
-                    'type' => 'theme_mod', 
+                'default' => $sf_impact_Theme_Mods->getDefault('sf_impact_footer_text'),
+                'type' => 'theme_mod', 
                 'capability' => 'edit_theme_options', 
                 'transport' => 'refresh', 
                 'sanitize_callback' => 'esc_html',
@@ -317,7 +318,7 @@
 function sf_impact_pageOptions($wp_customize)
 {
  
-
+    global $sf_impact_Theme_Mods;
                $wp_customize->add_section( 'sf_impact_page_options', 
                 array(
                 'title' => __( 'Page Options', 'sf-impact' ), 
@@ -339,7 +340,7 @@ function sf_impact_pageOptions($wp_customize)
             //Setting to featured image on pages
             $wp_customize->add_setting( 'sf_impact_page_header', 
                 array(
-                'default' => false, 
+                'default' => $sf_impact_Theme_Mods->getDefault('sf_impact_page_header'),
                 'type' => 'theme_mod', 
                 'capability' => 'edit_theme_options', 
                 'transport' => 'refresh', 
@@ -358,6 +359,7 @@ function sf_impact_pageOptions($wp_customize)
 }
    function sf_impact_postOptions($wp_customize)
     {
+        global $sf_impact_Theme_Mods;
             $wp_customize->add_section( 'sf_impact_post_options', 
                 array(
                 'title' => __( 'Post Options', 'sf-impact' ), 
@@ -376,7 +378,7 @@ function sf_impact_pageOptions($wp_customize)
            //Setting to show author
             $wp_customize->add_setting( 'sf_impact_show_author', 
                 array(
-                'default' => true, 
+                'default' => $sf_impact_Theme_Mods->getDefault('sf_impact_show_author'),
                 'type' => 'theme_mod', 
                 'capability' => 'edit_theme_options', 
                 'transport' => 'refresh', 
@@ -403,7 +405,7 @@ function sf_impact_pageOptions($wp_customize)
             //Setting to featured image on posts
             $wp_customize->add_setting( 'sf_impact_post_header', 
                 array(
-                'default' => false, 
+                'default' => $sf_impact_Theme_Mods->getDefault('sf_impact_post_header'),
                 'type' => 'theme_mod', 
                 'capability' => 'edit_theme_options', 
                 'transport' => 'refresh', 
@@ -427,7 +429,7 @@ function sf_impact_pageOptions($wp_customize)
             //Setting to show thumbnail excerpts
             $wp_customize->add_setting( 'sf_impact_show_thumbnail_excerpt', 
                 array(
-                'default' => FALSE, 
+                'default' => $sf_impact_Theme_Mods->getDefault('sf_impact_show_thumbnail_excerpt'), 
                 'type' => 'theme_mod', 
                 'capability' => 'edit_theme_options', 
                 'transport' => 'refresh', 
@@ -447,7 +449,7 @@ function sf_impact_pageOptions($wp_customize)
             //Setting to show full posts or excerpts on archive pages
             $wp_customize->add_setting( 'sf_impact_show_excerpt_archive_post', 
                 array(
-                'default' => TRUE, 
+                'default' => $sf_impact_Theme_Mods->getDefault('sf_impact_show_excerpt_archive_post'), 
                 'type' => 'theme_mod', 
                 'capability' => 'edit_theme_options', 
                 'transport' => 'refresh', 
@@ -456,7 +458,7 @@ function sf_impact_pageOptions($wp_customize)
             );      
             
             $wp_customize->add_control( 'sf_impact_show_excerpt_archive_post', array(
-                'settings' => 'sf_impact_show_excerpt_archive_post',
+             
                 'label'    => __( 'Display excerpts on archive pages', 'sf-impact'),
                 'section'  => 'sf_impact_post_options',
                             'priority' => 10,
@@ -465,7 +467,7 @@ function sf_impact_pageOptions($wp_customize)
             //Setting to show full page or excerpts on blog pages
             $wp_customize->add_setting( 'sf_impact_show_excerpt_blog_post', 
                 array(
-                'default' => TRUE, 
+                'default' => $sf_impact_Theme_Mods->getDefault('sf_impact_show_excerpt_blog_post'),  
                 'type' => 'theme_mod', 
                 'capability' => 'edit_theme_options', 
                 'transport' => 'refresh', 
@@ -493,7 +495,7 @@ function sf_impact_pageOptions($wp_customize)
                 //Setting to show full posts or excerpts for sticky posts
             $wp_customize->add_setting( 'sf_impact_show_full_sticky_post', 
                 array(
-                'default' => true, 
+                 'default' => $sf_impact_Theme_Mods->getDefault('sf_impact_show_full_sticky_post'),
                 'type' => 'theme_mod', 
                 'capability' => 'edit_theme_options', 
                 'transport' => 'refresh', 
@@ -518,6 +520,7 @@ function sf_impact_pageOptions($wp_customize)
     }  
     function sf_impact_thumbnailGridOptions($wp_customize)
     {
+        global $sf_impact_Theme_Mods;
         //Thumbnail Grid Options
             $wp_customize->add_section( 'sf_impact_grid_options', 
             array(
@@ -533,7 +536,7 @@ function sf_impact_pageOptions($wp_customize)
                 //Display Grid on HOme Page
                 $wp_customize->add_setting( 'sf_impact_grid_display', 
                     array(
-                    'default' => FALSE, 
+                    'default' => $sf_impact_Theme_Mods->getDefault('sf_impact_grid_display'),
                     'type' => 'theme_mod', 
                     'capability' => 'edit_theme_options', 
                     'transport' => 'refresh', 
@@ -551,7 +554,7 @@ function sf_impact_pageOptions($wp_customize)
                 //Display Grid on all pages
                 $wp_customize->add_setting( 'sf_impact_grid_display_all', 
                     array(
-                    'default' => FALSE, 
+                    'default' => $sf_impact_Theme_Mods->getDefault('sf_impact_grid_display_all'),
                     'type' => 'theme_mod', 
                     'capability' => 'edit_theme_options', 
                     'transport' => 'refresh', 
@@ -569,7 +572,7 @@ function sf_impact_pageOptions($wp_customize)
                 //Title for the Grid 
                     $wp_customize->add_setting( 'sf_impact_grid_title', 
                     array(
-                    'default' => "Recent Posts", 
+                    'default' => $sf_impact_Theme_Mods->getDefault('sf_impact_grid_title'),
                     'type' => 'theme_mod', 
                     'capability' => 'edit_theme_options', 
                     'transport' => 'refresh', 
@@ -594,7 +597,7 @@ function sf_impact_pageOptions($wp_customize)
                 //Text to click to full category page
                     $wp_customize->add_setting( 'sf_impact_grid_more', 
                     array(
-                    'default' => "More Recent Posts", 
+                     'default' => $sf_impact_Theme_Mods->getDefault('sf_impact_grid_more'),
                     'type' => 'theme_mod', 
                     'capability' => 'edit_theme_options', 
                     'transport' => 'refresh', 
@@ -620,7 +623,7 @@ function sf_impact_pageOptions($wp_customize)
                 //Text to display thumbnails for posts or pages
                 $wp_customize->add_setting( 'sf_impact_grid_type', 
                     array(
-                    'default' => "post", 
+                    'default' => $sf_impact_Theme_Mods->getDefault('sf_impact_grid_type'),
                     'type' => 'theme_mod', 
                     'capability' => 'edit_theme_options', 
                     'transport' => 'refresh', 
@@ -641,15 +644,15 @@ function sf_impact_pageOptions($wp_customize)
                     'priority' => 10, 
                     'type'     => 'radio',
 		        'choices'  => array(
-			        'post'  => __('post', 'sf-impact'),
-			        'page' => __('page', 'sf-impact'),
+			        'post'  => __('Post', 'sf-impact'),
+			        'page' => __('Page', 'sf-impact'),
                     )
                     ) 
                 ) );
                 //Category for the grid
                 $wp_customize->add_setting( 'sf_impact_post_category', array(
-                    'default'        => '',
-                        'type' => 'theme_mod', 
+                    'default' => $sf_impact_Theme_Mods->getDefault('sf_impact_post_category'),
+                    'type' => 'theme_mod', 
                     'capability' => 'edit_theme_options', 
                     'transport' => 'refresh', 
                     'sanitize_callback' => 'sf_impact_sanitize_category'
@@ -663,8 +666,8 @@ function sf_impact_pageOptions($wp_customize)
  
                 //Page to link to if All is selected - Will display standard 'blog' page
                 $wp_customize->add_setting( 'sf_impact_thumbnail_more_page', array(
-                    'default'        => '',
-                        'type' => 'theme_mod', 
+                    'default' => $sf_impact_Theme_Mods->getDefault('sf_impact_thumbnail_more_page'),
+                     'type' => 'theme_mod', 
                     'capability' => 'edit_theme_options', 
                     'transport' => 'refresh', 
                     'sanitize_callback' => 'sf_impact_sanitize_dropdown_pages'
@@ -679,7 +682,7 @@ function sf_impact_pageOptions($wp_customize)
                 //Number of thumbnails to display
                 $wp_customize->add_setting( 'sf_impact_grid_posts', 
                         array(
-                        'default' => "4", 
+                        'default' => $sf_impact_Theme_Mods->getDefault('sf_impact_grid_posts'),
                         'type' => 'theme_mod', 
                         'capability' => 'edit_theme_options', 
                         'transport' => 'refresh', 
@@ -700,8 +703,8 @@ function sf_impact_pageOptions($wp_customize)
                     ) );
                 //Wordpress Image Size
                 $wp_customize->add_setting( 'sf_impact_image_size_name', array(
-                    'default'        => 'thumbnail',
-                        'type' => 'theme_mod', 
+                    'default' => $sf_impact_Theme_Mods->getDefault('sf_impact_image_size_name'),
+                    'type' => 'theme_mod', 
                     'capability' => 'edit_theme_options', 
                     'transport' => 'refresh', 
                     'sanitize_callback' => 'sf_impact_sanitize_select'
@@ -716,7 +719,7 @@ function sf_impact_pageOptions($wp_customize)
                 //Image Height
                 $wp_customize->add_setting( 'sf_impact_grid_image_height', 
                     array(
-                    'default' => "", 
+                    'default' => $sf_impact_Theme_Mods->getDefault('sf_impact_grid_image_height'),
                     'type' => 'theme_mod', 
                     'capability' => 'edit_theme_options', 
                     'transport' => 'refresh', 
@@ -740,7 +743,7 @@ function sf_impact_pageOptions($wp_customize)
                 //Image Width
                 $wp_customize->add_setting( 'sf_impact_grid_image_width', 
                     array(
-                    'default' => "", 
+                    'default' => $sf_impact_Theme_Mods->getDefault('sf_impact_grid_image_width'), 
                     'type' => 'theme_mod', 
                     'capability' => 'edit_theme_options', 
                     'transport' => 'refresh', 
@@ -779,6 +782,7 @@ function sf_impact_pageOptions($wp_customize)
     }
     function sf_impact_homePageOptions($wp_customize)
     {
+        global $sf_impact_Theme_Mods;
                 //Home Page Settings
             $wp_customize->add_section( 'sf_impact_home_options', 
             array(
@@ -793,7 +797,7 @@ function sf_impact_pageOptions($wp_customize)
             //Setting to display sidebar on home page
             $wp_customize->add_setting( 'sf_impact_home_sidebar', 
                 array(
-                'default' => TRUE, 
+                'default' => $sf_impact_Theme_Mods->getDefault('sf_impact_home_sidebar'),
                 'type' => 'theme_mod', 
                 'capability' => 'edit_theme_options', 
                 'transport' => 'refresh', 
@@ -811,7 +815,7 @@ function sf_impact_pageOptions($wp_customize)
             //Setting for header content on home page
             $wp_customize->add_setting( 'sf_impact_home_header_type', 
                 array(
-                'default' => '3', 
+                'default' => $sf_impact_Theme_Mods->getDefault('sf_impact_home_header_type'),
                 'type' => 'theme_mod', 
                 'capability' => 'edit_theme_options', 
                 'transport' => 'refresh', 
@@ -842,7 +846,7 @@ function sf_impact_pageOptions($wp_customize)
             //Setting for Image (if Header Image is selected above)
                 $wp_customize->add_setting( 'sf_impact_header_image', 
                 array(
-                'default' => '',
+                'default' => $sf_impact_Theme_Mods->getDefault('sf_impact_header_image'),
                 'type' => 'theme_mod', 
                 'capability' => 'edit_theme_options', 
                 'transport' => 'refresh', 
@@ -868,7 +872,7 @@ function sf_impact_pageOptions($wp_customize)
             //Header height on home page
                 $wp_customize->add_setting( 'sf_impact_header_height', 
                 array(
-                'default' => "", 
+                'default' => $sf_impact_Theme_Mods->getDefault('sf_impact_header_height'),
                 'type' => 'theme_mod', 
                 'capability' => 'edit_theme_options', 
                 'transport' => 'refresh', 
@@ -890,7 +894,7 @@ function sf_impact_pageOptions($wp_customize)
            
             $wp_customize->add_setting( 'sf_impact_header_stretch', 
                 array(
-                'default' => true, 
+                'default' => $sf_impact_Theme_Mods->getDefault('sf_impact_header_stretch'),
                 'type' => 'theme_mod', 
                 'capability' => 'edit_theme_options', 
                 'transport' => 'refresh', 
@@ -923,7 +927,7 @@ function sf_impact_pageOptions($wp_customize)
          //Setting to display posts on the home page    
             $wp_customize->add_setting( 'sf_impact_home_posts', 
                 array(
-                'default' => TRUE, 
+                'default' => $sf_impact_Theme_Mods->getDefault('sf_impact_home_posts'), 
                 'type' => 'theme_mod', 
                 'capability' => 'edit_theme_options', 
                 'transport' => 'refresh', 
@@ -945,7 +949,7 @@ function sf_impact_pageOptions($wp_customize)
                     array('type' => "text", 'style' => 'font-style:italic',   'label' => __('You can display all posts or choose a single category in the dropdown box to display on the home page or alternately the blog page when a static front page is use.', 'sf-impact'),  'section' => 'sf_impact_home_posts',  'settings' => "homelabel3", 'priority' => 10, ) ) );     
             //Category for posts on the home page
             $wp_customize->add_setting( 'sf_impact_home_rp_categoryid', array(
-                'default'        => '0',
+                'default' => $sf_impact_Theme_Mods->getDefault('sf_impact_home_rp_categoryid'), 
                 'type' => 'theme_mod', 
                 'capability' => 'edit_theme_options', 
                 'transport' => 'refresh', 
@@ -965,6 +969,7 @@ function sf_impact_pageOptions($wp_customize)
   
     function sf_impact_sliderOptions($wp_customize)
     {
+        global $sf_impact_Theme_Mods;
             $wp_customize->add_section( 'sf_impact_slider_options', 
             array(
                 'title' => __( 'Slide Show Options', 'sf-impact' ), 
@@ -979,7 +984,8 @@ function sf_impact_pageOptions($wp_customize)
             $wp_customize->add_control( new Arbitrary_Custom_Control($wp_customize,  "slidelabel1",
                     array('type' => "text", 'style' => 'font-style:italic',   'label' => __('Create navigation for paging control of each clide? Note: Leave true for manualControls usage', 'sf-impact'), 'section' => 'sf_impact_slider_options',  'settings' => "slidelabel1", 'priority' => 10, ) ) );         
         $wp_customize->add_setting('sf_impact_slider_navigation', 
-            array ('default' => false, 
+            array (
+            'default' => $sf_impact_Theme_Mods->getDefault('sf_impact_slider_navigation'), 
             'type' => 'theme_mod',
             'capability' => 'edit_theme_options',
             'transport' => 'refresh',
@@ -998,7 +1004,8 @@ function sf_impact_pageOptions($wp_customize)
             $wp_customize->add_control( new Arbitrary_Custom_Control($wp_customize,  "slidelabel2",
                     array('type' => "text", 'style' => 'font-style:italic',   'label' => __('navigation for previous/next navigation', 'sf-impact'),  'section' => 'sf_impact_slider_options',  'settings' => "slidelabel2", 'priority' => 10, ) ) );         
         $wp_customize->add_setting('sf_impact_slider_navdirection', 
-            array ('default' => false, 
+            array (
+            'default' => $sf_impact_Theme_Mods->getDefault('sf_impact_slider_navdirection'), 
             'type' => 'theme_mod',
             'capability' => 'edit_theme_options',
             'transport' => 'refresh',
@@ -1018,7 +1025,8 @@ function sf_impact_pageOptions($wp_customize)
             $wp_customize->add_control( new Arbitrary_Custom_Control($wp_customize,  "slidelabel3",
                     array('type' => "text", 'style' => 'font-style:italic',   'label' => __('Allow slider navigating via keyboard left/right keys', 'sf-impact'),  'section' => 'sf_impact_slider_options',  'settings' => "slidelabel3", 'priority' => 10, ) ) );         
         $wp_customize->add_setting('sf_impact_slider_keyboard', 
-            array ('default' => true, 
+            array (
+            'default' => $sf_impact_Theme_Mods->getDefault('sf_impact_slider_keyboard'), 
             'type' => 'theme_mod',
             'capability' => 'edit_theme_options',
             'transport' => 'refresh',
@@ -1036,7 +1044,8 @@ function sf_impact_pageOptions($wp_customize)
             $wp_customize->add_control( new Arbitrary_Custom_Control($wp_customize,  "slidelabel4",
                     array('type' => "text", 'style' => 'font-style:italic',   'label' =>  __(' Allow slider navigating via mousewheel', 'sf-impact'),   'section' => 'sf_impact_slider_options',  'settings' => "slidelabel4", 'priority' => 10, ) ) );         
         $wp_customize->add_setting('sf_impact_slider_mousewheel', 
-            array ('default' => false, 
+            array (
+            'default' => $sf_impact_Theme_Mods->getDefault('sf_impact_slider_mousewheel'),
             'type' => 'theme_mod',
             'capability' => 'edit_theme_options',
             'transport' => 'refresh',
@@ -1055,7 +1064,8 @@ function sf_impact_pageOptions($wp_customize)
             $wp_customize->add_control( new Arbitrary_Custom_Control($wp_customize,  "slidelabel5",
                     array('type' => "text", 'style' => 'font-style:italic',   'label' =>  __(' Pause the slideshow when hovering over slider, then resume when no longer hovering', 'sf-impact'),   'section' => 'sf_impact_slider_options',  'settings' => "slidelabel5", 'priority' => 10, ) ) );         
         $wp_customize->add_setting('sf_impact_slider_pauseonhover', 
-            array ('default' => false, 
+            array (
+            'default' => $sf_impact_Theme_Mods->getDefault('sf_impact_slider_pauseonhover'),
             'type' => 'theme_mod',
             'capability' => 'edit_theme_options',
             'transport' => 'refresh',
@@ -1069,7 +1079,8 @@ function sf_impact_pageOptions($wp_customize)
             'type'     => 'checkbox',
         ) );
         $wp_customize->add_setting('sf_impact_slider_captions', 
-            array ('default' => false, 
+            array (
+             'default' => $sf_impact_Theme_Mods->getDefault('sf_impact_slider_captions'), 
             'type' => 'theme_mod',
             'capability' => 'edit_theme_options',
             'transport' => 'refresh',
@@ -1086,7 +1097,7 @@ function sf_impact_pageOptions($wp_customize)
                     //Setting for slideshow transition
             $wp_customize->add_setting( 'sf_impact_slider_transition', 
                 array(
-                'default' => 'fade',
+                 'default' => $sf_impact_Theme_Mods->getDefault('sf_impact_slider_transition'), 
                 'type' => 'theme_mod', 
                 'capability' => 'edit_theme_options', 
                 'transport' => 'refresh', 
@@ -1109,7 +1120,7 @@ function sf_impact_pageOptions($wp_customize)
             ));
             $wp_customize->add_setting( 'sf_impact_slider_direction', 
                 array(
-                'default' => 'horizontal',
+                'default' => $sf_impact_Theme_Mods->getDefault('sf_impact_slider_direction'), 
                 'type' => 'theme_mod', 
                 'capability' => 'edit_theme_options', 
                 'transport' => 'refresh', 
@@ -1132,7 +1143,8 @@ function sf_impact_pageOptions($wp_customize)
             ));
  
            $wp_customize->add_setting('sf_impact_slider_automate', 
-                array ('default' => true, 
+                array (
+                'default' => $sf_impact_Theme_Mods->getDefault('sf_impact_slider_automate'), 
                 'type' => 'theme_mod',
                 'capability' => 'edit_theme_options',
                 'transport' => 'refresh',
@@ -1147,7 +1159,7 @@ function sf_impact_pageOptions($wp_customize)
         ) );
             $wp_customize->add_setting( 'sf_impact_slider_animspeed', 
                 array(
-                'default' => '500',
+                'default' => $sf_impact_Theme_Mods->getDefault('sf_impact_slider_animspeed'),
                 'type' => 'theme_mod', 
                 'capability' => 'edit_theme_options', 
                 'transport' => 'refresh', 
@@ -1160,14 +1172,14 @@ function sf_impact_pageOptions($wp_customize)
                 'label' => __( 'Slide Animation Speed', 'sf-impact' ), 
                 'description' => __('Set the speed of animations, in milliseconds', 'sf-impact'),
                 'section' => 'sf_impact_slider_options', 
-                'settings' => 'sf_impact_slider_animspeed', 
+             
                 'priority' => 10, 
            
                 ) 
             ));
         $wp_customize->add_setting( 'sf_impact_slider_speed', 
                 array(
-                'default' => '3000',
+                'default' => $sf_impact_Theme_Mods->getDefault('sf_impact_slider_speed'),
                 'type' => 'theme_mod', 
                 'capability' => 'edit_theme_options', 
                 'transport' => 'refresh', 
@@ -1191,6 +1203,7 @@ function sf_impact_pageOptions($wp_customize)
     }
     function sf_impact_socialMediaOptions($wp_customize)
     {
+        global $sf_impact_Theme_Mods;
         $wp_customize->add_section( 'sf_impact_social_media', array(
 			    'title'          => __('Icon Menu', 'sf-impact'),
 			    'priority'       => 2,
@@ -1200,7 +1213,7 @@ function sf_impact_pageOptions($wp_customize)
 	    ) );
             $wp_customize->add_setting( 'sf_impact_social_above_menu', 
                 array(
-                'default' => false, 
+                'default' => $sf_impact_Theme_Mods->getDefault('sf_impact_social_above_menu'),
                 'type' => 'theme_mod', 
                 'capability' => 'edit_theme_options', 
                 'transport' => 'refresh', 
@@ -1226,7 +1239,7 @@ function sf_impact_pageOptions($wp_customize)
  
             $wp_customize->add_setting( 'sf_impact_social_above_content', 
                 array(
-                'default' => false, 
+                 'default' => $sf_impact_Theme_Mods->getDefault('sf_impact_social_above_content'),
                 'type' => 'theme_mod', 
                 'capability' => 'edit_theme_options', 
                 'transport' => 'refresh', 
@@ -1250,7 +1263,7 @@ function sf_impact_pageOptions($wp_customize)
             ) ); 
              $wp_customize->add_setting( 'sf_impact_social_above_footer', 
                 array(
-                'default' => false, 
+                'default' => $sf_impact_Theme_Mods->getDefault('sf_impact_social_above_footer'),
                 'type' => 'theme_mod', 
                 'capability' => 'edit_theme_options', 
                 'transport' => 'refresh', 
@@ -1274,7 +1287,7 @@ function sf_impact_pageOptions($wp_customize)
             ) );              
             $wp_customize->add_setting( 'sf_impact_icon_size', 
                 array(
-                'default' => "1g", 
+                'default' => $sf_impact_Theme_Mods->getDefault('sf_impact_icon_size'),
                 'type' => 'theme_mod', 
                 'capability' => 'edit_theme_options', 
                 'transport' => 'refresh', 
@@ -1329,6 +1342,7 @@ function sf_impact_pageOptions($wp_customize)
     }
         function sf_impact_customCSS($wp_customize)
     {
+        global $sf_impact_Theme_Mods;
               $wp_customize->add_section( 'sf_impact_custom_css', 
             array(
                 'title' => __( ' Custom CSS Styles ', 'sf-impact' ), 
@@ -1339,7 +1353,7 @@ function sf_impact_pageOptions($wp_customize)
                 ) 
             ); 
             $wp_customize->add_setting( 'sf_impact_custom_head_css', array(
-	        'default' => '',
+	        'default' => $sf_impact_Theme_Mods->getDefault('sf_impact_custom_head_css'),
 	        'type' => 'theme_mod',
 	        'capability' => 'edit_theme_options',
 	        'transport' => '',
@@ -1349,13 +1363,14 @@ function sf_impact_pageOptions($wp_customize)
         $wp_customize->add_control( 'sf_impact_custom_head_css', array(
          'settings' => 'sf_impact_custom_head_css',
             'type' => 'textarea',
+            'description' => '',
             'priority' => 10,
             'section' => 'sf_impact_custom_css',
             'label' => __( 'Custom CSS for the header', 'textdomain' ),
             'description' => '',
         ) );
           $wp_customize->add_setting( 'sf_impact_custom_footer_css', array(
-	        'default' => '',
+	        'default' =>  $sf_impact_Theme_Mods->getDefault('sf_impact_custom_footer_css'),
 	        'type' => 'theme_mod',
 	        'capability' => 'edit_theme_options',
 	        'transport' => '',
@@ -1373,6 +1388,7 @@ function sf_impact_pageOptions($wp_customize)
     }
       function sf_impact_editorDefaults($wp_customize)
     {
+        global $sf_impact_Theme_Mods;
         
                 $wp_customize->add_section( 'sf_impact_editor_defaults', 
             array(
@@ -1392,7 +1408,7 @@ function sf_impact_pageOptions($wp_customize)
            //Setting to display sidebar on posts
             $wp_customize->add_setting( 'sf_impact_post_sidebar', 
                 array(
-                'default' => FALSE, 
+               'default' =>  $sf_impact_Theme_Mods->getDefault('sf_impact_post_sidebar'),
                 'type' => 'theme_mod', 
                 'capability' => 'edit_theme_options', 
                 'transport' => 'refresh', 
@@ -1410,7 +1426,7 @@ function sf_impact_pageOptions($wp_customize)
             //Setting to featured image on posts
             $wp_customize->add_setting( 'sf_impact_post_featured', 
                 array(
-                'default' => false, 
+                'default' =>  $sf_impact_Theme_Mods->getDefault('sf_impact_post_featured'),
                 'type' => 'theme_mod', 
                 'capability' => 'edit_theme_options', 
                 'transport' => 'refresh', 
@@ -1429,7 +1445,7 @@ function sf_impact_pageOptions($wp_customize)
                        //Setting to featured image on pages
             $wp_customize->add_setting( 'sf_impact_page_featured', 
                 array(
-                'default' => false, 
+                 'default' =>  $sf_impact_Theme_Mods->getDefault('sf_impact_page_featured'),
                 'type' => 'theme_mod', 
                 'capability' => 'edit_theme_options', 
                 'transport' => 'refresh', 
@@ -1466,7 +1482,7 @@ function sf_impact_pageOptions($wp_customize)
        //Setting to display featured highlights on the home page    
             $wp_customize->add_setting( 'sf_impact_home_featured_highlights', 
                 array(
-                'default' => false, 
+                'default' => $sf_impact_Theme_Mods->getDefault('sf_impact_home_featured_highlights'),
                 'type' => 'theme_mod', 
                 'capability' => 'edit_theme_options', 
                 'transport' => 'refresh', 
@@ -1501,7 +1517,7 @@ function sf_impact_pageOptions($wp_customize)
             
             $wp_customize->add_setting( 'sf_impact_highlight_boxes', 
                 array(
-                'default' => 0, 
+                'default' => $sf_impact_Theme_Mods->getDefault('sf_impact_highlight_boxes'),
                 'type' => 'theme_mod', 
                 'capability' => 'edit_theme_options', 
                 'transport' => 'refresh', 
@@ -1525,7 +1541,7 @@ function sf_impact_pageOptions($wp_customize)
 
             $wp_customize->add_setting( 'sf_impact_highlight_style', 
                 array(
-                'default' => $sf_impact_Theme_Mods->getMod( 'sf_impact_highlight_style', 'T' ),
+                'default' =>$sf_impact_Theme_Mods->getDefault('sf_impact_highlight_style'),
                 'type' => 'theme_mod', 
                 'capability' => 'edit_theme_options', 
                 'transport' => 'refresh', 
@@ -1569,7 +1585,7 @@ function sf_impact_pageOptions($wp_customize)
     
                 $wp_customize->add_setting( "$name", 
                     array(
-                     'default' => $sf_impact_Theme_Mods->getMod( $name, "" ),
+                     'default' => $sf_impact_Theme_Mods->getDefault( $name ),
                     'type' => 'theme_mod', 
                     'capability' => 'edit_theme_options', 
                     'transport' => 'refresh', 
@@ -1579,7 +1595,7 @@ function sf_impact_pageOptions($wp_customize)
                     $name = "sf_impact_highlight_image$x";
                 $wp_customize->add_setting( "$name", 
                     array(
-                    'default' => $sf_impact_Theme_Mods->getMod( $name, "" ),
+                    'default' => $sf_impact_Theme_Mods->getDefault( $name ),
                     'type' => 'theme_mod', 
                     'capability' => 'edit_theme_options', 
                     'transport' => 'refresh', 
@@ -1589,7 +1605,7 @@ function sf_impact_pageOptions($wp_customize)
                 $name = "sf_impact_highlight_text$x";
                 $wp_customize->add_setting( "$name", 
                     array(
-                    'default' => $sf_impact_Theme_Mods->getMod( $name, "" ),
+                    'default' => $sf_impact_Theme_Mods->getDefault( $name ),
                     'type' => 'theme_mod', 
                     'capability' => 'edit_theme_options', 
                     'transport' => 'refresh', 
@@ -1660,7 +1676,7 @@ function sf_impact_pageOptions($wp_customize)
                 $name = 'sf_impact_highlight_link' . $x;
                 $wp_customize->add_setting( "$name", 
                     array(
-                    'default' => "", 
+                    'default' => $sf_impact_Theme_Mods->getDefault($name),
                     'type' => 'theme_mod', 
                     'capability' => 'edit_theme_options', 
                     'transport' => 'refresh', 

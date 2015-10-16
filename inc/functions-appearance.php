@@ -526,14 +526,7 @@ if (!function_exists('sf_impact_header')):
     {
        // global $sf_impact_Theme_Mods;
         
-        $top = TRUE;
- 
-/*        $sf_impact_header_image = $sf_impact_Theme_Mods->getMod( 'sf_impact_header_image' );
-        $sf_impact_logo_location = $sf_impact_Theme_Mods->getMod( 'sf_impact_logo_location' );
-        $sf_impact_home_header_type = $sf_impact_Theme_Mods->getMod( 'sf_impact_home_header_type' );
-  */   
-        if ($sf_impact_header_image && $sf_impact_logo_location == 'image')
-            $top = FALSE;
+     
             
        
          $wclass = sf_impact_get_home_header_class();
@@ -551,11 +544,11 @@ if (!function_exists('sf_impact_header')):
                 <div class="header-container-home <?php echo $wclass?> ">
 
                     <?php if ($logo=="image"){ ?>
-                        <div class="header-container-home-inner">
+                       
                             <div class="site-branding fixed shoofly-branding-image" >
                                 <?php get_template_part('template-parts/branding');?>
             		        </div>
-                        </div>
+                       
                     <?php }?>
                     <img class="headerimg" alt="header" <?php echo  $hstyle?> src="<?php echo $sf_impact_header_image?>"/>
                 </div><?php

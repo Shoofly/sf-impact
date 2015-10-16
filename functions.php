@@ -125,118 +125,28 @@ function sf_impact_setup() {
     add_theme_support( 'custom-header', $args );
     //add excerpt support for posts
      add_post_type_support( 'page', 'excerpt' );
-
+    setDefaults();
      //settings moved here
-        $sfimpact_demo_data = $sf_impact_Theme_Mods->getMod('sf_impact_demo_data', TRUE); //This is not really a setting, it's a switch. 
-        if ($sfimpact_demo_data) {
-           
-            $defaultpath =        get_template_directory_uri() . '/images/';
-            $defaultlogo = $defaultpath . "logo.png"; 
 
-            $defaultheader = $defaultpath . "impact.png";
-            $defaultheadertype = "3"; //This should be 2
-            $sf_impact_Theme_Mods->setMod('header_textcolor','000099');      
-         //   $sf_impact_Theme_Mods->setMod('sf_impact_header_image', $defaultheader); //this should not be set
-         
-            $sf_impact_Theme_Mods->setMod('sf_impact_logo_image', $defaultlogo);
-            $sf_impact_Theme_Mods->setMod('sf_impact_logo_location', 'image');
-            $sf_impact_Theme_Mods->setMod('sf_impact_home_header_type', $defaultheadertype);
-            $sf_impact_highlight_style->setMod('sf_impact_highlight_style', 'T');
-            $sf_impact_Theme_Mods->setMod('sf_impact_highlight_boxes', 2);
-            $sf_impact_Theme_Mods->setMod('sf_impact_highlight_header1', 'Up to 3 highlights');
-            $sf_impact_Theme_Mods->setMod('sf_impact_highlight_image1', $defaultpath . 'flowers.png');
-            $sf_impact_Theme_Mods->setMod('sf_impact_highlight_text1', 'Create up to 3 highlight boxes!');
-            $sf_impact_Theme_Mods->setMod('sf_impact_highlight_link1', '#'); 
-            $sf_impact_Theme_Mods->setMod('sf_impact_highlight_header2', 'Home Page features');
-            $sf_impact_Theme_Mods->setMod('sf_impact_highlight_image2', $defaultpath . 'drop.png');
-            $sf_impact_Theme_Mods->setMod('sf_impact_highlight_text2', 'Display an image or a slide show!');
-            $sf_impact_Theme_Mods->setMod('sf_impact_highlight_link2', '#'); 
-            $sf_impact_Theme_Mods->setMod('sf_impact_home_featured_highlights', true);
-            $sf_impact_Theme_Mods->setMod('sf_impact_color_theme', 'light');
-            $sf_impact_Theme_Mods->setMod('sf_impact_demo_data', FALSE);
-          
-        }
-       
-        //Color settings
-        $sf_impact_Theme_Mods->setDefault( 'sf_impact_header_background', "#5b5b5b" );
-        $sf_impact_Theme_Mods->setDefault( 'sf_impact_content_background', "#F5F5F5" );
-        $sf_impact_Theme_Mods->setDefault( 'sf_impact_header_opacity', 0 );
-        $sf_impact_Theme_Mods->setDefault( 'sf_impact_content_opacity', 100 );
-
-        //Home settings
-        $sf_impact_Theme_Mods->setDefault( 'sf_impact_home_rp_categoryid', "" );
-        
-        //Header and Icon mods
-        $sf_impact_Theme_Mods->setDefault( 'sf_impact_icon_size', 'lg' );
-        $sf_impact_Theme_Mods->setDefault( 'sf_impact_header_height', "" );
-        $sf_impact_Theme_Mods->setDefault( 'sf_impact_header_width', "100%" );
-        $sf_impact_Theme_Mods->setDefault( 'sf_impact_header_image', '' );
-        $sf_impact_Theme_Mods->setDefault( 'sf_impact_logo_location', 'image' );
-        $sf_impact_Theme_Mods->setDefault( 'sf_impact_home_header_type', '3' );
-        
-        //Slider mods
-        $sf_impact_Theme_Mods->setDefault( 'sf_impact_slider_transition', 'fade' );
-        $sf_impact_Theme_Mods->setDefault( 'sf_impact_slider_animspeed', '500' );
-        $sf_impact_Theme_Mods->setDefault( 'sf_impact_slider_speed', '7000' );
-        $sf_impact_Theme_Mods->setDefault( 'sf_impact_slider_automate', true );
-        $sf_impact_Theme_Mods->setDefault( 'sf_impact_slider_direction', 'horizontal');
-        $sf_impact_Theme_Mods->setDefault( 'sf_impact_slider_navigation', FALSE );
-        $sf_impact_Theme_Mods->setDefault( 'sf_impact_slider_navdirection', FALSE );
-        $sf_impact_Theme_Mods->setDefault( 'sf_impact_slider_keyboard', true );
-        $sf_impact_Theme_Mods->setDefault( 'sf_impact_slider_mousewheel', false );
-        $sf_impact_Theme_Mods->setDefault( 'sf_impact_slider_pauseonhover', false );
-        
-        //Highlight box mods 
-        $sf_impact_Theme_Mods->setDefault( 'sf_impact_highlight_boxes', 0 );
-        $sf_impact_Theme_Mods->setDefault( 'sf_impact_highlight_style', "L" );
-        
-        for($x=0; $x <= 3; ++$x)
-        {
-            $sf_impact_Theme_Mods->setDefault( 'sf_impact_highlight_image' . $x, '' );
-            $sf_impact_Theme_Mods->setDefault( 'sf_impact_highlight_header' . $x, '' );
-            $sf_impact_Theme_Mods->setDefault( 'sf_impact_highlight_text' . $x, '' );
-            $sf_impact_Theme_Mods->setDefault( 'sf_impact_highlight_link' . $x, '#' );
-        }
-        
-        
-        //Grid mods
-        $sf_impact_Theme_Mods->setDefault( 'sf_impact_grid_display', FALSE );
-        $sf_impact_Theme_Mods->setDefault( 'sf_impact_grid_display_all', FALSE );
-        
-        //Slider mods
-        $sf_impact_Theme_Mods->setDefault( 'sf_impact_slider_style', 'default' );
-        $sf_impact_Theme_Mods->setDefault( 'sf_impact_slider_captions', TRUE ) ;
-        
-        //Thumbnail mods
-        $sf_impact_Theme_Mods->setDefault( 'sf_impact_slider_thumbnails', false );
-         
-        //Post mods   
-        $sf_impact_Theme_Mods->setDefault( 'sf_impact_show_full_sticky_post', true );
-        $sf_impact_Theme_Mods->setDefault( 'sf_impact_show_excerpt_archive_post', true );
-        $sf_impact_Theme_Mods->setDefault( 'sf_impact_show_excerpt_blog_post', TRUE );
-        $sf_impact_Theme_Mods->setDefault( 'sf_impact_post_featured', false );
-        $sf_impact_Theme_Mods->setDefault( 'sf_impact_page_featured', false );
-        $sf_impact_Theme_Mods->setDefault( 'sf_impact_post_sidebar', FALSE );
-        
-        //Social settings
-        $social_sites = sf_impact_social_media_array();
-        $social_icons = sf_impact_social_icons_array();
+    //Social settings
+    $social_sites = sf_impact_social_media_array();
+    $social_icons = sf_impact_social_icons_array();
  
-        // any inputs that aren't empty are stored in $active_sites array
-        $sf_impact_icon_size = $sf_impact_Theme_Mods->getMod( 'sf_impact_icon_size' );
+    // any inputs that aren't empty are stored in $active_sites array
+    $sf_impact_icon_size = $sf_impact_Theme_Mods->getMod( 'sf_impact_icon_size' );
         
-        for ($i=0; $i < count($social_sites); ++$i) 
-        {
+    for ($i=0; $i < count($social_sites); ++$i) 
+    {
 
-            $social_site = $social_sites[$i];
-            if( strlen( $sf_impact_Theme_Mods->getMod( $social_site ) ) > 0 ) {
+        $social_site = $social_sites[$i];
+        if( strlen( $sf_impact_Theme_Mods->getMod( $social_site ) ) > 0 ) {
                 
-                $active_sites[] = $social_site;
-                $links[] = $sf_impact_Theme_Mods->getMod( $social_site );
-                $icons[] = $social_icons[$i];
-            }
-        }     
-
+            $active_sites[] = $social_site;
+            $links[] = $sf_impact_Theme_Mods->getMod( $social_site );
+            $icons[] = $social_icons[$i];
+        }
+    }     
+ 
 }
 endif; // sf_impact_setup
 add_action( 'after_setup_theme', 'sf_impact_setup' );
@@ -892,4 +802,112 @@ function is_edit_page($new_edit = null){
         return in_array( $pagenow, array( 'post.php', 'post-new.php' ) );
 }
 endif;
+   function setDefaults()
+    {
+        global $sf_impact_Theme_Mods;
+        $sfimpact_demo_data = $sf_impact_Theme_Mods->getMod('sf_impact_demo_data', TRUE); //This is not really a setting, it's a switch. 
+        if ($sfimpact_demo_data) {
+           
+            $defaultpath =        get_template_directory_uri() . '/images/';
+            $defaultlogo = $defaultpath . "logo.png"; 
+
+            $defaultheader = $defaultpath . "impact.png";
+            $defaultheadertype = "3"; //This should be 2
+           // $sf_impact_Theme_Mods->setDefault('header_textcolor','000099');      
+         //   $sf_impact_Theme_Mods->setMod('sf_impact_header_image', $defaultheader); //this should not be set
+         
+            $sf_impact_Theme_Mods->setMod('sf_impact_logo_image', $defaultlogo);
+            $sf_impact_Theme_Mods->setMod('sf_impact_logo_location', 'image');
+            $sf_impact_Theme_Mods->setMod('sf_impact_home_header_type', $defaultheadertype);
+            $sf_impact_highlight_style->setMod('sf_impact_highlight_style', 'T');
+            $sf_impact_Theme_Mods->setMod('sf_impact_highlight_boxes', 2);
+            $sf_impact_Theme_Mods->setMod('sf_impact_highlight_header1', 'Up to 3 highlights');
+            $sf_impact_Theme_Mods->setMod('sf_impact_highlight_image1', $defaultpath . 'flowers.png');
+            $sf_impact_Theme_Mods->setMod('sf_impact_highlight_text1', 'Create up to 3 highlight boxes!');
+            $sf_impact_Theme_Mods->setMod('sf_impact_highlight_link1', '#'); 
+            $sf_impact_Theme_Mods->setMod('sf_impact_highlight_header2', 'Home Page features');
+            $sf_impact_Theme_Mods->setMod('sf_impact_highlight_image2', $defaultpath . 'drop.png');
+            $sf_impact_Theme_Mods->setMod('sf_impact_highlight_text2', 'Display an image or a slide show!');
+            $sf_impact_Theme_Mods->setMod('sf_impact_highlight_link2', '#'); 
+            $sf_impact_Theme_Mods->setMod('sf_impact_home_featured_highlights', true);
+            $sf_impact_Theme_Mods->setMod('sf_impact_color_theme', 'light');
+            $sf_impact_Theme_Mods->setMod('sf_impact_demo_data', FALSE);
+          
+        }
+       
+        //Color settings
+        $sf_impact_Theme_Mods->setDefault( 'sf_impact_header_background', "#5b5b5b" );
+        $sf_impact_Theme_Mods->setDefault( 'sf_impact_content_background', "#F5F5F5" );
+        $sf_impact_Theme_Mods->setDefault( 'sf_impact_header_opacity', 0 );
+        $sf_impact_Theme_Mods->setDefault( 'sf_impact_content_opacity', 100 );
+
+        //Home settings
+        $sf_impact_Theme_Mods->setDefault( 'sf_impact_home_rp_categoryid', "" );
+        
+        //Header and Icon mods
+        $sf_impact_Theme_Mods->setDefault( 'sf_impact_icon_size', 'lg' );
+        $sf_impact_Theme_Mods->setDefault( 'sf_impact_header_height', "" );
+        $sf_impact_Theme_Mods->setDefault( 'sf_impact_header_width', "100%" );
+        $sf_impact_Theme_Mods->setDefault( 'sf_impact_header_image', '' );
+        $sf_impact_Theme_Mods->setDefault( 'sf_impact_logo_location', 'image' );
+        $sf_impact_Theme_Mods->setDefault( 'sf_impact_home_header_type', '3' );
+        
+        //Slider mods
+        $sf_impact_Theme_Mods->setDefault( 'sf_impact_slider_transition', 'fade' );
+        $sf_impact_Theme_Mods->setDefault( 'sf_impact_slider_animspeed', '500' );
+        $sf_impact_Theme_Mods->setDefault( 'sf_impact_slider_speed', '7000' );
+        $sf_impact_Theme_Mods->setDefault( 'sf_impact_slider_automate', true );
+        $sf_impact_Theme_Mods->setDefault( 'sf_impact_slider_direction', 'horizontal');
+        $sf_impact_Theme_Mods->setDefault( 'sf_impact_slider_navigation', FALSE );
+        $sf_impact_Theme_Mods->setDefault( 'sf_impact_slider_navdirection', FALSE );
+        $sf_impact_Theme_Mods->setDefault( 'sf_impact_slider_keyboard', true );
+        $sf_impact_Theme_Mods->setDefault( 'sf_impact_slider_mousewheel', false );
+        $sf_impact_Theme_Mods->setDefault( 'sf_impact_slider_pauseonhover', false );
+        
+        //Highlight box mods 
+        $sf_impact_Theme_Mods->setDefault( 'sf_impact_highlight_boxes', 0 );
+        $sf_impact_Theme_Mods->setDefault( 'sf_impact_highlight_style', "L" );
+        
+        for($x=0; $x <= 3; ++$x)
+        {
+            $sf_impact_Theme_Mods->setDefault( 'sf_impact_highlight_image' . $x, '' );
+            $sf_impact_Theme_Mods->setDefault( 'sf_impact_highlight_header' . $x, '' );
+            $sf_impact_Theme_Mods->setDefault( 'sf_impact_highlight_text' . $x, '' );
+            $sf_impact_Theme_Mods->setDefault( 'sf_impact_highlight_link' . $x, '#' );
+        }
+        
+        
+        //Grid mods
+        $sf_impact_Theme_Mods->setDefault( 'sf_impact_grid_display', FALSE );
+        $sf_impact_Theme_Mods->setDefault( 'sf_impact_grid_display_all', FALSE );
+        
+        //Slider mods
+        $sf_impact_Theme_Mods->setDefault( 'sf_impact_slider_style', 'default' );
+        $sf_impact_Theme_Mods->setDefault( 'sf_impact_slider_captions', TRUE ) ;
+        
+        //Thumbnail mods
+        $sf_impact_Theme_Mods->setDefault( 'sf_impact_slider_thumbnails', false );
+         
+        //Post mods   
+        $sf_impact_Theme_Mods->setDefault( 'sf_impact_show_full_sticky_post', true );
+        $sf_impact_Theme_Mods->setDefault( 'sf_impact_show_excerpt_archive_post', true );
+        $sf_impact_Theme_Mods->setDefault( 'sf_impact_show_excerpt_blog_post', TRUE );
+        $sf_impact_Theme_Mods->setDefault( 'sf_impact_post_featured', false );
+        $sf_impact_Theme_Mods->setDefault( 'sf_impact_page_featured', false );
+        $sf_impact_Theme_Mods->setDefault( 'sf_impact_post_sidebar', FALSE );
+        $sf_impact_Theme_Mods->setDefault( 'sf_impact_footer_text',    __( '© 2015 Shoofly Solutions', 'sf-impact' ));
+        $sf_impact_Theme_Mods->setDefault( 'sf_impact_home_sidebar', TRUE );
+        $sf_impact_Theme_Mods->setDefault( 'sf_impact_home_posts', TRUE );
+        $sf_impact_Theme_Mods->setDefault( 'sf_impact_grid_title', 'Recent Posts' );
+        $sf_impact_Theme_Mods->setDefault( 'sf_impact_grid_more', 'More Recent Posts' );
+        $sf_impact_Theme_Mods->setDefault( 'sf_impact_grid_type', 'post' );
+        $sf_impact_Theme_Mods->setDefault( 'sf_impact_post_category', 'post' );
+        $sf_impact_Theme_Mods->setDefault( 'sf_impact_thumbnail_more_page', '' );
+        $sf_impact_Theme_Mods->setDefault( 'sf_impact_grid_posts', '4' );
+        $sf_impact_Theme_Mods->setDefault( 'sf_impact_image_size_name', 'thumbnail' );
+        $sf_impact_Theme_Mods->setDefault( 'sf_impact_grid_image_height', '' );
+        $sf_impact_Theme_Mods->setDefault( 'sf_impact_grid_image_width', '' );
+        $sf_impact_Theme_Mods->setDefault( 'sf_impact_custom_footer_css', '' );
+        
+    }
 ?>

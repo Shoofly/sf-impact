@@ -29,7 +29,11 @@ class sf_impact_Theme_Mods
         
         return $val;
     }
-
+    public function getDefault($key)
+    {
+       return get_theme_mod($key, self::$default[$this->handle][$key]) ? get_theme_mod($key, self::$default[$this->handle][$key]) : NULL;
+        
+    }
     public function setDefault($key, $default) 
     {
 
