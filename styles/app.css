@@ -1354,11 +1354,11 @@ nav.navigation.posts-navigation {
 /*--------------------------------------------------------------
 12.0 Media
 --------------------------------------------------------------*/
-.site-branding.site-branding-text {
+.site-branding {
   vertical-align: top;
 }
 
-.site-branding.site-branding-text .site-title a {
+.site-branding .site-title a {
   white-space: nowrap;
 }
 
@@ -1608,14 +1608,14 @@ footer.entry-footer .author-bio {
 
 #containermasthead {
   display: block;
-  margin: auto;
-  max-width: 1200px;
+  width: 1200px;
+  margin: 0px auto;
 }
 
 #outermasthead {
   display: table;
-  max-width: 1200px;
-  margin: 0 auto 0 auto;
+  width: 1200px;
+  margin: 0px auto;
   width: 100%;
   padding: 0;
 }
@@ -1697,8 +1697,8 @@ footer.entry-footer .author-bio {
 }
 
 #shoofly-social-media-container {
-  max-width: 1200px;
-  margin: 0 auto 0 auto;
+  width: 1200px;
+  margin: 0px auto;
   width: 100%;
 }
 
@@ -1765,9 +1765,9 @@ footer.entry-footer .author-bio {
 }
 
 @media only screen and (min-width: 1200px) {
-  #content, #masthead, #innermasthead, .site-footer, #bottomwrapper {
+  #content, #masthead, #innermasthead, .site-footer, #bottomwrapper, .sfly-grid {
     width: 1200px;
-    margin: auto;
+    margin: 0px auto;
   }
   #topmasthead {
     margin-bottom: 0;
@@ -1805,10 +1805,10 @@ footer.entry-footer .author-bio {
   .primary-menu ul {
     margin-left: 40px;
   }
-  .site-branding.site-branding-text #site-logo-title .site-title {
+  .site-branding #site-logo-title .site-title {
     font-size: 2rem;
   }
-  .site-branding.site-branding-text #site-logo-title .site-title a {
+  .site-branding #site-logo-title .site-title a {
     white-space: normal;
   }
 }
