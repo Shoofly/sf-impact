@@ -1738,17 +1738,36 @@ function sf_impact_pageOptions($wp_customize)
                 $outu .= sprintf("%s {%s:%s;}", ".site-title", "color", $site); 
                 $background = get_background_color();
                 $outu .= sprintf("%s {%s:%s;}", "body", "background-color", $background); 
-                echo $outu;
-              
+
+                $custom_style =  $sf_impact_Theme_Mods->getMod( 'sf_impact_color_theme', 'light' ) ;
+
+                $linkTheme = new sf_impact_CustomLinkThemes( 'sf_impact' );
+                ob_start();
+                include( $linkTheme->getCustomThemePath($custom_style) );
+                
+                $menuhex = $sf_impact_Theme_Mods->getMod('sf_impact_content_background');
+                
+                $outu .= ob_get_clean();
+                
+                $outu .= '
+                .home-highlight-boxes .highlight-span h2 {
+                    color: #' . get_header_textcolor() . ';
+                }
+                .flexslider {
+                    min-height: ' . $sf_impact_Theme_Mods->getMod('sf_impact_header_height') . ';
+                }';
+                
                 $sf_impact_content_opacity = $sf_impact_Theme_Mods->getMod( 'sf_impact_content_opacity' );
                 if ($sf_impact_content_opacity < 100) {
                     $hstyle = sf_impact_rbgastyle($sf_impact_content_background,  $sf_impact_content_opacity);
-                    echo "#masthead, #content {" . $hstyle . "}";
+                    $outu.= "#masthead, #content {" . $hstyle . "}";
                 } else {
-                    $outu = sprintf("%s {%s:%s;}", "#masthead, #content", "background-color", $sf_impact_content_background);                      echo $outu;
+                    $outu .= sprintf("%s {%s:%s;}", "#masthead, #content", "background-color", $sf_impact_content_background);                      echo $outu;
                 }           
                 if ($sf_impact_custom_head_css != '') 
-                    echo $sf_impact_custom_head_css;
+                    $outu .= $sf_impact_custom_head_css;
+                    
+                echo $outu;
                 ?>
             </style> 
             <!--/Customizer CSS-->

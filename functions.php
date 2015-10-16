@@ -381,6 +381,7 @@ if (!function_exists('sf_impact_scripts')):
       
         wp_enqueue_style("sf_impact_theme_styles");     
    
+       /*
         $custom_style =  $sf_impact_Theme_Mods->getMod( 'sf_impact_color_theme', 'light' ) ;
 
         $linkTheme = new sf_impact_CustomLinkThemes( 'sf_impact' );
@@ -400,10 +401,10 @@ if (!function_exists('sf_impact_scripts')):
             }';
          
         wp_add_inline_style( 'sf_impact_theme_styles', $custom_css );
- 
+        */
         
 
-        add_editor_style( "$themedir/styles/app.css", "$themedir/style-parts/$custom_style-scheme.css"); 
+        add_editor_style( "$themedir/styles/app.css" /*, "$themedir/style-parts/$custom_style-scheme.css"*/); 
 
         wp_enqueue_script('jquery');
         wp_enqueue_script('	jquery-ui-tooltip');
