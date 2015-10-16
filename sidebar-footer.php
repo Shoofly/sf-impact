@@ -6,6 +6,7 @@
   * @subpackage sf-impact
  * @since sf-impact 1.0
  */
+ if (is_active_sidebar('sfly-footersidebar-left') || is_active_sidebar('sfly-footersidebar-middle') || is_active_sidebar('sfly-footersidebar-right')):
  ?>
 
 <div id="footersidebar" class="widget-area fixed" role="complementary">
@@ -26,3 +27,4 @@
     </div>
 </div>
 </div><!-- #secondary -->
+<?php endif;?>

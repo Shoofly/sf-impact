@@ -6,7 +6,7 @@
  * @since sf-impact 1.0
  * default content
  */
-
+ global $sf_impact_Theme_Mods;
 
 ?>
 
@@ -22,7 +22,7 @@
 	    <div class="entry-content entry-content-sticky_full">
 
             <?php
-            the_content(get_theme_mod('sf_impact_excerpt_more_text', 'Read the rest'));	
+            the_content($sf_impact_Theme_Mods->getMod('sf_impact_excerpt_more_text'));	
 	        wp_link_pages( array(
 				    'before' => '<div class="page-links">' . esc_html__( 'Pages:', 'sf-impact' ),
 				    'after'  => '</div>',

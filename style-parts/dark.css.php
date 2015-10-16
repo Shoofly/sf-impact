@@ -1,21 +1,22 @@
-a {
+a, a:visited {
 	color: #000276;
-}
-
-a:visited {
-	color: #0f11aa;
 }
 
 a:hover {
 	color: #0069BA;
 }
 
-article:last-child {
+nav.navigation.posts-navigation {
     border-color: #000276;    
 }
 
 .primary-navigation a:hover, .primary-navigation a:focus, .primary-navigation a:active {
 	color: #0069BA;
+}
+
+.primary-navigation.toggled-on .menu-toggle {
+    color: #000276;
+    outline: 0;    
 }
 
 .author-info {
@@ -55,16 +56,12 @@ hr {
   border-bottom-color: #000276;
 }
  
-.primary-menu > ul > li > a:hover {
+.primary-menu > ul > li > a:hover, .primary-menu > ul > li > a:focus {
 	color: #0069BA; 
 	border-bottom-color: #0069BA;
 }
 
-.primary-menu > ul > li.current_page_item > a:visited {
-    border-bottom-color: #0f11aa;
-}
-
-.primary-menu > ul .menu-item .menu-item a:hover {
+.primary-menu > ul .menu-item .menu-item a:hover, .primary-menu > ul .menu-item .menu-item a:focus {
 	background-color: #e5e5e5;
 	color: #6e6e6e;
 }
@@ -72,7 +69,7 @@ hr {
 .primary-menu .children a .menu-item-bg, .primary-menu .children a:visited .menu-item-bg {
 	color: #545454;
 }
-.primary-menu .children a:hover .menu-item-bg, .primary-menu .children a:hover .menu-item-bg {
+.primary-menu .children a:hover .menu-item-bg, .primary-menu .children a:hover .menu-item-bg, .primary-menu .children a:focus .menu-item-bg, .primary-menu .children a:focus .menu-item-bg {
 	color: #6e6e6e;
 }
 
@@ -89,8 +86,7 @@ hr {
 	background-color: rgba(253,253,253,0.97); 
 }
 
-.primary-navigation ul ul a:hover {
-      
+.primary-navigation ul ul a:hover, .primary-navigation ul ul a:focus {  
 	background-color: whitesmoke;
 }
 
@@ -118,21 +114,34 @@ h3, h4, h5, h6 {
 	color: #0069BA;	
 }
 
-.widget-area a:hover {
+.widget-area a:hover, .widget-area a:focus {
 	color: #00398F;
 }
 
 .entry-title, .page-title, .entry-title a, .page-title a, .entry-title a:visited, .page-title a:visited {
-	color: #004F13;
+    color: cadetblue;
 }
 
-.entry-title a:hover, .page-title a:hover {
-    color: #267539;
+.entry-title a:hover, .page-title a:hover, .entry-title a:focus, .page-title a:focus {
+    color: #0069BA;
 }
 
+.site-info span {
+    color: #A96E11;
+}
 
-@media only screen and (max-width: 781px) {
-  .primary-navigation .menu-item .menu-item a, .primary-menu .menu-item .menu-item a:hover {
-    background-color: transparent;
-  }
+#shoofly-footer {
+    color: #000276;
+}
+
+@media only screen and (max-width: 782px) {
+    #primary-menu a:hover, #primary-menu a:focus {
+        border-bottom-color: #6e6e6e;
+    }
+}
+
+@media screen and (min-width: 783px) {
+    .post-navigation {
+        border-top-color: #00398F;
+    }
 }

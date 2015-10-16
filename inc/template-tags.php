@@ -215,11 +215,12 @@ if ( ! function_exists( 'sf_impact_entry_footer' ) ) :
  * Prints HTML with meta information for the categories, tags and comments.
  */
  function sf_impact_entry_footer() {
+       global $sf_impact_Theme_Mods;
 	// Hide category and tag text for pages only show on single posts.
 
     if (is_single() || is_page())
     {
-        echo 'hello';
+        
 	    if ( 'post' == get_post_type() ) {
    
 		    /* translators: used between list items, there is a space after the comma */
@@ -235,8 +236,8 @@ if ( ! function_exists( 'sf_impact_entry_footer' ) ) :
 		    }
 	    }
     
-        $sfly_theme1_show_author = get_theme_mod('sfly_theme1_show_author', true);
-   	    if ( is_single() &&   $sfly_theme1_show_author  ) :
+        $sf_impact_show_author = $sf_impact_Theme_Mods->getMod('sf_impact_show_author');
+   	    if ( is_single() &&   $sf_impact_show_author  ) :
 			    get_template_part( 'template-parts/author-bio' );
 		    endif;
     
@@ -299,21 +300,33 @@ add_action( 'save_post',     'sf_impact_category_transient_flusher' );
 if (!function_exists('sf_impact_thumbnail')):
 
  function sf_impact_thumbnail()
- {
-      global $post;
-    $hide_featured = !get_theme_mod('sfly_theme1_post_featured', TRUE);
-    $id = 'hide_featured_image';
-         $hidethumb = esc_attr( get_post_meta( $post->ID, $id, true ) ) != NULL ? esc_attr( get_post_meta( $post->ID, $id, true ) ) : $hide_featured;
-         if (!$hidethumb):
+  {
+     global $post, $sf_impact_Theme_Mods;
+     if ($post->post_type == "post")
+     {
+        $sf_impact_post_featured = $sf_impact_Theme_Mods->getMod('sf_impact_post_featured');
+        $sf_impact_post_header = $sf_impact_Theme_Mods->getMod('sf_impact_post_header'); //Check if this should go in the header instead 
+     }
+     else
+     {
+       $sf_impact_post_featured = $sf_impact_Theme_Mods->getMod('sf_impact_page_featured');
+        $sf_impact_post_header = $sf_impact_Theme_Mods->getMod('sf_impact_page_header'); 
+     }
+    if ($sf_impact_post_header)  //This is going to go into the header instead
+        return;
+    $meta = get_post_meta( $post->ID, 'show_featured_image', $sf_impact_post_featured  ) ;
+ 
+    $showthumb = esc_attr( get_post_meta( $post->ID, 'show_featured_image', true ) ) != NULL ? esc_attr( get_post_meta( $post->ID, 'show_featured_image', true ) ) :  $sf_impact_post_featured;;
+         if ($showthumb):
      
      ?>
-            <div class="post_img">
-		    <?php 
-            if ( has_post_thumbnail() ) { // check if the post has a Post Thumbnail assigned to it.
-              the_post_thumbnail();?>
-              <hr><?php            
-            }?>
-            </div><!--post_img-->
+        <div class="post_img">
+		<?php 
+        if ( has_post_thumbnail() ) { // check if the post has a Post Thumbnail assigned to it.
+            the_post_thumbnail();?>
+            <hr><?php            
+        }?>
+        </div><!--post_img-->
  <?php 
         endif;
     

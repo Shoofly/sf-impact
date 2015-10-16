@@ -6,7 +6,8 @@
  * @since sf-impact 1.0
   */  
 get_header(); 
-$sf_impact_grid_title = get_theme_mod( 'sf_impact_grid_title', "Recent Posts");
+global $sf_impact_Theme_Mods;
+$sf_impact_grid_title = $sf_impact_Theme_Mods->getMod( 'sf_impact_grid_title');
 ?>
  
 	<div id="primary" class="content-area">
