@@ -889,7 +889,7 @@ if (!function_exists('sf_impact_setDefaults')):
         $sf_impact_Theme_Mods->setDefault( 'sf_impact_grid_image_height', '' );
         $sf_impact_Theme_Mods->setDefault( 'sf_impact_grid_image_width', '' );
         $sf_impact_Theme_Mods->setDefault( 'sf_impact_custom_footer_css', '' );
-        
+        $sf_impact_Theme_Mods->setDefault( 'sf_impact_menu_location', 'above');
     }
 endif;
 ?>
