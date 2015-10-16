@@ -377,7 +377,7 @@ if (!function_exists('sf_impact_scripts')):
 
         $themedir = get_template_directory_uri();
           
-        wp_register_style("sf_impact_theme_styles", "$themedir/styles/app.css", "1.0", true);
+        wp_register_style("sf_impact_theme_styles", "$themedir/styles/app.css", "1.0");
       
         wp_enqueue_style("sf_impact_theme_styles");     
    
@@ -419,7 +419,7 @@ if (!function_exists('sf_impact_scripts')):
             $cmp = stripos($curpath,  $bbspath); 
             if ( $cmp !== false)
             {
-                    wp_register_style("sf_impact_bbspress", "$themedir/styles/bbspress.css", "1.0", true);
+                    wp_register_style("sf_impact_bbspress", "$themedir/styles/bbspress.css", "1.0");
                     wp_enqueue_style("sf_impact_bbspress");
             }
         }
@@ -430,11 +430,11 @@ if (!function_exists('sf_impact_scripts')):
            $sf_impact_home_header_type = $sf_impact_Theme_Mods->getMod( 'sf_impact_home_header_type' );
            
 
-           wp_register_style( '_sf_impact_header_styles', $themedir . '/styles/home.css', array(), '1.0', true);
+           wp_register_style( '_sf_impact_header_styles', $themedir . '/styles/home.css', array(), '1.0');
            wp_enqueue_style( '_sf_impact_header_styles' );
            if ($sf_impact_home_header_type == "1")
            {
-                wp_register_style( 'flex_style', $themedir . '/flexslider/flexslider.css', array(), '2.5.0', true);
+                wp_register_style( 'flex_style', $themedir . '/flexslider/flexslider.css', array(), '2.5.0');
                 wp_enqueue_style("flex_style");
                 wp_register_script('flex_script', $themedir . '/flexslider/jquery.flexslider-min.js', array(), "2.5.0", true);
                 wp_enqueue_script('flex_script');
@@ -450,7 +450,7 @@ if (!function_exists('sf_impact_scripts')):
 
 	  //  wp_enqueue_style( 'shoofly-style', get_stylesheet_uri() );
 	    wp_enqueue_script( 'shoofly-navigation', get_template_directory_uri() . '/js/functions-min.js', array(), '20120206', true );
-        wp_register_style('font_awesome', get_template_directory_uri() . "/font-awesome/css/font-awesome.min.css", '4.4', true);
+        wp_register_style('font_awesome', get_template_directory_uri() . "/font-awesome/css/font-awesome.min.css", '4.4');
         wp_enqueue_style('font_awesome');
     	wp_enqueue_script( 'shoofly-skip-link-focus-fix', get_template_directory_uri() . '/js/skip-link-focus-fix.js', array(), '20130115', true );
 
