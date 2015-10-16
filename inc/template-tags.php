@@ -215,6 +215,7 @@ if ( ! function_exists( 'sf_impact_entry_footer' ) ) :
  * Prints HTML with meta information for the categories, tags and comments.
  */
  function sf_impact_entry_footer() {
+       global $sf_impact_Theme_Mods;
 	// Hide category and tag text for pages only show on single posts.
 
     if (is_single() || is_page())
@@ -235,7 +236,7 @@ if ( ! function_exists( 'sf_impact_entry_footer' ) ) :
 		    }
 	    }
     
-        $sf_impact_show_author = get_theme_mod('sf_impact_show_author', true);
+        $sf_impact_show_author = $sf_impact_Theme_Mods->getMod('sf_impact_show_author');
    	    if ( is_single() &&   $sf_impact_show_author  ) :
 			    get_template_part( 'template-parts/author-bio' );
 		    endif;
@@ -299,17 +300,17 @@ add_action( 'save_post',     'sf_impact_category_transient_flusher' );
 if (!function_exists('sf_impact_thumbnail')):
 
  function sf_impact_thumbnail()
- {
-     global $post;
+  {
+     global $post, $sf_impact_Theme_Mods;
      if ($post->post_type == "post")
      {
-        $sf_impact_post_featured = get_theme_mod('sf_impact_post_featured', true);
-        $sf_impact_post_header = get_theme_mod('sf_impact_post_header', false); //Check if this should go in the header instead 
+        $sf_impact_post_featured = $sf_impact_Theme_Mods->getMod('sf_impact_post_featured');
+        $sf_impact_post_header = $sf_impact_Theme_Mods->getMod('sf_impact_post_header'); //Check if this should go in the header instead 
      }
      else
      {
-       $sf_impact_post_featured = get_theme_mod('sf_impact_page_featured', true);
-        $sf_impact_post_header = get_theme_mod('sf_impact_page_header', false); 
+       $sf_impact_post_featured = $sf_impact_Theme_Mods->getMod('sf_impact_page_featured');
+        $sf_impact_post_header = $sf_impact_Theme_Mods->getMod('sf_impact_page_header'); 
      }
     if ($sf_impact_post_header)  //This is going to go into the header instead
         return;

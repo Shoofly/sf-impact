@@ -31,7 +31,7 @@ class sf_impact_Theme_Mods
     }
     public function getDefault($key)
     {
-       
+        
        return get_theme_mod($key, self::$default[$this->handle][$key]) ? get_theme_mod($key, self::$default[$this->handle][$key]) : NULL;
         
     }

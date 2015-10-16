@@ -17,7 +17,7 @@
 			    <?php sf_impact_posted_on(); ?>
 		        </div><!-- .entry-meta -->
             </header><!-- .entry-header --><?php
-            the_content(get_theme_mod('sf_impact_excerpt_more_text', 'Read the rest') ,
+            the_content($sf_impact_Theme_Mods->getMod('sf_impact_excerpt_more_text') ,
 				    the_title( '<span class="screen-reader-text">', '</span>', false ));
      	    wp_link_pages( array(
 				    'before' => '<div class="page-links">' . esc_html__( 'Pages:', 'sf-impact' ),

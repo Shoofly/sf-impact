@@ -8,7 +8,7 @@
  * @subpackage sf-impact
  * @since sf-impact 1.0
  */
-
+global $sf_impact_Theme_Mods;
 ?>
  
 <!DOCTYPE html>
@@ -18,9 +18,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
         <link rel="profile" href="http://gmpg.org/xfn/11" />
         <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
-
-    
-        <?php wp_head(); ?>
+       <?php wp_head(); ?>
     </head>
     
 <?php 
@@ -38,12 +36,12 @@
     }
                 
     //Get the settings for the header
-    $sf_impact_logo_location = get_theme_mod('sf_impact_logo_location', 'image');
-    $sf_impact_menu_location = get_theme_mod('sf_impact_menu_location', 'above');
-    $sf_impact_home_header_type = get_theme_mod('sf_impact_home_header_type', '3');
-    $sf_impact_header_image = get_theme_mod('sf_impact_header_image', '');
-    $sf_impact_social_above_content = get_theme_mod('sf_impact_social_above_content', false);
-    $sf_impact_social_above_menu = get_theme_mod('sf_impact_social_above_menu', false);
+    $sf_impact_logo_location = $sf_impact_Theme_Mods->getMod('sf_impact_logo_location');
+    $sf_impact_menu_location = $sf_impact_Theme_Mods->getMod('sf_impact_menu_location');
+    $sf_impact_home_header_type = $sf_impact_Theme_Mods->getMod('sf_impact_home_header_type');
+    $sf_impact_header_image = $sf_impact_Theme_Mods->getMod('sf_impact_header_image');
+    $sf_impact_social_above_content = $sf_impact_Theme_Mods->getMod('sf_impact_social_above_content');
+    $sf_impact_social_above_menu = $sf_impact_Theme_Mods->getMod('sf_impact_social_above_menu');
     //Is this the home page or the front page (and not the blog page) and the header type is not default display the custom home page header image/slide show
     if ((is_home() || is_front_page()) && $sf_impact_home_header_type != "3" && !$wp_query -> is_posts_page)
         $homeimage = TRUE;      //Display the custom home page header
@@ -171,7 +169,7 @@
 
          if ((is_home() || is_front_page()) && !$wp_query -> is_posts_page)
          {
-            if ( get_theme_mod('sf_impact_home_featured_highlights', false))
+            if ( $sf_impact_Theme_Mods->getMod('sf_impact_home_featured_highlights'))
             {
             ?>
  
@@ -188,8 +186,8 @@
           <?php
             $arra = sf_impact_get_thumbnailarray();  //Get the settings for the thumbnail grid
             $url = sf_impact_get_thumbnailurl();     //Get the url for the read more link
-            $sf_impact_grid_title =  get_theme_mod('sf_impact_grid_title', 'Recent Posts');
-            $sf_impact_grid_more = get_theme_mod('sf_impact_grid_more', 'More Recent Posts')        
+            $sf_impact_grid_title =  $sf_impact_Theme_Mods->getMod('sf_impact_grid_title');
+            $sf_impact_grid_more = $sf_impact_Theme_Mods->getMod('sf_impact_grid_more')        
                 ?>
             <div class="home-thumb fixed">
                 <h1><?php echo $sf_impact_grid_title  ?></h1>

@@ -594,15 +594,15 @@ endif;
 if (!function_exists('sf_impact_getCustomUrl')):
 function sf_impact_getCustomUrl($url)
 {
-    global $post;
+    global $post, $sf_impact_Theme_Mods;
       if (is_single()) {
-           $sf_impact_post_header = get_theme_mod('sf_impact_post_header', false);
-            $sf_impact_post_featured = get_theme_mod('sf_impact_post_featured', true);
+           $sf_impact_post_header = $sf_impact_Theme_Mods->getMod('sf_impact_post_header');
+            $sf_impact_post_featured = $sf_impact_Theme_Mods->getMod('sf_impact_post_featured');
         } elseif (is_page()) {
-            $sf_impact_post_header = get_theme_mod('sf_impact_page_header', false);
-            $sf_impact_post_featured = get_theme_mod('sf_impact_page_featured', true);  
+            $sf_impact_post_header = $sf_impact_Theme_Mods->getMod('sf_impact_page_header');
+            $sf_impact_post_featured = $sf_impact_Theme_Mods->getMod('sf_impact_page_featured');  
         }        
-        $meta = get_post_meta( $post->ID, 'show_featured_image', true  ) ;
+        $meta = get_post_meta( $post->ID, 'show_featured_image'  ) ;
      
         if (( $sf_impact_post_header && $meta) )
         {
@@ -800,7 +800,7 @@ if (!function_exists('sf_impact_setDefaults')):
             $sf_impact_Theme_Mods->setMod('sf_impact_logo_image', $defaultlogo);
             $sf_impact_Theme_Mods->setMod('sf_impact_logo_location', 'image');
             $sf_impact_Theme_Mods->setMod('sf_impact_home_header_type', $defaultheadertype);
-            $sf_impact_highlight_style->setMod('sf_impact_highlight_style', 'T');
+            $sf_impact_Theme_Mods->setMod('sf_impact_highlight_style', 'T');
             $sf_impact_Theme_Mods->setMod('sf_impact_highlight_boxes', 2);
             $sf_impact_Theme_Mods->setMod('sf_impact_highlight_header1', 'Up to 3 highlights');
             $sf_impact_Theme_Mods->setMod('sf_impact_highlight_image1', $defaultpath . 'flowers.png');

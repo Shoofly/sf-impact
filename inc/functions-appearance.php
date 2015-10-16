@@ -105,15 +105,15 @@ if (!function_exists('sf_impact_get_thumbnailarray')):
     function sf_impact_get_thumbnailarray( )
     {
     global $sf_impact_Theme_Mods;      
-        $type = get_theme_mod('sf_impact_grid_type', 'post');
+        $type = $sf_impact_Theme_Mods->getMod('sf_impact_grid_type');
         $gridwidth = "99%";
-        $posts = get_theme_mod( 'sf_impact_grid_posts', '4');
-        $height = get_theme_mod( 'sf_impact_grid_image_height',"" );
-        $width= get_theme_mod( 'sf_impact_grid_image_width',"" );
-         $cellwidth = get_theme_mod( 'sf_impact_grid_cell_width',  "" );
-         $cellheight = get_theme_mod( 'sf_impact_grid_cell_height', "");
-        $category = get_theme_mod( 'sf_impact_post_category', "");
-        $imagesize = get_theme_mod( 'sf_impact_image_size_name', 'thumbnail');
+        $posts = $sf_impact_Theme_Mods->getMod( 'sf_impact_grid_posts');
+        $height = $sf_impact_Theme_Mods->getMod( 'sf_impact_grid_image_height' );
+        $width= $sf_impact_Theme_Mods->getMod( 'sf_impact_grid_image_width');
+         $cellwidth = $sf_impact_Theme_Mods->getMod( 'sf_impact_grid_cell_width' );
+         $cellheight = $sf_impact_Theme_Mods->getMod( 'sf_impact_grid_cell_height');
+        $category = $sf_impact_Theme_Mods->getMod( 'sf_impact_post_category');
+        $imagesize = $sf_impact_Theme_Mods->getMod( 'sf_impact_image_size_name');
         $captionwidth = $width;
         $arra = array('post_type' => $type, 'posts_per_page' => $posts,  'aligngrid' => 'autocenter',   'imagesize' => $imagesize, 'cellwidth' => $cellwidth, 'cellheight'=>$cellheight, 'captionwidth' => $captionwidth, 'ignore_sticky_posts' => 1);
 
@@ -142,9 +142,9 @@ endif;
 if (!function_exists('sf_impact_get_thumbnailurl')):
     function sf_impact_get_thumbnailurl()
     {
-              global $sf_impact_Theme_Mods;      
-        $category = get_theme_mod( 'sf_impact_post_category', "");
-        $page = get_theme_mod('sf_impact_thumbnail_more_page', '');
+        global $sf_impact_Theme_Mods;      
+        $category = $sf_impact_Theme_Mods->getMod( 'sf_impact_post_category');
+        $page = $sf_impact_Theme_Mods->getMod('sf_impact_thumbnail_more_page');
 
 
         if ($category)

@@ -5,6 +5,7 @@
   * @subpackage sfimpact
  * @since sfImpact 1.0
  */
+ global $sf_impact_Theme_Mods;
 $myLink = sf_impact_get_url(); 
 if (!$myLink) $post_format = "standard";
 
@@ -22,7 +23,7 @@ if (!$myLink)
     <div class="entry-content entry-excerpt">
 
 		<?php
-             $sf_impact_show_thumbnail_excerpt = get_theme_mod('sf_impact_show_thumbnail_excerpt', FALSE);
+             $sf_impact_show_thumbnail_excerpt = $sf_impact_Theme_Mods->getMod('sf_impact_show_thumbnail_excerpt');
        
             if (has_post_thumbnail() && $sf_impact_show_thumbnail_excerpt != FALSE)
             {

@@ -11,7 +11,7 @@
 
 get_header(); 
 //default sidebar option
-$sf_impact_post_sidebar = !get_theme_mod('sf_impact_post_sidebar', FALSE);
+$sf_impact_post_sidebar = !$sf_impact_Theme_Mods->getMod('sf_impact_post_sidebar');
 //post sidebar option
 $hidesidebar = esc_attr( get_post_meta( $post->ID, 'post_hide_sidebar', true ) ) ? esc_attr( get_post_meta( $post->ID, 'post_hide_sidebar', true ) ) : $sf_impact_post_sidebar ;
 
