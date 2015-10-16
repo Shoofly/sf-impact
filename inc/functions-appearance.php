@@ -540,34 +540,25 @@ if (!function_exists('sf_impact_header')):
         
     
    
-         if ($sf_impact_home_header_type == "1" && isset($the_slide_query))
-         {     
+        if ($sf_impact_home_header_type == "1" && isset($the_slide_query)) {     
            $hstyle = sf_impact_get_home_header_height();
             sf_impact_get_slideshow($the_slide_query, $wclass, $hstyle);
-         }
-         else 
-         {
-             if ($sf_impact_header_image && $sf_impact_home_header_type == "0")
-             {
+        } else {
+            if ($sf_impact_header_image && $sf_impact_home_header_type == "0") {
                   $hstyle = sf_impact_get_home_header_height(true);
                   if ($hstyle) $hstyle = "style='$hstyle'";
                 ?>
-              <div class="header-container-home <?php echo $wclass?> ">
+                <div class="header-container-home <?php echo $wclass?> ">
 
-            <?php    
-             if ($logo=="image")
-            {?>
-                <div class="header-container-home-inner">
-                <div class="site-branding fixed shoofly-branding-image" >
-                    <?php get_template_part('template-parts/branding');?>
-		        </div>
-             <?php 
-            }?>
-                <img class="headerimg" alt="header" <?php echo  $hstyle?> src="<?php echo $sf_impact_header_image?>"/>
-               </div>
-                <?php if ($logo == "image") ?>
-                    </div>
-                <?php 
+                    <?php if ($logo=="image"){ ?>
+                        <div class="header-container-home-inner">
+                            <div class="site-branding fixed shoofly-branding-image" >
+                                <?php get_template_part('template-parts/branding');?>
+            		        </div>
+                        </div>
+                    <?php }?>
+                    <img class="headerimg" alt="header" <?php echo  $hstyle?> src="<?php echo $sf_impact_header_image?>"/>
+                </div><?php
                 $output = "";
                 $output = apply_filters('sf_impact_home_post_bar', $output);
                 if ( $output != '' )
