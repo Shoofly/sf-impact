@@ -36,7 +36,7 @@
       
         $wp_customize->add_setting( 'sf_impact_demo_data', 
                 array(
-                    'default' => $sf_impact_Theme_Mods->getDefault('sf_impact_demo_data'),
+                    'default' => true,
                     'type' => 'theme_mod', 
                     'capability' => 'edit_theme_options', 
                     'transport' => 'refresh', 
@@ -1722,7 +1722,7 @@ function sf_impact_pageOptions($wp_customize)
     public function sf_impact_footer_output()
     {
        global $sf_impact_Theme_Mods;
-          $sf_impact_custom_footer_css = $sf_impact_Theme_Mods->getMod( 'sf_impact_custom_footer_css', '' );
+          $sf_impact_custom_footer_css = $sf_impact_Theme_Mods->getMod( 'sf_impact_custom_footer_css' );
           if ($sf_impact_custom_footer_css != '') 
           {
              ?>
@@ -1738,7 +1738,7 @@ function sf_impact_pageOptions($wp_customize)
             <!--Customizer CSS--> 
             <style type="text/css">
                 <?php 
-                $sf_impact_custom_head_css = $sf_impact_Theme_Mods->getMod( 'sf_impact_custom_head_css', '' );
+                $sf_impact_custom_head_css = $sf_impact_Theme_Mods->getMod( 'sf_impact_custom_head_css' );
               
                 $sf_impact_header_background = $sf_impact_Theme_Mods->getMod( 'sf_impact_header_background' );
                 $sf_impact_content_background  = $sf_impact_Theme_Mods->getMod( 'sf_impact_content_background' );
@@ -1755,7 +1755,7 @@ function sf_impact_pageOptions($wp_customize)
                 $background = get_background_color();
                 $outu .= sprintf("%s {%s:%s;}", "body", "background-color", $background); 
 
-                $custom_style =  $sf_impact_Theme_Mods->getMod( 'sf_impact_color_theme', 'light' ) ;
+                $custom_style =  $sf_impact_Theme_Mods->getMod( 'sf_impact_color_theme' ) ;
 
                 $linkTheme = new sf_impact_CustomLinkThemes( 'sf_impact' );
                 ob_start();

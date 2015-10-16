@@ -8,7 +8,7 @@ if (!function_exists('sf_impact_get_home_header_class')):
     function sf_impact_get_home_header_class()
     {
         global $sf_impact_Theme_Mods;
-        $sf_impact_header_stretch = $sf_impact_Theme_Mods->getMod('sf_impact_header_stretch', true) ? TRUE : FALSE; 
+        $sf_impact_header_stretch = $sf_impact_Theme_Mods->getMod('sf_impact_header_stretch') ? TRUE : FALSE; 
         if ($sf_impact_header_stretch)
             $class = "sfly-img-stretch";
         else
@@ -46,13 +46,13 @@ if (!function_exists('sf_impact_slideshow_scripts')):
         $sf_impact_slider_transition = $sf_impact_Theme_Mods->getMod( 'sf_impact_slider_transition' );
         $sf_impact_slider_animspeed = $sf_impact_Theme_Mods->getMod( 'sf_impact_slider_animspeed' );
         $sf_impact_slider_speed = $sf_impact_Theme_Mods->getMod( 'sf_impact_slider_speed' );
-        $sf_impact_slider_automate = $sf_impact_Theme_Mods->getMod( 'sf_impact_slider_automate', true)  == TRUE ? 'true' : 'false';
+        $sf_impact_slider_automate = $sf_impact_Theme_Mods->getMod( 'sf_impact_slider_automate')  == TRUE ? 'true' : 'false';
         $sf_impact_slider_direction = $sf_impact_Theme_Mods->getMod( 'sf_impact_slider_direction' );
-        $sf_impact_slider_navigation = $sf_impact_Theme_Mods->getMod( 'sf_impact_slider_navigation', FALSE) == TRUE ? "true" : "false";
-        $sf_impact_slider_navdirection = $sf_impact_Theme_Mods->getMod( 'sf_impact_slider_navdirection', FALSE) == TRUE ? "true" : "false";
-        $sf_impact_slider_keyboard = $sf_impact_Theme_Mods->getMod( 'sf_impact_slider_keyboard', true) == TRUE ? "true" : "false";
-        $sf_impact_slider_mousewheel = $sf_impact_Theme_Mods->getMod( 'sf_impact_slider_mousewheel', FALSE) == TRUE ? "true" : "false";
-        $sf_impact_slider_pauseonhover = $sf_impact_Theme_Mods->getMod( 'sf_impact_slider_pauseonhover', false) == TRUE ? "true" : "false";
+        $sf_impact_slider_navigation = $sf_impact_Theme_Mods->getMod( 'sf_impact_slider_navigation') == TRUE ? "true" : "false";
+        $sf_impact_slider_navdirection = $sf_impact_Theme_Mods->getMod( 'sf_impact_slider_navdirection') == TRUE ? "true" : "false";
+        $sf_impact_slider_keyboard = $sf_impact_Theme_Mods->getMod( 'sf_impact_slider_keyboard') == TRUE ? "true" : "false";
+        $sf_impact_slider_mousewheel = $sf_impact_Theme_Mods->getMod( 'sf_impact_slider_mousewheel') == TRUE ? "true" : "false";
+        $sf_impact_slider_pauseonhover = $sf_impact_Theme_Mods->getMod( 'sf_impact_slider_pauseonhover') == TRUE ? "true" : "false";
 
          ?>
        	<script type="text/javascript">
@@ -161,7 +161,7 @@ if (!function_exists('sf_impact_get_highlightboxes')):
     function sf_impact_get_highlightboxes()
     {
         global $sf_impact_Theme_Mods;      
-        $sf_impact_highlight_boxes = $sf_impact_Theme_Mods->getMod( 'sf_impact_highlight_boxes', 0);
+        $sf_impact_highlight_boxes = $sf_impact_Theme_Mods->getMod( 'sf_impact_highlight_boxes');
         $boxcount = intval( $sf_impact_highlight_boxes );
         if ($boxcount > 0) 
         { 
@@ -292,8 +292,8 @@ endif;
     {
         global $sf_impact_Theme_Mods;
         $grid = FALSE;
-        $sf_impact_grid_display = $sf_impact_Theme_Mods->getMod( 'sf_impact_grid_display', FALSE);
-        $sf_impact_grid_display_all = $sf_impact_Theme_Mods->getMod( 'sf_impact_grid_display_all', FALSE);
+        $sf_impact_grid_display = $sf_impact_Theme_Mods->getMod( 'sf_impact_grid_display');
+        $sf_impact_grid_display_all = $sf_impact_Theme_Mods->getMod( 'sf_impact_grid_display_all');
       
            //Load script for thumbnail grid
          if (class_exists('sfly_thumbnailgrid'))
@@ -372,11 +372,11 @@ if (!function_exists('sf_impact_get_slideshow')):
           global $sf_impact_Theme_Mods;
           $format =  $sf_impact_Theme_Mods->getMod( 'sf_impact_slider_style' );
          
-          $sf_impact_slider_captions = $sf_impact_Theme_Mods->getMod( 'sf_impact_slider_captions', TRUE) ;
+          $sf_impact_slider_captions = $sf_impact_Theme_Mods->getMod( 'sf_impact_slider_captions') ;
           $istyle = "";
           if ($sf_impact_slider_captions) 
                 $wclass .= " has-captions";
-          $sf_impact_slider_navigation = $sf_impact_Theme_Mods->getMod('sf_impact_slider_navigation', FALSE);
+          $sf_impact_slider_navigation = $sf_impact_Theme_Mods->getMod('sf_impact_slider_navigation');
           if ($sf_impact_slider_navigation)
            $wclass .= " has-navigation";
     
@@ -387,7 +387,7 @@ if (!function_exists('sf_impact_get_slideshow')):
     		<div class="flexslider"> 
 		    <ul class="slides <?php echo $wclass?>">
                     <?php 
-                     $sf_impact_slider_thumbnails = $sf_impact_Theme_Mods->getMod( 'sf_impact_slider_thumbnails', false) == TRUE ? "true" : "false";
+                     $sf_impact_slider_thumbnails = $sf_impact_Theme_Mods->getMod( 'sf_impact_slider_thumbnails') == TRUE ? "true" : "false";
                      while ( $the_query->have_posts() )  :$the_query->the_post();
                             $permalink = get_permalink();
                             $title = get_the_title();
@@ -468,7 +468,7 @@ if (!function_exists('sf_impact_posts')):
                 $full  = sf_impact_postContentFullPage();  //Check to see if the option to display excerpts is on or off
                 $sf_impact_show_full_sticky_post = FALSE;  //Check to see if the sticky as full post option is on 
                 if (is_sticky() && !$full)  //The sticky as full post is only valid when excerpts are enabled.
-                   $sf_impact_show_full_sticky_post = ($sf_impact_Theme_Mods->getMod( 'sf_impact_show_full_sticky_post', true) && $current_post_index  == 0);      //Make sure that all sticky posts at the top display as full if this is set
+                   $sf_impact_show_full_sticky_post = ($sf_impact_Theme_Mods->getMod( 'sf_impact_show_full_sticky_post') && $current_post_index  == 0);      //Make sure that all sticky posts at the top display as full if this is set
                 ?>      
 			<?php
                 if ($full)
@@ -504,11 +504,11 @@ if ( ! function_exists( 'sf_impact_postContentFullPage' ) ) :
         if (!is_search()) {
             if (is_archive()) {
         
-                $full = ! $sf_impact_Theme_Mods->getMod( 'sf_impact_show_excerpt_archive_post', true);
+                $full = ! $sf_impact_Theme_Mods->getMod( 'sf_impact_show_excerpt_archive_post');
         
             } else {
                 if ((!is_single()  && !is_page()) ) {
-                    $full = !$sf_impact_Theme_Mods->getMod( 'sf_impact_show_excerpt_blog_post', TRUE);    
+                    $full = !$sf_impact_Theme_Mods->getMod( 'sf_impact_show_excerpt_blog_post');    
                 }
             }
         } else { 

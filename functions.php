@@ -125,7 +125,7 @@ function sf_impact_setup() {
     add_theme_support( 'custom-header', $args );
     //add excerpt support for posts
      add_post_type_support( 'page', 'excerpt' );
-    setDefaults();
+    sf_impact_setDefaults();
      //settings moved here
 
     //Social settings
@@ -291,27 +291,7 @@ if (!function_exists('sf_impact_scripts')):
       
         wp_enqueue_style("sf_impact_theme_styles");     
    
-       /*
-        $custom_style =  $sf_impact_Theme_Mods->getMod( 'sf_impact_color_theme', 'light' ) ;
-
-        $linkTheme = new sf_impact_CustomLinkThemes( 'sf_impact' );
-        ob_start();
-        include( $linkTheme->getCustomThemePath($custom_style) );
-        
-        $menuhex = $sf_impact_Theme_Mods->getMod('sf_impact_content_background');
-        
-        $custom_css = ob_get_clean();
-        
-        $custom_css .= '
-            .home-highlight-boxes .highlight-span h2 {
-                color: #' . get_header_textcolor() . ';
-            }
-            .flexslider {
-                min-height: ' . $sf_impact_Theme_Mods->getMod('sf_impact_header_height') . ';
-            }';
-         
-        wp_add_inline_style( 'sf_impact_theme_styles', $custom_css );
-        */
+ 
         
 
         add_editor_style( "$themedir/styles/app.css" /*, "$themedir/style-parts/$custom_style-scheme.css"*/); 
@@ -586,7 +566,7 @@ if ( is_admin() ) {
             $newpost = is_edit_page('new');
             if ($posttype == "post")
             {
-                $defaultval = !$sf_impact_Theme_Mods->getMod( 'sf_impact_post_sidebar', FALSE);
+                $defaultval = !$sf_impact_Theme_Mods->getMod( 'sf_impact_post_sidebar');
                 $this->createCheckbox("post_hide_sidebar", "Hide Sidebar (Full Page)", $newpost, $defaultval);
                 $this->createCheckbox("post_show_in_slideshow", "Include in Slide Show", $newpost, TRUE);
             }
@@ -595,12 +575,12 @@ if ( is_admin() ) {
                 if ($posttype == 'post')
                 {
                     $text = __( "Display featured image in post", 'sf-impact' );
-                    $defvalue = $sf_impact_Theme_Mods->getMod( 'sf_impact_post_featured',  false);
+                    $defvalue = $sf_impact_Theme_Mods->getMod( 'sf_impact_post_featured');
                 }
                 else
                 {
                     $text = __( "Display featured image in page", 'sf-impact' );
-                    $defvalue = $sf_impact_Theme_Mods->getMod( 'sf_impact_page_featured', false);
+                    $defvalue = $sf_impact_Theme_Mods->getMod( 'sf_impact_page_featured');
                 }
                
                
@@ -802,7 +782,8 @@ function is_edit_page($new_edit = null){
         return in_array( $pagenow, array( 'post.php', 'post-new.php' ) );
 }
 endif;
-   function setDefaults()
+if (!function_exists('sf_impact_setDefaults')):
+   function sf_impact_setDefaults()
     {
         global $sf_impact_Theme_Mods;
         $sfimpact_demo_data = $sf_impact_Theme_Mods->getMod('sf_impact_demo_data', TRUE); //This is not really a setting, it's a switch. 
@@ -910,4 +891,5 @@ endif;
         $sf_impact_Theme_Mods->setDefault( 'sf_impact_custom_footer_css', '' );
         
     }
+endif;
 ?>

@@ -31,6 +31,7 @@ class sf_impact_Theme_Mods
     }
     public function getDefault($key)
     {
+       
        return get_theme_mod($key, self::$default[$this->handle][$key]) ? get_theme_mod($key, self::$default[$this->handle][$key]) : NULL;
         
     }
@@ -51,18 +52,23 @@ class sf_impact_Theme_Mods
         
         self::$defaults[$this->handle] = array_merge(self::$defaults[$this->handle],$array);
    }
-    
+    /*
+    * Get the theme mod setting
+    * $key - the name of the modification
+    * $default - overrides the set default
+    * returns the value
+    */
     public function getMod($key, $default=null) {
 
         switch(true) {
-            case isset(self::$default[$this->handle][$key]): 
-                return get_theme_mod($key, self::$default[$this->handle][$key]);
-                break;
-            case isset($default):
+            case isset($default):  //Use the override default first if the key does not exist
                 return get_theme_mod($key, $default);
                 break;
+            case isset(self::$default[$this->handle][$key]): //Use the preset override if the key does not exist
+                return get_theme_mod($key, self::$default[$this->handle][$key]);
+                break;
             default:
-                return get_theme_mod($key);
+                return get_theme_mod($key); //Return the key
         }
     }
     
