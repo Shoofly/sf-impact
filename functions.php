@@ -819,14 +819,14 @@ if (!function_exists('sf_impact_setDefaults')):
         //Color settings
         $sf_impact_Theme_Mods->setDefault( 'sf_impact_header_background', "#5b5b5b" );
         $sf_impact_Theme_Mods->setDefault( 'sf_impact_content_background', "#F5F5F5" );
-        $sf_impact_Theme_Mods->setDefault( 'sf_impact_header_opacity', 0 );
-        $sf_impact_Theme_Mods->setDefault( 'sf_impact_content_opacity', 100 );
+        $sf_impact_Theme_Mods->setDefault( 'sf_impact_header_opacity', "0" );
+        $sf_impact_Theme_Mods->setDefault( 'sf_impact_content_opacity', "100" );
 
         //Home settings
         $sf_impact_Theme_Mods->setDefault( 'sf_impact_home_rp_categoryid', "" );
         
         //Header and Icon mods
-        $sf_impact_Theme_Mods->setDefault( 'sf_impact_icon_size', 'lg' );
+        $sf_impact_Theme_Mods->setDefault( 'sf_impact_icon_size', '1g' );
         $sf_impact_Theme_Mods->setDefault( 'sf_impact_header_height', "" );
         $sf_impact_Theme_Mods->setDefault( 'sf_impact_header_width', "100%" );
         $sf_impact_Theme_Mods->setDefault( 'sf_impact_header_image', '' );
@@ -891,6 +891,7 @@ if (!function_exists('sf_impact_setDefaults')):
         $sf_impact_Theme_Mods->setDefault( 'sf_impact_custom_footer_css', '' );
         $sf_impact_Theme_Mods->setDefault( 'sf_impact_menu_location', 'above');
         $sf_impact_Theme_Mods->setDefault( 'sf_impact_header_stretch', true);
+        $sf_impact_Theme_Mods->setDefault('sf_impact_social_above_menu', true);
     }
 endif;
 ?>

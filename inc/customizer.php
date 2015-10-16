@@ -166,7 +166,6 @@
             'settings' => 'sf_impact_header_opacity', 
             'min' => '0',
             'max' => '100',
-               
             'priority' => 10, 
            
             ) 
