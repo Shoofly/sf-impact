@@ -30,8 +30,9 @@ class sf_impact_Theme_Mods
         return $val;
     }
     public function getDefault($key)
-    {
-       return get_theme_mod($key, $this->retrieveDefault($key)) ? get_theme_mod($key, $this->retrieveDefault($key)) : NULL;
+    { 
+
+        return get_theme_mod($key, $this->retrieveDefault($key)) ? get_theme_mod($key, $this->retrieveDefault($key)) : NULL;
         
     }
     public function setDefault($key, $default) 
@@ -53,9 +54,13 @@ class sf_impact_Theme_Mods
     }
     
     private function retrieveDefault($key) {
+    
         if ( isset(self::$default[$this->handle][$key]) ) {
             return self::$default[$this->handle][$key];
         } else {
+            if( WP_DEBUG === true ) {
+                echo "<b>Warning:</b> there is no default for $key!<BR>";
+            }
             return null;
         }
     }
