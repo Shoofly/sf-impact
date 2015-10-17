@@ -234,7 +234,6 @@
         $wp_customize->get_setting( 'blogname' )->transport         = 'postMessage';
         $wp_customize->get_setting( 'blogdescription' )->transport  = 'postMessage';
         $wp_customize->get_setting( 'header_textcolor' )->transport = 'postMessage';
-        $wp_customize->get_setting( 'header_textcolor' )->default   = '000276';
 }
     function sf_impact_generalOptions($wp_customize)
     {
@@ -1731,11 +1730,11 @@ function sf_impact_pageOptions($wp_customize)
             <!--Customizer CSS--> 
             <style type="text/css">
                 <?php 
-                $sf_impact_custom_head_css = $sf_impact_Theme_Mods->getMod( 'sf_impact_custom_head_css' );
+                $sf_impact_custom_head_css      = $sf_impact_Theme_Mods->getMod( 'sf_impact_custom_head_css' );
               
-                $sf_impact_header_background = $sf_impact_Theme_Mods->getMod( 'sf_impact_header_background' );
-                $sf_impact_content_background  = $sf_impact_Theme_Mods->getMod( 'sf_impact_content_background' );
-                $sf_impact_header_opacity = $sf_impact_Theme_Mods->getMod( 'sf_impact_header_opacity' );
+                $sf_impact_header_background    = $sf_impact_Theme_Mods->getMod( 'sf_impact_header_background' );
+                $sf_impact_content_background   = $sf_impact_Theme_Mods->getMod( 'sf_impact_content_background' );
+                $sf_impact_header_opacity       = $sf_impact_Theme_Mods->getMod( 'sf_impact_header_opacity' );
                 $outu = "";
                 if ($sf_impact_header_opacity < 100) {
                     $hstyle = sf_impact_rbgastyle($sf_impact_header_background, $sf_impact_header_opacity);
@@ -1744,6 +1743,8 @@ function sf_impact_pageOptions($wp_customize)
                     $outu .= sprintf("%s {%s:%s;}", "#topmasthead", "background-color", $sf_impact_header_background); 
                 }   
                 $site = get_header_textcolor();
+               
+               
                 $outu .= sprintf("%s {%s:%s;}", ".site-title", "color", $site); 
                 $background = get_background_color();
                 $outu .= sprintf("%s {%s:%s;}", "body", "background-color", $background); 
@@ -1778,7 +1779,8 @@ function sf_impact_pageOptions($wp_customize)
                     
                 echo $outu;
                 ?>
-            </style> 
+            </style>
+            
             <!--/Customizer CSS-->
             <?php
     }

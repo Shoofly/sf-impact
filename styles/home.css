@@ -144,15 +144,6 @@ hr.home1
     margin: 8px 0px 15px 0px;
 }
 
-.highlight-left-img .highlight-img,
-.highlight-right-img .highlight-img,
-.highlight-top-img .highlight-img {
- 
-  width: auto;
-  height: 150px;
-
-}
-
 .highlight-left-text,
 .highlight-right-text
 {

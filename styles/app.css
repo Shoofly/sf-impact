@@ -34,7 +34,7 @@
 /*--------------------------------------------------------------
 1.0 Reset
 --------------------------------------------------------------*/
-html, body, div, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, abbr, acronym, address, big, cite, ol, ul, li, label, form, table, caption {
+html, body, div, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, acronym, address, big, cite, ol, ul, li, label, form, table, caption {
   -webkit-transition-delay: 0s;
   -webkit-transition-duration: 0.2s;
   -webkit-transition-property: left;
@@ -790,7 +790,7 @@ ol.comment-list {
 
 .site-description {
   font-style: italic;
-  padding-left: 25px;
+  padding: 0px 15px;
   font-size: 1em;
   color: white;
   font-weight: 400; }
@@ -1354,6 +1354,18 @@ footer.entry-footer .author-bio {
 .griditemleft {
   margin: 20px !important; }
 
+.highlight-right-text .highlight-span h2, .highlight-left-text .highlight-span h2 {
+  font-size: 1.5em;
+  word-wrap: normal; }
+
+.highlight-right-img, .highlight-left-img {
+  overflow: hidden; }
+  .highlight-right-img img, .highlight-left-img img {
+    max-width: 100%;
+    max-height: 150px;
+    height: auto;
+    width: auto; }
+
 /*Etc*/
 @media only screen and (min-width: 751px) {
   .fimage-title-large .title {
@@ -1377,7 +1389,8 @@ footer.entry-footer .author-bio {
     margin: 25px;
     clear: both; }
   .highlight-right-text .highlight-span h2, .highlight-left-text .highlight-span h2 {
-    font-size: 1.5em; } }
+    font-size: 1.5em;
+    word-wrap: normal; } }
 
 @media only screen and (min-width: 1200px) {
   #content, #masthead, #innermasthead, .site-footer, #bottomwrapper, .sfly-grid {
@@ -1565,9 +1578,6 @@ footer.entry-footer .author-bio {
         .sfly-headerimg .flexslider .slides.sfly-img-fit img {
           padding: 0px;
           border: 0px; }
-  .highlight-right-img img.highlight-img, .highlight-left-img img.highlight-img {
-    width: 100%;
-    height: auto; }
   #primary-navigation a {
     float: left; }
   #primary-navigation #primary-menu {
@@ -1615,7 +1625,7 @@ footer.entry-footer .author-bio {
 
 @media only screen and (max-width: 480px) {
   #page #site-logo-title.site-text .site-title, #page #site-logo-title.site-text .site-description {
-    padding-left: 20px; }
+    padding: 0px 20px; }
   #page .site-info {
     display: block;
     float: left;
