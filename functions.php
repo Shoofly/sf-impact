@@ -118,8 +118,9 @@ function sf_impact_setup() {
 		'default-image' => '',
 	) ) );
     $args = array(
-	    'width'         => 980,
-	    'height'        => 60,
+	    'width' 			=> 980,
+	    'height' 			=> 60,
+            'default-text-color'	=> '000276',
 	    'default-image' => get_template_directory_uri() . '/images/impact.png',
     );
     add_theme_support( 'custom-header', $args );
@@ -794,7 +795,7 @@ if (!function_exists('sf_impact_setDefaults')):
 
             $defaultheader = $defaultpath . "impact.png";
             $defaultheadertype = "3"; //This should be 2
-           // $sf_impact_Theme_Mods->setDefault('header_textcolor','000099');      
+          //  $sf_impact_Theme_Mods->setDefault('header_textcolor','000099');      
          //   $sf_impact_Theme_Mods->setMod('sf_impact_header_image', $defaultheader); //this should not be set
          
             $sf_impact_Theme_Mods->setMod('sf_impact_logo_image', $defaultlogo);
@@ -856,7 +857,6 @@ if (!function_exists('sf_impact_setDefaults')):
             $sf_impact_Theme_Mods->setDefault( 'sf_impact_highlight_text' . $x, '' );
             $sf_impact_Theme_Mods->setDefault( 'sf_impact_highlight_link' . $x, '#' );
         }
-        
         
         //Grid mods
         $sf_impact_Theme_Mods->setDefault( 'sf_impact_grid_display', FALSE );
