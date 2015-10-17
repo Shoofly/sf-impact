@@ -572,7 +572,12 @@ if ( is_admin() ) {
             {
                 $defaultval = !$sf_impact_Theme_Mods->getMod( 'sf_impact_post_sidebar');
                 $this->createCheckbox("post_hide_sidebar", "Hide Sidebar (Full Page)", $defaultval);
-                $this->createCheckbox("post_show_in_slideshow", "Include in Slide Show",  TRUE);
+                if($newpost) {
+                    $this->createCheckbox("post_show_in_slideshow", "Include in Slide Show", TRUE);
+                }
+                else {
+                    $this->createCheckbox("post_show_in_slideshow", "Include in Slide Show");
+                }
             }
            
             if ($posttype === 'post' || $posttype=='page') {
@@ -823,8 +828,8 @@ if (!function_exists('sf_impact_setDefaults')):
         //Color settings
         $sf_impact_Theme_Mods->setDefault( 'sf_impact_header_background', "#5b5b5b" );
         $sf_impact_Theme_Mods->setDefault( 'sf_impact_content_background', "#F5F5F5" );
-        $sf_impact_Theme_Mods->setDefault( 'sf_impact_header_opacity', "0" );
-        $sf_impact_Theme_Mods->setDefault( 'sf_impact_content_opacity', "100" );
+        $sf_impact_Theme_Mods->setDefault( 'sf_impact_header_opacity', 0 );
+        $sf_impact_Theme_Mods->setDefault( 'sf_impact_content_opacity', 100 );
 
         //Home settings
         $sf_impact_Theme_Mods->setDefault( 'sf_impact_home_rp_categoryid', "" );

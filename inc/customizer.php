@@ -148,7 +148,7 @@
         ) );   
         $wp_customize->add_setting( 'sf_impact_header_opacity', 
             array(
-               'default' => $sf_impact_Theme_Mods->getDefault('sf_impact_header_opacity'),
+               'default' => 0,//$sf_impact_Theme_Mods->getDefault('sf_impact_header_opacity', 0),
                 'type' => 'theme_mod', 
                 'capability' => 'edit_theme_options', 
                 'transport' => 'refresh', 
@@ -159,7 +159,7 @@
                 $wp_customize, 
             'sf_impact_header_opacity', 
             array(
-            'type' => 'range',
+            'type' => 'number',
             'label' => __( 'Site Header Background Opacity', 'sf-impact' ), 
             'description' => __('The background opacity for area above the header image & content', 'sf-impact'), 
             'section' => 'colors', 
@@ -203,7 +203,7 @@
                 $wp_customize, 
             'sf_impact_content_opacity', 
             array(
-            'type' => 'range',
+            'type' => 'number',
             'label' => __( 'Content Background Opacity', 'sf-impact' ), 
             'description' => __('The background color opacity for site content', 'sf-impact'),
             'section' => 'colors', 
@@ -1098,44 +1098,7 @@ function sf_impact_pageOptions($wp_customize)
                 'sanitize_callback' => 'sf_impact_sanitize_select'
                 ) 
             ); 
-            $wp_customize->add_control (new WP_Customize_Control(
-            $wp_customize, 'sf_impact_slider_transition',
-                array(
-                'label' => __( 'Slide Show transition type', 'sf-impact' ), 
-                 'section' => 'sf_impact_slider_options', 
-                'settings' => 'sf_impact_slider_transition', 
-                'priority' => 10, 
-                'type' => 'select',
-                'choices'  => array(
-                'fade' => __('fade', 'sf-impact'), 
-                'slide' => __('slide', 'sf-impact'), 
-                ) 
-            )
-            ));
-            $wp_customize->add_setting( 'sf_impact_slider_direction', 
-                array(
-                'default' => $sf_impact_Theme_Mods->getDefault('sf_impact_slider_direction'), 
-                'type' => 'theme_mod', 
-                'capability' => 'edit_theme_options', 
-                'transport' => 'refresh', 
-                'sanitize_callback' => 'sf_impact_sanitize_select'
-                ) 
-            ); 
-            $wp_customize->add_control (new WP_Customize_Control(
-            $wp_customize, 'sf_impact_slider_direction',
-                array(
-                'label' => __( 'Slide Show direction', 'sf-impact' ),
-                 'section' => 'sf_impact_slider_options', 
-                'settings' => 'sf_impact_slider_direction', 
-                'priority' => 10, 
-                'type' => 'select',
-                'choices'  => array(
-                'vertical' => __('horizontal', 'sf-impact'), 
-                'horizontal' => __('vertical', 'sf-impact'), 
-                ) 
-            )
-            ));
- 
+
            $wp_customize->add_setting('sf_impact_slider_automate', 
                 array (
                 'default' => $sf_impact_Theme_Mods->getDefault('sf_impact_slider_automate'), 
