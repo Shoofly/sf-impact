@@ -543,15 +543,18 @@ if ( is_admin() ) {
         
             update_post_meta( $post_id, esc_attr($id), $value ); //save value
         }
-         public function createCheckbox($id, $label, $newpost = FALSE,  $default = NULL)
+         public function createCheckbox($id, $label,  $default = NULL)
          {
             global $post;
             if (!$default)
               $default = FALSE;
-            $meta = get_post_meta( $post->ID, $id, true ) ;
-  
-            $value = $newpost ? esc_attr($default) : esc_attr($meta);
+    $value = esc_attr( get_post_meta( $post->ID, $id, true ) ) != NULL ? esc_attr( get_post_meta( $post->ID, $id, true ) ) :  $default;
 
+ /*           $meta = get_post_meta( $post->ID, $id, true ) ;
+            if ($meta) $i="meta"; else $i="";
+            echo "<p>$id</p><p>isset: $i</p><p>meta $meta</p>$newpost $newpost<p>default $default</p>";
+            $value = $newpost || ($meta)) ? esc_attr($default) : esc_attr($meta);
+            */
             echo '<div><label for="' . $id . '" class="selectit"><input name="' . $id . '" type="checkbox" id="' . $id . '" value="' . $value . ' "'. checked( $value, 1, false) .'> ' . $label .'</label></div>';
 	    }
         /**
@@ -568,8 +571,8 @@ if ( is_admin() ) {
             if ($posttype == "post")
             {
                 $defaultval = !$sf_impact_Theme_Mods->getMod( 'sf_impact_post_sidebar');
-                $this->createCheckbox("post_hide_sidebar", "Hide Sidebar (Full Page)", $newpost, $defaultval);
-                $this->createCheckbox("post_show_in_slideshow", "Include in Slide Show", $newpost, TRUE);
+                $this->createCheckbox("post_hide_sidebar", "Hide Sidebar (Full Page)", $defaultval);
+                $this->createCheckbox("post_show_in_slideshow", "Include in Slide Show",  TRUE);
             }
            
             if ($posttype === 'post' || $posttype=='page') {
@@ -585,7 +588,7 @@ if ( is_admin() ) {
                 }
                
                
-                $this->createCheckbox("show_featured_image", $text, $newpost, $defvalue);
+                $this->createCheckbox("show_featured_image", $text,  $defvalue);
                 
                 
         	}
