@@ -1635,7 +1635,7 @@ function sf_impact_pageOptions($wp_customize)
                     )
                 )
             );
-            $name = 'sf_impact_highlight_header' . $x;
+            $name = "sf_impact_highlight_header$x";
             $wp_customize->add_control( new WP_Customize_Control (
    
                     $wp_customize, 
@@ -1650,7 +1650,7 @@ function sf_impact_pageOptions($wp_customize)
                     ) 
                 ) );
   
-            $name = 'sf_impact_highlight_text' . $x;
+            $name = "sf_impact_highlight_text$x";
                 $wp_customize->add_control( new WP_Customize_Control (
    
                     $wp_customize, 
@@ -1664,7 +1664,7 @@ function sf_impact_pageOptions($wp_customize)
                     ) 
                 ) );
 
-                $name = 'sf_impact_highlight_link' . $x;
+                $name = "sf_impact_highlight_link$x";
                 $wp_customize->add_setting( "$name", 
                     array(
                     'default' => $sf_impact_Theme_Mods->getDefault($name),

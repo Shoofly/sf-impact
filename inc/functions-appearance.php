@@ -169,10 +169,10 @@ if (!function_exists('sf_impact_get_highlightboxes')):
          
             for ($x = 0; $x <= 3; ++$x) 
             {
-                ${'sf_impact_highlight_image' . $x} = $sf_impact_Theme_Mods->getMod( 'sf_impact_highlight_image' . $x, '');
-                ${'sf_impact_highlight_header' . $x} = $sf_impact_Theme_Mods->getMod( 'sf_impact_highlight_header' . $x, '');
-                ${'sf_impact_highlight_text' . $x} = $sf_impact_Theme_Mods->getMod( 'sf_impact_highlight_text' . $x, '');
-                ${'sf_impact_highlight_link' . $x} = $sf_impact_Theme_Mods->getMod( 'sf_impact_highlight_link' . $x, '#');
+                ${'sf_impact_highlight_image' . $x} = $sf_impact_Theme_Mods->getMod( 'sf_impact_highlight_image' . $x);
+                ${'sf_impact_highlight_header' . $x} = $sf_impact_Theme_Mods->getMod( 'sf_impact_highlight_header' . $x);
+                ${'sf_impact_highlight_text' . $x} = $sf_impact_Theme_Mods->getMod( 'sf_impact_highlight_text' . $x );
+                ${'sf_impact_highlight_link' . $x} = $sf_impact_Theme_Mods->getMod( 'sf_impact_highlight_link' . $x );
             }
          ?>
             <div class="home-highlight-boxes fixed sfcenter">
