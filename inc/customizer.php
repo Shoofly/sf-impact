@@ -73,9 +73,7 @@
                 'sanitize_callback' => 'sf_impact_sanitize_image'
                 ) 
             );      
-            
-  
-        
+       
             $wp_customize->add_control( new WP_Customize_Image_Control(
    
                 $wp_customize, 
@@ -132,20 +130,15 @@
             $wp_customize, 
             'sf_impact_color_theme', 
             array(
-                'label' => __( 'Link Color theme', 'sf-impact' ),
+                'label' => __( 'Color theme', 'sf-impact' ),
                 'description' => __('Select a preset link color theme. Note: This will not change your background color.', 'sf-impact'),
                 'section' => 'colors', 
                 'settings' => 'sf_impact_color_theme', 
-                'priority' => 10, 
+                'priority' => 1, 
                 'type' => 'select',
                 'choices' => $choices->getLinkThemesForCustomizer(),
             )
-        ) );      
-
-	
-
-
-  
+        ) );   
         $wp_customize->add_setting( 'sf_impact_header_opacity', 
             array(
                'default' => $sf_impact_Theme_Mods->getDefault('sf_impact_header_opacity'),

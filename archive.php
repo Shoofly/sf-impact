@@ -9,7 +9,9 @@
  * @since sf-impact 1.0
  */
 
-get_header(); ?>
+get_header();
+wp_reset_postdata();
+?>
 <div id="container">
     
   <div id="wrap" class="archive-page">
