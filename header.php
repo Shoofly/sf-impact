@@ -9,6 +9,7 @@
  * @since sf-impact 1.0
  */
 global $sf_impact_Theme_Mods;
+
 ?>
  
 <!DOCTYPE html>

@@ -12,13 +12,20 @@
  * @param WP_Customize_Manager $wp_customize Theme Customizer object.
  */ ?>
 <?php
+
  if (!class_exists('sf_impact_Customize')):
  class sf_impact_Customize {
-
+    private $customStylesObj;
      function __construct()
      {
-            
-   // Setup the Theme Customizer settings and controls...
+         global $sf_impact_Theme_Mods;
+         
+        //Private call loads custom CSS settings.
+        require(get_stylesheet_directory() . "/inc/functions-colortheme-current.php");
+        $this->customStylesObj =  new sf_impact_CurrentCustomColorTheme( $sf_impact_Theme_Mods->getDefault('sf_impact_color_theme') ) ;
+
+                   
+        // Setup the Theme Customizer settings and controls...
         add_action( 'customize_register' , array( $this , 'sf_impact_customize_register' ) );
 
         // Output custom CSS to live site
@@ -26,6 +33,7 @@
         add_action( 'wp_footer', array($this, 'sf_impact_footer_output'));
         // Enqueue live preview javascript in Theme Customizer admin screen
         add_action( 'customize_preview_init' , array( $this , 'sf_impact_customize_preview_js' ) );     
+
     }
 
     
@@ -125,15 +133,14 @@
     	        'default' => $sf_impact_Theme_Mods->getDefault('sf_impact_color_theme'),
     	        'type' 			=> 'theme_mod',
     	        'capability' 	=> 'edit_theme_options',
-    	        'transport' 	=> 'refresh',
+    	        'transport' 	=> 'postMessage',
                 'sanitize_callback' => 'sf_impact_sanitize_select',
     	    )
     	);
 
-        $choices = new sf_impact_CustomLinkThemes('sf-impact');
-     
+        $choices = new sf_impact_CustomColorThemes( 'sf-impact' );
+
         $wp_customize->add_control( new WP_Customize_Control(
-   
             $wp_customize, 
             'sf_impact_color_theme', 
             array(
@@ -238,10 +245,13 @@
 	    	) 
         );    
         
+        $customStyles = $this->customStylesObj->getThemeSettings();
         $wp_customize->get_setting( 'blogname' )->transport         = 'postMessage';
         $wp_customize->get_setting( 'blogdescription' )->transport  = 'postMessage';
         $wp_customize->get_setting( 'header_textcolor' )->transport = 'postMessage';
-}
+        $wp_customize->get_setting( 'background_color' )->default   = $customStyles['backgroundColor'];
+        
+    }
     function sf_impact_generalOptions($wp_customize)
     {
         global $sf_impact_Theme_Mods;
@@ -1297,7 +1307,7 @@ function sf_impact_pageOptions($wp_customize)
 		
 	    }
     }
-        function sf_impact_customCSS($wp_customize)
+    function sf_impact_customCSS($wp_customize)
     {
         global $sf_impact_Theme_Mods;
               $wp_customize->add_section( 'sf_impact_custom_css', 
@@ -1313,7 +1323,7 @@ function sf_impact_pageOptions($wp_customize)
 	        'default' => $sf_impact_Theme_Mods->getDefault('sf_impact_custom_head_css'),
 	        'type' => 'theme_mod',
 	        'capability' => 'edit_theme_options',
-	        'transport' => '',
+	        'transport' => 'postMessage',
 	        'sanitize_callback' => 'esc_textarea',
         ) );
 
@@ -1330,7 +1340,7 @@ function sf_impact_pageOptions($wp_customize)
 	        'default' =>  $sf_impact_Theme_Mods->getDefault('sf_impact_custom_footer_css'),
 	        'type' => 'theme_mod',
 	        'capability' => 'edit_theme_options',
-	        'transport' => '',
+	        'transport' => 'postMessage',
 	        'sanitize_callback' => 'esc_textarea',
         ) );
 
@@ -1671,7 +1681,7 @@ function sf_impact_pageOptions($wp_customize)
     public function sf_impact_customize_preview_js() {
 	    wp_enqueue_script( 'sf_impact_customizer', get_template_directory_uri() . '/js/customizer.js', array( 'jquery', 'customize-preview' ), '20130508', true );
     }
-
+    
     public function sf_impact_footer_output()
     {
        global $sf_impact_Theme_Mods;
@@ -1704,22 +1714,17 @@ function sf_impact_pageOptions($wp_customize)
                     $outu .= sprintf("%s {%s:%s;}", "#topmasthead", "background-color", $sf_impact_header_background); 
                 }   
                 $site = get_header_textcolor();
-               
-               
-                $outu .= sprintf("%s {%s:%s;}", ".site-title", "color", $site); 
-                $background = get_background_color();
                 
-
-                $custom_style =  $sf_impact_Theme_Mods->getMod( 'sf_impact_color_theme' ) ;
-                $outu .= sprintf("%s {%s:%s;}", "body", "background-color", $custom_styles['backgroundColor']); 
-
-                $linkTheme = new sf_impact_CustomLinkThemes( 'sf_impact' );
-                ob_start();
-                include( $linkTheme->getCustomThemePath($custom_style) );
+                $customStyles = $this->customStylesObj->getThemeSettings();
+                $stylesheet = $this->customStylesObj->getStylesheet(); 
+                $outu .= $stylesheet['css']; 
+                $outu .= sprintf( "%s {%s:%s;}", ".site-title", "color", $site ); 
+                if(get_background_color() && get_background_color() != "") {
+                    $outu .= sprintf( "%s {%s:%s;}", "body", "background-color", $sf_impact_Theme_Mods->getDefault('background_color') );
+                }
                 
                 $menuhex = $sf_impact_Theme_Mods->getMod('sf_impact_content_background');
                 
-                $outu .= ob_get_clean();
                 
                 $outu .= '
                 .home-highlight-boxes .highlight-span h2 {

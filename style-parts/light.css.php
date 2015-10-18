@@ -1,5 +1,6 @@
 <?php
-    $customStyles = array(
+    return array(
+        'stylesheetTemplate'     => 'template',
     	'backgroundColor'        => '#FFF',
     	'mainLinkColor'          => '#008BC3',
     	'mainLinkHoverColor'     => '#1ABEF6',
@@ -25,6 +26,7 @@
     	'sidebarLinkHoverColor'  => '#001369',
     	'footerLinkColor'        => '#000276',
     	'footerLinkHoverColor'   => '#0069BA',
+    	'commentsBgHoverColor'   => 'rgba(255,255,255,0.7)',
     );
     require("template.min.php"); 
 ?>

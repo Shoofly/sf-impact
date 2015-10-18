@@ -8,16 +8,27 @@
 
 ( function( $ ) {
 	// Site title and description.
+        
+    $('head').append('<style style="text/css" id="colorThemeStyle"> </style>');
+    $('body').prepend('<style style="text/css" id="footerStyle"> </style>');
+    $('body').append('<style style="text/css" id="headerStyle"> </style>');
+    
+    var colorThemeStyle = document.getElementById('colorThemeStyle'),
+        footerStyle = document.getElementById('footerStyle'),
+        headerStyle = document.getElementById('headerStyle');
+    
 	wp.customize( 'blogname', function( value ) {
 		value.bind( function( to ) {
 			$( '.site-title a' ).text( to );
 		} );
 	} );
+	
 	wp.customize( 'blogdescription', function( value ) {
 		value.bind( function( to ) {
 			$( '.site-description' ).text( to );
 		} );
 	} );
+	
 	// Header text color.
 	wp.customize( 'header_textcolor', function( value ) {
 		value.bind( function( to ) {
@@ -35,4 +46,37 @@
 			}
 		} );
 	} );
+	
+	//Custom CSS Header
+	wp.customize( 'sf_impact_custom_head_css', function ( value ) {
+    	value.bind( function( to ) {
+            $(headerStyle).text( to );
+    	} );
+	} );
+	
+	//Custom CSS Footer
+	wp.customize( 'sf_impact_custom_footer_css', function ( value ) {
+    	value.bind( function( to ) {
+        	$(footerStyle).text( to );
+    	} );
+	} );
+		
+	//Background Color
+	wp.customize( 'sf_impact_color_theme', function ( value ) {
+    	value.bind( function( to ) {
+        	$.ajax({
+            	url: 'index.php',
+            	method: "POST",
+            	data: {custom_action: true, custom_color_theme: to}
+        	}).done(function( msg ) {
+            	var msga = eval('(' + msg + ')'),
+            	    newPicker;
+            	
+            	$(colorThemeStyle).text( msga.css + ' body { background-color: ' + msga.backgroundColor + '; }' );
+            	
+        	});
+    	});
+	});	
+	
+            	
 } )( jQuery );
