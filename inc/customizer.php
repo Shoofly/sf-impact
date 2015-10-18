@@ -145,7 +145,7 @@
             'sf_impact_color_theme', 
             array(
                 'label' => __( 'Color theme', 'sf-impact' ),
-                'description' => __('Select a preset link color theme. Note: This will not change your background color.', 'sf-impact'),
+                'description' => __('Select a preset color theme.  This changes the default background color. Your custom background color will not be changed. ', 'sf-impact'),
                 'section' => 'colors', 
                 'settings' => 'sf_impact_color_theme', 
                 'priority' => 1, 

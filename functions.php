@@ -111,22 +111,18 @@ function sf_impact_setup() {
 		'link',
         
 	) );
-
+     sf_impact_setDefaults();
+     $customStylesObj =  new sf_impact_CurrentCustomColorTheme( $sf_impact_Theme_Mods->getDefault         ('sf_impact_color_theme') ) ;
+         $customStyles = $customStylesObj->getThemeSettings();
 	// Set up the WordPress core custom background feature.
 	add_theme_support( 'custom-background', apply_filters( 'sf_impact_custom_background_args', array(
-		'default-color' => '#3A3A3A',
+		'default-color' =>  $customStyles['backgroundColor'],
 		'default-image' => '',
 	) ) );
-    $args = array(
-	    'width' 			=> 980,
-	    'height' 			=> 60,
-            'default-text-color'	=> '000276',
-	    'default-image' => get_template_directory_uri() . '/images/impact.png',
-    );
-    add_theme_support( 'custom-header', $args );
+
     //add excerpt support for posts
      add_post_type_support( 'page', 'excerpt' );
-    sf_impact_setDefaults();
+   
      //settings moved here
 
     //Social settings
