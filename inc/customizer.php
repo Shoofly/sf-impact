@@ -1708,9 +1708,10 @@ function sf_impact_pageOptions($wp_customize)
                
                 $outu .= sprintf("%s {%s:%s;}", ".site-title", "color", $site); 
                 $background = get_background_color();
-                $outu .= sprintf("%s {%s:%s;}", "body", "background-color", $background); 
+                
 
                 $custom_style =  $sf_impact_Theme_Mods->getMod( 'sf_impact_color_theme' ) ;
+                $outu .= sprintf("%s {%s:%s;}", "body", "background-color", $custom_styles['backgroundColor']); 
 
                 $linkTheme = new sf_impact_CustomLinkThemes( 'sf_impact' );
                 ob_start();

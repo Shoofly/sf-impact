@@ -1358,9 +1358,9 @@ footer.entry-footer .author-bio {
   font-size: 1.5em;
   word-wrap: normal; }
 
-.highlight-right-img, .highlight-left-img {
+.highlight-right-img, .highlight-left-img, .highlight-top-img {
   overflow: hidden; }
-  .highlight-right-img img, .highlight-left-img img {
+  .highlight-right-img img, .highlight-left-img img, .highlight-top-img img {
     max-width: 100%;
     max-height: 150px;
     height: auto;
@@ -1497,7 +1497,7 @@ footer.entry-footer .author-bio {
           border-style: outset; }
       .primary-navigation .primary-menu .sub-menu ul {
         display: none;
-        top: 5px; }
+        top: 12px; }
       .primary-navigation .primary-menu .sub-menu a {
         white-space: normal;
         width: 176px;
@@ -1515,11 +1515,11 @@ footer.entry-footer .author-bio {
       display: block; }
     .primary-navigation .primary-menu ul li:hover > ul, .primary-navigation .primary-menu ul li.focus > ul, .primary-navigation .primary-menu ul li:focus > ul {
       left: 100%;
-      margin-left: -12px; }
+      margin-left: 0px; }
     .primary-navigation .primary-menu ul li:hover > ul.left-side, .primary-navigation .primary-menu ul li.focus > ul.left-side, .primary-navigation .primary-menu ul li:focus > ul.left-side {
       left: -100%;
       width: 100%;
-      margin-left: 13px; }
+      margin-left: 0px; }
     .primary-navigation .menu-item-has-children {
       clear: both;
       position: relative; }
@@ -1578,7 +1578,7 @@ footer.entry-footer .author-bio {
         .sfly-headerimg .flexslider .slides.sfly-img-fit img {
           padding: 0px;
           border: 0px; }
-  .highlight-right-img img.highlight-img, .highlight-left-img img.highlight-img {
+  img.highlight-img {
     max-width: 100%;
     height: auto;
     max-height: 150px;
@@ -1624,9 +1624,11 @@ footer.entry-footer .author-bio {
     max-width: 30%; }
   .highlight-right-text .highlight-span h2, .highlight-left-text .highlight-span h2 {
     font-size: 1.9em; }
-  .highlight-right-img img.highlight-img, .highlight-left-img img.highlight-img {
-    width: auto;
-    height: 150px; } }
+  img.highlight-img {
+    max-width: 100%;
+    height: auto;
+    max-height: 150px;
+    width: auto; } }
 
 @media only screen and (max-width: 480px) {
   #page #site-logo-title.site-text .site-title, #page #site-logo-title.site-text .site-description {
