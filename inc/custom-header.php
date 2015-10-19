@@ -22,7 +22,7 @@ function sf_impact_custom_header_setup() {
      global $sf_impact_Theme_Mods;
 	add_theme_support( 'custom-header', apply_filters( 'sf_impact_custom_header_args', array(
 		'default-image' => get_template_directory_uri() . '/images/impact.png',
-		'default-text-color'     =>  $sf_impact_Theme_Mods->getDefault('header_textcolor'),  
+		'default-text-color'     =>  $sf_impact_Theme_Mods->getDefault('sf_impact_header_textcolor'),  
 		'width'                  => 1000,
 		'height'                 => 250,
 		'flex-height'            => true,
@@ -40,11 +40,12 @@ if ( ! function_exists( 'sf_impact_header_style' ) ) :
  * @see sf_impact_custom_header_setup().
  */
 function sf_impact_header_style() {
+     global $sf_impact_Theme_Mods;
 	$header_text_color = get_header_textcolor();
 
 	// If no custom options for text are set, let's bail
 	// get_header_textcolor() options: HEADER_TEXTCOLOR is default, hide text (returns 'blank') or any hex value.
-	if ( HEADER_TEXTCOLOR == $header_text_color ) {
+	if ( $sf_impact_Theme_Mods->getDefault('sf_impact_header_textcolor') == $header_text_color ) {
 		return;
 	}
 
