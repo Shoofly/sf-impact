@@ -22,7 +22,7 @@
          
         //Private call loads custom CSS settings.
         require(get_stylesheet_directory() . "/inc/functions-colortheme-current.php");
-        $this->customStylesObj =  new sf_impact_CurrentCustomColorTheme( $sf_impact_Theme_Mods->getDefault('sf_impact_color_theme') ) ;
+        $this->customStylesObj =  new sf_impact_CurrentCustomColorTheme( $sf_impact_Theme_Mods->getMod('sf_impact_color_theme') ) ;
 
                    
         // Setup the Theme Customizer settings and controls...

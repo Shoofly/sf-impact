@@ -1412,6 +1412,10 @@ footer.entry-footer .author-bio {
     margin-bottom: 0;
     padding-top: 25px; } }
 
+@media only screen and (max-width: 1199px) {
+  #containermasthead {
+    width: 100%; } }
+
 @media only screen and (min-width: 391px) and (max-width: 750px) {
   .fimage-title-large .title {
     font-size: 100%;
