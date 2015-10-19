@@ -1721,19 +1721,9 @@ function sf_impact_pageOptions($wp_customize)
                 $outu .= $stylesheet['css']; 
                 $outu .= sprintf( "%s {%s:%s;}", ".site-title", "color", $site ); 
                
-                    $outu .= sprintf( "%s {%s:%s;}", "body", "background-color", get_background_color() );
-                
-                
+                $outu .= sprintf( "%s {%s:%s;}", "body", "background-color", get_background_color() );  
+                $outu .= sprintf( "%s {%s:%s;}", ".flexslider", "min-height", $sf_impact_Theme_Mods->getMod('sf_impact_header_height') );
                 $menuhex = $sf_impact_Theme_Mods->getMod('sf_impact_content_background');
-                
-                
-                $outu .= '
-                .home-highlight-boxes .highlight-span h2 {
-                    color: #' . get_header_textcolor() . ';
-                }
-                .flexslider {
-                    min-height: ' . $sf_impact_Theme_Mods->getMod('sf_impact_header_height') . ';
-                }';
                 
                 $sf_impact_content_opacity = $sf_impact_Theme_Mods->getMod( 'sf_impact_content_opacity' );
                 if ($sf_impact_content_opacity < 100) {

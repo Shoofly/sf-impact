@@ -15,7 +15,7 @@
     	'fimageTitleColor'       => '#F3F6F9',
     	'borderColor'            => $borderColor,
     	'dropdownMenuColor'      => $menuColor,
-    	'dropdownMenuBg'         => 'inherit',
+    	'dropdownMenuBg'         => '#454545',
     	'dropdownSubMenuBg'      => '#E5E5E5',
     	'dropdownMenuHoverColor' => '#A6A6CD',
     	'dropdownMenuColor'      => '#A6A6CD',

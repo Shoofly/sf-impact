@@ -42,36 +42,6 @@ if ( ! function_exists( 'sf_impact_header_style' ) ) :
 function sf_impact_header_style() {
      global $sf_impact_Theme_Mods;
 	$header_text_color = get_header_textcolor();
-
-	// If no custom options for text are set, let's bail
-	// get_header_textcolor() options: HEADER_TEXTCOLOR is default, hide text (returns 'blank') or any hex value.
-	/*if ( $sf_impact_Theme_Mods->getDefault('sf_impact_header_textcolor') == $header_text_color ) {
-		return;
-	}*/
-
-	// If we get this far, we have custom styles. Let's do this.
-	?>
-	<style type="text/css">
-	<?php
-		// Has the text been hidden?
-		if ( 'blank' == $header_text_color ) :
-	?>
-		.site-title,
-		.site-description {
-			position: absolute;
-			clip: rect(1px, 1px, 1px, 1px);
-		}
-	<?php
-		// If the user has set a custom color for the text use that.
-		else :
-	?>
-		.site-title,
-		.site-description {
-			color: #<?php echo esc_attr( $header_text_color ); ?>;
-		}
-	<?php endif; ?>
-	</style>
-	<?php
 }
 endif; // sf_impact_header_style
 

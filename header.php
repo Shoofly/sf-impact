@@ -44,10 +44,11 @@ global $sf_impact_Theme_Mods;
     $sf_impact_social_above_content = $sf_impact_Theme_Mods->getMod('sf_impact_social_above_content');
     $sf_impact_social_above_menu = $sf_impact_Theme_Mods->getMod('sf_impact_social_above_menu');
     //Is this the home page or the front page (and not the blog page) and the header type is not default display the custom home page header image/slide show
-    if ((is_home() || is_front_page()) && $sf_impact_home_header_type != "3" && !$wp_query -> is_posts_page)
+    if ((is_home() || is_front_page()) && $sf_impact_home_header_type != "3" && !$wp_query -> is_posts_page) {
         $homeimage = TRUE;      //Display the custom home page header
-    else
+    } else {
         $homeimage = FALSE;     //Do not display the custom home page header
+    }
     
     $logo = $sf_impact_logo_location; 
     $menu = $sf_impact_menu_location;
@@ -101,108 +102,95 @@ global $sf_impact_Theme_Mods;
         <div id="topmasthead" class="fixed"> <!-- navigatin area -->
             <div id="containermasthead">
                 <?php if ($sf_impact_social_above_menu) sf_impact_social_media_icons();?> 
-            <div id="outermasthead">
-            
-                <div id="innermasthead" class="fixed">
-                <?php
-                if ($logo == "top")   //If the logo or title is on top, display it here 
-                {
-                    ?>
-                    <?php
-                    get_template_part('template-parts/branding');
-                    ?>             
-                <?php
-            
-                }?>
-  
-                <?php if ($menu == "above")
-                    sf_impact_menu();
-                ?>
- 	    
-                   
-                </div><!--innermasthead-->
-        </div>
-            </div>
+                <div id="outermasthead">
+                
+                    <div id="innermasthead" class="fixed">
+                        <?php 
+                        if ($logo == "top"):   //If the logo or title is on top, display it here 
+                            get_template_part('template-parts/branding');
+                        endif;
+          
+                        if ($menu == "above"):
+                            sf_impact_menu();
+                        endif;
+                        ?>           
+                    </div><!--innermasthead-->
+                </div><!--outermasthead-->
+            </div><!--containermasthead-->
         </div><!--topmasthead-->
- 	<header id="masthead" class="site-header" role="banner">
-        <?php
-        if ($homeimage === TRUE)
-            $xClass="sfly-headerimg-home";
-        else
-            $xClass = "";
-        ?>
-            
-        <div class="sfly-headerimg <?php echo $xClass; ?>">
+     	<header id="masthead" class="site-header" role="banner">
             <?php
-            if (!$homeimage) //If this is not the home image or the front page, display the url
-            {
-                if ( $url )
-                {
-                     
-                     if ($logo=="image")
-                    {?>
-                        <div class="site-branding fixed shoofly-branding-image" >
-                            <?php get_template_part('template-parts/branding');?>
-		                </div>
-                     <?php 
-                    }?>
-                    <div class="header-container-inner">
-                        <img class="headerimg headerimg-page" src="<?php echo $url; ?>" alt="header" >
-                    </div>
-                <?php      
-                }
-            }
+            if ($homeimage === TRUE)
+                $xClass="sfly-headerimg-home";
             else
-            {
-                sf_impact_header($sf_impact_home_header_type, $sf_impact_header_image, $sf_impact_logo_location, $the_slide_query, $logo );
-            }
-    
-        ?>
-        </div><!--sfly-headerimg-->
-        <?php if ($menu == "below")
-        {
-                sf_impact_menu();
-            ?><hr class="navdivider"><?php
-         }
-        ?>
-
-         <?php
-
-         if ((is_home() || is_front_page()) && !$wp_query -> is_posts_page)
-         {
-            if ( $sf_impact_Theme_Mods->getMod('sf_impact_home_featured_highlights'))
-            {
+                $xClass = "";
             ?>
- 
-                <div id="sfly-home-header">
-                    <?php  sf_impact_get_highlightboxes();  //DISPLAY FEATURED HIGHLIGHT BOXES?>
-                </div><!--sfly-home-header-->
-            <?php
+                
+            <div class="sfly-headerimg <?php echo $xClass; ?>">
+                <?php if ($logo=="image"): ?>
+                    <div class="site-branding fixed shoofly-branding-image" >
+                        <?php get_template_part('template-parts/branding');?>
+                    </div>
+                 <?php endif;
+                
+                //If this is not the home image or the front page, display the url
+                if (!$homeimage) {
+                    if ( $url ): ?>
+                        <div class="header-container-inner">
+                            <img class="headerimg headerimg-page" src="<?php echo $url; ?>" alt="header" >
+                        </div>
+                    <?php
+                    endif;
+                } else {
+                    sf_impact_header($sf_impact_home_header_type, $sf_impact_header_image, $sf_impact_logo_location, $the_slide_query, $logo );
+                }
+        
+            ?>
+            </div><!--sfly-headerimg-->
+            <?php 
+            if ($menu == "below") {
+                    sf_impact_menu();
+                ?><hr class="navdivider"><?php
             }
-         }      
-        if (sf_impact_is_grid())
-        {
-               
-            ?> <div class="sfly-grid">
-          <?php
-            $arra = sf_impact_get_thumbnailarray();  //Get the settings for the thumbnail grid
-            $url = sf_impact_get_thumbnailurl();     //Get the url for the read more link
-            $sf_impact_grid_title =  $sf_impact_Theme_Mods->getMod('sf_impact_grid_title');
-            $sf_impact_grid_more = $sf_impact_Theme_Mods->getMod('sf_impact_grid_more')        
-                ?>
-            <div class="home-thumb fixed">
-                <h1><?php echo $sf_impact_grid_title  ?></h1>
-                <?php 
-                $tg = new sfly_thumbnailgrid();
-                echo  $tg->thumbnailgrid_function($arra);?> 
-                <div class="more-link"><a href="<?php echo $url?>"><?php echo $sf_impact_grid_more?></a></div>
-                </div>
-            <hr>
-            </div>
-                <?php
-        }
-        ?>
-	</header><!-- #masthead -->
+            ?>
     
-	<div id="content" class="site-content">
-     <?php if ($sf_impact_social_above_content) sf_impact_social_media_icons(); ?>
+             <?php
+    
+            if ((is_home() || is_front_page()) && !$wp_query -> is_posts_page) {
+                if ( $sf_impact_Theme_Mods->getMod('sf_impact_home_featured_highlights')) {
+                ?>
+     
+                    <div id="sfly-home-header">
+                        <?php  sf_impact_get_highlightboxes();  //DISPLAY FEATURED HIGHLIGHT BOXES?>
+                    </div><!--sfly-home-header-->
+                <?php
+                }
+            }      
+            if (sf_impact_is_grid()) {
+                   
+                ?> <div class="sfly-grid">
+              <?php
+                $arra = sf_impact_get_thumbnailarray();  //Get the settings for the thumbnail grid
+                $url = sf_impact_get_thumbnailurl();     //Get the url for the read more link
+                $sf_impact_grid_title =  $sf_impact_Theme_Mods->getMod('sf_impact_grid_title');
+                $sf_impact_grid_more = $sf_impact_Theme_Mods->getMod('sf_impact_grid_more')        
+                    ?>
+                <div class="home-thumb fixed">
+                    <h1><?php echo $sf_impact_grid_title  ?></h1>
+                    <?php 
+                    $tg = new sfly_thumbnailgrid();
+                    echo  $tg->thumbnailgrid_function($arra);?> 
+                    <div class="more-link"><a href="<?php echo $url?>"><?php echo $sf_impact_grid_more?></a></div>
+                    </div>
+                <hr>
+                </div>
+                    <?php
+            }
+            ?>
+    	</header><!-- #masthead -->
+    
+    	<div id="content" class="site-content">
+        <?php 
+        if ($sf_impact_social_above_content):
+              sf_impact_social_media_icons();
+        endif;
