@@ -790,7 +790,7 @@ if (!function_exists('sf_impact_setDefaults')):
         }
         $sf_impact_Theme_Mods->setDefault( 'sf_impact_highlight_link1' ,  '' );
         $sf_impact_Theme_Mods->setDefault( 'sf_impact_highlight_link2' , $x, '#' );
-        $sf_impact_Theme_Mods->setDefault( 'sf_impact_highlight_link1' ,  '' );
+        $sf_impact_Theme_Mods->setDefault( 'sf_impact_highlight_link3' ,  '' );
         //Grid mods
         $sf_impact_Theme_Mods->setDefault( 'sf_impact_grid_display', FALSE );
         $sf_impact_Theme_Mods->setDefault( 'sf_impact_grid_display_all', FALSE );

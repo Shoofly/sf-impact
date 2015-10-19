@@ -45,9 +45,9 @@ function sf_impact_header_style() {
 
 	// If no custom options for text are set, let's bail
 	// get_header_textcolor() options: HEADER_TEXTCOLOR is default, hide text (returns 'blank') or any hex value.
-	if ( $sf_impact_Theme_Mods->getDefault('sf_impact_header_textcolor') == $header_text_color ) {
+	/*if ( $sf_impact_Theme_Mods->getDefault('sf_impact_header_textcolor') == $header_text_color ) {
 		return;
-	}
+	}*/
 
 	// If we get this far, we have custom styles. Let's do this.
 	?>
