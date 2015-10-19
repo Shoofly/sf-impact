@@ -41,7 +41,7 @@
      
         global $sf_impact_Theme_Mods;
       
-      
+   
         $wp_customize->add_setting( 'sf_impact_demo_data', 
                 array(
                     'default' => true,
@@ -189,7 +189,7 @@
         $wp_customize->add_control( 
 	    new WP_Customize_Color_Control( 
 	    $wp_customize, 
-	    'sf_impact_header_background_color', 
+	    'sf_impact_header_background', 
 	    array(
 		    'label'      => __( 'Site Header Background Color', 'sf-impact' ),
             'descriptin' => __( ' The background color for the area above the header and content. ', 'sf-impact'),
@@ -247,7 +247,8 @@
         
         $customStyles = $this->customStylesObj->getThemeSettings();
         $wp_customize->get_setting( 'blogname' )->transport         = 'postMessage';
-        $wp_customize->get_setting( 'blogdescription' )->transport  = 'postMessage';
+       $wp_customize->get_setting( 'blogdescription' )->transport  = 'postMessage';
+        $wp_customize->get_setting( 'header_textcolor' )->default = $sf_impact_Theme_Mods->getDefault('sf_impact_header_textcolor');
         $wp_customize->get_setting( 'header_textcolor' )->transport = 'postMessage';
         $wp_customize->get_setting( 'background_color' )->default   = $customStyles['backgroundColor'];
         
@@ -1719,9 +1720,9 @@ function sf_impact_pageOptions($wp_customize)
                 $stylesheet = $this->customStylesObj->getStylesheet(); 
                 $outu .= $stylesheet['css']; 
                 $outu .= sprintf( "%s {%s:%s;}", ".site-title", "color", $site ); 
-                if(get_background_color() && get_background_color() != "") {
-                    $outu .= sprintf( "%s {%s:%s;}", "body", "background-color", $sf_impact_Theme_Mods->getDefault('background_color') );
-                }
+               
+                    $outu .= sprintf( "%s {%s:%s;}", "body", "background-color", get_background_color() );
+                
                 
                 $menuhex = $sf_impact_Theme_Mods->getMod('sf_impact_content_background');
                 

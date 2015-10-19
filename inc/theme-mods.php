@@ -11,7 +11,7 @@ class sf_impact_Theme_Mods
     private function __construct()
     {
     }
-    
+  
     public static function get_instance($handle) {
         
         if( !isset(self::$_this[$handle]) ) {

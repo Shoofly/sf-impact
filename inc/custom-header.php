@@ -19,9 +19,10 @@
  */
    
 function sf_impact_custom_header_setup() {
+     global $sf_impact_Theme_Mods;
 	add_theme_support( 'custom-header', apply_filters( 'sf_impact_custom_header_args', array(
 		'default-image' => get_template_directory_uri() . '/images/impact.png',
-		'default-text-color'     => '000276',
+		'default-text-color'     =>  $sf_impact_Theme_Mods->getDefault('header_textcolor'),  
 		'width'                  => 1000,
 		'height'                 => 250,
 		'flex-height'            => true,
@@ -121,3 +122,4 @@ function sf_impact_admin_header_image() {
 <?php
 }
 endif; // sf_impact_admin_header_image
+?>

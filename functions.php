@@ -561,11 +561,7 @@ if ( is_admin() ) {
               $default = FALSE;
     $value = esc_attr( get_post_meta( $post->ID, $id, true ) ) != NULL ? esc_attr( get_post_meta( $post->ID, $id, true ) ) :  $default;
 
- /*           $meta = get_post_meta( $post->ID, $id, true ) ;
-            if ($meta) $i="meta"; else $i="";
-            echo "<p>$id</p><p>isset: $i</p><p>meta $meta</p>$newpost $newpost<p>default $default</p>";
-            $value = $newpost || ($meta)) ? esc_attr($default) : esc_attr($meta);
-            */
+
             echo '<div><label for="' . $id . '" class="selectit"><input name="' . $id . '" type="checkbox" id="' . $id . '" value="' . $value . ' "'. checked( $value, 1, false) .'> ' . $label .'</label></div>';
 	    }
         /**
@@ -682,12 +678,12 @@ function sf_impact_count_sticky($category = NULL)
  {
         
     $menu_settings = array( 'theme_location' => 'primary',  
-                                'link_before' => '<span class="menu-link">', 
-                                'container_id' => 'cssmenu',
-                                'fallback_cb' => 'sf_impact_page_menu',
-                                'link_after' => '</span>', 
-                                'menu_class' => 'nav-menu primary-menu fixed', 
-                                'menu_id' => 'primary-menu' )?>                   
+                            'link_before' => '<span class="menu-link">', 
+                            'container_id' => 'cssmenu',
+                            'fallback_cb' => 'sf_impact_page_menu',
+                            'link_after' => '</span>', 
+                            'menu_class' => 'nav-menu primary-menu fixed', 
+                            'menu_id' => 'primary-menu' )?>                   
     <nav id="primary-navigation" class="site-navigation primary-navigation" role="navigation">
 		    <button class="menu-toggle fa fa-ellipsis-h"></button>
 		    <div>
@@ -730,12 +726,8 @@ if (!function_exists('sf_impact_setDefaults')):
            
             $defaultpath =        get_template_directory_uri() . '/images/';
             $defaultlogo = $defaultpath . "logo.png"; 
-
             $defaultheader = $defaultpath . "impact.png";
             $defaultheadertype = "3"; //This should be 2
-          //  $sf_impact_Theme_Mods->setDefault('header_textcolor','000099');      
-         //   $sf_impact_Theme_Mods->setMod('sf_impact_header_image', $defaultheader); //this should not be set
-         
             $sf_impact_Theme_Mods->setMod('sf_impact_logo_image', $defaultlogo);
             $sf_impact_Theme_Mods->setMod('sf_impact_logo_location', 'image');
             $sf_impact_Theme_Mods->setMod('sf_impact_home_header_type', $defaultheadertype);
@@ -758,6 +750,7 @@ if (!function_exists('sf_impact_setDefaults')):
         //Color settings
         $sf_impact_Theme_Mods->setDefault( 'sf_impact_header_background', "#5b5b5b" );
         $sf_impact_Theme_Mods->setDefault( 'sf_impact_content_background', "#F5F5F5" );
+        $sf_impact_Theme_Mods->setDefault( 'sf_impact_header_textcolor','000099');    
         $sf_impact_Theme_Mods->setDefault( 'sf_impact_header_opacity', 0 );
         $sf_impact_Theme_Mods->setDefault( 'sf_impact_content_opacity', 100 );
 
@@ -778,8 +771,8 @@ if (!function_exists('sf_impact_setDefaults')):
         $sf_impact_Theme_Mods->setDefault( 'sf_impact_slider_speed', '7000' );
         $sf_impact_Theme_Mods->setDefault( 'sf_impact_slider_automate', true );
         $sf_impact_Theme_Mods->setDefault( 'sf_impact_slider_direction', 'horizontal');
-        $sf_impact_Theme_Mods->setDefault( 'sf_impact_slider_navigation', FALSE );
-        $sf_impact_Theme_Mods->setDefault( 'sf_impact_slider_navdirection', FALSE );
+        $sf_impact_Theme_Mods->setDefault( 'sf_impact_slider_navigation', true );
+        $sf_impact_Theme_Mods->setDefault( 'sf_impact_slider_navdirection', true );
         $sf_impact_Theme_Mods->setDefault( 'sf_impact_slider_keyboard', true );
         $sf_impact_Theme_Mods->setDefault( 'sf_impact_slider_mousewheel', false );
         $sf_impact_Theme_Mods->setDefault( 'sf_impact_slider_pauseonhover', false );
@@ -793,9 +786,11 @@ if (!function_exists('sf_impact_setDefaults')):
             $sf_impact_Theme_Mods->setDefault( 'sf_impact_highlight_image' . $x, '' );
             $sf_impact_Theme_Mods->setDefault( 'sf_impact_highlight_header' . $x, '' );
             $sf_impact_Theme_Mods->setDefault( 'sf_impact_highlight_text' . $x, '' );
-            $sf_impact_Theme_Mods->setDefault( 'sf_impact_highlight_link' . $x, '#' );
+           
         }
-        
+        $sf_impact_Theme_Mods->setDefault( 'sf_impact_highlight_link1' ,  '' );
+        $sf_impact_Theme_Mods->setDefault( 'sf_impact_highlight_link2' , $x, '#' );
+        $sf_impact_Theme_Mods->setDefault( 'sf_impact_highlight_link1' ,  '' );
         //Grid mods
         $sf_impact_Theme_Mods->setDefault( 'sf_impact_grid_display', FALSE );
         $sf_impact_Theme_Mods->setDefault( 'sf_impact_grid_display_all', FALSE );
