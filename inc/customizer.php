@@ -1714,12 +1714,12 @@ function sf_impact_pageOptions($wp_customize)
                 } else {
                     $outu .= sprintf("%s {%s:%s;}", "#topmasthead", "background-color", $sf_impact_header_background); 
                 }   
-                $site = get_header_textcolor();
+                $site = "#" . get_header_textcolor();
                 
                 $customStyles = $this->customStylesObj->getThemeSettings();
                 $stylesheet = $this->customStylesObj->getStylesheet(); 
                 $outu .= $stylesheet['css']; 
-                $outu .= sprintf( "%s {%s:%s;}", ".site-title", "color", $site ); 
+                $outu .= sprintf( "%s {%s:%s;} %s {%s:%s;}", ".site-title", "color", $site, ".site-description", "color", $site ); 
                
                 $outu .= sprintf( "%s {%s:%s;}", "body", "background-color", get_background_color() );  
                 $outu .= sprintf( "%s {%s:%s;}", ".flexslider", "min-height", $sf_impact_Theme_Mods->getMod('sf_impact_header_height') );
