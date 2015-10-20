@@ -112,7 +112,7 @@ function sf_impact_setup() {
         
 	) );
      sf_impact_setDefaults();
-     $customStylesObj =  new sf_impact_CurrentCustomColorTheme( $sf_impact_Theme_Mods->getDefault         ('sf_impact_color_theme') ) ;
+     $customStylesObj =  new sf_impact_CurrentCustomColorTheme( $sf_impact_Theme_Mods->getDefault('sf_impact_color_theme') ) ;
          $customStyles = $customStylesObj->getThemeSettings();
 	// Set up the WordPress core custom background feature.
 	add_theme_support( 'custom-background', apply_filters( 'sf_impact_custom_background_args', array(
@@ -742,7 +742,7 @@ if (!function_exists('sf_impact_setDefaults')):
             $sf_impact_Theme_Mods->setMod('sf_impact_highlight_text2', 'Display an image or a slide show!');
             $sf_impact_Theme_Mods->setMod('sf_impact_highlight_link2', '#'); 
             $sf_impact_Theme_Mods->setMod('sf_impact_home_featured_highlights', true);
-            $sf_impact_Theme_Mods->setMod('sf_impact_color_theme', 'light');
+            $sf_impact_Theme_Mods->setMod('sf_impact_color_theme', 'dark');
             $sf_impact_Theme_Mods->setMod('sf_impact_demo_data', FALSE);
           
         }
