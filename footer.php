@@ -9,6 +9,8 @@
  * @since sf-impact 1.0
  */
  global $sf_impact_Theme_Mods;
+ 
+ $sf_impact_custom_footer_css      = $sf_impact_Theme_Mods->getMod( 'sf_impact_custom_footer_css' );
 ?>
 
 	</div><!-- #content -->
@@ -33,5 +35,6 @@
     <div id="shoofly-footer"><?php echo $footer  ?></div>
     <div class="site-info fixed"><?php echo $dev?></div>
 </div>
+
 </body>
 </html>
