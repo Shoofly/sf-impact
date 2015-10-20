@@ -32,8 +32,12 @@ if (!class_exists('sf_impact_CurrentCustomColorTheme')):
         
         private function setCustomStyle ( )
         { 
-            $this->custom_style = include( $this->getCustomThemePath($this->current_themename . ".css.php") );    
-            return true;
+            if  ( file_exists( $this->getCustomThemePath($this->current_themename . ".css.php") ) ) {                
+                $this->custom_style = include( $this->getCustomThemePath($this->current_themename . ".css.php") );    
+                return true;
+            } else {
+                return false;
+            }
         }
         
         public function getThemeSettings ( ) 

@@ -35,10 +35,5 @@
     <div id="shoofly-footer"><?php echo $footer  ?></div>
     <div class="site-info fixed"><?php echo $dev?></div>
 </div>
-<?php if ($sf_impact_custom_footer_css != "" ): ?>
-<style type="text/css">
-    <?php echo $sf_impact_custom_footer_css; ?>
-</style>
-<?php endif; ?>
 </body>
 </html>
