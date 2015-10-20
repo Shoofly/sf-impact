@@ -1658,6 +1658,8 @@ footer.entry-footer .author-bio {
     margin-left: 15px; }
     #page .site-info span, #page .site-info a {
       float: left; }
+  #wrap {
+    padding: 0px 10px; }
   .highlight-right-text .highlight-span h2, .highlight-left-text .highlight-span h2 {
     font-size: 1.5em; }
   .sfly-grid div.postimage-title a {

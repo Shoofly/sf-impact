@@ -8,17 +8,17 @@ Stable tag: 1.0.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-A theme called Impact by Shoofly Solutions (sf-impact)
+A theme called SF Impact (sf-impact)
 
 == Description ==
 
-Very customizable theme. Optional unique home page header image or post slideshow, change the background color of navigation bar and content. Our Featured Thumbnail grid area can be displayed on every page and used as a menu. Optional sidebar on the home page. Structuredthree column footer + alternative flexible footer sidebar.
+Very customizable theme. Optional unique home page header image or post slideshow, change the background color of navigation bar and content. Our Featured Thumbnail grid area can be displayed on every page and used as a menu. Optional sidebar on the home page. Structured three column footer + alternative flexible footer sidebar.
 
 Shoofly Impact WordPress Theme is derived from Underscores WordPress Theme, http://underscores.me/ Copyright 2013 Automattic, Inc.
 Underscores WordPress Theme is distributed under the terms of the GNU GPL
 
-Shoofly Impact Theme bundles the following third-party resources:
 
+Shoofly Impact Theme bundles the following third-party resources:
 
 # FlexSlider 2.5.0 http://www.woothemes.com/flexslider/ - Copyright (c) 2015 WooThemes
 
@@ -44,7 +44,7 @@ Shoofly Solutions Featured Image Thumbnail Grid [http://shooflysolutions.com] GN
 
 = Does this theme support any plugins? =
 
-Impact includes support for Infinite Scroll in Jetpack.
+Impact includes support for Infinite Scroll in Jetpack and WooThemes.
 
 == Changelog ==
 
