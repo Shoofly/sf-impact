@@ -1,6 +1,6 @@
 === Impact  ===
 
-Tags: translation-ready, custom-background, theme-options, custom-menu, post-formats, threaded-comments
+Tags: translation-ready, custom-background, theme-options, custom-menu, post-formats, threaded-comments, dark, light, right-sidebar, responsive-layout, blavatar, editor-style, featured-image-header, featured-images, full-width-template, sticky-post
 
 Requires at least: 4.0
 Tested up to: 4.3
@@ -28,6 +28,9 @@ Font Awesome Dave Gandy - http://fontawesome.io
 FONT: font-awesome/fonts/. License: SIL OFL 1.1 URL: http://scripts.sil.org/OFL
 CODE: font-awesome/css/, font-awesome/less/, and font-awesome/scss/. License: MIT License URL: http://opensource.org/licenses/mit-license.html
 DOCUMENTATION: License: CC BY 3.0 URL: http://creativecommons.org/licenses/by/3.0/ 
+
+Chat Content post ID's [http://www.gnu.org/licenses/old-licenses/gpl-2.0.html] author David Chandra & Justin Tadlock  * @link http://justintadlock.com/archives/2012/08/21/post-formats-chat
+
 
 Shoofly Solutions Featured Image Thumbnail Grid [http://shooflysolutions.com] GNU GENERAL PUBLIC LICENSE copyright 2014-2015 http://www.shooflysoultions.com
 

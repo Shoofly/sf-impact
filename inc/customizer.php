@@ -1316,7 +1316,7 @@ function sf_impact_pageOptions($wp_customize)
                 'title' => __( ' Custom CSS Styles ', 'sf-impact' ), 
                 'priority' => 8, 
                 'capability' => 'edit_theme_options',
-                'description' => __('Add custom CSS styles'), //Descriptive tooltip
+                'description' => __('Add custom CSS styles', 'sf-impact'), //Descriptive tooltip
                 //'panel' => 'sf_impact_panel',
                 ) 
             ); 
