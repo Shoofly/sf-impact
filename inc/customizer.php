@@ -1685,6 +1685,15 @@ function sf_impact_pageOptions($wp_customize)
     public function sf_impact_footer_output()
     {
        global $sf_impact_Theme_Mods;
+<<<<<<< HEAD
+          $sf_impact_custom_footer_css = $sf_impact_Theme_Mods->getMod( 'sf_impact_custom_footer_css' );
+
+         if ($sf_impact_custom_footer_css != "" ): ?>
+        <style type="text/css">
+            <?php echo $sf_impact_custom_footer_css; ?>
+        </style>
+        <?php endif;
+=======
        $sf_impact_custom_footer_css = $sf_impact_Theme_Mods->getMod( 'sf_impact_custom_footer_css' );
      
         ?>
@@ -1695,6 +1704,7 @@ function sf_impact_pageOptions($wp_customize)
     <?php endif; ?>
     <?php
           
+>>>>>>> e1803b41062b1b12edbf54511bba2d370dca5fc8
     }
 
     public function sf_impact_header_output() 
