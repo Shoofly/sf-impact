@@ -1685,9 +1685,12 @@ function sf_impact_pageOptions($wp_customize)
     public function sf_impact_footer_output()
     {
        global $sf_impact_Theme_Mods;
-       $sf_impact_custom_footer_css = $sf_impact_Theme_Mods->getMod( 'sf_impact_custom_footer_css' );
-     
-       if ($sf_impact_custom_footer_css != "" ): ?>
+
+
+          $sf_impact_custom_footer_css = $sf_impact_Theme_Mods->getMod( 'sf_impact_custom_footer_css' );
+
+         if ($sf_impact_custom_footer_css != "" ): ?>
+
         <style type="text/css">
             <?php echo $sf_impact_custom_footer_css; ?>
         </style>
