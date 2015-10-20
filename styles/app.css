@@ -145,7 +145,8 @@ body, button, input, select, textarea {
   font-family: sans-serif;
   font-size: 16px;
   font-size: 1.6rem;
-  line-height: 1.5; }
+  line-height: 1.5;
+  max-width: 100%; }
 
 h1, h2, h3, h4, h5, h6 {
   clear: both;
@@ -1647,6 +1648,8 @@ footer.entry-footer .author-bio {
     width: auto; } }
 
 @media only screen and (max-width: 480px) {
+  body, #content {
+    overflow-x: hidden; }
   #page #site-logo-title.site-text .site-title, #page #site-logo-title.site-text .site-description {
     padding: 0px 20px; }
   #page .site-info {
@@ -1656,7 +1659,13 @@ footer.entry-footer .author-bio {
     #page .site-info span, #page .site-info a {
       float: left; }
   .highlight-right-text .highlight-span h2, .highlight-left-text .highlight-span h2 {
-    font-size: 1.5em; } }
+    font-size: 1.5em; }
+  .sfly-grid div.postimage-title a {
+    white-space: normal; }
+  #bottomwrapper div {
+    float: left;
+    padding-left: 20px;
+    margin-left: 0px; } }
 
 @media only screen and (max-width: 390px) {
   .fimage-title-large .title {
