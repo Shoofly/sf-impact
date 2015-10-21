@@ -1,9 +1,7 @@
 #SF Impact Theme for WordPress#
 
-Tags: 
-
-Requires at least: 4.0
-Tested up to: 4.3
+Requires at least: WordPress version 4.0
+Tested up to: WordPress version 4.3
 Stable tag: 1.0.0
 
 ##Description##
