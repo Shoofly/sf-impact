@@ -10,11 +10,11 @@
 
 // Header
 get_header();
-
+global $sf_impact_Theme_Mods;
 
 //Home Page
-   $sf_impact_home_posts = get_theme_mod('sf_impact_home_posts', true); 
-    $sf_impact_home_sidebar = get_theme_mod('sf_impact_home_sidebar', TRUE);
+   $sf_impact_home_posts = $sf_impact_Theme_Mods->getMod('sf_impact_home_posts'); 
+    $sf_impact_home_sidebar = $sf_impact_Theme_Mods->getMod('sf_impact_home_sidebar');
     if ($sf_impact_home_sidebar == FALSE)
         $class="full-width";
     else
@@ -29,7 +29,7 @@ get_header();
 	        <div id="primary" class="content-area fixed <?php echo $class?>">
                 <main id="main" class="site-main" role="main">
                     <?php if ($sf_impact_home_posts){ ?>  
-                    <?php $sf_impact_home_rp_categoryid = get_theme_mod('sf_impact_home_rp_categoryid', "");
+                    <?php $sf_impact_home_rp_categoryid = $sf_impact_Theme_Mods->getMod('sf_impact_home_rp_categoryid');
                    
                     //if ($sf_impact_home_rp_categoryid != "") add_action( 'pre_get_posts', 'sf_impact_home_category' );   ?>
                     <?php if ($sf_impact_home_rp_categoryid != "" && $sf_impact_home_rp_categoryid != "0"  )

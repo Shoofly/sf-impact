@@ -44,8 +44,12 @@ Version: 1.0
 
 .home-thumb
 {
-        padding-top: 25px;
-    padding-left: 15px;
+    padding: 5px 0;
+    clear: both;
+}
+
+.home-thumb h1 {
+    margin: 10px 0px 5px;
 }
 
 .shoofly-home-branding
@@ -83,10 +87,14 @@ hr.home1
     }
 }
 
-.highlight-img
-{
-    width: 50px;
-    height: 50px;
+.highlight-img {
+    opacity: 1;
+    transition: opacity 0.2s;
+}
+
+.highlight-top-img:hover img {
+    opacity: 0.9;
+    transition: opacity 0.2s;
 }
 
 .home-highlight-section {
@@ -105,18 +113,35 @@ hr.home1
         margin: auto;
 }
 
- span.highlight-span
-h2 {
-    overflow-wrap: break-word;
+.highlight-full .highlight-span {
+    display: inline-block;
 }
 
-.highlight-left-img .highlight-img,
-.highlight-right-img .highlight-img,
-.highlight-top-img .highlight-img {
- 
-  width: auto;
-  height: 150px;
+.highlight-full .highlight-span h2, .highlight-full .highlihgt-span p {
+    float: none;
+    text-align: center;
+}
 
+.sfcenter .highlight-span h2, .sfcenter .highlight-span p {
+    text-align: center;
+}
+
+.highlight-span h2 {
+    overflow-wrap: break-word;
+    font-size: 2em;
+    text-transform: uppercase;
+    font-weight: normal;
+    line-height: 1.2;
+    letter-spacing: 0px;
+    word-spacing: 1px;
+    text-align: left;
+    margin: auto;
+}
+
+.highlight-span p {
+    text-align: left;
+    font-weight: 100;
+    margin: 8px 0px 15px 0px;
 }
 
 .highlight-left-text,
@@ -124,7 +149,6 @@ h2 {
 {
     float: left;
     width: 50%;
-    padding: 25px;
     text-align: center;
     /* height: 150px; */
     /* overflow: hidden; */
@@ -132,6 +156,7 @@ h2 {
     /* align-items: center; */
  
 }
+
 .highlight-box
 {
     max-width: 600px;

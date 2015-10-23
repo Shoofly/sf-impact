@@ -21,7 +21,7 @@ function pluto_add_customizer_custom_controls( $wp_customize ) {
         public $type = 'alphacolor';
         //public $palette = '#3FADD7,#555555,#666666, #F5f5f5,#333333,#404040,#2B4267';
         public $palette = true;
-        public $default = '#3FADD7';
+        public $default = '';
     
         protected function render() {
             $id = 'customize-control-' . str_replace( '[', '-', str_replace( ']', '', $this->id ) );

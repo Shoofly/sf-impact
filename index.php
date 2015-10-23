@@ -21,6 +21,7 @@ get_header();
 <div id="container">
 
   <div id="wrap" class="index">
+      
 	<div id="primary" class="content-area">
 		<main id="main" class="site-main" role="main">
         <?php wp_reset_postdata(); ?>
@@ -57,7 +58,7 @@ get_header();
 
 		</main><!-- #main -->
 	</div><!-- #primary -->
-      <?php   $sf_impact_home_sidebar = get_theme_mod('sf_impact_home_sidebar', TRUE);?>
+      <?php   $sf_impact_home_sidebar = $sf_impact_Theme_Mods->getMod('sf_impact_home_sidebar');?>
       <?php if (!($sf_impact_home_sidebar == FALSE && is_front_page()))
     get_sidebar(); ?>
   </div><!--wrap-->

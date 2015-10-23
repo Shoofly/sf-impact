@@ -9,7 +9,9 @@
  * @since sf-impact 1.0
  */
 
-get_header(); ?>
+get_header();
+wp_reset_postdata();
+?>
 <div id="container">
     
   <div id="wrap" class="archive-page">
@@ -20,14 +22,15 @@ get_header(); ?>
 
 			<header class="page-header">
 				<?php
-					the_archive_title( '<h1 class="page-title archive-title">', '</h1>' );
+	    			the_archive_title( '<h1 class="page-title archive-title">', '</h1>' );
+						
 					the_archive_description( '<div class="taxonomy-description">', '</div>' );
 				?>
 			</header><!-- .page-header -->
 
 			<?php /* Start the Loop */ ?>
 			<?php while ( have_posts() ) : the_post(); 
-                $full  = sf_impact_postContentFull();
+                $full  = sf_impact_postContentFullPage();
                 if ($full)
 				    get_template_part( 'template-parts/content', get_post_format() );
                 else

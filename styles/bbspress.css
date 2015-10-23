@@ -9,6 +9,10 @@
 	margin-top: -40px;
 }
 
+#bbpress-forums ul.bbp-forum-visibility-hidden, #bbpress-forums ul.status-hidden {
+    display: none !important;
+}
+
 #bbpress-forums span {
 	display: inline-block;
 }
@@ -18,13 +22,12 @@
 }
 
 #bbpress-forums .bbp-breadcrumb {
-	width: 100%;
-	background-image: url('images/tblue.png');
-	background-repeat: repeat;
-	border: 2px ridge white;
-	padding: 5px 10px;
-	z-index: 2;
-	text-transform: uppercase;
+    text-transform: uppercase;
+    padding-bottom: 10px;
+    border-bottom: 1px solid black;
+    width: 100%;
+    margin-bottom: 10px;
+
 }
 #bbpress-forums .bbp-breadcrumb p > a {
 	float: left;
@@ -42,9 +45,16 @@
 }
 #bbpress-forums #subscription-toggle {
 	clear: both;
-	width: 100%;
-	height: 60px;
-	background-color: inherit;
+    font-weight: normal;
+    padding: 4px 8px;
+    border: 1px solid grey;
+    border-radius: 6px;
+    background-color: #efefef;
+    display: inline-block;
+    color: #101010;
+}
+#bbpress-forums #subscription-toggle .is-subscribed a {
+    color: #ef0032;
 }
 #bbpress-forums .bbp-reply-content #subscription-toggle {
 	width: auto;
@@ -65,5 +75,8 @@
 	width: 155px !important;
 	margin-right: 10px !important;
 }
-
+#bbpress-forums .bbp-template-notice, #bbpress-forums div.indicator-hint {
+    background-color: transparent;
+    border-width: 2px;
+}
 

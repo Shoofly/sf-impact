@@ -21,10 +21,10 @@ class Number_Custom_Control extends WP_Customize_Control
    
    
   
-     $max = (isset($this->max)) ? 'max="' . strval($this->max).'"'  : '';
-     $min = (isset($this->min)) ? 'min="' . strval($this->min).'"'  : '';
-     $idx = (isset($this->id)) ? 'id="' . $this->id . '"' : '';
-     $namex = (isset($this->id)) ? 'name="' . $this->id . '"' : '';
+     $max = (isset($this->max)) ? "max='" . strval($this->max). "'"  : ""; 
+     $min = (isset($this->min)) ? "min='" . strval($this->min). "'"  : ""; 
+     $idx = (isset($this->id)) ? "id='$this->id'": "" ;
+     $namex = (isset($this->id)) ? "name='$this->id'" : "";
      if (isset($this->id) && $this->type == 'range')
      {
          $xid = $this->id;
