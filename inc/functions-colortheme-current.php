@@ -16,9 +16,10 @@ if (!class_exists('sf_impact_CurrentCustomColorTheme')):
     
         public function getCustomThemePath( $filename ) 
         {
+            
             $child_template = get_stylesheet_directory() . "/style-parts/" . $filename;
             $parent_template = get_template_directory() . "/style-parts/" . $filename;
-            
+           
             if ( file_exists($child_template) ) {
                 return $child_template;
             } elseif ( file_exists($parent_template) ) {

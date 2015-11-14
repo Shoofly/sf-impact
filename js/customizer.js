@@ -64,17 +64,21 @@
 	//Background Color
 	wp.customize( 'sf_impact_color_theme', function ( value ) {
     	value.bind( function( to ) {
+        	var data = {action: 'customizer', sf_impact_color_theme: to};
         	$.ajax({
-            	url: 'index.php',
-            	method: "POST",
-            	data: {custom_action: true, custom_color_theme: to}
-        	}).done(function( msg ) {
-            	var msga = eval('(' + msg + ')'),
-            	    newPicker;
+            	type: "GET",
+            	url: ajax_object.ajax_url, 
+            	data: data,
+            	success: function(response) {
+            	    var msga = eval('(' + response + ')'),
+            	        newPicker;
             	
-            	$(colorThemeStyle).text( msga.css + ' body { background-color: ' + msga.backgroundColor + '; }' );
-            	
-        	});
+                    $(colorThemeStyle).text( msga.css + ' body { background-color: ' + msga.backgroundColor + '; }' );
+                },
+                error: function(response) {
+                    console.log("error: " + response);
+                }
+            });	
     	});
 	});	
 	

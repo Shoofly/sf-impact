@@ -110,8 +110,8 @@ if (!function_exists('sf_impact_get_thumbnailarray')):
         $posts = $sf_impact_Theme_Mods->getMod( 'sf_impact_grid_posts');
         $height = $sf_impact_Theme_Mods->getMod( 'sf_impact_grid_image_height' );
         $width= $sf_impact_Theme_Mods->getMod( 'sf_impact_grid_image_width');
-         $cellwidth = $sf_impact_Theme_Mods->getMod( 'sf_impact_grid_cell_width' );
-         $cellheight = $sf_impact_Theme_Mods->getMod( 'sf_impact_grid_cell_height');
+        $cellwidth = $sf_impact_Theme_Mods->getMod( 'sf_impact_grid_cell_width' );
+        $cellheight = $sf_impact_Theme_Mods->getMod( 'sf_impact_grid_cell_height');
         $category = $sf_impact_Theme_Mods->getMod( 'sf_impact_post_category');
         $imagesize = $sf_impact_Theme_Mods->getMod( 'sf_impact_image_size_name');
         $captionwidth = $width;

@@ -1315,7 +1315,7 @@ function sf_impact_pageOptions($wp_customize)
             'title' => __( ' Custom CSS Styles ', 'sf-impact' ), 
             'priority' => 8, 
             'capability' => 'edit_theme_options',
-            'description' => __('Add custom CSS styles'), //Descriptive tooltip
+            'description' => __('Add custom CSS styles', 'sf-impact'), //Descriptive tooltip
             //'panel' => 'sf_impact_panel',
             ) 
         ); 
@@ -1333,7 +1333,7 @@ function sf_impact_pageOptions($wp_customize)
             'description' => '',
             'priority' => 10,
             'section' => 'sf_impact_custom_css',
-            'label' => __( 'Custom CSS for the header', 'textdomain' ),
+            'label' => __( 'Custom CSS for the header', 'sf-impact' ),
             'description' => '',
         ) );
           $wp_customize->add_setting( 'sf_impact_custom_footer_css', array(
@@ -1349,7 +1349,7 @@ function sf_impact_pageOptions($wp_customize)
             'type' => 'textarea',
             'priority' => 10,
             'section' => 'sf_impact_custom_css',
-            'label' => __( 'Custom CSS for the footer', 'textdomain' ),
+            'label' => __( 'Custom CSS for the footer', 'sf-impact' ),
             'description' => '',
         ) );
     }
