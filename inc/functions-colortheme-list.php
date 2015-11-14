@@ -44,7 +44,7 @@ if (!class_exists('sf_impact_CustomColorThemes')):
             } else {
                 die('Incorrect usage, should be const::parent or const::child');
             }
-            if(is_dir( $dir )) {
+            if(is_dir( $dir . $folder )) {
                 $files = scandir( $dir . $folder );
             
                 //Strip out . and ..
