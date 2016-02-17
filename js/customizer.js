@@ -5,7 +5,7 @@
  *
  * Contains handlers to make Theme Customizer preview reload changes asynchronously.
  */
-
+ 
 ( function( $ ) {
 	// Site title and description.
         
@@ -62,9 +62,9 @@
 	} );
 		
 	//Background Color
-	wp.customize( 'sf_impact_color_theme', function ( value ) {
+	wp.customize( 'sf_impact_color_scheme', function ( value ) {
     	value.bind( function( to ) {
-        	var data = {action: 'customizer', sf_impact_color_theme: to};
+        	var data = {action: 'customizer', sf_impact_color_scheme: to};
         	$.ajax({
             	type: "GET",
             	url: ajax_object.ajax_url, 
@@ -72,8 +72,7 @@
             	success: function(response) {
             	    var msga = eval('(' + response + ')'),
             	        newPicker;
-            	
-                    $(colorThemeStyle).text( msga.css + ' body { background-color: ' + msga.backgroundColor + '; }' );
+                    $(colorThemeStyle).text( msga.css + ' body { background-color: ' + msga.background_color + '; }' );
                 },
                 error: function(response) {
                     console.log("error: " + response);
@@ -81,6 +80,5 @@
             });	
     	});
 	});	
-	
-            	
+
 } )( jQuery );

@@ -205,7 +205,7 @@ function sf_impact_posted_on() {
 		'<span class="author vcard"><a class="url fn n" href="' . esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ) . '">' . esc_html( get_the_author() ) . '</a></span>'
 	);
 
-	echo '<span class="posted-on">' . $posted_on . '</span><span class="byline"> ' . $byline . '</span>'; // WPCS: XSS OK.
+	echo '<span class="posted-on">' . ($posted_on) . '</span><span class="byline"> ' . $byline . '</span>'; // WPCS: XSS OK.
 
 }
 endif;
@@ -235,19 +235,21 @@ if ( ! function_exists( 'sf_impact_entry_footer' ) ) :
 			    printf( '<div class="tags-links footer-links">' . __( 'Tagged %1$s', 'sf-impact' ) . '</div>', $tags_list );
 		    }
 	    }
+       
+
+            $sf_impact_show_author = $sf_impact_Theme_Mods->getMod('sf_impact_show_author');
+   	        if ( is_single() &&   $sf_impact_show_author  ) :
+			        get_template_part( 'template-parts/author-bio' );
+		        endif;
     
-        $sf_impact_show_author = $sf_impact_Theme_Mods->getMod('sf_impact_show_author');
-   	    if ( is_single() &&   $sf_impact_show_author  ) :
-			    get_template_part( 'template-parts/author-bio' );
-		    endif;
-    
-        if ( ! is_single() && ! post_password_required() && ( comments_open() || get_comments_number() ) ) {
-		    echo '<div class="comments-link">';
-		    comments_popup_link( __( 'Leave a comment', 'sf-impact' ), __( '1 Comment', 'sf-impact' ), __( '% Comments', 'sf-impact' ) );
-		    echo '</div>';
-	    }
+            if ( ! is_single() && ! post_password_required() && ( comments_open() || get_comments_number() ) ) {
+		        echo '<div class="comments-link">';
+		        comments_popup_link( __( 'Leave a comment', 'sf-impact' ), __( '1 Comment', 'sf-impact' ), __( '% Comments', 'sf-impact' ) );
+		        echo '</div>';
+	        }
  
-	    edit_post_link( __( 'Edit', 'sf-impact' ), '<div class="edit-link">', '</div>' );
+	        edit_post_link( __( 'Edit', 'sf-impact' ), '<div class="edit-link">', '</div>' );
+        
     }
 }
 endif;
@@ -302,7 +304,7 @@ if (!function_exists('sf_impact_thumbnail')):
  function sf_impact_thumbnail()
   {
      global $post, $sf_impact_Theme_Mods;
-     if ($post->post_type == "post")
+     if ($post->post_type != "page")
      {
         $sf_impact_post_featured = $sf_impact_Theme_Mods->getMod('sf_impact_post_featured');
         $sf_impact_post_header = $sf_impact_Theme_Mods->getMod('sf_impact_post_header'); //Check if this should go in the header instead 

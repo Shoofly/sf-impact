@@ -36,7 +36,7 @@ class Number_Custom_Control extends WP_Customize_Control
 		<label>
             <span class="customize-control-title"><?php echo esc_html( $this->label ); ?></span>
             <span class="description customize-control-description"><?php echo $this->description?></span>
-			<input <?php echo $namex?> <?php echo $idx?>" type="<?php echo $this->type ?>" <?php echo $this->link(); ?> <?php echo $min ?> <?php echo $max ?> value="<?php echo intval( $this->value() ); ?>" <?php  echo $js  ?> />
+			<input <?php echo $namex?> <?php echo $idx; ?>" type="<?php echo $this->type ?>" <?php echo $this->link(); ?> <?php echo $min ?> <?php echo $max ?> value="<?php echo intval( $this->value() ); ?>" <?php  echo $js  ?> />
             <?php if ($this->type == 'range' && isset($this->id))
             {?>  
                 <output name="amount" id="<?php echo $this->id ?>_o"><?php echo intval( $this->value() ); ?></output>

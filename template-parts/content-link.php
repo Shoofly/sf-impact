@@ -33,7 +33,7 @@
                 elseif (is_single()) 
                 {
                 ?>
-                   <a href="<?php echo $myLink; ?>"><?php echo the_title(); ?></a>
+                   <a href="<?php echo esc_url($myLink); ?>"><?php echo the_title(); ?></a>
                 <?php 
                 }
 

@@ -23,15 +23,8 @@ class sf_impact_Theme_Mods
         return self::$_this[$handle];
     }
     
-    public function setMod($key, $val) 
-    {
-        set_theme_mod($key, $val);
-        
-        return $val;
-    }
     public function getDefault($key)
     { 
-
         if ( isset(self::$default[$this->handle][$key]) ) {
             return self::$default[$this->handle][$key];
         }
@@ -39,11 +32,10 @@ class sf_impact_Theme_Mods
     }
     public function setDefault($key, $default) 
     {
-
         if( $default === false ) $default = 0;
         self::$default[$this->handle][$key] = $default;
         
-       $this->getMod($key);
+        $this->getMod($key);
 
  
         
@@ -71,7 +63,6 @@ class sf_impact_Theme_Mods
     * returns the value
     */
     public function getMod($key, $default=null) {
-
         switch(true) {
             case isset($default):  //Use the override default first if the key does not exist
                 return get_theme_mod($key, $default);
@@ -83,10 +74,14 @@ class sf_impact_Theme_Mods
                 return get_theme_mod($key); //Return the key
         }
     }
-    
+   
+    public function getAll() {
+        return self::$default[$this->handle];
+    }
+ 
     public function dumpAll() {
         var_dump(self::$default[$this->handle]);
     }
 }
 
-$sf_impact_Theme_Mods = sf_impact_Theme_Mods::get_instance('sf_impact');
+$sf_impact_Theme_Mods = sf_impact_Theme_Mods::get_instance('sf-impact');

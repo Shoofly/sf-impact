@@ -43,8 +43,8 @@ global $sf_impact_Theme_Mods;
     $sf_impact_header_image = $sf_impact_Theme_Mods->getMod('sf_impact_header_image');
     $sf_impact_social_above_content = $sf_impact_Theme_Mods->getMod('sf_impact_social_above_content');
     $sf_impact_social_above_menu = $sf_impact_Theme_Mods->getMod('sf_impact_social_above_menu');
-    //Is this the home page or the front page (and not the blog page) and the header type is not default display the custom home page header image/slide show
-    if ((is_home() || is_front_page()) && $sf_impact_home_header_type != "3" && !$wp_query -> is_posts_page) {
+    //Is this the front page (and not the blog page) and the header type is not default display the custom home page header image/slide show
+    if (( is_front_page()) && $sf_impact_home_header_type != "3") {// && !$wp_query -> is_posts_page) {
         $homeimage = TRUE;      //Display the custom home page header
     } else {
         $homeimage = FALSE;     //Do not display the custom home page header
@@ -57,22 +57,23 @@ global $sf_impact_Theme_Mods;
 
     if ($homeimage) //This check is only going to happen for the home page or the front page
     {
+       
         $noheaderimg = FALSE;
         switch ($sf_impact_home_header_type)
         {
             default:
-            case NOHEADER:
+            case SF_IMPACT_NOHEADER:
                 $noheaderimg = TRUE;
                 break;
-            case DEFAULTHEADER:
+            case SF_IMPACT_DEFAULTHEADER:
                 if ($url == "")
                     $noheaderimg = TRUE;
                 break;
-            case CUSTOMHEADER:
+            case SF_IMPACT_CUSTOMHEADER:
                  if ($sf_impact_header_image=="")
                     $noheaderimg = TRUE;
                 break;
-            case SLIDEHEADER:
+            case SF_IMPACT_SLIDEHEADER:
                 $the_slide_query = sf_impact_slideshow_query(); //Make sure that there are slides
                
                 if ($the_slide_query->post_count <= 0)
@@ -84,6 +85,7 @@ global $sf_impact_Theme_Mods;
                 }
                 break;
         }
+            
     } 
      elseif (!$url) { //This check only occurs on pages that are not the front page or home page 
         $noheaderimg = TRUE;
@@ -96,18 +98,22 @@ global $sf_impact_Theme_Mods;
     }      
 ?>
 
-<body <?php body_class();?>><div id="page" class="hfeed site  clear">
+<body <?php if (sf_impact_page_bbpress()) body_class('forum'); else body_class();?>><div id="page" class="hfeed site  clear">
 	
        
         <div id="topmasthead" class="fixed"> <!-- navigatin area -->
             <div id="containermasthead">
-                <?php if ($sf_impact_social_above_menu) sf_impact_social_media_icons();?> 
+                <?php 
+                    
+                    if ($sf_impact_social_above_menu) sf_impact_social_media_icons();?> 
                 <div id="outermasthead">
                 
                     <div id="innermasthead" class="fixed">
                         <?php 
                         if ($logo == "top"):   //If the logo or title is on top, display it here 
-                            get_template_part('template-parts/branding');
+                        ?><div class="site-branding fixed">
+                           <?php get_template_part('template-parts/branding');?>
+                        </div><?php
                         endif;
           
                         if ($menu == "above"):
@@ -126,7 +132,7 @@ global $sf_impact_Theme_Mods;
                 $xClass = "";
             ?>
                 
-            <div class="sfly-headerimg <?php echo $xClass; ?>">
+            <div class="sfly-headerimg <?php echo $xClass; ?> fixed">
                 <?php if ($logo=="image"): ?>
                     <div class="site-branding fixed shoofly-branding-image" >
                         <?php get_template_part('template-parts/branding');?>
@@ -137,7 +143,7 @@ global $sf_impact_Theme_Mods;
                 if (!$homeimage) {
                     if ( $url ): ?>
                         <div class="header-container-inner">
-                            <img class="headerimg headerimg-page" src="<?php echo $url; ?>" alt="header" >
+                            <img class="headerimg headerimg-page" src="<?php echo esc_url($url); ?>" alt="header" >
                         </div>
                     <?php
                     endif;
@@ -156,7 +162,7 @@ global $sf_impact_Theme_Mods;
     
              <?php
     
-            if ((is_home() || is_front_page()) && !$wp_query -> is_posts_page) {
+            if ((is_front_page()) && !$wp_query -> is_posts_page) { //do not show on blog page
                 if ( $sf_impact_Theme_Mods->getMod('sf_impact_home_featured_highlights')) {
                 ?>
      
@@ -176,11 +182,11 @@ global $sf_impact_Theme_Mods;
                 $sf_impact_grid_more = $sf_impact_Theme_Mods->getMod('sf_impact_grid_more')        
                     ?>
                 <div class="home-thumb fixed">
-                    <h1><?php echo $sf_impact_grid_title  ?></h1>
+                    <h1><?php echo esc_attr($sf_impact_grid_title)  ?></h1>
                     <?php 
-                    $tg = new sfly_thumbnailgrid();
-                    echo  $tg->thumbnailgrid_function($arra);?> 
-                    <div class="more-link"><a href="<?php echo $url?>"><?php echo $sf_impact_grid_more?></a></div>
+                    $tg = new thumbnailgrid($arra);
+                    echo  $tg->thumbnailgrid_function();?> 
+                    <div class="more-link"><a href="<?php echo esc_url($url)?>"><?php echo $sf_impact_grid_more?></a></div>
                     </div>
                 <hr>
                 </div>
@@ -188,9 +194,9 @@ global $sf_impact_Theme_Mods;
             }
             ?>
     	</header><!-- #masthead -->
-    
     	<div id="content" class="site-content">
         <?php 
         if ($sf_impact_social_above_content):
               sf_impact_social_media_icons();
         endif;
+        do_action('sf_impact_after_header', 'sf_photo_impact_mosaic');

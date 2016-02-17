@@ -70,7 +70,7 @@ if (!function_exists('sf_impact_social_media_icons')):
                     $icon = $icons[$i];
                 ?>
    
-                    <a href="<?php echo $link?>" target="_blank" title="<?php echo ucfirst($site); ?>"><i class="fa fa-<?php echo $icon?> fa-<?php echo $sf_impact_icon_size ?>"></i></a>
+                    <a href="<?php echo esc_url($link)?>" target="_blank" title="<?php echo ucfirst(esc_attr($site)); ?>"><i class="fa fa-<?php echo $icon?> fa-<?php echo esc_attr($sf_impact_icon_size) ?>"></i></a>
                 <?php }?>
            </div><!--shoofly-social-media-->
         </div><!--shoofly-social-media-container--><?php

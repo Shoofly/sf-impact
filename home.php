@@ -19,8 +19,8 @@ global $sf_impact_Theme_Mods;
         $class="full-width";
     else
         $class="";
-    ?>
-
+ 
+  ?>
     <?php wp_reset_postdata(); ?>
     <div id="container">
 
@@ -29,9 +29,7 @@ global $sf_impact_Theme_Mods;
 	        <div id="primary" class="content-area fixed <?php echo $class?>">
                 <main id="main" class="site-main" role="main">
                     <?php if ($sf_impact_home_posts){ ?>  
-                    <?php $sf_impact_home_rp_categoryid = $sf_impact_Theme_Mods->getMod('sf_impact_home_rp_categoryid');
-                   
-                    //if ($sf_impact_home_rp_categoryid != "") add_action( 'pre_get_posts', 'sf_impact_home_category' );   ?>
+                    <?php $sf_impact_home_rp_categoryid = $sf_impact_Theme_Mods->getMod('sf_impact_home_rp_categoryid'); ?>
                     <?php if ($sf_impact_home_rp_categoryid != "" && $sf_impact_home_rp_categoryid != "0"  )
                     {
                         sf_impact_posts_by_category($sf_impact_home_rp_categoryid);
