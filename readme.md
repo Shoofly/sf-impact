@@ -47,6 +47,10 @@ Impact.png - Shoofly Solutions
 
 Logo.png  - Shoofly Solutions
 
+Globe - Free Images B S K http://www.freeimages.com/photo/globe-1238288
+Blue Circles - Free Images Darren Wylie - http://www.freeimages.com/photo/blue-circles-1521898
+
+
 ##Installation##
 	
 1. In your admin panel, go to Appearance > Themes and click the Add New button.
@@ -108,3 +112,17 @@ Impact currently includes support for Thumbnail Grid, WooThemes, and Jetpack's I
 * Remove URLIsValid function 
 * Esc boolean string output in flex slider script
 * Fix loading of flex style sheet
+* 3.0
+* Added sidebars to the home page under the header and above the content along with some default content.
+* Added footer sidebar
+* Fixed some spacing on the home page
+* Added margins to the articles
+* Make sure that global $sf_impact_Theme_Mods; is always declared
+* Fix proporional sizing of flex slider when an initial height is selected.
+* Make featured highlights links
+* Allow edit of slide count for slide show
+* 3.1 
+* Syntax errors introduced in 3.0
+* 3.2
+* Fix header sidebar display & styles 
+* Add missing general theme options

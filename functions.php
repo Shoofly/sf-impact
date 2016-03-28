@@ -290,7 +290,14 @@ endif;
 	    'before_title' => '<div><h2 class="widget-title">',
 		    'after_title' => '</h2></div>',
 	    ) );
-
+        register_sidebar( array(
+		    'name' => __( 'Top Footer Sidebar', 'sf-impact' ),
+		    'id' => 'sfly-footersidebar-top',
+		    'before_widget' => '<aside id="%1$s" class="widget %2$s">',
+		    'after_widget' => "</aside>",
+			    'before_title' => '<div><h2 class="widget-title">',
+		    'after_title' => '</h2></div>',
+	    ) );
 	    register_sidebar( array(
 		    'name' => __( 'Left Footer Sidebar', 'sf-impact' ),
 		    'id' => 'sfly-footersidebar-left',
@@ -316,7 +323,31 @@ endif;
 		    'after_title' => '</h2></div>',
 	    ) );
 
+  	 
+        register_sidebar( array(
+        	'name'          => __( 'Home Page Under Header', 'sf_impact' ),
+        	'id'            => 'homepage-under-header',
+        	'description'   => 'Add Testimonials, Call to Action, and more.',
+             'class'         => '',
+        	'before_widget' => '<div id="%1$s" class="widget %2$s">',
+        	'after_widget'  => '</div>',
+        	'before_title'  => '<h2 class="widget-title">',
+        	'after_title'   => '</h2>' 
+    	) ); 
+        
+        register_sidebar( array(
+        	'name'          => __( 'Home Page Content Sidebar', 'sf_impact' ),
+        	'id'            => 'homepage-sidebar-left',
+        	'description'   => 'Add Testimonials, Call to Action, and more.',
+             'class'         => '',
+        	'before_widget' => '<div id="%1$s" class="widget %2$s">',
+        	'after_widget'  => '</div>',
+        	'before_title'  => '<h2 class="widget-title">',
+        	'after_title'   => '</h2>' 
+    	) ); 
+
     }
+  
 endif;
 add_action( 'widgets_init', 'sf_impact_widgets_init' );
  
@@ -842,6 +873,7 @@ if (!function_exists('sf_impact_setDefaults')):
         //Highlight box mods 
         $sf_impact_Theme_Mods->setDefault( 'sf_impact_highlight_boxes', 0 );
         $sf_impact_Theme_Mods->setDefault( 'sf_impact_highlight_style', "L" );
+        $sf_impact_Theme_Mods->setDefault('sf_impact_home_featured_more', 1);
         
         for($x=0; $x <= 3; ++$x)
         {
@@ -899,8 +931,10 @@ if (!function_exists('sf_impact_setDefaults')):
         //change this in the child theme
         $sf_impact_Theme_Mods->setDefault('sf_impact_footer_link', __('www.shooflysolutions.com', 'sf-impact')); 
         $sf_impact_Theme_Mods->setDefault('sf_impact_footer_text', __('Shoofly Solutions', 'sf-impact'));
+        //future enhancement
+        $sf_impact_Theme_Mods->setDefault('sf_impact_align_menu', false);
 
-
+    
 
         $sfimpact_demo_data = $sf_impact_Theme_Mods->setDefault('sf_impact_demo_data', 1);
         $sfimpact_demo_data = $sf_impact_Theme_Mods->getMod('sf_impact_demo_data', 1); //This is not really a setting, it's a switch. 

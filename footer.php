@@ -13,9 +13,9 @@
  $sf_impact_custom_footer_css      = $sf_impact_Theme_Mods->getMod( 'sf_impact_custom_footer_css' );
 $link =    $sf_impact_Theme_Mods->getMod('sf_impact_footer_link');
 $text =     $sf_impact_Theme_Mods->getMod('sf_impact_footer_text');
-
+ get_sidebar('footer-top');
 ?>
-
+   
 	</div><!-- #content -->
 
  

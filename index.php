@@ -13,7 +13,7 @@
  * @subpackage sf-impact
  * @since sf-impact 1.0
  */
-
+ global $sf_impact_Theme_Mods;
 get_header(); 
 
  

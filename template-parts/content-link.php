@@ -6,7 +6,8 @@
  * @subpackage sfimpact
  * @since sfImpact 1.0
  */
-
+  
+ global $sf_impact_Theme_Mods;
  $myLink = sf_impact_get_url(); 
 ?>
 

@@ -203,6 +203,7 @@ if (!function_exists('sf_impact_highlightboxes_default')):
     {
             global $sf_impact_Theme_Mods;  
             $sf_impact_highlight_boxes = $sf_impact_Theme_Mods->getMod( 'sf_impact_highlight_boxes');
+            $sf_impact_home_featured_more = $sf_impact_Theme_Mods->getMod('sf_impact_home_featured_more');
             $boxcount = intval( $sf_impact_highlight_boxes );
             if ($boxcount > 0) 
             { 
@@ -231,23 +232,23 @@ if (!function_exists('sf_impact_highlightboxes_default')):
                             case ('L'):
                             {
                                if (${'sf_impact_highlight_image' . $x} != "")
-                               {    sf_impact_genHightlightImg(${'sf_impact_highlight_image' . $x}, "highlight-left-img highlight-img-$x", ${"sf_impact_highlight_text$x"});     
+                               {    sf_impact_genHighlightImg(${'sf_impact_highlight_image' . $x}, ${'sf_impact_highlight_link' . $x}, "highlight-left-img highlight-img-$x", ${"sf_impact_highlight_text$x"});     
                                     $class="highlight-right-text highlight-text-$x";
                                 }
                                 else
                                 {
                                         $class="highlight-full highlight-text-$x";
                                 }
-                                sf_impact_genHightlightText  (${"sf_impact_highlight_header$x"} ,  ${"sf_impact_highlight_text$x"}, $class); 
+                                sf_impact_genHighlightText  (${"sf_impact_highlight_header$x"}, ${'sf_impact_highlight_link' . $x},  ${"sf_impact_highlight_text$x"}, $class); 
                             break;
                             }
                             case ("T"):
                             {
                                 if (${'sf_impact_highlight_image' . $x} != "")
                                 {
-                                     sf_impact_genHightlightImg(${'sf_impact_highlight_image' . $x}, "highlight-top-img highlight-img-$x", ${"sf_impact_highlight_text$x"});
+                                     sf_impact_genHighlightImg(${'sf_impact_highlight_image' . $x}, ${'sf_impact_highlight_link' . $x},  "highlight-top-img highlight-img-$x", ${"sf_impact_highlight_text$x"});
                                 }
-                                 sf_impact_genHightlightText  (${"sf_impact_highlight_header$x"} ,  ${"sf_impact_highlight_text$x"}); 
+                                 sf_impact_genHighlightText  (${"sf_impact_highlight_header$x"}, ${'sf_impact_highlight_link' . $x},  ${"sf_impact_highlight_text$x"}); 
                                 break;
                              }        
                             case ("R"):
@@ -261,16 +262,16 @@ if (!function_exists('sf_impact_highlightboxes_default')):
                                 {
                                         $class="highlight-full highlight-text-$x";
                                 }
-                                 sf_impact_genHightlightText  (${"sf_impact_highlight_header$x"} ,  ${"sf_impact_highlight_text$x"}, $class); 
+                                 sf_impact_genHighlightText  (${"sf_impact_highlight_header$x"}, ${'sf_impact_highlight_link' . $x},  ${"sf_impact_highlight_text$x"}, $class); 
                                 if (${'sf_impact_highlight_image' . $x} != "")
                                 {        
-                                     sf_impact_genHightlightImg(${'sf_impact_highlight_image' . $x}, "highlight-right-img highlight-img-$x", ${"sf_impact_highlight_text$x"});    
+                                     sf_impact_genHighlightImg(${'sf_impact_highlight_image' . $x}, ${'sf_impact_highlight_link' . $x},  "highlight-right-img highlight-img-$x", ${"sf_impact_highlight_text$x"});    
                                 }
                                break;
                     
                             }
                             }
-                            if (${'sf_impact_highlight_link' . $x} != "")
+                            if (${'sf_impact_highlight_link' . $x} != "" && $sf_impact_home_featured_more)
                                 {?>
                                   <div class="highlight-link"><a class="read-more btn" href="<?php echo esc_url(${'sf_impact_highlight_link' . $x});?>"><?php echo __('more', 'sf-impact');?></a></div>   
  
@@ -296,12 +297,16 @@ endif;
 * $imagename - path to the image
 * $class - class for the img div (Image can be on top, left or right of box)
 */
-if (!function_exists('sf_impact_genHightlightImg')):
-    function sf_impact_genHightlightImg($imagename, $class, $alt)
+if (!function_exists('sf_impact_genHighlightImg')):
+    function sf_impact_genHighlightImg($imagename, $link, $class, $alt)
     {
+        
+        $img = sprintf('<img class="highlight-img" alt="%s" src="%s" />', esc_html($alt), esc_url($imagename) );
+        if ($link != "") { $img = sprintf( '<a href="%s">%s</a>', $link, $img ); } 
+
         ?>
             <div class="<?php echo $class?>">
-                <img class="highlight-img" alt="<?php echo esc_html($alt)?>" src="<?php echo esc_url($imagename) ;?>"/>
+                <?php echo $img; ?>
             </div>  <!--highlight-left-img-->
         <?php   
     }
@@ -312,13 +317,17 @@ endif;
 * $text - highlight description text
 * $class - div class (text can be below image, to the right or to the left)
 */ 
-if (!function_exists('sf_impact_genHightlightText')):
-    function sf_impact_genHightlightText($header, $text, $class="highlight-full")
+if (!function_exists('sf_impact_genHighlightText')):
+    function sf_impact_genHighlightText($header, $link, $text, $class="highlight-full")
     {        
     ?>
         <div class="<?php echo $class?>"> 
             <div class="highlight-span">
-                <h2><?php echo esc_attr($header);?></h2>
+                <h2>
+                    <?php if ( $link != ''): ?><a href="<?php echo esc_url($link); ?>"><?php endif; ?>
+                        <?php echo esc_attr($header);?>
+                    <?php if ( $link != ''): ?></a><?php endif; ?>
+                </h2>
                 <p><?php echo esc_attr($text);?></p>
             </div>
         </div><!--<?php echo $class?>-->
@@ -405,7 +414,8 @@ if (!function_exists('sf_impact_get_slideshow')):
           $sf_impact_slider_navigation = $sf_impact_Theme_Mods->getMod('sf_impact_slider_navigation');
           if ($sf_impact_slider_navigation)
            $wclass .= " has-navigation";
-           $hstyle = ($height != "") ?  "height:$height;max-height:$height;max-width:none!important;" : "";
+           $hstyle = ($height != "") ?  "height:auto;max-height:$height;" : "";
+
        
             ?>
 

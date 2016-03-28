@@ -10,7 +10,7 @@
 .shoofly-home-branding{position:absolute;z-index:99;margin:25px;}
 .home .post_img{margin-top:25px;}
 .home #page #primary .fullwidth{float:none;width:100%;}
-#content .home #primary{padding-top:25px;}
+#content .home #primary{padding-top: 0;margin-top: 0!important;}
 hr.home1{margin-top:15px;}
 .home #main #secondary.widget-area{margin-top:15px;}
 @media only screen and (min-width:0px) and (max-width:870px){.home .shoofly-cell{display:block;vertical-align:top;clear:both;width:100%;}
@@ -45,3 +45,17 @@ hr.home1{margin-top:15px;}
 .thumbnailgridcontainer{width:auto !important;}
 .highlight-link{margin-bottom:30px;}
 }
+
+#header-sidebar,
+#main-sidebar
+{
+    display: block;
+    width: 100%;
+    padding: 0 25px 0 25px;
+}
+/*
+#header-sidebar .widget
+{
+  
+}
+*/

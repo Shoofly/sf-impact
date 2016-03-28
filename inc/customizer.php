@@ -83,7 +83,7 @@
    
         
           
-          do_action ('sf_impact_general_options', $wp_customize);
+           do_action ('sf_impact_generalOptions', $wp_customize);
           do_action ('sf_impact_homePageOptions', $wp_customize);
           do_action ('sf_impact_postOptions', $wp_customize);
           do_action ('sf_impact_pageOptions', $wp_customize);
@@ -315,8 +315,30 @@
 			    'below' => __('Below header images', 'sf-impact'),
                 )
                 ) 
-            ) );   
-
+            ) );  
+            //Future enhancement 
+/*   $wp_customize->add_setting( 'sf_impact_align_menu', 
+                array(
+                'default' => $sf_impact_Theme_Mods->getDefault('sf_impact_align_menu'),
+                'type' => 'theme_mod', 
+                'capability' => 'edit_theme_options', 
+                'transport' => 'refresh', 
+                 'sanitize_callback' => 'sf_impact_sanitize_checkbox',
+                ) 
+            );      
+ 
+            $wp_customize->add_control( new WP_Customize_Control (
+   
+                $wp_customize, 
+                'sf_impact_align_menu', 
+                array(
+                'label' => __( 'Align bottoms of menu and logo/site where appropriate?', 'sf-impact' ), 
+                'section' => 'sf_impact_general_options', 
+                'settings' => 'sf_impact_align_menu', 
+                'priority' => 15, 
+                'type'     => 'checkbox',
+                ) 
+            )); */
             //Setting and control for footer text
            // $data = __( '© 2015 Shoofly Solutions', 'sf-impact' );
             $wp_customize->add_setting( 'sf_impact_footer_text', 
@@ -906,7 +928,7 @@ function sf_impact_pageOptions($wp_customize)
                 'priority' => 25, 
                 'choices' => array(
                     'stretchauto' =>__('Proportional: Fixed width 100%, Height proportional', 'sf-impact'),
-                    'fitfix' => __('Proportional: Initial height for a slide show/Maximum height for a custom header image  (height when the window is full width)', 'sf-impact'),
+                    'fitfix' => __('Proportional: Initial height for a slide show/Maximum height for a custom header image  (height when the window is full width). Note that your images should be at least this height!', 'sf-impact'),
                     'stretchfix' => __('Not Proportional: Stretch the header width and keep the height fixed', 'sf-impact'), 
                      
                 ),
@@ -1040,11 +1062,32 @@ function sf_impact_pageOptions($wp_customize)
                 'title' => __( 'Home Page Slide Show Options', 'sf-impact' ), 
                 'priority' => 2, 
                 'capability' => 'edit_theme_options',
-                'description' => __('Slide show options', 'sf-impact'), //Descriptive tooltip
+                'description' => __('Slide show options - Enable this in the <b>Home Page General Options</b>', 'sf-impact'), //Descriptive tooltip
                 'panel' => 'sf_impact_panel_home',
                 ) 
             ); 
-
+    $wp_customize->add_setting( 'sf_impact_slider_count', 
+            array(
+            'default' => $sf_impact_Theme_Mods->getDefault('sf_impact_slider_count'),
+            'type' => 'theme_mod', 
+            'capability' => 'edit_theme_options', 
+            'transport' => 'refresh', 
+            'sanitize_callback' => 'sf_impact_sanitize_number_absint'
+            ) 
+        ); 
+       $wp_customize->add_control( new Number_Custom_Control (
+   
+            $wp_customize, 
+            'sf_impact_slider_count', 
+            array(
+            'label' => __( 'Number of Slides', 'sf-photo-impact' ), 
+                'description' => __('Maximum number of slides to show', 'sf-photo-impact' ), 
+            'section' => 'sf_impact_slider_options', 
+            'settings' => 'sf_impact_slider_count', 
+            'priority' => 8, 
+           
+            ) 
+        ) );
           $wp_customize->add_setting( "slidelabel1", array(   'transport' => 'refresh', 'sanitize_callback' => 'sanitize_text_field') );
 
             $wp_customize->add_control( new Arbitrary_Custom_Control($wp_customize,  "slidelabel1",
@@ -1581,7 +1624,23 @@ function sf_impact_pageOptions($wp_customize)
                             'priority' => 10,
                 'type'     => 'checkbox',
             ) );       
-
+          $wp_customize->add_setting( 'sf_impact_home_featured_more', 
+                array(
+                'default' => $sf_impact_Theme_Mods->getDefault('sf_impact_home_featured_more'),
+                'type' => 'theme_mod', 
+                'capability' => 'edit_theme_options', 
+                'transport' => 'refresh', 
+                'sanitize_callback' => 'sf_impact_sanitize_checkbox'
+                ) 
+            );      
+     
+            $wp_customize->add_control( 'sf_impact_home_featured_more', array(
+                'settings' => 'sf_impact_home_featured_more',
+                'label'    => __( "Display 'More' text ?", 'sf-impact' ), 
+                'section'  => 'sf_impact_highlight_options',
+                            'priority' => 10,
+                'type'     => 'checkbox',
+            ) );
            $wp_customize->add_setting( 
                     'linex', 
                     array(   'transport' => 'refresh', 
@@ -1864,7 +1923,7 @@ function sf_impact_pageOptions($wp_customize)
                 $outu .= sprintf( "%s {%s:%s;} %s {%s:%s;}", ".site-title", "color", $site, ".site-description", "color", $site ); 
                
                 $outu .= sprintf( "%s {%s:%s;}", "body", "background-color", get_background_color() );  
-                $outu .= sprintf( "%s {%s:%s;}", ".flexslider", "min-height", $sf_impact_Theme_Mods->getMod('sf_impact_header_height') );
+          //      $outu .= sprintf( "%s {%s:%s;}", ".flexslider", "min-height", $sf_impact_Theme_Mods->getMod('sf_impact_header_height') );
                 $menuhex = $sf_impact_Theme_Mods->getMod('sf_impact_content_background');
                 
                 $sf_impact_content_opacity = $sf_impact_Theme_Mods->getMod( 'sf_impact_content_opacity' );

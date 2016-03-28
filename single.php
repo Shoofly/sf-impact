@@ -8,7 +8,7 @@
  * @subpackage sf-impact
  * @since sf-impact 1.0
  */
-
+ global $sf_impact_Theme_Mods;
 get_header(); 
 //default sidebar option
 $sf_impact_post_sidebar = !$sf_impact_Theme_Mods->getMod('sf_impact_post_sidebar');

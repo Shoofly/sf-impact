@@ -60,7 +60,7 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
 
 p {
     line-height: 26px;
-    margin-bottom: 1.5em;
+    /* margin-bottom: 1.5em; */
     -ms-word-wrap: break-word;
     word-wrap: break-word;
 }
@@ -853,7 +853,7 @@ a:focus {
 }
 
 .posts-navigation {
-    margin-left: 15px;
+    /* margin-left: 15px; */
     padding: 5px 15px 5px 0px;
     border-top: 2px dotted;
 }
@@ -1157,7 +1157,7 @@ content:after {
 
 .page-links {
     clear: both;
-    margin: 0 0 1.5em;
+    /* margin: 0 0 1.5em; */
 }
 
 
@@ -1241,7 +1241,10 @@ content:after {
     height: auto;
 }
 
-
+article
+{
+    margin: 25px 0;
+}
 .site-branding img, article img {
     max-width: 100%;
     height: auto;
@@ -1454,11 +1457,11 @@ footer {
     padding: 15px;
 }
 
-#footersidebartop {
-    display: table;
-    display: flex;
+#footersidebar-top {
+    display: block;
+    width: 100%;
+    padding: 15px 25px 0 25px;
     margin: auto;
-    padding-top: 15px;
 }
 
 #shoofly-footer {
@@ -1521,6 +1524,12 @@ header#masthead {
     padding: 0px 0 15px 0;
 }
 
+
+#footer-sidebar-top .widget
+{
+    margin: auto;
+    display: table;
+}
 #header-surround:after {
     content: ".";
     visibility: hidden;
@@ -1622,6 +1631,11 @@ header#masthead {
 .highlight-right-text .highlight-span h2, .highlight-left-text .highlight-span h2 {
     font-size: 1.5em;
     word-wrap: normal;
+}
+.highlight-span h2 a {
+    color: inherit;
+    font-size: inherit;
+    font-weight: inherit;
 }
 
 .highlight-right-img, .highlight-left-img, .highlight-top-img {
@@ -1766,6 +1780,10 @@ header#masthead {
         margin-left: 40px;
     }
 
+    #outermasthead.nav_bottom #cssmenu.menu-short-container {
+        position: relative;
+    }
+
     .site-branding #site-logo-title .site-title {
         font-size: 2rem;
     }
@@ -1774,7 +1792,15 @@ header#masthead {
         white-space: normal;
     }
 }
+    #outermasthead.nav_bottom {
+        position: relative;
+    }
 
+    #outermasthead.nav_bottom #cssmenu {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+    }
 @media screen and (min-width: 783px) {
     /* Primary Navigation */
     .primary-navigation {

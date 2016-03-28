@@ -8,7 +8,7 @@
  * @subpackage sfimpact
  * @since sfImpact 1.0
  */
-
+ global $sf_impact_Theme_Mods;
 get_header(); ?>
 <div id="container">
 

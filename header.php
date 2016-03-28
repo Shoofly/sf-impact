@@ -104,10 +104,18 @@ global $sf_impact_Theme_Mods;
         <div id="topmasthead" class="fixed"> <!-- navigatin area -->
             <div id="containermasthead">
                 <?php 
-                    
-                    if ($sf_impact_social_above_menu) sf_impact_social_media_icons();?> 
-                <div id="outermasthead">
-                
+                /*************************************Top Social Media Icons*******************************/    
+                if ($sf_impact_social_above_menu) sf_impact_social_media_icons();
+                /***************************************Menu styling**************************************/
+                $bottom = FALSE;
+                //future enhancement
+                /*    if ($logo == "top" && $menu == "above"){  //If the logo or title is on top, display it here 
+                        $bottom = $sf_impact_Theme_Mods->getMod('sf_impact_align_menu') ? TRUE : false; 
+                }*/?>
+                <div id="outermasthead" <?php echo $bottom ? "class='nav_bottom'" : ''; ?>>
+           
+                    <?php /******************************************Top Branding Above Header**********************************/
+                    ?>
                     <div id="innermasthead" class="fixed">
                         <?php 
                         if ($logo == "top"):   //If the logo or title is on top, display it here 
@@ -115,7 +123,7 @@ global $sf_impact_Theme_Mods;
                            <?php get_template_part('template-parts/branding');?>
                         </div><?php
                         endif;
-          
+                        /********************************************Menu Above Header*******************************/
                         if ($menu == "above"):
                             sf_impact_menu();
                         endif;
@@ -124,21 +132,20 @@ global $sf_impact_Theme_Mods;
                 </div><!--outermasthead-->
             </div><!--containermasthead-->
         </div><!--topmasthead-->
+        
      	<header id="masthead" class="site-header" role="banner">
             <?php
-            if ($homeimage === TRUE)
-                $xClass="sfly-headerimg-home";
-            else
-                $xClass = "";
+            
+            /*********************************Logo On Top of Image************************/    
             ?>
-                
-            <div class="sfly-headerimg <?php echo $xClass; ?> fixed">
+             
+            <div class="sfly-headerimg <?php echo $homeimage == true ? 'sfly-headerimg-home' : ''; ?> fixed">
                 <?php if ($logo=="image"): ?>
                     <div class="site-branding fixed shoofly-branding-image" >
                         <?php get_template_part('template-parts/branding');?>
                     </div>
                  <?php endif;
-                
+                /**********************Display The Header************************************/
                 //If this is not the home image or the front page, display the url
                 if (!$homeimage) {
                     if ( $url ): ?>
@@ -148,20 +155,29 @@ global $sf_impact_Theme_Mods;
                     <?php
                     endif;
                 } else {
+                //This is some kind of custom Header
                     sf_impact_header($sf_impact_home_header_type, $sf_impact_header_image, $sf_impact_logo_location, $the_slide_query, $logo );
                 }
-        
+              /*************************Menu below header area******************************/     
             ?>
+ 
             </div><!--sfly-headerimg-->
             <?php 
             if ($menu == "below") {
                     sf_impact_menu();
                 ?><hr class="navdivider"><?php
             }
+            /*****************************customize filter for You**************************/
+            do_action('sf_impact_after_header');
+            /******************************Sidebar Below Header*****************************/
             ?>
-    
+           <?php //sidebar
+                if ( is_front_page() ) {
+                   get_sidebar('header');
+            	}
+        	?>   
              <?php
-    
+            /*****************************Featured Highlight area***************************/
             if ((is_front_page()) && !$wp_query -> is_posts_page) { //do not show on blog page
                 if ( $sf_impact_Theme_Mods->getMod('sf_impact_home_featured_highlights')) {
                 ?>
@@ -172,6 +188,7 @@ global $sf_impact_Theme_Mods;
                 <?php
                 }
             }      
+            /*********************************Thumbnail Grid Area**********************************/
             if (sf_impact_is_grid()) {
                    
                 ?> <div class="sfly-grid">
@@ -196,7 +213,9 @@ global $sf_impact_Theme_Mods;
     	</header><!-- #masthead -->
     	<div id="content" class="site-content">
         <?php 
+        /***********************************Social Icons Above Content****************************************************/
         if ($sf_impact_social_above_content):
               sf_impact_social_media_icons();
         endif;
-        do_action('sf_impact_after_header', 'sf_photo_impact_mosaic');
+        /************************************Customize filter for your stuff here**************************************************/
+        do_action('sf_impact_before_content');

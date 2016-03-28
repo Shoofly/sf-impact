@@ -7,7 +7,7 @@
  */
 
 get_header(); 
-
+global $sf_impact_Theme_Mods;
 $indexClass="site-main fullpage";
 
 ?>
