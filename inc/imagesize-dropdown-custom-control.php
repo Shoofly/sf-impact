@@ -10,7 +10,7 @@
 
 ?>
 <?php
-
+defined( 'ABSPATH' ) or die( 'No script kiddies please!' );
 if ( ! class_exists( 'WP_Customize_Control' ) )
     return NULL;
 

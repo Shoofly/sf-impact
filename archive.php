@@ -8,7 +8,7 @@
  * @subpackage sf-impact
  * @since sf-impact 1.0
  */
-
+ defined( 'ABSPATH' ) or die( 'No script kiddies please!' );
 get_header();
 wp_reset_postdata();
 ?>

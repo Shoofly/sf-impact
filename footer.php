@@ -8,11 +8,16 @@
  * @subpackage sf-impact
  * @since sf-impact 1.0
  */
+defined( 'ABSPATH' ) or die( 'No script kiddies please!' );
  global $sf_impact_Theme_Mods;
  
  $sf_impact_custom_footer_css      = $sf_impact_Theme_Mods->getMod( 'sf_impact_custom_footer_css' );
-?>
+$link =    $sf_impact_Theme_Mods->getMod('sf_impact_footer_link');
+$text =     $sf_impact_Theme_Mods->getMod('sf_impact_footer_text');
 
+ get_sidebar('footer-top');
+?>
+   
 	</div><!-- #content -->
 
  
@@ -21,7 +26,7 @@
            
             if ($sf_impact_social_above_footer) sf_impact_social_media_icons(); ?>
         <?php get_sidebar('footer');
-        $footer =   $sf_impact_footer_text = $sf_impact_Theme_Mods->getMod("sf_impact_footer_text");
+        $footer =    $sf_impact_Theme_Mods->getMod("sf_impact_footer_text");
         ?>
         
 	
@@ -29,11 +34,13 @@
  
 </div><!-- #page -->
   
-<?php wp_footer(); ?>
-<?php $dev = '<span>Theme developed by &nbsp; </span> <a href="http://shooflysolutions.com/"> Shoofly Solutions</a>'; ?>
+<?php wp_footer(); 
+ $dev =  __('Theme developed by', 'sf-impact');
+ ?>
+
 <div id="bottomwrapper">
-    <div id="shoofly-footer"><?php echo $footer  ?></div>
-    <div class="site-info fixed"><?php echo $dev?></div>
+    <div id="shoofly-footer"><?php echo esc_attr($footer)  ?></div>
+    <div class="site-info fixed"><span><?php echo esc_attr($dev) ?>&nbsp; </span> <a href='<?php echo esc_url($link)?>'>Shoofly Solutions</a></div>
 </div>
 </body>
 </html>

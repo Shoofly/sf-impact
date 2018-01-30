@@ -7,9 +7,9 @@
  */
 
 get_header(); 
-
+global $sf_impact_Theme_Mods;
 $indexClass="site-main fullpage";
-
+defined( 'ABSPATH' ) or die( 'No script kiddies please!' );
 ?>
 <div id="container">
 

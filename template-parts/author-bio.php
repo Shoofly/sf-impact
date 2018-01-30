@@ -6,6 +6,7 @@
  * @subpackage sf-impact
  * @since sf-impact 1.0
  */
+defined( 'ABSPATH' ) or die( 'No script kiddies please!' );
  global $sf_impact_Theme_Mods;
 ?>
 

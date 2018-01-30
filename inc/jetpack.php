@@ -13,6 +13,7 @@
  * Add theme support for Infinite Scroll.
  * See: https://jetpack.me/support/infinite-scroll/
  */
+defined( 'ABSPATH' ) or die( 'No script kiddies please!' );
 function sf_impact_jetpack_setup() {
 	add_theme_support( 'infinite-scroll', array(
 		'container' => 'main',

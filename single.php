@@ -8,13 +8,15 @@
  * @subpackage sf-impact
  * @since sf-impact 1.0
  */
-
+ defined( 'ABSPATH' ) or die( 'No script kiddies please!' );
+ global $sf_impact_Theme_Mods;
 get_header(); 
 //default sidebar option
 $sf_impact_post_sidebar = !$sf_impact_Theme_Mods->getMod('sf_impact_post_sidebar');
 //post sidebar option
-$hidesidebar = esc_attr( get_post_meta( $post->ID, 'post_hide_sidebar', true ) ) ? esc_attr( get_post_meta( $post->ID, 'post_hide_sidebar', true ) ) : $sf_impact_post_sidebar ;
-
+$val = esc_attr( get_post_meta( $post->ID, 'post_hide_sidebar', true ) );
+$hidesidebar =  isset($val) ? $val : $sf_impact_post_sidebar ;
+$postclass = "single-format single-format-" . get_post_format( $post->post_id );
 if (!$hidesidebar)
     $class="content-area";
 else
@@ -22,8 +24,8 @@ else
 ?>
 <div id="container">
 
-  <div id="wrap" class="single-format">
-	<div id="primary" class="<?php echo $class?>">
+  <div id="wrap" class="<?php echo $postclass; ?>">
+	<div id="primary" class="<?php echo $class; ?>">
 		<main id="main" class="site-main" role="main">
          
 		<?php while ( have_posts() ) : the_post(); 

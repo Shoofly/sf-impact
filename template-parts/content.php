@@ -7,7 +7,11 @@
  * default content
  */
  global $sf_impact_Theme_Mods;
- ?>
+ defined( 'ABSPATH' ) or die( 'No script kiddies please!' );
+ global $isarchiveshortcode;  //if archive shortcode, skip this
+
+ 
+        ?>
 
     <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 

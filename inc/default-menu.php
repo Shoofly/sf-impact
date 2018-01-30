@@ -23,6 +23,7 @@
  * }
  * @return string|void HTML menu
  */
+defined( 'ABSPATH' ) or die( 'No script kiddies please!' );
 function sf_impact_page_menu( $args = array() ) {
 	$defaults = array('sort_column' => 'menu_order, post_title', 'menu_class' => 'menu', 'echo' => true, 'link_before' => '', 'link_after' => '');
 	$args = wp_parse_args( $args, $defaults );

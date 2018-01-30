@@ -6,6 +6,7 @@
   * @subpackage sf-impact
  * @since sf-impact 1.0
  */
+ defined( 'ABSPATH' ) or die( 'No script kiddies please!' );
  if (is_active_sidebar('sfly-footersidebar-left') || 
      is_active_sidebar('sfly-footersidebar-middle') || 
      is_active_sidebar('sfly-footersidebar-right')):

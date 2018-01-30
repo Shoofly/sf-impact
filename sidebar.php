@@ -8,7 +8,7 @@
  * @subpackage sf-impact
  * @since sf-impact 1.0
  */
-
+defined( 'ABSPATH' ) or die( 'No script kiddies please!' );
 if ( ! is_active_sidebar( 'sidebar-1' ) ) {
 	return;
 }

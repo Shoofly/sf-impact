@@ -6,7 +6,9 @@
  * @subpackage sfimpact
  * @since sfImpact 1.0
  */
-
+  
+ global $sf_impact_Theme_Mods;
+ defined( 'ABSPATH' ) or die( 'No script kiddies please!' );
  $myLink = sf_impact_get_url(); 
 ?>
 
@@ -33,7 +35,7 @@
                 elseif (is_single()) 
                 {
                 ?>
-                   <a href="<?php echo $myLink; ?>"><?php echo the_title(); ?></a>
+                   <a href="<?php echo esc_url($myLink); ?>"><?php echo the_title(); ?></a>
                 <?php 
                 }
 

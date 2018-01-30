@@ -8,10 +8,8 @@
  */
 ?>
 <?php   
-require_once ( get_template_directory() . "/inc/theme-mods.php" );
-
-$sf_impact_Theme_Mods = sf_impact_Theme_Mods::get_instance('sf_impact');
-
+global $sf_impact_Theme_Mods;
+defined( 'ABSPATH' ) or die( 'No script kiddies please!' );
 $sf_impact_logo_image = $sf_impact_Theme_Mods->getMod('sf_impact_logo_image');
 
 $headerLogo = false;
@@ -27,13 +25,14 @@ if ($sf_impact_logo_image != '') {
 }
 ?>
 
-<div class="site-branding fixed">
-    <div id="site-logo-title"<?php echo $logoCss; ?>>
+
+  
+      <div id="site-logo-title"<?php echo $logoCss; ?>>
 
             <?php if($sf_impact_logo_image != '')
             {?>
         	<a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home">
-                <img src="<?php echo $sf_impact_logo_image; ?>" alt="get_the_title"/>
+                <img src="<?php echo esc_url($sf_impact_logo_image); ?>" alt="get_the_title"/>
         	</a>
             <?php 
             }
@@ -52,4 +51,3 @@ if ($sf_impact_logo_image != '') {
             ?>
             
     </div>
-</div>

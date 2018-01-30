@@ -17,6 +17,7 @@
  * the visitor has not yet entered the password we will
  * return early without loading the comments.
  */
+defined( 'ABSPATH' ) or die( 'No script kiddies please!' );
 if ( post_password_required() ) {
 	return;
 }

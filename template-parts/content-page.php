@@ -9,6 +9,7 @@
  * @since sf-impact 1.0
  */
   global $sf_impact_Theme_Mods;
+  defined( 'ABSPATH' ) or die( 'No script kiddies please!' );
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>

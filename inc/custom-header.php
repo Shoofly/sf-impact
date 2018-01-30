@@ -17,7 +17,7 @@
  * @uses s_admin_header_style()
  * @uses s_admin_header_image()
  */
-   
+defined( 'ABSPATH' ) or die( 'No script kiddies please!' );   
 function sf_impact_custom_header_setup() {
      global $sf_impact_Theme_Mods;
 	add_theme_support( 'custom-header', apply_filters( 'sf_impact_custom_header_args', array(

@@ -9,6 +9,7 @@
  */
  ?>
 <?php
+    defined( 'ABSPATH' ) or die( 'No script kiddies please!' );
 if ( class_exists( 'WP_Customize_Control' ) && ! class_exists( 'Arbitrary_Custom_Control' ) ) :
 class Arbitrary_Custom_Control extends WP_Customize_Control {
 

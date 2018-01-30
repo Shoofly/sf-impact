@@ -7,7 +7,7 @@
  * default content
  */
  global $sf_impact_Theme_Mods;
-
+ defined( 'ABSPATH' ) or die( 'No script kiddies please!' );
 ?>
 
 

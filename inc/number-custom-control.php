@@ -5,7 +5,7 @@
  * @subpackage sf-impact
  * @since sf-impact 1.0
  */
- 
+defined( 'ABSPATH' ) or die( 'No script kiddies please!' ); 
 if ( ! class_exists( 'WP_Customize_Control' ) )
     return NULL;
 if (!class_exists('Number_Custom_Control')):
@@ -36,7 +36,7 @@ class Number_Custom_Control extends WP_Customize_Control
 		<label>
             <span class="customize-control-title"><?php echo esc_html( $this->label ); ?></span>
             <span class="description customize-control-description"><?php echo $this->description?></span>
-			<input <?php echo $namex?> <?php echo $idx?>" type="<?php echo $this->type ?>" <?php echo $this->link(); ?> <?php echo $min ?> <?php echo $max ?> value="<?php echo intval( $this->value() ); ?>" <?php  echo $js  ?> />
+			<input <?php echo $namex?> <?php echo $idx; ?>" type="<?php echo $this->type ?>" <?php echo $this->link(); ?> <?php echo $min ?> <?php echo $max ?> value="<?php echo intval( $this->value() ); ?>" <?php  echo $js  ?> />
             <?php if ($this->type == 'range' && isset($this->id))
             {?>  
                 <output name="amount" id="<?php echo $this->id ?>_o"><?php echo intval( $this->value() ); ?></output>

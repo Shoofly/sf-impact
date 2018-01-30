@@ -5,6 +5,7 @@
  * @subpackage sf-impact
  * @since sf-impact 1.0
   */  
+defined( 'ABSPATH' ) or die( 'No script kiddies please!' );
 get_header(); 
 global $sf_impact_Theme_Mods;
 $sf_impact_grid_title = $sf_impact_Theme_Mods->getMod( 'sf_impact_grid_title');
@@ -13,7 +14,7 @@ $sf_impact_grid_title = $sf_impact_Theme_Mods->getMod( 'sf_impact_grid_title');
 	<div id="primary" class="content-area">
 		<div id="main" class="site-main" role="main">
         <header class="page-header">
-				<h1 class="page-title"><?php echo $sf_impact_grid_title ?></h1>
+				<h1 class="page-title"><?php echo esc_attr($sf_impact_grid_title); ?></h1>
 		</header>
 	    <?php sf_impact_home_query();?>
            
